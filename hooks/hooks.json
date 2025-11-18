@@ -1,0 +1,21 @@
+{
+  "comment": "Geoffrey hooks configuration - Phase 1 placeholder",
+  "hooks": {
+    "post-conversation": {
+      "description": "Extract learnings after each conversation (Phase 4)",
+      "enabled": false,
+      "script": null
+    },
+    "pre-command": {
+      "description": "Prepare context before command execution (future)",
+      "enabled": false,
+      "script": null
+    },
+    "session-start": {
+      "description": "Initialize Geoffrey on session start (future)",
+      "enabled": false,
+      "script": null
+    }
+  },
+  "version": "0.1.0"
+}

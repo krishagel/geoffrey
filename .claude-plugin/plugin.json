@@ -1,0 +1,19 @@
+{
+  "name": "geoffrey",
+  "version": "0.1.0",
+  "description": "Personal AI infrastructure with learning-enabled assistance for work, travel, and personal tasks",
+  "author": {
+    "name": "Kris Hagel",
+    "email": "kris@krishagel.com"
+  },
+  "repository": "https://github.com/krishagel/geoffrey",
+  "keywords": [
+    "personal-ai",
+    "learning",
+    "preferences",
+    "assistant",
+    "travel",
+    "productivity"
+  ],
+  "license": "MIT"
+}

@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# iCloud sync conflicts
+*sync-conflict*
+*.icloud
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+logs/
+debug/
+
+# Local secrets (never commit)
+secrets.env
+.env.local
+*.key
+
+# Node modules (if we add any tooling)
+node_modules/
+package-lock.json
+
+# Python (if we add any tooling)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# Testing
+test-output/
+*.test
+
+# Personal data (stored in iCloud, not repo)
+knowledge/
+preferences.json
+memory.jsonl
+patterns.json
