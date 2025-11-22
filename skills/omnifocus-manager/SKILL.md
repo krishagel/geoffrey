@@ -6,12 +6,14 @@ triggers:
   - "create task"
   - "new task"
   - "follow up with"
-  - "triage inbox"
-  - "clean up tasks"
+  - "triage omnifocus"
+  - "triage my omnifocus"
+  - "omnifocus inbox"
+  - "clean up omnifocus"
   - "check omnifocus"
   - "show tasks"
   - "what's due"
-  - "inbox review"
+  - "omnifocus review"
 allowed-tools: Read, Bash
 version: 0.1.0
 ---
@@ -52,6 +54,15 @@ Key JXA patterns:
 - `app.add(tag, {to: task.tags})` - add existing tags (not push!)
 - `task.assignedContainer = project` - move to project
 
+### get_inbox.js
+Returns remaining inbox tasks (matches OmniFocus Inbox perspective).
+
+**Filter logic:** Tasks with no project + not completed + not dropped + not deferred to future
+
+**Output:** JSON with count and task array (id, name, note, tags, dueDate)
+
+**Use when:** Starting inbox triage
+
 ### get_tags.js
 Returns full tag hierarchy with groupings.
 
@@ -59,15 +70,33 @@ Returns full tag hierarchy with groupings.
 
 **Use when:** Need to find correct tags for a task
 
-### get_projects.js (TODO)
+### get_projects.js
 Returns full project/folder structure.
+
+**Output:** JSON with projects and folder paths
 
 **Use when:** Need to find correct project for a task
 
-### add_task.js (TODO)
-Creates a task with proper tags and project.
+### add_task.js
+Creates a new task with proper tags and project.
 
-**Parameters:** name, project, tags, dueDate, notes
+**Parameters:** name, project, tags[], dueDate, deferDate, note, flagged
+
+**Use when:** Creating new tasks
+
+### update_task.js
+Updates any existing task (not just inbox).
+
+**Parameters:** name or id, project, tags[], dueDate, deferDate
+
+**Use when:** Triaging/moving tasks, adding tags
+
+### create_tag.js
+Creates a new tag, optionally under a parent.
+
+**Parameters:** name, parent (optional)
+
+**Use when:** Tag doesn't exist for a person or category
 
 ## Tag Hierarchy Reference
 
@@ -86,38 +115,90 @@ Creates a task with proper tags and project.
 - Tech: Mel, Bill, Reese, Mark, Brad, Mason, Jordan, etc.
 - DCRC: Jodi, Terri, Laura
 - Comms: Danielle, Jake, Shana
-- ESC: Ashley, John Y, Patrick, Krestin, James, Wendy, etc.
+- ESC: Ashley, John Y, Patrick, Krestin, James, Wendy, Janna, etc.
 - SSOs: Moose, Brent
+
+**Special tags:**
+- Geoffrey - tasks that AI can assist with
+- Full Focus - requires dedicated focus time
+
+## Task Routing Rules
+
+### By Task Type → Project
+
+| Task Type | Project | Default Due |
+|-----------|---------|-------------|
+| Discussions with people | Meetings | 7 days |
+| Phone calls | Meetings | 7 days |
+| CoSN-related | CoSN Work | 7 days |
+| Digital Promise work | Digital Promise | 7 days |
+| AI/automation projects | AI Studio | 7 days |
+| Coding/development | Coding Projects | 7 days |
+| Research/learning | Research for Future Plans | 7 days |
+| SOP/process development | Standard Operating Procedures | 14 days |
+| Form/procedure updates | Department Procedures | 7 days |
+| District reimbursements | Purchasing & Acquisitions | 7 days |
+| Travel approvals | (appropriate project) | 14 days |
+| Data governance | Data Governance | 14 days |
+| Tech support issues | → Freshservice ticket | N/A |
+
+### By Task Type → Tags
+
+| Task Type | Tags |
+|-----------|------|
+| Discussion with person | [Person name], Follow Up |
+| Phone call | Phone, Follow Up |
+| Research tasks | Research |
+| AI-assistable tasks | Geoffrey |
+| Focus time needed | Full Focus |
+| Admin/organizational | Organization |
+| Safety/security related | (relevant ESC person) |
+
+### Routing Signals
+
+**Goes to Meetings project:**
+- "talk to [person]"
+- "discuss with"
+- "follow up with"
+- "check with"
+- "call [person/org]"
+- "get [thing] to [person]"
+
+**Goes to Research for Future Plans:**
+- "look at/into"
+- "what about"
+- CISA resources
+- Training to consider
+- External resources to review
+
+**Goes to Coding Projects or AI Studio:**
+- AI/automation ideas
+- "build a program"
+- Geoffrey capabilities
+- Technical tools to explore
+
+**Needs Freshservice (skip for now):**
+- User-reported issues
+- Equipment requests
+- "doesn't work/load"
+- Form rebuild requests
 
 ## Common Workflows
 
 ### Add a Task
 
-1. **Read preferences on-demand:**
-   ```bash
-   cat ~/Library/Mobile\ Documents/com~apple~CloudDocs/Geoffrey/knowledge/preferences.json
-   ```
-   Look for routing rules in `productivity.omnifocus_projects` and `omnifocus_timing`
+1. Parse user request for: task name, person (if any), context clues
 
-2. Parse user request for: task name, person (if any), context clues
+2. Apply routing rules above to determine:
+   - **Project** - based on task type
+   - **Tags** - person + communication method + activity type
+   - **Due date** - based on task type timing
 
-3. Apply learned routing rules:
-   - Discussions with people → Meetings project
-   - CoSN-related → CoSN Work project
-   - District reimbursements → Purchasing & Acquisitions
-   - Discussion items → 1 week due
-   - Travel approvals → 2 weeks due
+3. If tag doesn't exist, create it with `create_tag.js`
 
-4. Determine appropriate:
-   - **Project** - based on routing rules and domain
-   - **Tags** - person + Follow Up for discussions, Organization for admin tasks
-   - **Due date** - based on task type timing rules
+4. Run `add_task.js` with parameters
 
-5. Run `add_task.js` with parameters
-
-6. Update preferences if new routing patterns learned
-
-7. Return standardized output
+5. Return standardized output
 
 **Example:**
 ```
@@ -132,14 +213,51 @@ Actions:
 
 ### Triage Inbox
 
-1. Run script to get inbox tasks
-2. For each task, suggest:
-   - Appropriate project
-   - Tags based on content
-   - Due date
-3. Present recommendations
-4. User approves or modifies
-5. Move tasks to projects
+1. **Get inbox tasks:**
+   ```bash
+   osascript -l JavaScript ./scripts/get_inbox.js
+   ```
+   This returns only remaining tasks (no project, not completed, not dropped, not deferred)
+
+2. **Present assumptions in batches (10-15 tasks):**
+   - Read task notes for context clues
+   - Apply routing rules to suggest project, tags, due date
+   - Flag unclear tasks that need user input
+
+3. **Ask clarifying questions:**
+   - Who is [person/acronym]?
+   - Which project for [ambiguous task]?
+   - Should this be skipped (needs email context)?
+
+4. **Batch update confirmed tasks:**
+   ```bash
+   osascript -l JavaScript ./scripts/update_task.js '{"name":"...", "project":"...", "tags":[...], "dueDate":"..."}'
+   ```
+
+5. **Create missing tags/projects as needed:**
+   ```bash
+   osascript -l JavaScript ./scripts/create_tag.js '{"name":"PersonName", "parent":"ESC"}'
+   ```
+
+6. **Skip tasks that need:**
+   - Email context (user needs to read first)
+   - Freshservice ticket creation
+   - More information to route properly
+
+**Triage output format:**
+```markdown
+## My assumptions on remaining tasks:
+
+| # | Task | Project | Tags | Notes |
+|---|------|---------|------|-------|
+| 1 | task name | Meetings | Person, Follow Up | context |
+
+**Questions:**
+- #X: Who is [person]?
+- #Y: Which project for this?
+
+Which numbers need correction?
+```
 
 ### Clean Up Tasks
 
