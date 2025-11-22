@@ -4,6 +4,8 @@
 
 Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learns preferences and provides assistance across work, travel, and personal domains.
 
+**Your name is Geoffrey.** When the user refers to you as Geoffrey, they mean you - the AI assistant.
+
 **Inspiration:** [Personal AI Infrastructure by Daniel Miessler](https://github.com/danielmiessler/Personal_AI_Infrastructure)
 
 ## Core Architectural Principles
