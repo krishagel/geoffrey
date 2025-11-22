@@ -51,6 +51,21 @@ Discovery-driven, exhaustive research using parallel LLM agents for comprehensiv
 - Multiple sources for important claims
 - Note when sources conflict
 
+### 6. Clarifying Questions First
+Before diving into research, ask deep, thought-provoking questions to understand:
+- What's the actual goal? (not just the surface request)
+- What constraints exist? (budget, time, preferences)
+- What would success look like?
+- What have they already tried or considered?
+- Are there hidden requirements?
+
+Example: "Research Japan ski trip" should prompt:
+- "What skill level are you and Carrie? Blue runs, black diamonds?"
+- "Is après-ski culture important, or pure skiing focus?"
+- "Do you need English-friendly areas, or comfortable with Japanese-only?"
+- "Any specific dates that are fixed vs flexible?"
+- "Besides skiing, anything else you want to do (onsen, food tours)?"
+
 ## Domain Context Loading
 
 Research automatically loads relevant context from preferences based on detected domain.
