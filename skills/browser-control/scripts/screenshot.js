@@ -13,22 +13,25 @@
  *   bun screenshot.js https://www.marriott.com hotel.png --full
  */
 
-import { chromium } from 'playwright';
+import puppeteer from 'puppeteer-core';
 import path from 'path';
 
-const CDP_URL = 'http://127.0.0.1:9222';
+const CDP_ENDPOINT = 'http://127.0.0.1:9222';
 
 async function screenshot(url, outputPath, options = {}) {
   let browser;
 
   try {
-    browser = await chromium.connectOverCDP(CDP_URL);
-    const contexts = browser.contexts();
-    const context = contexts[0] || await browser.newContext();
-    const page = await context.newPage();
+    browser = await puppeteer.connect({
+      browserURL: CDP_ENDPOINT,
+      defaultViewport: null
+    });
+
+    const pages = await browser.pages();
+    const page = pages.length > 0 ? pages[0] : await browser.newPage();
 
     await page.goto(url, {
-      waitUntil: 'networkidle',
+      waitUntil: 'networkidle2',
       timeout: 30000
     });
 
@@ -45,7 +48,6 @@ async function screenshot(url, outputPath, options = {}) {
     });
 
     const title = await page.title();
-    await page.close();
 
     return {
       success: true,
@@ -61,8 +63,8 @@ async function screenshot(url, outputPath, options = {}) {
       success: false,
       url,
       error: error.message,
-      hint: error.message.includes('connect')
-        ? 'Is Chrome running? Start with: ./scripts/launch-chrome.sh'
+      hint: error.message.includes('connect') || error.message.includes('ECONNREFUSED')
+        ? 'Is browser running? Start with: ./scripts/launch-chrome.sh'
         : null,
       timestamp: new Date().toISOString()
     };

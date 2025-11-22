@@ -3,7 +3,7 @@
 /**
  * Navigate to URL and return page content
  *
- * Connects to Geoffrey's Chrome profile via CDP and navigates to the specified URL.
+ * Connects to Geoffrey's browser profile via CDP and navigates to the specified URL.
  * Returns page title, URL, and text content.
  *
  * Usage: bun navigate.js <url> [--wait <selector>]
@@ -13,23 +13,22 @@
  *   bun navigate.js https://flyertalk.com/forum --wait ".post-content"
  */
 
-import { chromium } from 'playwright';
+import puppeteer from 'puppeteer-core';
 
-const CDP_URL = 'http://127.0.0.1:9222';
+const CDP_ENDPOINT = 'http://127.0.0.1:9222';
 
 async function navigate(url, options = {}) {
   let browser;
 
   try {
-    // Connect to existing Chrome instance
-    browser = await chromium.connectOverCDP(CDP_URL);
+    // Connect to existing browser instance via CDP
+    browser = await puppeteer.connect({
+      browserURL: CDP_ENDPOINT,
+      defaultViewport: null
+    });
 
-    // Get existing context or create new one
-    const contexts = browser.contexts();
-    const context = contexts[0] || await browser.newContext();
-
-    // Create new page
-    const page = await context.newPage();
+    // Always create a new page to avoid interfering with user's tabs
+    const page = await browser.newPage();
 
     // Navigate to URL
     await page.goto(url, {
@@ -56,8 +55,6 @@ async function navigate(url, options = {}) {
     // Get current URL (may have redirected)
     const finalUrl = page.url();
 
-    await page.close();
-
     return {
       success: true,
       url: finalUrl,
@@ -71,13 +68,13 @@ async function navigate(url, options = {}) {
       success: false,
       url,
       error: error.message,
-      hint: error.message.includes('connect')
-        ? 'Is Chrome running? Start with: ./scripts/launch-chrome.sh'
+      hint: error.message.includes('connect') || error.message.includes('ECONNREFUSED')
+        ? 'Is browser running? Start with: ./scripts/launch-chrome.sh'
         : null,
       timestamp: new Date().toISOString()
     };
   } finally {
-    // Don't close browser - we're connecting to existing instance
+    // Disconnect (don't close - we want browser to stay open)
     if (browser) {
       browser.disconnect();
     }

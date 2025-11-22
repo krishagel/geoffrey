@@ -4,56 +4,39 @@
  * Extract content from webpage using CSS selectors
  *
  * Usage: bun extract.js <url> <selector> [--all] [--attr <attribute>]
- *
- * Options:
- *   --all           Get all matching elements (default: first only)
- *   --attr <name>   Get attribute value instead of text
- *
- * Examples:
- *   bun extract.js https://flyertalk.com ".post-content" --all
- *   bun extract.js https://marriott.com ".room-rate" --attr data-price
  */
 
-import { chromium } from 'playwright';
+import puppeteer from 'puppeteer-core';
 
-const CDP_URL = 'http://127.0.0.1:9222';
+const CDP_ENDPOINT = 'http://127.0.0.1:9222';
 
 async function extract(url, selector, options = {}) {
   let browser;
 
   try {
-    browser = await chromium.connectOverCDP(CDP_URL);
-    const contexts = browser.contexts();
-    const context = contexts[0] || await browser.newContext();
-    const page = await context.newPage();
+    browser = await puppeteer.connect({
+      browserURL: CDP_ENDPOINT,
+      defaultViewport: null
+    });
+
+    const page = await browser.newPage();
 
     await page.goto(url, {
       waitUntil: 'domcontentloaded',
       timeout: 30000
     });
 
-    // Wait for selector
     await page.waitForSelector(selector, { timeout: 10000 });
 
     let extracted;
 
     if (options.all) {
-      // Get all matching elements
       extracted = await page.$$eval(selector, (elements, attr) => {
-        return elements.map(el => {
-          if (attr) {
-            return el.getAttribute(attr);
-          }
-          return el.innerText.trim();
-        });
+        return elements.map(el => attr ? el.getAttribute(attr) : el.innerText.trim());
       }, options.attr);
     } else {
-      // Get first matching element
       extracted = await page.$eval(selector, (el, attr) => {
-        if (attr) {
-          return el.getAttribute(attr);
-        }
-        return el.innerText.trim();
+        return attr ? el.getAttribute(attr) : el.innerText.trim();
       }, options.attr);
     }
 
@@ -76,17 +59,10 @@ async function extract(url, selector, options = {}) {
       url,
       selector,
       error: error.message,
-      hint: error.message.includes('connect')
-        ? 'Is Chrome running? Start with: ./scripts/launch-chrome.sh'
-        : error.message.includes('selector')
-        ? 'Selector not found on page'
-        : null,
       timestamp: new Date().toISOString()
     };
   } finally {
-    if (browser) {
-      browser.disconnect();
-    }
+    if (browser) browser.disconnect();
   }
 }
 
@@ -103,22 +79,15 @@ async function main() {
     process.exit(1);
   }
 
-  // Parse options
   const options = {};
   for (let i = 2; i < args.length; i++) {
-    if (args[i] === '--all') {
-      options.all = true;
-    } else if (args[i] === '--attr') {
-      options.attr = args[++i];
-    }
+    if (args[i] === '--all') options.all = true;
+    else if (args[i] === '--attr') options.attr = args[++i];
   }
 
   const result = await extract(url, selector, options);
   console.log(JSON.stringify(result, null, 2));
-
-  if (!result.success) {
-    process.exit(1);
-  }
+  if (!result.success) process.exit(1);
 }
 
 main();

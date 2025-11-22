@@ -7,7 +7,7 @@
 #
 # Usage: ./launch-chrome.sh [--headless]
 
-PROFILE_DIR="$HOME/.chrome-geoffrey"
+PROFILE_DIR="$HOME/.brave-geoffrey"
 PORT=9222
 
 # Check if Chrome is already running with debugging
@@ -29,8 +29,8 @@ if [ "$1" = "--headless" ]; then
     HEADLESS="--headless=new"
 fi
 
-# Launch Chrome with remote debugging
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
+# Launch Brave Nightly with remote debugging (bypasses district MDM)
+/Applications/Brave\ Browser\ Nightly.app/Contents/MacOS/Brave\ Browser\ Nightly \
     --remote-debugging-port=$PORT \
     --user-data-dir="$PROFILE_DIR" \
     $HEADLESS \
