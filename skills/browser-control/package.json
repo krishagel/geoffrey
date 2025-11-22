@@ -1,0 +1,15 @@
+{
+  "name": "browser-control",
+  "version": "0.1.0",
+  "description": "Browser control scripts for Geoffrey using Playwright",
+  "type": "module",
+  "scripts": {
+    "launch": "./scripts/launch-chrome.sh",
+    "navigate": "bun scripts/navigate.js",
+    "screenshot": "bun scripts/screenshot.js",
+    "extract": "bun scripts/extract.js"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  }
+}
