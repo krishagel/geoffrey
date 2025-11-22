@@ -150,6 +150,30 @@ Complete list of every URL referenced:
 
 **Note:** Every factual claim needs an inline citation. The "All Sources" section at the end provides a consolidated reference list.
 
+## Saving Research Reports
+
+**ALWAYS save research reports to Google Docs** after completing research.
+
+### Default Behavior
+1. Create Google Doc in Geoffrey/Research folder
+2. Use appropriate account (hrg for personal, psd for work)
+3. Apply markdown formatting (headers, bold, links)
+4. Return link to user
+
+### How to Save
+```bash
+cd skills/google-workspace
+bun docs/create_doc.js <account> --title "<Research Topic>" --folder Research --content "<markdown>"
+```
+
+### Account Selection
+- **hrg** - Personal travel, consulting
+- **psd** - Work-related research
+- **kh** - Personal projects
+
+### Future: Obsidian Integration
+Will also save to local Obsidian vault (when skill is built).
+
 ## API Configuration
 
 Keys stored in: `~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env`

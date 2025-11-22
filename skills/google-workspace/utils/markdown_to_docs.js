@@ -15,6 +15,72 @@
  */
 
 /**
+ * Process inline formatting (bold, links) and return plain text + formatting requests
+ */
+function processInlineFormatting(text, startIndex) {
+  const requests = [];
+  let plainText = '';
+  let charIndex = startIndex;
+  let remaining = text;
+
+  while (remaining.length > 0) {
+    // Check for bold
+    const boldMatch = remaining.match(/^\*\*(.+?)\*\*/);
+    if (boldMatch) {
+      const boldText = boldMatch[1];
+      plainText += boldText;
+      requests.push({
+        updateTextStyle: {
+          range: {
+            startIndex: charIndex,
+            endIndex: charIndex + boldText.length,
+          },
+          textStyle: {
+            bold: true,
+          },
+          fields: 'bold',
+        },
+      });
+      charIndex += boldText.length;
+      remaining = remaining.substring(boldMatch[0].length);
+      continue;
+    }
+
+    // Check for links
+    const linkMatch = remaining.match(/^\[([^\]]+)\]\(([^)]+)\)/);
+    if (linkMatch) {
+      const linkText = linkMatch[1];
+      const linkUrl = linkMatch[2];
+      plainText += linkText;
+      requests.push({
+        updateTextStyle: {
+          range: {
+            startIndex: charIndex,
+            endIndex: charIndex + linkText.length,
+          },
+          textStyle: {
+            link: {
+              url: linkUrl,
+            },
+          },
+          fields: 'link',
+        },
+      });
+      charIndex += linkText.length;
+      remaining = remaining.substring(linkMatch[0].length);
+      continue;
+    }
+
+    // Regular character
+    plainText += remaining[0];
+    charIndex++;
+    remaining = remaining.substring(1);
+  }
+
+  return { plainText, requests, endIndex: charIndex };
+}
+
+/**
  * Parse markdown and return plain text + formatting requests
  * @param {string} markdown - The markdown text
  * @returns {Object} { text: string, requests: Array }
@@ -28,14 +94,12 @@ function parseMarkdown(markdown) {
 
   for (let i = 0; i < lines.length; i++) {
     let line = lines[i];
-    let lineRequests = [];
-    let processedLine = '';
 
     // Horizontal rule
     if (line.match(/^---+$/)) {
-      processedLine = '─'.repeat(50) + '\n';
-      plainText += processedLine;
-      currentIndex += processedLine.length;
+      const ruleLine = '─'.repeat(50) + '\n';
+      plainText += ruleLine;
+      currentIndex += ruleLine.length;
       continue;
     }
 
@@ -43,8 +107,13 @@ function parseMarkdown(markdown) {
     const headerMatch = line.match(/^(#{1,6})\s+(.+)$/);
     if (headerMatch) {
       const level = headerMatch[1].length;
-      const text = headerMatch[2];
-      processedLine = text + '\n';
+      const headerContent = headerMatch[2];
+
+      // Process inline formatting in header
+      const { plainText: processedText, requests: inlineRequests } =
+        processInlineFormatting(headerContent, currentIndex);
+
+      const fullLine = processedText + '\n';
 
       const headingStyle = level === 1 ? 'HEADING_1' :
                           level === 2 ? 'HEADING_2' :
@@ -52,11 +121,11 @@ function parseMarkdown(markdown) {
                           level === 4 ? 'HEADING_4' :
                           level === 5 ? 'HEADING_5' : 'HEADING_6';
 
-      lineRequests.push({
+      requests.push({
         updateParagraphStyle: {
           range: {
             startIndex: currentIndex,
-            endIndex: currentIndex + processedLine.length,
+            endIndex: currentIndex + fullLine.length,
           },
           paragraphStyle: {
             namedStyleType: headingStyle,
@@ -65,92 +134,50 @@ function parseMarkdown(markdown) {
         },
       });
 
-      plainText += processedLine;
-      requests.push(...lineRequests);
-      currentIndex += processedLine.length;
+      requests.push(...inlineRequests);
+      plainText += fullLine;
+      currentIndex += fullLine.length;
       continue;
     }
 
-    // Bullet lists
-    if (line.match(/^[-*]\s+/)) {
-      processedLine = line.replace(/^[-*]\s+/, '• ') + '\n';
-      plainText += processedLine;
-      currentIndex += processedLine.length;
+    // Bullet lists - process inline formatting within
+    const bulletMatch = line.match(/^[-*]\s+(.+)$/);
+    if (bulletMatch) {
+      const bulletContent = bulletMatch[1];
+      const { plainText: processedText, requests: inlineRequests } =
+        processInlineFormatting(bulletContent, currentIndex + 2); // +2 for "• "
+
+      const fullLine = '• ' + processedText + '\n';
+      plainText += fullLine;
+      requests.push(...inlineRequests);
+      currentIndex += fullLine.length;
       continue;
     }
 
-    // Numbered lists
+    // Numbered lists - process inline formatting within
     const numberedMatch = line.match(/^(\d+)\.\s+(.+)$/);
     if (numberedMatch) {
-      processedLine = numberedMatch[1] + '. ' + numberedMatch[2] + '\n';
-      plainText += processedLine;
-      currentIndex += processedLine.length;
+      const num = numberedMatch[1];
+      const listContent = numberedMatch[2];
+      const prefix = num + '. ';
+      const { plainText: processedText, requests: inlineRequests } =
+        processInlineFormatting(listContent, currentIndex + prefix.length);
+
+      const fullLine = prefix + processedText + '\n';
+      plainText += fullLine;
+      requests.push(...inlineRequests);
+      currentIndex += fullLine.length;
       continue;
     }
 
-    // Process inline formatting (bold, links)
-    let charIndex = currentIndex;
-    let remaining = line;
-    processedLine = '';
+    // Regular line - process inline formatting
+    const { plainText: processedText, requests: inlineRequests } =
+      processInlineFormatting(line, currentIndex);
 
-    while (remaining.length > 0) {
-      // Check for bold
-      const boldMatch = remaining.match(/^\*\*(.+?)\*\*/);
-      if (boldMatch) {
-        const boldText = boldMatch[1];
-        processedLine += boldText;
-        lineRequests.push({
-          updateTextStyle: {
-            range: {
-              startIndex: charIndex,
-              endIndex: charIndex + boldText.length,
-            },
-            textStyle: {
-              bold: true,
-            },
-            fields: 'bold',
-          },
-        });
-        charIndex += boldText.length;
-        remaining = remaining.substring(boldMatch[0].length);
-        continue;
-      }
-
-      // Check for links
-      const linkMatch = remaining.match(/^\[(.+?)\]\((.+?)\)/);
-      if (linkMatch) {
-        const linkText = linkMatch[1];
-        const linkUrl = linkMatch[2];
-        processedLine += linkText;
-        lineRequests.push({
-          updateTextStyle: {
-            range: {
-              startIndex: charIndex,
-              endIndex: charIndex + linkText.length,
-            },
-            textStyle: {
-              link: {
-                url: linkUrl,
-              },
-            },
-            fields: 'link',
-          },
-        });
-        charIndex += linkText.length;
-        remaining = remaining.substring(linkMatch[0].length);
-        continue;
-      }
-
-      // Regular character
-      processedLine += remaining[0];
-      charIndex++;
-      remaining = remaining.substring(1);
-    }
-
-    processedLine += '\n';
-    plainText += processedLine;
-    requests.push(...lineRequests);
-    currentIndex += processedLine.length;
+    const fullLine = processedText + '\n';
+    plainText += fullLine;
+    requests.push(...inlineRequests);
+    currentIndex += fullLine.length;
   }
 
   return { text: plainText, requests };
@@ -197,26 +224,29 @@ async function main() {
 
 This is **bold text** and this is a [link](https://example.com).
 
-- First bullet
-- Second bullet
+- First bullet with [a link](https://test.com)
+- Second bullet with **bold**
 - Third bullet
 
 ### Subsection
 
-1. Numbered item one
+1. Numbered item with [link](https://one.com)
 2. Numbered item two
 
 ---
 
-## Another Section
+## Sources
 
-More content here with **important** information.
+- [Source One](https://source1.com)
+- [Source Two](https://source2.com)
 `;
 
   const result = parseMarkdown(testMarkdown);
   console.log('Plain text:');
   console.log(result.text);
   console.log('\nFormatting requests:', result.requests.length);
+  console.log('\nSample requests:');
+  result.requests.slice(0, 3).forEach(r => console.log(JSON.stringify(r, null, 2)));
 }
 
 if (require.main === module) {
