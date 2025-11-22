@@ -29,6 +29,27 @@ Use this skill when user needs:
 - Fact-checking or verification
 - Market research or trend analysis
 
+## Travel Research Requirements
+
+**CRITICAL:** Travel research MUST include user-generated content:
+
+### Required Sections for Travel
+1. **User Reviews** - TripAdvisor, FlyerTalk, Reddit feedback
+2. **"What I Wish I Knew"** - Common mistakes and gotchas
+3. **Real Experiences** - Actual trip reports from similar travelers
+4. **Restaurant/Hotel Reviews** - With prices and quality feedback
+5. **Transportation Tips** - Real user experiences with logistics
+
+### Sources to Search
+- TripAdvisor reviews and forums
+- FlyerTalk (for points/miles properties)
+- Reddit (r/JapanTravel, r/skiing, r/churning, etc.)
+- Ski forums and trip reports
+- Points/miles blogs with personal reviews
+
+### Future: Browser Access
+Some user content requires browser access to scrape full threads and reviews. This will be enabled via 1Password integration for authenticated access to forums and review sites.
+
 ## Citation Requirements
 
 **CRITICAL:** All research output MUST include citations.
