@@ -1,7 +1,6 @@
-# Google Workspace Skill
-
 ---
 name: google-workspace
+description: Unified Google Workspace integration for managing email, calendar, files, and communication across multiple accounts
 triggers:
   # Gmail
   - "check email"
@@ -11,7 +10,6 @@ triggers:
   - "list emails"
   - "unread emails"
   - "inbox"
-
   # Calendar
   - "check calendar"
   - "schedule meeting"
@@ -19,28 +17,28 @@ triggers:
   - "what's on my calendar"
   - "free time"
   - "upcoming meetings"
-
   # Drive
   - "find file"
   - "search drive"
   - "list documents"
   - "open document"
   - "create document"
-
   # Docs/Sheets/Slides
   - "create doc"
   - "create spreadsheet"
   - "create presentation"
   - "edit document"
-
   # Tasks
   - "google tasks"
   - "task list"
-
   # Chat
   - "send chat"
   - "check chat"
+allowed-tools: Read, Bash
+version: 0.1.0
 ---
+
+# Google Workspace Skill
 
 ## Overview
 

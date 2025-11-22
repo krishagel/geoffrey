@@ -238,6 +238,48 @@ When adding new skills:
 4. Test with real data
 5. Update this CLAUDE.md if architectural decisions change
 
+### SKILL.md Validation Checklist
+
+**CRITICAL:** Every SKILL.md must pass these checks before commit:
+
+1. **Frontmatter must be FIRST** - No text before the opening `---`
+2. **Required fields:**
+   - `name` - skill identifier (matches directory name)
+   - `description` - one-line description
+   - `triggers` - array of natural language phrases
+   - `allowed-tools` - comma-separated tool list
+   - `version` - semantic version
+
+**Valid format:**
+```yaml
+---
+name: skill-name
+description: Brief description of what this skill does
+triggers:
+  - "trigger phrase one"
+  - "trigger phrase two"
+allowed-tools: Read, Bash
+version: 0.1.0
+---
+
+# Skill Title
+```
+
+**Invalid (will not register):**
+```yaml
+# Title Here    <-- ERROR: text before frontmatter
+
+---
+name: skill-name
+---
+```
+
+**Validation command:**
+```bash
+# Check all skills have valid frontmatter
+for f in skills/*/SKILL.md; do head -1 "$f" | grep -q "^---$" || echo "INVALID: $f"; done
+```
+
 ---
 
 **Remember:** Context is precious. Keep it lean. Fetch on-demand.

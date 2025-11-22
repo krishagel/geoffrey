@@ -1,9 +1,6 @@
-# Freshservice Manager Skill
-
-Manage Freshservice tickets, approvals, and get team performance reports across all workspaces.
-
 ---
 name: freshservice-manager
+description: Manage Freshservice tickets, approvals, and get team performance reports across all workspaces
 triggers:
   - "freshservice"
   - "ticket"
@@ -16,7 +13,11 @@ triggers:
   - "assign to"
   - "add note to ticket"
   - "close ticket"
+allowed-tools: Read, Bash
+version: 0.1.0
 ---
+
+# Freshservice Manager Skill
 
 ## Configuration
 
