@@ -21,9 +21,11 @@ logs/
 debug/
 
 # Local secrets (never commit)
+.env
 secrets.env
 .env.local
 *.key
+credentials.json
 
 # Node modules (if we add any tooling)
 node_modules/

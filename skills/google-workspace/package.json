@@ -1,0 +1,17 @@
+{
+  "name": "geoffrey-google-workspace",
+  "version": "1.0.0",
+  "description": "Google Workspace integration for Geoffrey",
+  "private": true,
+  "scripts": {
+    "setup:psd": "bun auth/oauth_setup.js psd",
+    "setup:kh": "bun auth/oauth_setup.js kh",
+    "setup:hrg": "bun auth/oauth_setup.js hrg",
+    "list:accounts": "bun auth/token_manager.js list"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "googleapis": "^128.0.0",
+    "open": "^9.1.0"
+  }
+}
