@@ -30,6 +30,18 @@ Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learn
 - Always use current year in search queries unless explicitly historical
 - When in doubt, search for "2025" or "2026" not past years
 
+### JavaScript Runtime
+
+**ALWAYS use `bun` instead of `node`** for running JavaScript files.
+
+```bash
+# Correct
+bun script.js
+
+# Wrong
+node script.js
+```
+
 ### Founding Principles
 
 Adapted from PAI's Constitution:

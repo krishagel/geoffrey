@@ -29,6 +29,30 @@ Use this skill when user needs:
 - Fact-checking or verification
 - Market research or trend analysis
 
+## Citation Requirements
+
+**CRITICAL:** All research output MUST include citations.
+
+### Inline Citations
+Every factual claim must link to its source:
+- "The Westin Rusutsu costs 70,000 points peak ([Point Hacks](url))"
+- "Shinkansen to Nagano takes 1.5 hours ([Corritrip](url))"
+
+### Source Section
+Every research report must end with a complete "Sources" section listing all URLs used.
+
+### Why This Matters
+- User needs to verify information
+- Information changes frequently (credit card perks, prices)
+- Establishes credibility
+- Allows deeper exploration
+
+### No Citation = Don't Include
+If you can't cite a source for a claim, either:
+1. Find a source
+2. Mark it as "unverified"
+3. Don't include it
+
 ## Architecture
 
 ### Query Decomposition
@@ -93,17 +117,19 @@ Use `/conduct-research [topic]` to trigger full parallel research workflow.
 ## Research: [Topic]
 
 ### Key Findings
-- Finding 1 (High confidence - 4/4 sources agree)
-- Finding 2 (Medium confidence - 3/4 sources)
-- Finding 3 (Low confidence - conflicting info)
+- Finding 1 with inline citation ([Source](url))
+- Finding 2 with inline citation ([Source](url))
+- Finding 3 - conflicting info ([Source A](url) vs [Source B](url))
 
 ### Detailed Analysis
-[Synthesized information organized by sub-topic]
 
-### Sources
-- [Source 1](url) - via Perplexity
-- [Source 2](url) - via Gemini
-- etc.
+#### Sub-topic 1
+Information with citations throughout. For example, "The Westin Rusutsu
+costs 70,000 points peak" ([Point Hacks](url)) and "offers ski-in/ski-out
+access" ([Marriott](url)).
+
+#### Sub-topic 2
+More information with inline citations...
 
 ### Confidence Assessment
 Overall: High/Medium/Low
@@ -114,7 +140,15 @@ Overall: High/Medium/Low
 ### Recommendations
 1. Actionable next step
 2. Another action
+
+### All Sources
+Complete list of every URL referenced:
+- [Source Name 1](full-url)
+- [Source Name 2](full-url)
+- [Source Name 3](full-url)
 ```
+
+**Note:** Every factual claim needs an inline citation. The "All Sources" section at the end provides a consolidated reference list.
 
 ## API Configuration
 
