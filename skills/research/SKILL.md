@@ -18,7 +18,63 @@ version: 0.1.0
 
 # Research Skill
 
-Multi-source research using parallel LLM agents for comprehensive, current information gathering.
+Discovery-driven, exhaustive research using parallel LLM agents for comprehensive, current information gathering.
+
+## Core Principles
+
+**CRITICAL:** These principles define how research works.
+
+### 1. Discovery-Driven, Not List-Driven
+- Find the BEST sources, not just known sources
+- Don't limit to predefined source lists
+- The internet is huge - explore it
+- Value is in finding what user doesn't already know
+
+### 2. Context-Aware
+- Load user's domain context from preferences
+- Research is RELEVANT to their specific situation
+- But context doesn't limit WHERE you search
+
+### 3. Exhaustive
+- No time limits - can take 30 minutes to 3 hours
+- Don't stop at first page of results
+- Keep going until topic is exhausted
+- Follow promising links deeper
+
+### 4. Multimedia
+- Not just text articles
+- Videos (YouTube), TikTok, podcasts
+- Real user experiences from forums
+
+### 5. Highly Cited
+- Every claim must have a citation
+- Multiple sources for important claims
+- Note when sources conflict
+
+## Domain Context Loading
+
+Research automatically loads relevant context from preferences based on detected domain.
+
+### How It Works
+1. Detect domain from query (travel, shopping, work, etc.)
+2. Load `research_domains.[domain]` from preferences
+3. Load referenced context keys
+4. Fetch any dynamic data (point balances, etc.)
+5. Apply domain-specific research patterns
+
+### Available Domains
+- **travel** - Loads loyalty programs, credit cards, ski passes, fetches point balances
+- **work_education** - Loads PSD context, CoSN membership, K-12 patterns
+- **shopping** - Price comparison, quality patterns
+- **ai_coding** - Tech stack, GitHub/HN patterns
+- **consulting** - Strategic recommendations patterns
+
+### Dynamic Data Fetching
+For travel research, use browser-control to fetch current:
+- Marriott points balance
+- Alaska miles balance
+- Chase points balance
+- Active transfer bonus promotions
 
 ## When to Activate
 
@@ -190,12 +246,15 @@ Use `/conduct-research [topic]` to trigger full parallel research workflow.
 ```markdown
 ## Research: [Topic]
 
-### Key Findings
-- Finding 1 with inline citation ([Source](url))
-- Finding 2 with inline citation ([Source](url))
-- Finding 3 - conflicting info ([Source A](url) vs [Source B](url))
+### Context Applied
+- Domain: [travel/shopping/work/etc]
+- User context loaded: [what was loaded from preferences]
+- Dynamic data fetched: [current point balances, etc]
 
-### Detailed Analysis
+### Executive Summary
+[2-3 paragraph overview of key findings and main recommendation]
+
+### Detailed Findings
 
 #### Sub-topic 1
 Information with citations throughout. For example, "The Westin Rusutsu
@@ -205,15 +264,24 @@ access" ([Marriott](url)).
 #### Sub-topic 2
 More information with inline citations...
 
-### Confidence Assessment
-Overall: High/Medium/Low
-- What we're confident about
-- What needs verification
-- What's still unclear
+### Multimedia Resources
+- [Video: Title](url) - brief description
+- [Podcast: Episode](url) - brief description
+- [TikTok: @user](url) - brief description
+
+### What I Discovered You Might Not Know
+- Surprising finding 1 that user likely didn't know
+- Surprising finding 2
+- New source or perspective discovered
 
 ### Recommendations
-1. Actionable next step
-2. Another action
+1. Actionable recommendation specific to user's context
+2. Another action based on their situation
+
+### Confidence Assessment
+- High confidence: [topics with multiple agreeing sources]
+- Needs verification: [topics with limited sources]
+- Conflicting information: [where sources disagree]
 
 ### All Sources
 Complete list of every URL referenced:
@@ -261,9 +329,10 @@ OPENAI_API_KEY=sk-...
 
 ## Performance
 
-- **Speed**: 15-45 seconds for full parallel research
-- **Depth**: 4 independent perspectives
-- **Accuracy**: Cross-referenced with confidence scoring
+- **Time**: 30 minutes to 3 hours for exhaustive research (not 15-45 seconds)
+- **Depth**: Exhaustive - multiple search pages, follow links, multimedia
+- **Sources**: Discover new sources, not just known lists
+- **Accuracy**: Cross-referenced with confidence scoring, all claims cited
 
 ## Limitations
 
