@@ -1,221 +1,239 @@
----
-name: freshservice-manager
-description: Manage Freshservice tickets, view status, create and update tickets across workspaces
-triggers:
-  - "freshservice"
-  - "check tickets"
-  - "create ticket"
-  - "ticket status"
-  - "my tickets"
-  - "open tickets"
-  - "freshservice summary"
-  - "assign ticket"
-allowed-tools: Read, Bash
-version: 0.1.0
----
-
 # Freshservice Manager Skill
 
-Manage Freshservice tickets across all workspaces with querying, creation, and updates.
+Manage Freshservice tickets, approvals, and get team performance reports across all workspaces.
 
-## When to Activate
-
-Use this skill when user wants to:
-- Check ticket status or list tickets
-- Create new tickets (from OmniFocus tasks, emails, etc.)
-- Update tickets (assign, change status, add notes)
-- Get daily summaries of ticket activity
-- View tickets assigned to them or their team
+---
+name: freshservice-manager
+triggers:
+  - "freshservice"
+  - "ticket"
+  - "helpdesk"
+  - "what happened in freshservice"
+  - "tech team metrics"
+  - "daily summary"
+  - "weekly summary"
+  - "approvals"
+  - "assign to"
+  - "add note to ticket"
+  - "close ticket"
+---
 
 ## Configuration
 
-**API Key Location:** `~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env`
-
-```env
-FRESHSERVICE_DOMAIN=psd401.freshservice.com
-FRESHSERVICE_API_KEY=your_key_here
-```
-
-**Agent Info:**
-- Agent ID: 6000130414
-- Email: hagelk@psd401.net
+- **Domain**: psd401.freshservice.com
+- **Agent ID**: 6000130414 (Kris Hagel)
+- **Primary Workspace**: 2 (Technology)
+- **API Key**: Stored in `~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env`
 
 ## Workspaces
 
-| ID | Name | Primary |
-|----|------|---------|
-| 2 | Technology | ✓ |
-| 3 | Employee Support Services | |
-| 4 | Business Services | |
-| 5 | Teaching & Learning | |
-| 6 | Maintenance | |
-| 8 | Investigations | |
-| 9 | Transportation | |
-| 10 | Safety & Security | |
-| 11 | Communications | |
-| 13 | Software Development | |
+| ID | Name |
+|----|------|
+| 2 | Technology (primary) |
+| 3 | Employee Support Services |
+| 4 | Business Services |
+| 5 | Teaching & Learning |
+| 6 | Maintenance |
+| 8 | Investigations |
+| 9 | Transportation |
+| 10 | Safety & Security |
+| 11 | Communications |
+| 13 | Software Development |
 
-**Note:** Use `workspace_id: 0` to query across all workspaces.
+## Team Context
 
-## Available Scripts
+- **TSD Generic Account** (6000875582) - Shared by high school interns for Chromebook repairs
+- **David Edwards** - Desktop Support Tech, handles most varied workload including incidents
+- **Carol Winget** - Student Database Admin, PowerSchool specialist
+- **Laura Durkin** - Admin Secretary, handles new students and badges
 
-Scripts are in `./scripts/` directory. Run via:
+## Reports & Summaries
+
+### Daily Summary
+Get a narrative summary of what happened in Technology on a specific day.
+
+**Natural language triggers:**
+- "What happened in Freshservice yesterday?"
+- "Give me today's tech summary"
+- "What did the team do on Wednesday?"
+
+**Script:** `bun get_daily_summary.js [date]`
+
+Date options:
+- `today` (default)
+- `yesterday`
+- Day names: `monday`, `tuesday`, `wednesday`, etc.
+- `last wednesday`, `last friday`
+- Specific date: `2025-11-20`
+
+**Output includes:**
+- Total tickets closed
+- Breakdown by category (Chromebook, Schoology, Security Alert, etc.)
+- Breakdown by agent with their tickets
+- Automated ticket count (password resets)
+
+### Weekly Summary
+Get trends and metrics for the entire week.
+
+**Natural language triggers:**
+- "Weekly tech summary"
+- "How did the team do this week?"
+- "Give me the weekly Freshservice report"
+
+**Script:** `bun get_weekly_summary.js [weeks_ago]`
+
+Options:
+- `0` = this week (default)
+- `1` = last week
+- `2` = two weeks ago
+
+**Output includes:**
+- Total closed and daily average
+- Peak day and slow day
+- Daily trend by volume
+- Category breakdown with percentages
+- Category trends (which days had spikes)
+- Top agents with ticket counts and focus areas
+- Agent daily breakdown
+
+### Narrative Style
+
+When presenting summaries, write a 1-minute narrative that:
+- Highlights the main story of the day/week (outages, big pushes, etc.)
+- Calls out specific people and what they handled
+- Notes any concerning patterns (security alerts, cut wires, etc.)
+- Converts UTC timestamps to Pacific time
+- Uses specific numbers and ticket counts
+
+## Ticket Operations
+
+### List Tickets
 ```bash
-bun ./scripts/script-name.js [args]
+bun list_tickets.js '{"workspace_id": 2, "filter": "new_and_my_open"}'
 ```
 
-### get_agent.js
-Get agent info by email.
+Filters: `new_and_my_open`, `watching`, `spam`, `deleted`, `archived`
 
-**Usage:** `bun get_agent.js [email]`
-
-**Returns:** Agent profile including ID, workspaces, roles
-
-### get_workspaces.js
-Get workspace details.
-
-**Usage:** `bun get_workspaces.js [workspace_id]`
-
-**Returns:** Workspace names, IDs, and state
-
-### list_tickets.js
-List tickets with filters.
-
-**Usage:** `bun list_tickets.js '<json>'`
-
-**Options:**
-```json
-{
-  "workspace_id": 2,
-  "filter": "new_and_my_open",
-  "per_page": 30,
-  "page": 1,
-  "updated_since": "2025-01-01"
-}
+### Search Tickets
+```bash
+bun search_tickets.js "status:2 AND priority:3" 2
 ```
 
-**Predefined filters:** `new_and_my_open`, `watching`, `spam`, `deleted`
+Query syntax: `field:value AND/OR field:value`
+Fields: `status`, `priority`, `agent_id`, `group_id`, `created_at`, `updated_at`
 
-### get_ticket.js
-Get ticket details by ID.
-
-**Usage:** `bun get_ticket.js <ticket_id> [include]`
-
-**Include options:** `conversations`, `requester`, `problem`, `stats`, `assets`, `change`, `related_tickets`
-
-### create_ticket.js
-Create a new ticket.
-
-**Usage:** `bun create_ticket.js '<json>'`
-
-**Required fields:** `subject`, `description`, `email`
-
-**Example:**
-```json
-{
-  "subject": "New equipment request",
-  "description": "Need a new monitor for office",
-  "email": "requester@psd401.net",
-  "priority": 2,
-  "status": 2,
-  "workspace_id": 2
-}
+### Get Ticket Details
+```bash
+bun get_ticket.js <ticket_id>
 ```
 
-### update_ticket.js
-Update an existing ticket.
-
-**Usage:** `bun update_ticket.js <ticket_id> '<json>'`
-
-**Example:**
-```json
-{
-  "status": 4,
-  "priority": 3,
-  "responder_id": 6000130414
-}
+### Get Service Request (with form data)
+```bash
+bun get_service_request.js <ticket_id>
 ```
 
-## Status and Priority Values
+Includes requester info, custom form fields, requested items.
 
-**Status:**
-- 2 = Open
-- 3 = Pending
-- 4 = Resolved
-- 5 = Closed
+### Create Ticket
+```bash
+bun create_ticket.js '<json>'
+```
 
-**Priority:**
-- 1 = Low
-- 2 = Medium
-- 3 = High
-- 4 = Urgent
+Required: `subject`, `description`, `email` or `requester_id`
+Optional: `priority`, `status`, `workspace_id`
+
+### Update Ticket
+```bash
+bun update_ticket.js <ticket_id> '<json>'
+```
+
+Can update: `status`, `priority`, `responder_id`, `group_id`
+
+### Add Note
+```bash
+bun add_note.js <ticket_id> '{"body": "Note text", "private": true}'
+```
+
+Optional: `notify_emails` array to alert specific agents.
+
+## Agent Operations
+
+### List Agents
+```bash
+bun list_agents.js [query]
+```
+
+Query filters by first name, last name, or email.
+Returns: id, name, email, job_title
+
+Use this to resolve "assign to Mark" → find Mark's agent ID → update ticket.
+
+### Get Agent by Email
+```bash
+bun get_agent.js <email>
+```
+
+## Approvals
+
+### Get Pending Approvals
+```bash
+bun get_approvals.js [status]
+```
+
+Status: `requested` (default), `approved`, `rejected`, `cancelled`
+
+**Note:** Freshservice API does not support approving service requests programmatically. User must approve via:
+- Web UI: `https://psd401.freshservice.com/helpdesk/tickets/<id>`
+- Email reply to approval request
 
 ## Common Workflows
 
-### Check My Open Tickets
+### "Add a note to Jodi on ticket 151501"
+1. Find Jodi's agent ID: `bun list_agents.js jodi` → 6000542935
+2. Add note: `bun add_note.js 151501 '{"body": "...", "notify_emails": ["miloj@psd401.net"]}'`
 
-```bash
-bun list_tickets.js '{"filter": "new_and_my_open", "workspace_id": 2}'
-```
+### "Assign ticket to Mark"
+1. Find Mark's ID: `bun list_agents.js mark`
+2. Update ticket: `bun update_ticket.js <id> '{"responder_id": <mark_id>}'`
 
-### Create Ticket from OmniFocus Task
+### "What approvals do I have?"
+1. Get approvals: `bun get_approvals.js`
+2. For each approval, get details: `bun get_service_request.js <ticket_id>`
 
-1. Extract task details (subject, notes)
-2. Determine workspace based on content
-3. Create ticket:
-```bash
-bun create_ticket.js '{"subject": "Task subject", "description": "Task notes", "email": "requester@psd401.net", "workspace_id": 2}'
-```
+### Cross-skill workflow
+"Add note to ticket, create OmniFocus task, reassign ticket" - can combine Freshservice note + OmniFocus task creation + ticket update in one flow.
 
-### Daily Summary
+## Category Detection
 
-1. List recent tickets across all workspaces:
-```bash
-bun list_tickets.js '{"workspace_id": 0, "updated_since": "2025-11-21", "per_page": 50}'
-```
+Tickets are auto-categorized by subject keywords:
+- **Password Reset**: "password reset"
+- **Security Alert**: "security alert", "compromised", "breach"
+- **Schoology**: "schoology"
+- **PowerSchool**: "powerschool"
+- **Promethean Board**: "promethean"
+- **Chromebook**: "chromebook"
+- **Phone/Voicemail**: "phone", "voicemail", "ext."
+- **Badge Request**: "badge"
+- **New Student**: "new student", "enrollee"
+- **Intercom**: "intercom"
+- **Raptor**: "raptor"
+- **GoGuardian**: "goguardian", "go guardian"
+- **Access/Login**: "login", "access", "mfa"
 
-2. Summarize by workspace and status
+## Status Codes
 
-### Assign Ticket to Agent
+| Code | Status |
+|------|--------|
+| 2 | Open |
+| 3 | Pending |
+| 4 | Resolved |
+| 5 | Closed |
 
-```bash
-bun update_ticket.js 151900 '{"responder_id": 6000130414}'
-```
+## Priority Codes
 
-## Output Format
-
-When presenting ticket information, use this format:
-
-```markdown
-## Tickets Summary
-
-**Technology (Workspace 2):**
-- #151900: Principal Phone Discovery (Open, Medium)
-- #151899: New Student Enrollee (Open, Medium)
-
-**Total:** X open, Y pending, Z resolved
-```
-
-## Future Enhancements
-
-- [ ] Search tickets with query strings
-- [ ] Get my pending approvals
-- [ ] Add notes/replies to tickets
-- [ ] Get ticket conversations
-- [ ] Agent workload summary
-- [ ] Custom field support
-- [ ] Bulk ticket operations
-
-## API Reference
-
-- **Base URL:** `https://psd401.freshservice.com/api/v2`
-- **Auth:** Basic auth with API key as username, X as password
-- **Rate Limits:** Higher limits than v1
-- **Docs:** https://api.freshservice.com/
-
-## Known Limitations
-
-1. **No "List Workspaces" endpoint** - workspace IDs must be known
-2. **Agent filtering has pagination bugs** - counts may be incorrect
-3. **No "My Approvals" endpoint** - need to query tickets/changes
-4. **30-day default window** - use `updated_since` for older tickets
+| Code | Priority |
+|------|----------|
+| 1 | Low |
+| 2 | Medium |
+| 3 | High |
+| 4 | Urgent |
