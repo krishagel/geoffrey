@@ -20,6 +20,16 @@ Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learn
 | **Tier 2** | SKILL.md | Skill activates | How to use OmniFocus |
 | **Tier 3** | Data/scripts | Just-in-time | Fetch tags when creating task |
 
+### Date Awareness
+
+**CRITICAL:** Always check the current date before any research or time-sensitive task.
+
+- Current date is in your environment: `Today's date: YYYY-MM-DD`
+- For seasonal topics (ski seasons, travel, events): calculate the CURRENT or UPCOMING season
+- November 2025 → 2025-2026 ski season (NOT 2024-2025)
+- Always use current year in search queries unless explicitly historical
+- When in doubt, search for "2025" or "2026" not past years
+
 ### Founding Principles
 
 Adapted from PAI's Constitution:
