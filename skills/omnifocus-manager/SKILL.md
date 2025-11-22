@@ -93,14 +93,31 @@ Creates a task with proper tags and project.
 
 ### Add a Task
 
-1. Parse user request for: task name, person (if any), context clues
-2. Run `get_tags.js` to fetch current tag hierarchy
-3. Determine appropriate:
-   - **Project** - based on domain (PSD work, Personal, etc.)
-   - **Tags** - person, activity type, energy level
-   - **Due date** - default to reasonable timeframe
-4. Run `add_task.js` with parameters
-5. Return standardized output
+1. **Read preferences on-demand:**
+   ```bash
+   cat ~/Library/Mobile\ Documents/com~apple~CloudDocs/Geoffrey/knowledge/preferences.json
+   ```
+   Look for routing rules in `productivity.omnifocus_projects` and `omnifocus_timing`
+
+2. Parse user request for: task name, person (if any), context clues
+
+3. Apply learned routing rules:
+   - Discussions with people → Meetings project
+   - CoSN-related → CoSN Work project
+   - District reimbursements → Purchasing & Acquisitions
+   - Discussion items → 1 week due
+   - Travel approvals → 2 weeks due
+
+4. Determine appropriate:
+   - **Project** - based on routing rules and domain
+   - **Tags** - person + Follow Up for discussions, Organization for admin tasks
+   - **Due date** - based on task type timing rules
+
+5. Run `add_task.js` with parameters
+
+6. Update preferences if new routing patterns learned
+
+7. Return standardized output
 
 **Example:**
 ```

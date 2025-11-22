@@ -1,6 +1,14 @@
 ---
 name: knowledge-manager
 description: Manages user preferences and learned knowledge with confidence scoring
+triggers:
+  - "what do you know"
+  - "my preferences"
+  - "show preferences"
+  - "remember that"
+  - "learn that"
+  - "forget that"
+  - "what have you learned"
 allowed-tools: Read, Write, Bash
 version: 0.1.0
 ---
