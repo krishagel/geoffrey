@@ -309,6 +309,37 @@ Conversation → Hook Triggers → Extract Preferences → Confidence Check → 
 
 ## Technical Specifications
 
+### Context Management Architecture
+
+**CRITICAL:** Keep context lean using three-tier progressive disclosure.
+
+| Tier | What | When Loaded | Size Guideline |
+|------|------|-------------|----------------|
+| **Tier 1** | preferences.json | Always active | 50-100 lines max |
+| **Tier 2** | SKILL.md | Skill activates | Comprehensive |
+| **Tier 3** | Scripts/data | Just-in-time | Fetch on-demand |
+
+**Why this matters:** As Geoffrey learns more, preferences could bloat and fill context windows. By keeping preferences lean (behavioral rules only) and fetching data on-demand via scripts, we maintain performance regardless of how much Geoffrey knows.
+
+**Preferences = Behavioral rules only:**
+```json
+{
+  "omnifocus_philosophy": {
+    "task_creation": "Always assign to project + due date"
+  }
+}
+```
+
+**NOT data dumps:**
+```json
+// WRONG - don't do this
+{
+  "all_129_tags": [...huge array...]
+}
+```
+
+**Code over prompts:** Build deterministic scripts, wrap with AI orchestration. Code is cheaper, faster, and more reliable than prompts.
+
 ### Plugin Format (Claude Code Standard)
 
 Geoffrey uses Claude Code's standard plugin format:
@@ -362,15 +393,20 @@ geoffrey/
 {"timestamp":"ISO-8601","query":"...","learned":["preference1"],"confidence_updates":{}}
 ```
 
-### MCP Integration
+### External Integrations
 
-Geoffrey relies on **existing MCP servers** for external integrations:
-- OmniFocus MCP
+Geoffrey uses a hybrid approach for integrations:
+
+**Custom Scripts (preferred for control):**
+- OmniFocus - JXA scripts in skills for full tag hierarchy access
+- Rationale: Existing MCP servers truncate data, can't get tag groupings
+
+**MCP Servers (where they work well):**
 - Obsidian MCP
 - Gmail MCP
 - Freshservice MCP (may need to build)
 
-**No custom MCP servers in Phase 1** - use JSON file access directly.
+**Design principle:** If MCP server gives what we need, use it. If not, write our own scripts inside skills for full control.
 
 ---
 

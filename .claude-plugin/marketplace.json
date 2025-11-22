@@ -12,7 +12,7 @@
   "plugins": [
     {
       "name": "geoffrey",
-      "source": ".",
+      "source": "./",
       "description": "Personal AI infrastructure with learning-enabled assistance for work, travel, and personal tasks",
       "version": "0.1.0",
       "category": "productivity",
