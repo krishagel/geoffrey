@@ -47,8 +47,61 @@ Use this skill when user needs:
 - Ski forums and trip reports
 - Points/miles blogs with personal reviews
 
-### Future: Browser Access
-Some user content requires browser access to scrape full threads and reviews. This will be enabled via 1Password integration for authenticated access to forums and review sites.
+### Browser Access for Deep Research
+
+Use the **browser-control** skill to scrape full threads and reviews that require:
+- JavaScript rendering (Reddit, modern forums)
+- Authentication (FlyerTalk, logged-in content)
+- Dynamic content loading
+
+**Prerequisites:**
+1. Brave must be running: `cd skills/browser-control && ./scripts/launch-chrome.sh`
+2. User must be logged into relevant sites in the Brave Geoffrey profile
+
+**Available Scripts** (in `skills/browser-control/scripts/`):
+
+```bash
+# Navigate and get page content
+bun navigate.js "https://www.reddit.com/r/JapanTravel/comments/..."
+
+# Extract specific content
+bun extract.js "https://flyertalk.com/forum/thread" ".post-content" --all
+
+# Search travel sites directly
+bun search.js reddit "Hakuba ski resort tips"
+bun search.js flyertalk "Marriott Bonvoy Japan redemption"
+
+# Capture current page without navigating
+bun capture.js /tmp/screenshot.png
+```
+
+**When to Use Browser Control:**
+- Reddit threads (full comments, not just preview)
+- FlyerTalk forum posts (complete thread content)
+- Hotel/airline pages requiring login (availability, points pricing)
+- Sites that block web scraping but allow browsers
+
+### Research Tool Decision Tree
+
+**Start with WebSearch/WebFetch** for:
+- General facts and information
+- Blog posts and news articles
+- Static content that's publicly accessible
+- Quick lookups
+
+**Escalate to browser-control** when:
+- WebFetch returns truncated/incomplete content (JS-rendered sites)
+- Need authenticated access (user's Marriott/Alaska account)
+- Need real-time prices or availability
+- Forum threads show only previews
+- Site blocks scraping but allows browsers
+
+**Example Flow:**
+1. User asks: "What do people say about Westin Rusutsu?"
+2. Start with `WebSearch` for blog reviews
+3. Find promising Reddit/FlyerTalk threads
+4. Use `browser-control` to get full thread content
+5. Synthesize findings with citations
 
 ## Citation Requirements
 
