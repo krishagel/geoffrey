@@ -56,7 +56,7 @@ Launch multiple researcher agents simultaneously:
 
 ## Available Agents
 
-Agents are in `/agents/` directory:
+Agents are in `./agents/` directory:
 
 | Agent | Best For | API Required |
 |-------|----------|--------------|
