@@ -1,22 +1,38 @@
 #!/usr/bin/env node
 
 /**
- * Create Google Doc
+ * Create Google Doc with Markdown Formatting
  *
- * Usage: node create_doc.js <account> --title <title> [--content <content>]
+ * Usage: bun create_doc.js <account> --title <title> [options]
+ *
+ * Options:
+ *   --title     Document title (required)
+ *   --content   Markdown content
+ *   --folder    Subfolder in Geoffrey (Research, Notes, Reports, Travel)
+ *   --raw       Don't apply markdown formatting (plain text)
  *
  * Examples:
- *   node create_doc.js psd --title "Meeting Notes"
- *   node create_doc.js psd --title "Report" --content "Initial content here"
+ *   bun create_doc.js hrg --title "Meeting Notes" --folder Notes
+ *   bun create_doc.js psd --title "Report" --content "# Header\n\nContent" --folder Research
  */
 
 const { google } = require('googleapis');
 const path = require('path');
 const { getAuthClient } = require(path.join(__dirname, '..', 'auth', 'token_manager'));
+const { ensureGeoffreyFolders } = require(path.join(__dirname, '..', 'utils', 'folder_manager'));
+const { insertFormattedContent } = require(path.join(__dirname, '..', 'utils', 'markdown_to_docs'));
 
 async function createDoc(account, options) {
   const auth = await getAuthClient(account);
   const docs = google.docs({ version: 'v1', auth });
+  const drive = google.drive({ version: 'v3', auth });
+
+  // Get or create Geoffrey folder structure
+  let folderId = null;
+  if (options.folder) {
+    const folderResult = await ensureGeoffreyFolders(account, options.folder);
+    folderId = folderResult.targetFolder;
+  }
 
   // Create the document
   const createResponse = await docs.documents.create({
@@ -27,19 +43,43 @@ async function createDoc(account, options) {
 
   const documentId = createResponse.data.documentId;
 
-  // Add content if provided
-  if (options.content) {
-    await docs.documents.batchUpdate({
-      documentId,
-      requestBody: {
-        requests: [{
-          insertText: {
-            location: { index: 1 },
-            text: options.content,
-          },
-        }],
-      },
+  // Move to Geoffrey folder if specified
+  if (folderId) {
+    // Get current parents
+    const file = await drive.files.get({
+      fileId: documentId,
+      fields: 'parents',
     });
+
+    // Move to Geoffrey folder
+    await drive.files.update({
+      fileId: documentId,
+      addParents: folderId,
+      removeParents: file.data.parents.join(','),
+      fields: 'id, parents',
+    });
+  }
+
+  // Add content if provided
+  let formattingInfo = null;
+  if (options.content) {
+    if (options.raw) {
+      // Plain text insertion
+      await docs.documents.batchUpdate({
+        documentId,
+        requestBody: {
+          requests: [{
+            insertText: {
+              location: { index: 1 },
+              text: options.content,
+            },
+          }],
+        },
+      });
+    } else {
+      // Markdown formatted insertion
+      formattingInfo = await insertFormattedContent(docs, documentId, options.content);
+    }
   }
 
   return {
@@ -49,7 +89,9 @@ async function createDoc(account, options) {
       id: documentId,
       title: createResponse.data.title,
       url: `https://docs.google.com/document/d/${documentId}/edit`,
+      folder: options.folder || 'root',
     },
+    formatting: formattingInfo,
     metadata: {
       timestamp: new Date().toISOString(),
     }
@@ -64,7 +106,7 @@ async function main() {
   if (!account) {
     console.error(JSON.stringify({
       error: 'Missing account',
-      usage: 'node create_doc.js <account> --title <title> [--content <content>]'
+      usage: 'bun create_doc.js <account> --title <title> [--content <markdown>] [--folder <subfolder>]'
     }));
     process.exit(1);
   }
@@ -79,13 +121,19 @@ async function main() {
       case '--content':
         options.content = args[++i];
         break;
+      case '--folder':
+        options.folder = args[++i];
+        break;
+      case '--raw':
+        options.raw = true;
+        break;
     }
   }
 
   if (!options.title) {
     console.error(JSON.stringify({
       error: 'Missing --title option',
-      usage: 'node create_doc.js <account> --title <title> [--content <content>]'
+      usage: 'bun create_doc.js <account> --title <title> [--content <markdown>] [--folder <subfolder>]'
     }));
     process.exit(1);
   }
