@@ -33,6 +33,16 @@ Manage the user's Obsidian vault as a persistent second brain. Read existing kno
 Personal_Notes/
 ├── Geoffrey/              # Geoffrey-generated content
 │   ├── Research/          # Research task outputs
+│   ├── Reports/           # Generated reports and artifacts
+│   │   ├── PSD/           # Peninsula School District reports
+│   │   │   ├── Discipline/    # Discipline reports and infographics
+│   │   │   ├── Enrollment/    # Enrollment reports
+│   │   │   └── {topic}/       # Other PSD topics
+│   │   ├── HRG/           # Hat Rack Group (consulting LLC) reports
+│   │   │   └── {topic}/       # HRG topics
+│   │   ├── Personal/      # Personal reports
+│   │   │   └── {topic}/       # Personal topics
+│   │   └── {org}/         # Other organizations as needed
 │   ├── Daily-Logs/        # Session summaries
 │   ├── Learnings/         # Extracted patterns
 │   └── Decisions/         # Major decisions with rationale
@@ -135,16 +145,41 @@ Opens the specified note in Obsidian using Actions URI.
 
 ## Content Routing
 
-When creating content, use these destinations:
+**CRITICAL:** When creating content, use these destinations. NEVER dump files directly into `Geoffrey/` - always use proper subfolders.
 
 | Content Type | Folder | Naming Pattern |
 |--------------|--------|----------------|
 | Research results | `Geoffrey/Research/` | `YYYY-MM-DD-topic.md` |
+| **Reports** | `Geoffrey/Reports/{org}/{topic}/` | Descriptive name with date |
+| **Images/Infographics** | Same as parent report | `Descriptive Name YYYY-MM-DD.png` |
 | Meeting notes | `Meetings/` | `Topic - YYYY-MM-DD.md` |
 | Daily summaries | `Geoffrey/Daily-Logs/` | `YYYY-MM-DD.md` |
 | Learnings | `Geoffrey/Learnings/` | `topic-slug.md` |
 | Decisions | `Geoffrey/Decisions/` | `YYYY-MM-DD-decision.md` |
 | Person updates | `People/` | Existing file name |
+
+**Naming Rules:**
+- All images/infographics MUST include date in filename
+- Format: `Descriptive Name YYYY-MM-DD.png` or `Descriptive Name YYYY-MM-DD to YYYY-MM-DD.png` for date ranges
+- Example: `Peninsula High School Discipline Report 2025-11-17 to 2025-11-20.png`
+
+**Reports Folder Structure:**
+Pattern: `Geoffrey/Reports/{organization}/{topic}/`
+
+Organizations:
+- **PSD** - Peninsula School District reports
+  - `Geoffrey/Reports/PSD/Discipline/`
+  - `Geoffrey/Reports/PSD/Enrollment/`
+  - `Geoffrey/Reports/PSD/Attendance/`
+  - `Geoffrey/Reports/PSD/{topic}/`
+
+- **HRG** - Hat Rack Group (consulting LLC) reports
+  - `Geoffrey/Reports/HRG/{topic}/`
+
+- **Personal** - Personal reports
+  - `Geoffrey/Reports/Personal/{topic}/`
+
+- **{org}** - Other organizations as needed
 
 ## Frontmatter Standard
 
