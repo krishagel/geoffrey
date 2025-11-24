@@ -279,6 +279,67 @@ User has 129 tags organized hierarchically:
 - Tag with person + "Follow Up" for 1:1 discussions
 - Use location tags for shopping tasks
 
+## Obsidian Integration
+
+Obsidian is the user's persistent second brain. All significant work should be saved there.
+
+**Vault Path:** `/Users/hagelk/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/`
+
+### When to Read from Obsidian
+
+- **Before research tasks:** Check Readwise for existing highlights on the topic
+- **When people mentioned:** Look up context in `People/` folder
+- **For meeting prep:** Find past meetings and related notes
+- **For podcast context:** Search Snipd transcripts
+
+### When to Write to Obsidian
+
+| Content Type | Destination | When |
+|--------------|-------------|------|
+| Research results | `Geoffrey/Research/` | After completing research tasks |
+| Learnings | `Geoffrey/Learnings/` | When patterns or insights emerge |
+| Decisions | `Geoffrey/Decisions/` | Major decisions with rationale |
+| Meeting notes | `Meetings/` | After meetings (if requested) |
+
+**Write Mode:** Auto-create new files, confirm before updating existing files.
+
+### Knowledge Sources
+
+**Readwise (368 articles, 34 books):**
+- Years of curated highlights
+- Search by topic, author, or category
+- Path: `Readwise/Articles/`, `Readwise/Books/`
+
+**Snipd (58+ episodes):**
+- Podcast transcripts and snips
+- Rich metadata including timestamps
+- Path: `Snipd/Data/`
+
+### Creating Backlinks
+
+Always create connections to existing content:
+
+1. Search vault before creating new notes
+2. Use `[[wiki-links]]` to reference existing notes
+3. Add related notes to frontmatter
+4. Reference Readwise/Snipd sources when relevant
+
+### Frontmatter Standard
+
+```yaml
+---
+created: 2025-11-23
+tags: [geoffrey, research]
+source: geoffrey
+related:
+  - "[[Related Note]]"
+---
+```
+
+### Dashboard
+
+The user's dashboard is at `Geoffrey Mission Control.md` - shows recent activity, Readwise highlights, Snipd episodes, and vault stats.
+
 ## Future Considerations
 
 ### When to Cache
