@@ -9,6 +9,10 @@ triggers:
   - "learn that"
   - "forget that"
   - "what have you learned"
+  - "check benefits"
+  - "credit card status"
+  - "expiring benefits"
+  - "card balances"
 allowed-tools: Read, Write, Bash
 version: 0.1.0
 ---
@@ -144,6 +148,102 @@ If JSON is malformed:
 - Don't overwrite the file
 - Ask user to check file manually
 
+## Credit Card Benefits Tracking
+
+### Overview
+Track credit card balances, expiring benefits, and annual credits across multiple accounts for both Hagel and Carrie.
+
+### Storage Location
+```
+~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/knowledge/credit-card-status.json
+```
+
+### Accounts to Track
+
+**Hagel:**
+- Chase Sapphire Reserve (...2502)
+- Marriott Bonvoy Amex (3 cards: ...81004, ...43001, ...61000)
+- Alaska/Atmos Rewards
+
+**Carrie:**
+- Alaska/Atmos account
+- Chase account(s)
+
+### Data Structure
+```json
+{
+  "last_updated": "2025-11-22T20:00:00Z",
+  "accounts": {
+    "hagel": {
+      "chase": {
+        "ultimate_rewards_points": 53254,
+        "cards": [{
+          "name": "Sapphire Reserve",
+          "last_four": "2502",
+          "credits": {
+            "travel": {"total": 300, "used": 0, "resets": "anniversary"},
+            "doordash": {"total": 50, "used": 0, "expires": "2025-12-31"},
+            "instacart": {"total": 15, "used": 0, "expires": "2025-12-31"},
+            "lyft": {"total": 0, "used": 0, "expires": "2025-12-31"}
+          }
+        }]
+      },
+      "marriott": {
+        "points": 215323,
+        "status": "Titanium Elite",
+        "nights_this_year": 92,
+        "expiring_benefits": [
+          {"name": "Free Night Award (40k)", "expires": "2025-12-31"},
+          {"name": "Suite Night Award", "expires": "2025-12-31"}
+        ]
+      },
+      "alaska": {
+        "miles": 469888,
+        "status": "Atmos Platinum",
+        "companion_fare": {"available": false, "expires": null}
+      }
+    },
+    "carrie": {
+      "chase": {},
+      "alaska": {}
+    }
+  },
+  "alerts": [
+    {"account": "hagel.marriott", "item": "Free Night Award", "expires": "2025-12-31", "days_remaining": 39}
+  ]
+}
+```
+
+### Check Benefits Workflow
+
+When user triggers "check benefits":
+
+1. **Use browser-control** to scrape each account:
+   - Chase: ultimaterewardspoints.chase.com + benefits page
+   - Marriott: marriott.com/loyalty/myAccount/activity.mi
+   - Alaska: alaskaair.com/account/wallet
+   - Amex: global.americanexpress.com/dashboard
+
+2. **Extract key data**:
+   - Point/mile balances
+   - Credit usage status
+   - Expiring benefits with dates
+   - Free night certificates
+
+3. **Save to status file** in iCloud
+
+4. **Generate alerts** for items expiring within 30 days
+
+5. **Report to user** with action items
+
+### Monthly Reminder
+
+A recurring OmniFocus task reminds Hagel to run the benefits check monthly. Task details:
+- Project: Personal
+- Due: 1st of each month
+- Tags: Organization
+- Note: "Run 'check benefits' in Geoffrey to update credit card status"
+
 ## Future Enhancements
 
 In later phases, this skill will:
@@ -152,3 +252,4 @@ In later phases, this skill will:
 - Suggest preference updates based on patterns
 - Track preference changes over time
 - Sync with conversation memory system
+- **Auto-alert on expiring benefits** via email or notification

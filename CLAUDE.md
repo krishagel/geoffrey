@@ -30,6 +30,52 @@ Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learn
 - Always use current year in search queries unless explicitly historical
 - When in doubt, search for "2025" or "2026" not past years
 
+### Never Trust Internal Knowledge for Current Information
+
+**CRITICAL:** Your training data is STALE. Never assume you know current facts about ANYTHING that changes.
+
+This applies to:
+- AI models (change weekly)
+- Credit card benefits (change quarterly)
+- Interest rates (change monthly)
+- Product features and pricing
+- Company policies
+- Travel programs and redemption values
+- Software versions and APIs
+
+**NEVER search using assumed facts:**
+- "GPT-4 turbo features" - you don't know if GPT-4 still exists
+- "Chase Sapphire Reserve benefits" - benefits may have changed
+- "Marriott Bonvoy redemption rates" - rates change constantly
+
+**Examples:**
+```
+# WRONG - assumes facts and narrows scope
+"Chase Sapphire Reserve travel credit"
+"Alaska Airlines MVP benefits"
+"GPT-4 API pricing"
+
+# RIGHT - discovers complete current state
+"Chase Sapphire Reserve all benefits complete list November 2025"
+"Alaska Airlines frequent flyer program all benefits tiers November 2025"
+"OpenAI all API products services pricing November 2025"
+```
+
+**Rule:** Search to discover what actually exists today, not to confirm what you assume exists.
+
+### Search Principle: Explore Before Filter
+
+**CRITICAL:** Your first search must be exploratory, not confirmatory.
+
+- **Exploratory**: Discover what exists
+- **Confirmatory**: Find what you assume exists
+
+**Always ask the complete question first.** If the user asks "what benefits expire?", first discover ALL benefits, then identify which expire. Never skip the discovery step.
+
+**Pattern**: `[subject] all [broadest relevant noun] complete list [current date]`
+
+The [broadest relevant noun] should be the most general term that covers the user's question. Not "travel credit" but "benefits". Not "models" but "products services". Your assumptions will always be incomplete. The search results define reality.
+
 ### JavaScript Runtime
 
 **ALWAYS use `bun` instead of `node`** for running JavaScript files.
