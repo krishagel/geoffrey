@@ -57,6 +57,8 @@ async function listFiles(account, options = {}) {
     pageSize: options.max || 20,
     fields: 'files(id, name, mimeType, size, createdTime, modifiedTime, webViewLink, parents)',
     orderBy: 'modifiedTime desc',
+    supportsAllDrives: true,
+    includeItemsFromAllDrives: true,
   });
 
   const files = (response.data.files || []).map(file => ({

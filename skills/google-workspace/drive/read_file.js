@@ -41,6 +41,7 @@ async function readFile(account, fileId, options = {}) {
   const metadata = await drive.files.get({
     fileId,
     fields: 'id, name, mimeType, size, webViewLink',
+    supportsAllDrives: true,
   });
 
   const file = metadata.data;
@@ -67,6 +68,7 @@ async function readFile(account, fileId, options = {}) {
     const response = await drive.files.get({
       fileId,
       alt: 'media',
+      supportsAllDrives: true,
     }, { responseType: 'text' });
 
     content = response.data;
