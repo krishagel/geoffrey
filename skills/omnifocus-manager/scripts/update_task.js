@@ -35,12 +35,13 @@ function run(argv) {
 
     try {
         // Find the task - search all tasks, not just inbox
-        let tasks;
+        let tasksRef;
         if (taskId) {
-            tasks = doc.flattenedTasks.whose({id: taskId});
+            tasksRef = doc.flattenedTasks.whose({id: taskId});
         } else {
-            tasks = doc.flattenedTasks.whose({name: taskName});
+            tasksRef = doc.flattenedTasks.whose({name: taskName});
         }
+        const tasks = tasksRef();
 
         if (tasks.length === 0) {
             return JSON.stringify({
@@ -61,7 +62,8 @@ function run(argv) {
         // Move to project if specified
         let targetLocation = "Inbox";
         if (projectName) {
-            const projects = doc.flattenedProjects.whose({name: projectName});
+            const projectsRef = doc.flattenedProjects.whose({name: projectName});
+            const projects = projectsRef();
             if (projects.length === 0) {
                 return JSON.stringify({
                     success: false,
