@@ -1,12 +1,15 @@
 {
   "name": "presentation-master",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "World-class presentation creation skill embodying principles from Garr Reynolds, Nancy Duarte, Guy Kawasaki, Seth Godin, TED, Edward Tufte, and Steve Jobs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"No tests yet\" && exit 0",
-    "validate": "node scripts/validate-presentation.js",
-    "analyze": "node scripts/analyze-context.js"
+    "validate": "bun scripts/validate-presentation.js",
+    "analyze": "bun scripts/analyze-context.js",
+    "suggest-images": "bun scripts/suggest-images.js",
+    "adapt-pptx": "bun adapters/pptx-adapter.js",
+    "adapt-slides": "bun adapters/slides-adapter.js"
   },
   "keywords": [
     "presentations",
