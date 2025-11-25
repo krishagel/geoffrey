@@ -1,0 +1,43 @@
+{
+  "name": "presentation-master",
+  "version": "1.0.0",
+  "description": "World-class presentation creation skill embodying principles from Garr Reynolds, Nancy Duarte, Guy Kawasaki, Seth Godin, TED, Edward Tufte, and Steve Jobs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0",
+    "validate": "node scripts/validate-presentation.js",
+    "analyze": "node scripts/analyze-context.js"
+  },
+  "keywords": [
+    "presentations",
+    "slides",
+    "powerpoint",
+    "google-slides",
+    "keynote",
+    "design",
+    "storytelling",
+    "presentation-zen",
+    "nancy-duarte",
+    "ted-talks",
+    "visual-communication",
+    "data-visualization",
+    "slide-design"
+  ],
+  "author": "Geoffrey (Kris Hagel)",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hagelk/geoffrey.git",
+    "directory": "skills/presentation-master"
+  },
+  "bugs": {
+    "url": "https://github.com/hagelk/geoffrey/issues"
+  },
+  "homepage": "https://github.com/hagelk/geoffrey/tree/main/skills/presentation-master#readme"
+}
