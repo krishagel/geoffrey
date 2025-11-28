@@ -1,0 +1,121 @@
+# Multi-Model Research Agent Configuration
+
+models:
+  gpt:
+    enabled: true
+    provider: openai
+    model_id: gpt-5.1  # Simpler model name (OpenAI auto-resolves to latest)
+    max_tokens: 8192
+    temperature: 0.7
+    # reasoning_effort: medium  # Can add back after testing
+    strengths:
+      - reasoning
+      - breadth
+      - synthesis
+    cost_per_1m_input: 2.5
+    cost_per_1m_output: 10.0
+
+  gemini:
+    enabled: true
+    provider: google
+    model_id: gemini-3-pro-preview  # Correct model name as of Nov 2025
+    max_tokens: 8192
+    temperature: 1.0  # Google recommends default 1.0 for Gemini 3
+    strengths:
+      - long_context
+      - multimodal
+      - reasoning
+      - speed
+    cost_per_1m_input: 1.25
+    cost_per_1m_output: 5.0
+
+  perplexity:
+    enabled: true
+    provider: perplexity
+    model_id: sonar-pro
+    max_tokens: 4096
+    temperature: 0.7
+    search_context_size: high  # low, medium, high
+    return_citations: true
+    strengths:
+      - web_search
+      - citations
+      - factuality
+      - recency
+    cost_per_1m_input: 3.0
+    cost_per_1m_output: 15.0
+    cost_per_1k_requests: 14.0
+
+  grok:
+    enabled: true
+    provider: xai
+    model_id: grok-4-1-fast-reasoning
+    max_tokens: 8192
+    temperature: 0.7
+    strengths:
+      - x_twitter_data
+      - real_time
+      - tool_calling
+    cost_per_1m_input: 0.2
+    cost_per_1m_output: 0.5
+
+  # Claude runs natively in Claude Code - no API call needed
+  claude:
+    enabled: true
+    type: native  # Special flag - handled by Geoffrey directly
+    strengths:
+      - analysis
+      - synthesis
+      - nuance
+      - coding
+
+council:
+  # Default council members (Geoffrey/Claude + these external models)
+  members:
+    - gpt
+    - gemini
+    - perplexity
+    - grok
+
+  # Chairman model for final synthesis (GPT-5.1 per Karpathy's findings)
+  chairman: gpt
+
+  # Enable peer review phase
+  peer_review: true
+
+routing:
+  # Simple query patterns (route to Perplexity only)
+  simple_keywords:
+    - "what is"
+    - "define"
+    - "when did"
+    - "who is"
+    - "how many"
+
+  # Complex query patterns (route to full council)
+  council_keywords:
+    - "compare"
+    - "analyze"
+    - "comprehensive"
+    - "deep dive"
+    - "research"
+    - "investigate"
+    - "contrast"
+    - "evaluate"
+
+  # Default model for simple queries
+  simple_default: perplexity
+
+output:
+  # Save to Obsidian Geoffrey/Research folder
+  obsidian_folder: "Geoffrey/Research"
+
+  # Include confidence scores
+  show_confidence: true
+
+  # Citation style
+  citation_style: numeric  # numeric, author-date
+
+timeouts:
+  request_timeout: 120  # seconds per API request
+  total_timeout: 300    # seconds for entire research process

@@ -1,0 +1,14 @@
+[project]
+name = "multi-model-research"
+version = "0.1.0"
+description = "Multi-model research agent using LLM Council pattern"
+dependencies = [
+    "httpx>=0.25.0",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0.0",
+    "python-frontmatter>=1.0.0"
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
