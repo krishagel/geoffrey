@@ -41,6 +41,39 @@ async function screenshot(url, outputPath, options = {}) {
       outputPath = `screenshot-${urlObj.hostname}-${Date.now()}.png`;
     }
 
+    // Get page dimensions
+    const MAX_DIMENSION = 7500; // Safety margin under 8000px API limit
+    const originalDimensions = await page.evaluate(() => ({
+      width: Math.max(
+        document.documentElement.scrollWidth,
+        document.body.scrollWidth,
+        document.documentElement.clientWidth
+      ),
+      height: Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+        document.documentElement.clientHeight
+      )
+    }));
+
+    // Calculate scaled dimensions if needed
+    let width = originalDimensions.width;
+    let height = originalDimensions.height;
+    let scaled = false;
+
+    if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+      const scale = Math.min(
+        MAX_DIMENSION / width,
+        MAX_DIMENSION / height
+      );
+      width = Math.floor(width * scale);
+      height = Math.floor(height * scale);
+      scaled = true;
+    }
+
+    // Set viewport to constrained size
+    await page.setViewport({ width, height });
+
     // Take screenshot
     await page.screenshot({
       path: outputPath,
@@ -54,6 +87,10 @@ async function screenshot(url, outputPath, options = {}) {
       url,
       title,
       screenshot: path.resolve(outputPath),
+      dimensions: { width, height },
+      originalDimensions,
+      scaled,
+      safeToRead: true,
       fullPage: options.fullPage || false,
       timestamp: new Date().toISOString()
     };

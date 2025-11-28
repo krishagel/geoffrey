@@ -82,6 +82,30 @@ bun scripts/extract.js "https://www.flyertalk.com/forum/thread-url" ".post-conte
 bun scripts/screenshot.js "https://www.marriott.com/hotels/travel/ctswi-the-westin-rusutsu-resort/" rusutsu.png
 ```
 
+## Screenshot Dimensions
+
+Screenshots are automatically resized to a maximum of 7500x7500 pixels to ensure:
+- Safe to Read in Claude Code (8000px API limit)
+- Enable research analysis workflows
+- Maintain aspect ratio
+
+The script returns `safeToRead: true` in JSON output when dimensions are within limits.
+
+Example output:
+```json
+{
+  "success": true,
+  "url": "https://example.com",
+  "title": "Example Page",
+  "screenshot": "/tmp/screenshot.png",
+  "dimensions": { "width": 1920, "height": 1080 },
+  "originalDimensions": { "width": 1920, "height": 1080 },
+  "scaled": false,
+  "safeToRead": true,
+  "timestamp": "2025-11-28T..."
+}
+```
+
 ## Connection Details
 
 Scripts connect to Chrome via Chrome DevTools Protocol (CDP):

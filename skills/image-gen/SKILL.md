@@ -137,6 +137,21 @@ By default, save images to `/tmp/` or user-specified paths. For persistent stora
 ~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/images/
 ```
 
+## ⚠️ CRITICAL: Never Read Generated Images
+
+**DO NOT use the Read tool on generated images.**
+
+Why:
+- 4K images (3840x2160) are within the 8000px limit
+- 2K images (2560x1440) are also safe
+- BUT: Do not Read them - they're for user consumption, not analysis
+- For edits, use edit.py script, not Read tool
+
+Workflow:
+1. Generate image with script
+2. Return file path to user
+3. User views the high-quality output
+
 ## Limitations
 
 - No photorealistic humans (safety filter)

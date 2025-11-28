@@ -20,6 +20,26 @@ Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learn
 | **Tier 2** | SKILL.md | Skill activates | How to use OmniFocus |
 | **Tier 3** | Data/scripts | Just-in-time | Fetch tags when creating task |
 
+### Image Handling Rule
+
+**CRITICAL:** Different rules for different image types.
+
+**Screenshots (browser-control skill):**
+- Automatically resized to <8000px per dimension
+- Safe to Read for research analysis
+- Used by Geoffrey to analyze web content
+
+**Generated images (image-gen skill):**
+- NEVER use Read tool on these
+- High-quality 4K outputs for user consumption
+- Return file path, let user view
+
+**Why:**
+- API limit: 8000 pixels per dimension
+- Reading oversized images crashes Claude Code
+- Screenshot resizing enables research workflows
+- Generated images must stay high-quality
+
 ### Date Awareness
 
 **CRITICAL:** Always check the current date before any research or time-sensitive task.
