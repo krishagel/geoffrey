@@ -82,14 +82,25 @@ bun scripts/extract.js "https://www.flyertalk.com/forum/thread-url" ".post-conte
 bun scripts/screenshot.js "https://www.marriott.com/hotels/travel/ctswi-the-westin-rusutsu-resort/" rusutsu.png
 ```
 
-## Screenshot Dimensions
+## Screenshot Protection & Lazy-Loading
 
-Screenshots are automatically resized to a maximum of 7500x7500 pixels to ensure:
-- Safe to Read in Claude Code (8000px API limit)
-- Enable research analysis workflows
-- Maintain aspect ratio
+**Auto-Resize Protection (ALL screenshots):**
+- Post-capture resize using Sharp to max 7500px per dimension
+- Maintains aspect ratio, prevents Claude Code API crashes
+- Every screenshot guaranteed `safeToRead: true`
 
-The script returns `safeToRead: true` in JSON output when dimensions are within limits.
+**Lazy-Loading Limitation (AirBnB, dynamic sites):**
+- Sites with lazy-loading show grey placeholders in fullPage mode
+- Images only load when scrolled into viewport
+- **Solution**: Use viewport screenshots (no --full flag) or `screenshot-current.js`
+
+```bash
+# For lazy-loading sites, screenshot current viewport
+bun scripts/screenshot-current.js /tmp/output.png
+
+# Or navigate + viewport screenshot
+bun scripts/screenshot.js "https://airbnb.com/..." /tmp/output.png
+```
 
 Example output:
 ```json
