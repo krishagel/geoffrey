@@ -49,6 +49,21 @@ All scripts in `./scripts/` directory. Run via `bun <script> [args]`.
 
 **Use when**: User asks "what's scheduled?" or "show my scheduled tasks"
 
+### parse-schedule-request.js
+
+**Purpose**: Parse natural language schedule requests
+
+**Usage**: `bun parse-schedule-request.js "<natural language request>"`
+
+**Examples**:
+- "Schedule AI research every morning at 6am on weekdays"
+- "Run daily backups at 2am"
+- "Check email at 9am Monday through Friday"
+
+**Output**: JSON with parsed time, days, task, and suggested settings
+
+**Use when**: Converting user's natural language to create-schedule parameters
+
 ### create-schedule.js
 
 **Purpose**: Create new scheduled task
@@ -60,13 +75,14 @@ All scripts in `./scripts/` directory. Run via `bun <script> [args]`.
 - `--description` - What this schedule does
 - `--prompt` - Full prompt text to execute
 - `--schedule` - When to run (e.g., "6:00 Mon-Fri", "8:00 daily", "9:00 Sat")
-- `--tools` - Comma-separated allowed tools
-- `--missed-run` - Policy: skip|catch-up|retry
+- `--tools` - Comma-separated allowed tools (always include "Skill" for skill invocation)
+- `--missed-run` - Policy: skip|catch-up|retry (default: skip)
 - `--enabled` - Enable immediately (default: true)
+- `--obsidian-folder` - Where to save results (default: Geoffrey/Scheduled Tasks/Output)
 
 **Output**: Schedule ID, next run time, plist location
 
-**Use when**: User wants to schedule something
+**Use when**: User wants to schedule something (after parsing natural language)
 
 ### update-dashboard.js
 
@@ -86,49 +102,138 @@ All scripts in `./scripts/` directory. Run via `bun <script> [args]`.
 
 **Logic**:
 1. Read schedule from schedules.json
-2. Check if enabled
-3. Execute `claude -p` with prompt + allowed tools
-4. Log execution to JSONL
-5. Update last_run in schedules.json
-6. Update dashboard
+2. Check if enabled (exit if disabled)
+3. Log execution start to JSONL
+4. Execute `claude -p "<prompt>" --allowed-tools Tools,Skill`
+5. Capture output and exit code
+6. If failed and retry policy: retry up to max_retries times
+7. If failed with notify_on_failure: create OmniFocus task with log file link
+8. Update last_run in schedules.json
+9. Update dashboard
+
+**Error handling**:
+- Retry logic respects missed_run_policy.action and max_retries
+- OmniFocus notifications include schedule name, error, and log file path
+- All errors logged to JSONL with stack traces
 
 **Use when**: Never called directly - launchd invokes this
 
+### rotate-logs.js
+
+**Purpose**: Clean up old execution logs
+
+**Usage**: `bun rotate-logs.js [--keep-months 6] [--dry-run]`
+
+**Logic**: Deletes log files older than specified months (default: 6)
+
+**Use when**: Monthly maintenance to prevent log bloat
+
 ## User Workflows
 
-### Create Schedule
+### Create Schedule (Natural Language)
 
 **User**: "Schedule AI research every morning at 6am on weekdays"
 
-**Geoffrey**:
-1. Parse request: time=6:00, days=Mon-Fri, task=research AI
+**Geoffrey workflow**:
+1. Use parse-schedule-request.js to extract:
+   - Time: 6:00
+   - Days: weekdays (Mon-Fri)
+   - Task: "AI research"
 2. Ask clarifying questions:
-   - What prompt should I run?
-   - Where should results be saved?
-   - What tools are needed?
-   - What if computer is asleep? (skip/catch-up/retry)
-3. Run create-schedule.js
-4. Show confirmation with next run time
-5. Show link to dashboard
+   - "What specific prompt should I run for AI research?"
+   - "Which tools are needed? (e.g., WebSearch, Read, Write, Skill)"
+   - "Where should I save results in Obsidian?"
+   - "What if computer is asleep? (skip/catch-up/retry)"
+3. Run create-schedule.js with parsed + clarified parameters
+4. Show confirmation:
+   ```
+   ✅ Created schedule: AI research
+   - Runs: Mon-Fri at 6:00 AM
+   - Next run: Tomorrow at 6:00 AM
+   - Dashboard: [[Geoffrey/Scheduled Tasks]]
+   ```
+
+**Example prompts**:
+- "Schedule daily backup at 2am with catch-up if computer asleep"
+- "Run email check every weekday at 9am"
+- "Generate weekly report every Friday at 5pm"
 
 ### View Schedules
 
-**User**: "Show my scheduled tasks"
+**User**: "Show my scheduled tasks" or "What's scheduled?"
 
 **Geoffrey**:
 1. Run list-schedules.js
-2. Format as table
+2. Format as table:
+   ```
+   ID              Name            Enabled  Last Run      Status
+   ai-research-x7k Daily AI        ✓        Dec 1 06:00  ✓ Success
+   backup-2k8f     Daily Backup    ✓        Never        -
+   ```
 3. Show link to Obsidian dashboard
+
+### Modify Schedule
+
+**User**: "Change AI research to 7am" or "Disable the backup schedule"
+
+**Geoffrey**:
+1. Find matching schedule (fuzzy match by name)
+2. Confirm change
+3. Run update-schedule.js with new parameters
+4. Reload plist if schedule time changed
+
+### Delete Schedule
+
+**User**: "Remove the AI research schedule"
+
+**Geoffrey**:
+1. Find matching schedule
+2. Confirm deletion
+3. Run delete-schedule.js
+4. Unload plist, remove from schedules.json
+5. Ask: "Keep execution logs?" (default: yes)
 
 ### Check Execution
 
 **User**: "Did my AI research run this morning?"
 
 **Geoffrey**:
-1. Find matching schedule
+1. Find schedule by name
 2. Check last_run timestamp
-3. Read execution log if available
-4. Report status + link to output
+3. Read JSONL log if available
+4. Report:
+   ```
+   ✅ AI research ran at 6:00 AM (succeeded in 32s)
+
+   Results saved to: [[Geoffrey/Research/2025-12-01-ai-news.md]]
+   Log file: execution-logs/2025-12/01-ai-research-x7k.jsonl
+   ```
+
+### Handle Failures
+
+**Automatic on failure with notify_on_failure: true**:
+1. run-scheduled-task.js fails (exit code != 0)
+2. Checks retry policy:
+   - If retry: Retry up to max_retries times
+   - If retry exhausted or skip: Continue to notification
+3. Creates OmniFocus task:
+   ```
+   Name: "Scheduled task failed: Daily AI Research"
+   Project: Geoffrey System
+   Tags: Geoffrey, Alert, Automation
+   Note:
+     Schedule ID: ai-research-x7k
+
+     Error: claude exited with code 1
+
+     Log file: /Users/.../execution-logs/2025-12/01-ai-research-x7k.jsonl
+
+     Check the log file for details and fix the issue.
+   Flagged: Yes
+   Due: Today
+   ```
+4. User investigates log file, fixes issue
+5. Can disable/modify/delete schedule as needed
 
 ## Data Storage
 
@@ -180,8 +285,35 @@ Each schedule creates a plist file:
 
 ## Important Notes
 
-- Schedules use system time (Pacific)
-- launchd only runs when user logged in
-- Requires `claude -p` to work (test once manually first)
-- Dashboard auto-updates after every schedule operation
-- Logs rotate monthly to prevent file bloat
+**System Requirements:**
+- macOS with launchd (user-level agents)
+- User must be logged in for schedules to run
+- Claude Code installed and `claude -p` working
+- OmniFocus installed (for failure notifications)
+
+**Timing:**
+- All schedules use system time (Pacific)
+- launchd may delay up to 60 seconds for calendar intervals
+- Missed runs handled per missed_run_policy
+
+**Storage:**
+- schedules.json syncs via iCloud
+- Logs stored in iCloud knowledge folder
+- Dashboard auto-updates after any change
+- Run rotate-logs.js monthly to prevent bloat (keeps 6 months by default)
+
+**Best Practices:**
+1. Always include "Skill" in allowed-tools for skill invocation
+2. Use descriptive schedule names for easy management
+3. Set notify_on_failure: true for critical schedules
+4. Use retry policy for important tasks (backups, reports)
+5. Use skip policy for time-sensitive tasks (daily news)
+6. Test prompt manually first with `claude -p "<prompt>"` before scheduling
+7. Check dashboard weekly to verify schedules are running
+
+**Troubleshooting:**
+- Check launchd status: `launchctl list | grep geoffrey`
+- View plist: `cat ~/Library/LaunchAgents/com.geoffrey.schedule.*.plist`
+- Check logs: `tail ~/Library/Mobile\ Documents/.../execution-logs/YYYY-MM/DD-*.jsonl`
+- Test manually: `bun run-scheduled-task.js <schedule-id>`
+- Reload plist: `launchctl unload <plist> && launchctl load <plist>`
