@@ -32,20 +32,26 @@ Manage the user's Obsidian vault as a persistent second brain. Read existing kno
 ```
 Personal_Notes/
 ├── Geoffrey/              # Geoffrey-generated content
+│   ├── Mission Control.md # Central dashboard (Dataview queries)
+│   ├── Scheduled Tasks.md # Scheduler dashboard
 │   ├── Research/          # Research task outputs
+│   │   ├── Daily AI Briefings/  # Daily automated research
+│   │   ├── {Project}/     # Other research projects
+│   │   └── attachments/   # Research images
 │   ├── Reports/           # Generated reports and artifacts
 │   │   ├── PSD/           # Peninsula School District reports
 │   │   │   ├── Discipline/    # Discipline reports and infographics
 │   │   │   ├── Enrollment/    # Enrollment reports
+│   │   │   ├── Tech Support/  # Tech support dashboards
 │   │   │   └── {topic}/       # Other PSD topics
 │   │   ├── HRG/           # Hat Rack Group (consulting LLC) reports
 │   │   │   └── {topic}/       # HRG topics
 │   │   ├── Personal/      # Personal reports
 │   │   │   └── {topic}/       # Personal topics
 │   │   └── {org}/         # Other organizations as needed
-│   ├── Daily-Logs/        # Session summaries
-│   ├── Learnings/         # Extracted patterns
-│   └── Decisions/         # Major decisions with rationale
+│   ├── Daily-Logs/        # Session summaries (YYYY-MM-DD.md)
+│   ├── Learnings/         # Extracted patterns (YYYY-MM-DD-topic.md)
+│   └── Decisions/         # Major decisions with rationale (YYYY-MM-DD-topic.md)
 ├── Meetings/              # Meeting notes (YYYY-MM-DD format)
 ├── People/                # Contact profiles with metadata
 ├── Readwise/              # Synced highlights (368 articles, 34 books)
@@ -57,6 +63,14 @@ Personal_Notes/
 │   └── Data/              # Podcast folders > episodes
 └── Templates/             # Note templates
 ```
+
+**CRITICAL:** See CLAUDE.md "Obsidian Organizational Rules" section for:
+- Strict folder structure requirements
+- File naming conventions
+- Routing rules by content type
+- Validation checklist before writing
+
+Always validate folder placement before writing any files to Geoffrey folder.
 
 ## Scripts
 
