@@ -47,3 +47,12 @@ knowledge/
 preferences.json
 memory.jsonl
 patterns.json
+
+# Temporary work files (not part of repo)
+workspace/
+skills/pptx/*.png
+skills/pptx/*.html
+skills/pptx/*.txt
+skills/pptx/*.sh
+skills/pptx/create-presentation*.js
+skills/pptx/package.json

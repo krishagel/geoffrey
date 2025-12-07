@@ -68,7 +68,7 @@ Geoffrey/
 | Research outputs | `Geoffrey/Research/{Project}/` | `Geoffrey/Research/Daily AI Briefings/2025-12-01-ai-briefing.md` |
 | Generated reports | `Geoffrey/Reports/{Org}/{Topic}/` | `Geoffrey/Reports/PSD/Tech Support/Tech Support Dashboard Nov 2025.md` |
 | Session summary | `Geoffrey/Daily-Logs/YYYY-MM-DD.md` | `Geoffrey/Daily-Logs/2025-12-01.md` |
-| Extracted learning | `Geoffrey/Learnings/YYYY-MM-DD-topic.md` | `Geoffrey/Learnings/2025-12-01-scheduler-architecture.md` |
+| Extracted learning | `Geoffrey/Learnings/YYYY-MM-DD-topic.md` | `Geoffrey/Learnings/2025-12-01-browser-control-patterns.md` |
 | Major decision | `Geoffrey/Decisions/YYYY-MM-DD-topic.md` | `Geoffrey/Decisions/2025-12-01-obsidian-organization.md` |
 
 ### Automation Triggers
