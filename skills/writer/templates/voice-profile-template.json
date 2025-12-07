@@ -1,0 +1,209 @@
+{
+  "version": "1.0",
+  "last_updated": "YYYY-MM-DDTHH:MM:SS.sssZ",
+  "profiles": {
+    "email_work": {
+      "profile_type": "email_work",
+      "confidence": 0.0,
+      "sample_count": 0,
+      "date_range": "YYYY-MM-DD to YYYY-MM-DD",
+      "sources": [
+        {
+          "type": "gmail",
+          "account": "psd",
+          "count": 0
+        }
+      ],
+      "voice_characteristics": {
+        "tone": "Description of overall tone (e.g., Direct, professional, action-oriented)",
+        "sentence_structure": "Description of sentence patterns (e.g., Short, punchy. Avg 14 words. Favors simple sentences.)",
+        "vocabulary": "Description of word choice (e.g., Professional but accessible. Common terms: ..., Avoided terms: ...)",
+        "formatting": "Description of formatting preferences (e.g., Heavy bullet point usage. Markdown formatting. Bold for emphasis.)",
+        "opening_patterns": [
+          "Example opening pattern 1 (e.g., I've reviewed {topic} and have {number} recommendations.)",
+          "Example opening pattern 2",
+          "Example opening pattern 3"
+        ],
+        "closing_patterns": [
+          "Example closing pattern 1 (e.g., Let me know if you need clarification.)",
+          "Example closing pattern 2",
+          "Example closing pattern 3"
+        ],
+        "argument_structure": "How arguments are structured (e.g., Leads with conclusion 72%. Uses data/evidence 84%. Low hedging.)",
+        "distinctive_markers": "Unique stylistic markers (e.g., Uses em dashes. Contractions rare. Analytical framing.)"
+      },
+      "examples": [
+        {
+          "text": "[Full email text - will be populated during analysis]",
+          "context": "Description of the email context (e.g., Email to superintendent re: AI policy)",
+          "date": "YYYY-MM-DD",
+          "word_count": 0,
+          "notable_features": [
+            "Feature 1 (e.g., leads with conclusion)",
+            "Feature 2 (e.g., 3 bullet points)",
+            "Feature 3 (e.g., data-driven)"
+          ]
+        }
+      ]
+    },
+
+    "email_personal": {
+      "profile_type": "email_personal",
+      "confidence": 0.0,
+      "sample_count": 0,
+      "date_range": "YYYY-MM-DD to YYYY-MM-DD",
+      "sources": [
+        {
+          "type": "gmail",
+          "account": "kh",
+          "count": 0
+        }
+      ],
+      "voice_characteristics": {
+        "tone": "",
+        "sentence_structure": "",
+        "vocabulary": "",
+        "formatting": "",
+        "opening_patterns": [],
+        "closing_patterns": [],
+        "argument_structure": "",
+        "distinctive_markers": ""
+      },
+      "examples": []
+    },
+
+    "blog_technical": {
+      "profile_type": "blog_technical",
+      "confidence": 0.0,
+      "sample_count": 0,
+      "date_range": "YYYY-MM-DD to YYYY-MM-DD",
+      "sources": [
+        {
+          "type": "blog",
+          "domain": "psd401.ai",
+          "count": 0
+        },
+        {
+          "type": "blog",
+          "domain": "blog.krishagel.com",
+          "count": 0
+        }
+      ],
+      "voice_characteristics": {
+        "tone": "",
+        "sentence_structure": "",
+        "vocabulary": "",
+        "formatting": "",
+        "structure": "Overall blog structure preferences (e.g., Chronological flow. Subheadings for scannability.)",
+        "opening_patterns": [],
+        "closing_patterns": [],
+        "narrative_elements": "Use of quotes, stories, case studies (e.g., Staff quotes frequently (67%))",
+        "framing": "How ideas are framed (e.g., Progress-oriented, not prescriptive. Collaborative rather than hierarchical.)",
+        "distinctive_markers": ""
+      },
+      "examples": []
+    },
+
+    "social_linkedin": {
+      "profile_type": "social_linkedin",
+      "confidence": 0.0,
+      "sample_count": 0,
+      "date_range": "YYYY-MM-DD to YYYY-MM-DD",
+      "sources": [
+        {
+          "type": "social",
+          "platform": "linkedin",
+          "count": 0
+        }
+      ],
+      "voice_characteristics": {
+        "tone": "",
+        "sentence_structure": "",
+        "vocabulary": "",
+        "formatting": "LinkedIn-specific formatting (hashtags, line breaks, emojis, etc.)",
+        "opening_patterns": [],
+        "call_to_action_patterns": [],
+        "engagement_style": "How posts invite engagement (e.g., Questions, calls for input, sharing experiences)",
+        "distinctive_markers": ""
+      },
+      "examples": []
+    },
+
+    "social_twitter": {
+      "profile_type": "social_twitter",
+      "confidence": 0.0,
+      "sample_count": 0,
+      "date_range": "YYYY-MM-DD to YYYY-MM-DD",
+      "sources": [
+        {
+          "type": "social",
+          "platform": "twitter",
+          "count": 0
+        }
+      ],
+      "voice_characteristics": {
+        "tone": "",
+        "sentence_structure": "Twitter-specific structure (brevity, threads, punchiness)",
+        "vocabulary": "",
+        "formatting": "Twitter formatting (hashtags, @mentions, threads)",
+        "opening_patterns": [],
+        "thread_patterns": "How multi-tweet threads are structured",
+        "engagement_style": "",
+        "distinctive_markers": ""
+      },
+      "examples": []
+    },
+
+    "report_formal": {
+      "profile_type": "report_formal",
+      "confidence": 0.0,
+      "sample_count": 0,
+      "date_range": "YYYY-MM-DD to YYYY-MM-DD",
+      "sources": [
+        {
+          "type": "report",
+          "context": "user-provided samples",
+          "count": 0
+        }
+      ],
+      "voice_characteristics": {
+        "tone": "",
+        "sentence_structure": "",
+        "vocabulary": "",
+        "formatting": "Report-specific formatting (headings, sections, executive summaries)",
+        "structure": "Overall report organization (e.g., Executive summary first, findings, recommendations)",
+        "data_presentation": "How data and evidence are presented",
+        "recommendation_style": "How recommendations are framed and supported",
+        "formality_level": "Level of formality for institutional reports",
+        "distinctive_markers": ""
+      },
+      "examples": []
+    }
+  },
+
+  "confidence_guidelines": {
+    "high": {
+      "threshold": 0.85,
+      "minimum_samples": 50,
+      "description": "High confidence - voice well established"
+    },
+    "moderate": {
+      "threshold": 0.70,
+      "minimum_samples": 20,
+      "description": "Moderate confidence - voice patterns emerging"
+    },
+    "low": {
+      "threshold": 0.0,
+      "minimum_samples": 0,
+      "description": "Low confidence - insufficient samples"
+    }
+  },
+
+  "notes": [
+    "This template provides the structure for voice profiles.",
+    "Geoffrey will populate voice_characteristics and examples by analyzing writing samples.",
+    "Confidence scores are based on sample count: 50+ = 0.85+, 20-49 = 0.70-0.84, <20 = <0.70",
+    "Examples should include representative samples that capture key voice characteristics.",
+    "The full sample texts are stored to allow Geoffrey to re-read them during content generation."
+  ]
+}

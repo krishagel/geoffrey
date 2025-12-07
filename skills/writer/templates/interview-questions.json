@@ -1,0 +1,212 @@
+{
+  "email": {
+    "quick": [
+      {
+        "q": "Who is the recipient and what's your relationship?",
+        "purpose": "Set appropriate tone based on relationship (boss, peer, direct report)"
+      },
+      {
+        "q": "What's the purpose of this email? (inform, request, respond, update)",
+        "purpose": "Frame the structure and opening"
+      },
+      {
+        "q": "What's the key information or ask?",
+        "purpose": "Identify core message"
+      },
+      {
+        "q": "Desired tone? (formal, casual, urgent, friendly)",
+        "purpose": "Adjust voice for context"
+      }
+    ],
+    "complex": [
+      {
+        "q": "Who are the recipient(s) and what's the context of your communication?",
+        "purpose": "Understand audience and relationship dynamics"
+      },
+      {
+        "q": "What's the primary goal of this email?",
+        "purpose": "Frame overall structure"
+      },
+      {
+        "q": "What background information do they need?",
+        "purpose": "Determine how much context to provide"
+      },
+      {
+        "q": "What are the key points you need to make? (Aim for 3-5 max)",
+        "purpose": "Structure the main body"
+      },
+      {
+        "q": "What specific action or response are you requesting?",
+        "purpose": "Craft the call-to-action"
+      },
+      {
+        "q": "Are there any sensitive issues to navigate carefully?",
+        "purpose": "Adjust tone and framing"
+      },
+      {
+        "q": "Will there be attachments? If so, what?",
+        "purpose": "Reference them appropriately"
+      },
+      {
+        "q": "What tone is most appropriate for this situation?",
+        "purpose": "Final voice adjustment"
+      }
+    ]
+  },
+
+  "blog": [
+    {
+      "q": "What's your central message or thesis?",
+      "purpose": "Establish the core argument"
+    },
+    {
+      "q": "Why does this topic matter right now? Why should readers care?",
+      "purpose": "Frame timeliness and relevance"
+    },
+    {
+      "q": "What do you want readers to think, feel, or do after reading?",
+      "purpose": "Define desired impact and outcome"
+    },
+    {
+      "q": "What evidence, examples, or data supports your message?",
+      "purpose": "Identify concrete support for claims"
+    },
+    {
+      "q": "Are there any stories, case studies, or personal experiences to include?",
+      "purpose": "Add narrative elements and relatability"
+    },
+    {
+      "q": "What are the main counterarguments, and how do you respond to them?",
+      "purpose": "Strengthen the argument by addressing objections"
+    },
+    {
+      "q": "How should this open? (Hook, context-setting, anecdote, question)",
+      "purpose": "Craft an engaging opening"
+    },
+    {
+      "q": "What are the 3-5 key sections or points to cover?",
+      "purpose": "Structure the body"
+    },
+    {
+      "q": "How should it close? (Call-to-action, reflection, forward-looking statement)",
+      "purpose": "Land the ending effectively"
+    },
+    {
+      "q": "Who's the primary audience and what's their technical level?",
+      "purpose": "Calibrate vocabulary and depth"
+    },
+    {
+      "q": "What tone is most appropriate? (Authoritative, conversational, inspirational, analytical)",
+      "purpose": "Set voice direction"
+    }
+  ],
+
+  "social_linkedin": [
+    {
+      "q": "What's your main point in 1-2 sentences?",
+      "purpose": "Distill the core message"
+    },
+    {
+      "q": "Who's your target audience for this post?",
+      "purpose": "Tailor language and framing"
+    },
+    {
+      "q": "What tone? (Informative, thought-provoking, inspirational, conversational, urgent)",
+      "purpose": "Set voice direction"
+    },
+    {
+      "q": "What action do you want readers to take? (Comment, share, click link, reflect)",
+      "purpose": "Craft the call-to-action"
+    },
+    {
+      "q": "Will you include a link or visual? If so, to what?",
+      "purpose": "Plan multimedia elements"
+    }
+  ],
+
+  "social_twitter": [
+    {
+      "q": "What's your main point in one ultra-concise sentence?",
+      "purpose": "Distill for character limit"
+    },
+    {
+      "q": "What tone? (Witty, serious, informative, provocative, casual)",
+      "purpose": "Set tweet voice"
+    },
+    {
+      "q": "Is this a single tweet or a thread? If thread, how many tweets?",
+      "purpose": "Plan structure"
+    },
+    {
+      "q": "Will you include a link? To what?",
+      "purpose": "Plan multimedia"
+    }
+  ],
+
+  "report": [
+    {
+      "q": "What is the purpose of this report?",
+      "purpose": "Frame overall scope and direction"
+    },
+    {
+      "q": "Who are the primary and secondary audiences?",
+      "purpose": "Calibrate depth and formality"
+    },
+    {
+      "q": "What decisions will this report inform or influence?",
+      "purpose": "Understand the stakes and focus"
+    },
+    {
+      "q": "What's the scope? What's explicitly out of scope?",
+      "purpose": "Define boundaries"
+    },
+    {
+      "q": "What are the main findings or conclusions?",
+      "purpose": "Identify key messages"
+    },
+    {
+      "q": "What supporting data, metrics, or evidence do you have?",
+      "purpose": "Plan data presentation"
+    },
+    {
+      "q": "What trends or patterns emerged from your analysis?",
+      "purpose": "Add analytical depth"
+    },
+    {
+      "q": "Were there any surprises, anomalies, or unexpected findings?",
+      "purpose": "Highlight notable insights"
+    },
+    {
+      "q": "What recommendations are you making?",
+      "purpose": "Define actionable outcomes"
+    },
+    {
+      "q": "What evidence supports each recommendation?",
+      "purpose": "Ensure recommendations are grounded"
+    },
+    {
+      "q": "What structure would work best? (Executive summary first, chronological, problem-solution, etc.)",
+      "purpose": "Plan document organization"
+    },
+    {
+      "q": "Will you need visualizations? (Charts, graphs, tables)",
+      "purpose": "Plan visual elements"
+    },
+    {
+      "q": "How much detail is appropriate for this audience?",
+      "purpose": "Calibrate depth"
+    },
+    {
+      "q": "Are there specific formatting requirements? (Template, brand guidelines, page limit)",
+      "purpose": "Follow constraints"
+    },
+    {
+      "q": "Is there sensitive or confidential information to handle carefully?",
+      "purpose": "Plan appropriate framing"
+    },
+    {
+      "q": "What's the deadline and who will review this before it's finalized?",
+      "purpose": "Plan timeline and iteration"
+    }
+  ]
+}
