@@ -5,6 +5,8 @@ triggers:
   - "what do you know"
   - "my preferences"
   - "show preferences"
+  - "show my identity"
+  - "who am i"
   - "remember that"
   - "learn that"
   - "forget that"
@@ -13,8 +15,10 @@ triggers:
   - "credit card status"
   - "expiring benefits"
   - "card balances"
+  - "review identity"
+  - "quarterly review"
 allowed-tools: Read, Write, Bash
-version: 0.1.0
+version: 0.2.0
 ---
 
 # Knowledge Manager Skill
@@ -25,6 +29,8 @@ You are Geoffrey's knowledge management system. Your role is to help store, retr
 
 - **Store Preferences**: Save user preferences to the knowledge base
 - **Retrieve Preferences**: Read and display stored preferences
+- **Show Identity**: Display core identity (strengths, values, personality, mission)
+- **Check Review Status**: Determine if quarterly identity review is due
 - **Update Confidence**: Track how certain we are about each preference
 - **Validate Data**: Ensure data is properly formatted before storage
 - **Learn from Context**: Extract preferences from natural conversation
@@ -34,9 +40,22 @@ You are Geoffrey's knowledge management system. Your role is to help store, retr
 All knowledge is stored in:
 ```
 ~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/knowledge/
-├── preferences.json    # User preferences with confidence scores
-├── memory.jsonl        # Conversation history (future)
-└── patterns.json       # Detected patterns (future)
+├── preferences.json              # Behavioral preferences with confidence scores
+├── identity-core.json            # Core identity: strengths, values, personality (Tier 1)
+├── personality-assessments/      # Detailed CliftonStrengths, Colors, Enneagram
+│   ├── clifton-strengths.json
+│   ├── colors-profile.json
+│   └── enneagram-profile.json
+├── memory.jsonl                  # Conversation history (future)
+└── patterns.json                 # Detected patterns (future)
+```
+
+**Obsidian Identity Documents:**
+```
+Geoffrey/Identity/
+├── Personal-Constitution.md      # Philosophy, values, principles
+├── Personality-Profiles.md       # All assessments consolidated
+└── Identity-Evolution-Log.md     # Quarterly reviews and evolution tracking
 ```
 
 ## Preference Structure
@@ -116,8 +135,60 @@ You can update these anytime by telling me or using /preferences"
 Use this skill when:
 - User explicitly teaches you something ("I prefer...", "Always...", "Never...")
 - User asks about their preferences ("What do you know about...", "Show my preferences")
+- User asks about their identity ("Show my identity", "Who am I", "What are my strengths")
+- User wants to check if review is due ("Review identity", "Quarterly review")
 - User wants to update or delete knowledge
 - User asks "What have you learned about me?"
+- User triggers credit card benefits check
+
+## Identity Context (Always Load for Identity Queries)
+
+When user asks about identity ("show my identity", "who am i"), load core identity:
+
+```bash
+cat ~/Library/Mobile\ Documents/com~apple~CloudDocs/Geoffrey/knowledge/identity-core.json
+```
+
+**Display format for "show my identity":**
+
+```markdown
+## Core Identity Summary
+
+**Strengths:** [clifton_top_3]
+**Personality:** [colors_profile descriptor] • [enneagram full_designation]
+**Decision Style:** [decision_framework summary]
+**Communication:** [communication_preferences style]
+
+**Core Mission:** [telos_summary core_mission]
+
+**Top 3 Values:**
+1. [value 1]
+2. [value 2]
+3. [value 3]
+
+**Growth Edge:** [challenges and blind spots]
+
+**Next Review:** [next_review date] (quarterly)
+
+*Full details: identity-core.json (v[version]), Personal-Constitution.md, Personality-Profiles.md*
+```
+
+## Quarterly Review Check
+
+When user asks "review identity" or "quarterly review", run check script:
+
+```bash
+bun ~/non-ic-code/geoffrey/skills/knowledge-manager/scripts/check-review-due.js
+```
+
+**If review is due:**
+- Prompt user to run the review process
+- Reference Identity-Evolution-Log.md for review workflow
+- Offer to open the log in Obsidian
+
+**If not due yet:**
+- Show days until next review
+- Optionally summarize what will be reviewed
 
 ## Important Guidelines
 
