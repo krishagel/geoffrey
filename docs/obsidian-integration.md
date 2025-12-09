@@ -2,7 +2,9 @@
 
 Obsidian is the user's persistent second brain. All significant work should be saved there.
 
-**Vault Path:** `/Users/hagelk/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/`
+**Vault Path:** `/Users/$USER/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/`
+
+**Note:** The vault path is dynamic based on the current user. Use the environment or determine the active username programmatically - do not hardcode a specific username.
 
 ## When to Read from Obsidian
 
