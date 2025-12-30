@@ -46,7 +46,7 @@ test-output/
 knowledge/
 preferences.json
 memory.jsonl
-patterns.json
+# Note: hooks/pre-tool-use/patterns.json is tracked (security patterns, not personal data)
 
 # Temporary work files (not part of repo)
 workspace/

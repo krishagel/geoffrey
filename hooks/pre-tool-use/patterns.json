@@ -1,0 +1,186 @@
+{
+  "$schema": "./patterns.schema.json",
+  "version": "1.0.0",
+  "description": "Security patterns for credential detection in Claude Code hooks",
+  "patterns": [
+    {
+      "id": "aws-access-key",
+      "tier": 1,
+      "pattern": "\\bAKIA[0-9A-Za-z]{16}\\b",
+      "action": "block",
+      "description": "AWS Access Key ID",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "aws-secret-key",
+      "tier": 1,
+      "pattern": "(?:aws_secret_access_key|AWS_SECRET_ACCESS_KEY)\\s*[=:]\\s*[\"']?([A-Za-z0-9/+=]{40})",
+      "action": "block",
+      "description": "AWS Secret Access Key",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "github-token",
+      "tier": 1,
+      "pattern": "\\b(ghp|gho|ghu|ghs|ghr)_[A-Za-z0-9]{36,}\\b",
+      "action": "block",
+      "description": "GitHub Personal Access Token",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "slack-token",
+      "tier": 1,
+      "pattern": "\\bxox[baprs]-[0-9]{10,13}-[0-9]{10,13}-[A-Za-z0-9]{24,}\\b",
+      "action": "block",
+      "description": "Slack API Token",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "private-key",
+      "tier": 1,
+      "pattern": "-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----",
+      "action": "block",
+      "description": "Private Key Header",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "jwt-token",
+      "tier": 1,
+      "pattern": "\\beyJ[A-Za-z0-9_-]{10,}\\.eyJ[A-Za-z0-9_-]{10,}\\.[A-Za-z0-9_-]{10,}\\b",
+      "action": "block",
+      "description": "JSON Web Token (JWT)",
+      "falsePositiveRisk": "medium"
+    },
+    {
+      "id": "anthropic-api-key",
+      "tier": 1,
+      "pattern": "\\bsk-ant-[A-Za-z0-9_-]{40,}\\b",
+      "action": "block",
+      "description": "Anthropic API Key",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "openai-api-key",
+      "tier": 1,
+      "pattern": "\\bsk-[A-Za-z0-9]{20,}T3BlbkFJ[A-Za-z0-9]{20,}\\b",
+      "action": "block",
+      "description": "OpenAI API Key",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "google-api-key",
+      "tier": 1,
+      "pattern": "\\bAIza[0-9A-Za-z_-]{35}\\b",
+      "action": "block",
+      "description": "Google API Key",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "stripe-key",
+      "tier": 1,
+      "pattern": "\\b(sk_live_|rk_live_)[A-Za-z0-9]{24,}\\b",
+      "action": "block",
+      "description": "Stripe Live Secret Key",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "db-connection-string",
+      "tier": 1,
+      "pattern": "(?:postgres|mysql|mongodb|redis)://[^:]+:[^@]+@[^/]+",
+      "action": "block",
+      "description": "Database Connection String with Password",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "freshservice-api-key",
+      "tier": 2,
+      "pattern": "(?:FRESHSERVICE_API_KEY|freshservice_api_key)\\s*[=:]\\s*[\"']?([A-Za-z0-9]{20,})",
+      "action": "block",
+      "description": "FreshService API Key (PSD-specific)",
+      "falsePositiveRisk": "low"
+    },
+    {
+      "id": "env-credential-assignment",
+      "tier": 2,
+      "pattern": "(?:API_KEY|SECRET_KEY|AUTH_TOKEN|ACCESS_TOKEN|PRIVATE_KEY)\\s*[=:]\\s*[\"']?([A-Za-z0-9_/+=]{16,})",
+      "action": "warn",
+      "description": "Generic credential environment variable",
+      "falsePositiveRisk": "medium"
+    },
+    {
+      "id": "password-assignment",
+      "tier": 2,
+      "pattern": "(?:password|passwd|pwd)\\s*[=:]\\s*[\"']?([^\\s\"']{8,})",
+      "action": "warn",
+      "description": "Password assignment",
+      "falsePositiveRisk": "high"
+    },
+    {
+      "id": "bearer-token",
+      "tier": 2,
+      "pattern": "(?:Authorization|authorization)\\s*[=:]\\s*[\"']?Bearer\\s+([A-Za-z0-9._-]{20,})",
+      "action": "warn",
+      "description": "Bearer authorization token",
+      "falsePositiveRisk": "medium"
+    },
+    {
+      "id": "basic-auth",
+      "tier": 2,
+      "pattern": "(?:Authorization|authorization)\\s*[=:]\\s*[\"']?Basic\\s+([A-Za-z0-9+/=]{20,})",
+      "action": "warn",
+      "description": "Basic authentication header",
+      "falsePositiveRisk": "medium"
+    },
+    {
+      "id": "ssh-key-file",
+      "tier": 3,
+      "pattern": "~?\\/\\.ssh\\/id_[a-z]+(?:\\.pub)?",
+      "action": "warn",
+      "description": "SSH key file path reference",
+      "falsePositiveRisk": "high"
+    },
+    {
+      "id": "credit-card-number",
+      "tier": 1,
+      "pattern": "\\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13})\\b",
+      "action": "block",
+      "description": "Credit card number pattern",
+      "falsePositiveRisk": "medium"
+    },
+    {
+      "id": "ssn",
+      "tier": 1,
+      "pattern": "\\b\\d{3}-\\d{2}-\\d{4}\\b",
+      "action": "block",
+      "description": "Social Security Number format",
+      "falsePositiveRisk": "medium"
+    }
+  ],
+  "exceptions": [
+    {
+      "id": "test-placeholder",
+      "pattern": "(?:test|example|sample|placeholder|dummy|fake|YOUR_|<YOUR)",
+      "description": "Placeholder/test values"
+    },
+    {
+      "id": "env-reference",
+      "pattern": "\\$\\{[A-Z_]+\\}|\\$[A-Z_]+|process\\.env\\.",
+      "description": "Environment variable references"
+    },
+    {
+      "id": "localhost",
+      "pattern": "localhost|127\\.0\\.0\\.1",
+      "description": "Localhost addresses"
+    },
+    {
+      "id": "stripe-test-keys",
+      "pattern": "\\b(sk_test_|rk_test_|pk_test_)[A-Za-z0-9]{24,}\\b",
+      "description": "Stripe test keys (not sensitive)"
+    },
+    {
+      "id": "documentation-markers",
+      "pattern": "xxx+|\\[\\w+\\]|<\\w+>",
+      "description": "Documentation placeholders"
+    }
+  ]
+}
