@@ -29,6 +29,88 @@ Named after Geoffrey Hinton (godfather of AI) and Geoffrey from Fresh Prince of 
 - **Multi-machine**: Same Geoffrey, same preferences, different devices
 - **Open source**: MIT licensed, community contributions welcome
 
+## Founding Principles
+
+Geoffrey's architecture follows principles inspired by [Personal AI Infrastructure v2.0](https://github.com/danielmiessler/Personal_AI_Infrastructure). These guide all development decisions.
+
+### 1. Scaffolding Over Model
+**Architecture matters more than AI capability.**
+
+The structure around the AI—skills, hooks, knowledge storage—determines what's possible. A well-designed scaffold makes the AI more effective; a poor one limits even the best model.
+
+*Example:* Three-tier progressive disclosure (Tier 1: always loaded, Tier 2: on activation, Tier 3: just-in-time) keeps context lean while enabling rich capabilities.
+
+### 2. Code Before AI
+**Build deterministic CLI tools, then wrap with AI orchestration.**
+
+Code is cheaper, faster, and more reliable than prompts. Scripts handle data fetching and processing; AI handles orchestration and natural language.
+
+*Example:* `omnifocus-manager/scripts/get_tags.js` fetches tags deterministically. Geoffrey orchestrates when and how to use that data.
+
+### 3. Deterministic Systems
+**Favor predictable, repeatable outcomes over probabilistic behavior.**
+
+When possible, use deterministic code paths. Reserve AI judgment for tasks that require it. Runtime data fetching ensures always-current information without stale caches.
+
+*Example:* Fetching OmniFocus tags at runtime instead of hardcoding 129 tags that could change.
+
+### 4. Progressive Disclosure
+**Load only what's needed, when it's needed.**
+
+Context is precious. Tier 1 stays under 100 lines. Tier 2 loads when skills activate. Tier 3 fetches data just-in-time.
+
+*Example:* OmniFocus skill loads SKILL.md on activation, fetches tags only when creating a task.
+
+### 5. UNIX Philosophy
+**Modular, composable, single responsibility.**
+
+Each skill does one thing well. Skills compose to handle complex workflows. Clear boundaries between concerns.
+
+*Example:* `knowledge-manager` learns preferences, `omnifocus-manager` manages tasks, `freshservice-manager` handles tickets—each focused and independent.
+
+### 6. Self-Modifying Systems
+**Infrastructure learns and improves from experience.**
+
+Hooks extract patterns automatically. History enables preference detection. The system gets smarter over time without manual updates.
+
+*Example:* SessionEnd hooks analyze conversations, update `learned-preferences.json`, and route summaries to Obsidian by content type.
+
+### 7. Skill Management
+**Dynamic routing with modular loading.**
+
+SKILL.md frontmatter defines triggers. Skills activate automatically based on context. No manual switching required.
+
+*Example:* "Add a task to OmniFocus" → `omnifocus-manager` activates. "What are my travel preferences?" → `knowledge-manager` activates.
+
+### 8. CLI Interfaces
+**Command-line tools over GUIs.**
+
+All scripts are CLI-based for automation and composability. Use `bun` runtime for JavaScript. Standard input/output for integration.
+
+*Example:* `bun scripts/add_task.js` creates tasks programmatically, avoiding GUI dependencies.
+
+### 9. Identity-First Design
+**Consistent personality and decision framework.**
+
+Tier 1 identity always loaded: strengths, values, decision style. Enables personalized assistance aligned with user's cognitive patterns.
+
+*Example:* Understanding "Green-Orange Analytical Action-Taker" profile shapes how Geoffrey presents options and makes recommendations.
+
+### 10. Evidence-Driven Development
+**Validate against code, never assume behavior.**
+
+Always inspect before claiming. Use conservative language ("functionally validated" vs "production-ready"). Question all claims with "What evidence supports this?"
+
+*Example:* Before saying tests pass, actually run them. Before claiming a feature works, verify in the codebase.
+
+### Principles In Progress
+
+- **Specification-First**: Test before implementation (improving)
+- **History Systems**: Session capture and categorization (implemented in #4)
+- **Science as Cognitive Loop**: Hypothesis → Experiment → Measure (future)
+
+See [PAI v2.0's 14 Founding Principles](https://github.com/danielmiessler/Personal_AI_Infrastructure#founding-principles) for the full original framework.
+
 ## Installation
 
 ### Prerequisites
