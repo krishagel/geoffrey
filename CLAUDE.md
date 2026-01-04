@@ -203,19 +203,63 @@ Geoffrey follows [Semantic Versioning](https://semver.org/): **MAJOR.MINOR.PATCH
 
 ### Version Bump Process
 
+**CRITICAL:** Claude Code requires version numbers in exactly 5 locations for updates to work correctly.
+
 **Before committing:**
 
 1. **Determine change significance** using guidelines above
-2. **Update version in 3 places:**
-   - `.claude-plugin/plugin.json` → `"version": "X.Y.Z"`
-   - `.claude-plugin/marketplace.json` → `"version": "X.Y.Z"` (2 places: metadata + plugins array)
-   - `README.md` → Update "Current Status" section if needed
+
+2. **Update version in ALL 5 required locations:**
+
+   **Location 1:** `.claude-plugin/plugin.json`
+   ```json
+   {
+     "version": "X.Y.Z"
+   }
+   ```
+
+   **Location 2:** `.claude-plugin/marketplace.json` (metadata section)
+   ```json
+   {
+     "metadata": {
+       "version": "X.Y.Z"
+     }
+   }
+   ```
+
+   **Location 3:** `.claude-plugin/marketplace.json` (plugins array)
+   ```json
+   {
+     "plugins": [
+       {
+         "name": "geoffrey",
+         "version": "X.Y.Z"
+       }
+     ]
+   }
+   ```
+
+   **Location 4:** `package.json`
+   ```json
+   {
+     "version": "X.Y.Z"
+   }
+   ```
+
+   **Location 5:** `README.md`
+   - Update badge: `[![Version](https://img.shields.io/badge/version-X.Y.Z-blue.svg)]`
+   - Update "Current Status" section: `**Version:** X.Y.Z`
+   - Update footer: `*Version: X.Y.Z | Phase N*`
+
 3. **Update CHANGELOG.md:**
    - Add new version section at top: `## [X.Y.Z] - YYYY-MM-DD`
    - Document changes under Added/Changed/Fixed/Removed
+
 4. **Commit with version in message:**
-   - Format: `v0.2.0: Add strategic planning system`
+   - Format: `vX.Y.Z: Description of changes`
    - Include version number in first line of commit message
+
+**Why 5 locations?** Claude Code checks multiple files when determining if an update is available. Missing even one location will cause update detection to fail. This pattern matches working plugins like psd-claude-coding-system.
 
 ### Skill Versioning
 
