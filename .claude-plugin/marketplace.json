@@ -12,10 +12,7 @@
   "plugins": [
     {
       "name": "geoffrey",
-      "source": {
-        "source": "github",
-        "repo": "krishagel/geoffrey"
-      },
+      "source": ".",
       "description": "Personal AI infrastructure with learning-enabled assistance for work, travel, and personal tasks",
       "version": "0.2.1",
       "category": "productivity",
