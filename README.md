@@ -1,12 +1,26 @@
 # Geoffrey - Personal AI Infrastructure
 
+[![Version](https://img.shields.io/badge/version-0.2.1-blue.svg)](https://github.com/krishagel/geoffrey/releases)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-plugin-purple.svg)](https://claude.com/code)
+
 Your intelligent assistant, built as a Claude Code plugin. Geoffrey learns your preferences and patterns over time, providing personalized assistance across work, travel, and personal tasks.
 
 Named after Geoffrey Hinton (godfather of AI) and Geoffrey from Fresh Prince of Bel-Air.
 
+## 🚀 Quick Start
+
+```bash
+# Install via Claude Code
+claude plugin marketplace add krishagel/geoffrey
+claude plugin install geoffrey@geoffrey
+
+# For detailed setup, see INSTALL.md
+```
+
 ## Current Status: Phase 2 (Core Skills)
 
-**Version:** 0.2.0
+**Version:** 0.2.1
 **Status:** In Active Development
 
 ### What Works Now
@@ -318,17 +332,42 @@ Higher confidence preferences take priority in suggestions.
 - **Open source**: Audit the code yourself
 - **Encrypted**: Consider encrypting sensitive data (loyalty numbers)
 
+## Installation
+
+**Quick Install:**
+```bash
+claude plugin marketplace add krishagel/geoffrey
+claude plugin install geoffrey@geoffrey
+```
+
+**Full Setup Guide:** See [INSTALL.md](INSTALL.md) for complete installation instructions including:
+- Prerequisites (Bun, Python, uv)
+- API key configuration
+- iCloud setup
+- Skill-specific setup (OmniFocus, Obsidian, etc.)
+
 ## Contributing
 
-Contributions welcome! Please:
+Contributions welcome! Geoffrey is open source and we'd love your help.
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+**How to contribute:**
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details (coming soon).
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-skill`)
+3. **Make** your changes following our coding standards
+4. **Test** thoroughly (all skills must work)
+5. **Commit** with clear messages (`v0.X.Y: Description`)
+6. **Push** to your fork
+7. **Open** a pull request
+
+**Areas we need help:**
+- New skills (travel planning, health tracking, etc.)
+- Documentation improvements
+- Bug fixes
+- Performance optimizations
+- Testing and QA
+
+**Development setup:** See [INSTALL.md](INSTALL.md#option-b-local-development)
 
 ## Inspiration
 
@@ -357,5 +396,5 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 **Built with ❤️ using Claude Code**
 
-*Current status: Phase 1 implementation*
-*Last updated: November 17, 2025*
+*Version: 0.2.1 | Phase 2 (Core Skills)*
+*Last updated: January 4, 2026*

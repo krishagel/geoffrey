@@ -5,6 +5,37 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2026-01-04
+
+### Added
+- **INSTALL.md** - Comprehensive installation guide with step-by-step instructions
+- **LICENSE** - MIT License file for open source distribution
+- **Quick Start** section in README with installation commands
+- **Badges** to README (version, license, Claude Code plugin)
+
+### Changed
+- **README.md** enhanced for open source presentation
+  - Added Quick Start section with one-command install
+  - Expanded Contributing section with clear guidelines
+  - Added "Areas we need help" to encourage contributions
+  - Updated footer with current version and date
+  - Added Installation section linking to INSTALL.md
+- **Removed hardcoded username** (`/Users/hagelk/`) from all paths
+  - skills/obsidian-manager/SKILL.md → `~/Library/...`
+  - skills/presentation-master/README.md → `/path/to/geoffrey/...`
+  - skills/drafts-manager/actions/geoffrey-process-draft.js → Removed unused vault path
+  - skills/drafts-manager/actions/README.md → Clarified URL scheme usage
+  - Geoffrey-PRD.md → Generic paths
+
+### Fixed
+- Path portability across different user accounts
+- Documentation now works for any user, not just original developer
+
+### Security
+- Verified .gitignore properly excludes secrets (.env, *.key, credentials.json)
+- No API keys in repository
+- All sensitive data stays in iCloud
+
 ## [0.2.0] - 2026-01-04
 
 ### Added
