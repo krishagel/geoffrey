@@ -1,0 +1,33 @@
+{
+  "name": "geoffrey",
+  "version": "0.2.1",
+  "description": "Personal AI infrastructure with learning-enabled assistance for work, travel, and personal tasks",
+  "type": "module",
+  "author": {
+    "name": "Kris Hagel",
+    "email": "kris@krishagel.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/krishagel/geoffrey.git"
+  },
+  "bugs": {
+    "url": "https://github.com/krishagel/geoffrey/issues"
+  },
+  "homepage": "https://github.com/krishagel/geoffrey#readme",
+  "keywords": [
+    "claude-code",
+    "plugin",
+    "personal-ai",
+    "learning",
+    "preferences",
+    "assistant",
+    "productivity",
+    "strategic-planning",
+    "omnifocus"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
