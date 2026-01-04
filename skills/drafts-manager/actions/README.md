@@ -79,11 +79,7 @@ The parameters become available as template tags in the script.
 
 ### Customization
 
-To change the Obsidian vault path, edit this line in `geoffrey-process-draft.js`:
-
-```javascript
-let obsidianVault = "/Users/hagelk/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes";
-```
+The action uses the Obsidian URL scheme, so it automatically finds your vault. No path configuration needed.
 
 To change the default Obsidian folder, edit:
 

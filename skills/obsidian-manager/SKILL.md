@@ -23,7 +23,7 @@ Manage the user's Obsidian vault as a persistent second brain. Read existing kno
 
 ## Vault Configuration
 
-**Path:** `/Users/hagelk/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/`
+**Path:** `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/`
 
 **Write Mode:** Auto-create new files, confirm before updating existing files.
 

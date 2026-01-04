@@ -302,7 +302,7 @@ This skill is part of Geoffrey's skill library. No separate installation needed.
 
 Ensure dependencies are installed:
 ```bash
-cd /Users/hagelk/non-ic-code/geoffrey/skills/presentation-master
+cd /path/to/geoffrey/skills/presentation-master
 bun install
 ```
 

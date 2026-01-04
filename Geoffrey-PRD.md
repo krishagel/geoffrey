@@ -139,7 +139,7 @@ Conversation → Extract Patterns → Update Preferences → Increase Confidence
 
 **Create structure:**
 ```bash
-cd /Users/hagelk/non-ic-code/geoffrey
+cd /path/to/geoffrey
 mkdir -p .claude-plugin
 mkdir -p skills/knowledge-manager
 mkdir -p commands

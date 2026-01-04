@@ -107,10 +107,8 @@ switch (destination) {
         break;
 
     case "obsidian":
-        // Build Obsidian file path
-        let obsidianVault = "/Users/hagelk/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes";
+        // Build Obsidian file name (vault path not needed - using URL scheme)
         let fileName = title.replace(/[\/\\:*?"<>|]/g, "-") + ".md";
-        let filePath = folder + "/" + fileName;
 
         // Build frontmatter
         let frontmatter = [
