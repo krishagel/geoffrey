@@ -40,16 +40,95 @@ Use this skill when user wants to:
 - Tag with person + "Follow Up" for 1:1 discussions
 - Use location tags for shopping tasks
 
+## Working with OmniFocus Scripting
+
+### JXA vs AppleScript: When to Use Each
+
+**Use JXA (JavaScript for Automation) for:**
+- ✅ Reading data (tasks, projects, tags, inbox)
+- ✅ Creating/updating individual tasks
+- ✅ Adding tags to tasks
+- ✅ Moving tasks between projects
+- ✅ Fast, single-purpose operations
+
+**Use AppleScript for:**
+- ✅ Creating projects inside folders
+- ✅ Creating folders
+- ✅ Bulk operations on multiple projects
+- ✅ Complex nested structures (folder → project → tasks)
+
+**CRITICAL DIFFERENCE:**
+- **External JXA scripts** (via `osascript -l JavaScript`) have limitations
+- **OmniJS** (built-in JavaScript in OmniFocus app) has more capabilities
+- Documentation examples showing `new Project(name, folder)` work in OmniJS but **NOT in external JXA scripts**
+
+### Common Pitfalls & Solutions
+
+| Pitfall | Why It Happens | Solution |
+|---------|---------------|----------|
+| Projects created at root instead of in folder | JXA `parentFolder` property doesn't work externally | Use AppleScript with `tell folder` blocks |
+| Duplicate empty folders | Script creates folder but projects fail to nest | Always verify `count of projects of folder` after creation |
+| "Can't convert types" errors | JXA type mismatch between app objects and JavaScript | Use AppleScript for complex operations |
+| Projects appear created but aren't | Script reports success but verification shows 0 projects | Always verify after creation, never trust script output alone |
+| Can't delete folders via script | Folders don't support deletion commands | Manual cleanup in OmniFocus UI required |
+
+### Verification Patterns
+
+**ALWAYS verify operations that modify structure:**
+
+```applescript
+# After creating projects in folder
+tell application "OmniFocus"
+  tell default document
+    set projectCount to count of projects of folder "Folder Name"
+    if projectCount is 0 then
+      return "ERROR: Projects not in folder!"
+    else
+      return "SUCCESS: " & projectCount & " projects created"
+    end if
+  end tell
+end tell
+```
+
+**NEVER assume success based on:**
+- Script completing without errors
+- Return value claiming success
+- Absence of error messages
+
+**ALWAYS verify by:**
+- Counting items created
+- Checking container relationships
+- Querying actual data structure
+
+### Error Recovery Workflow
+
+**If you create projects incorrectly:**
+
+1. **STOP** - Don't create more until you understand the problem
+2. **VERIFY** - Check actual state: `projects of folder "X"`
+3. **CLEAN UP** - Drop wrong projects: `mark dropped proj`
+4. **NOTE** - Empty folders must be manually deleted in UI
+5. **FIX** - Use correct method (AppleScript for folders)
+6. **VERIFY AGAIN** - Confirm correction worked
+
 ## Available Scripts
 
-Scripts are in `./scripts/` directory. Run via:
+Scripts are in `./scripts/` directory.
+
+**For JXA scripts:**
 ```bash
 osascript -l JavaScript ./scripts/script-name.js
 ```
 
-**IMPORTANT:** Always use pure JXA, NOT Omni Automation URL scheme. The URL scheme triggers security popups for every unique script. JXA runs silently.
+**For AppleScript:**
+```bash
+osascript ./scripts/script-name.applescript
+```
 
-Key JXA patterns:
+**IMPORTANT:** Always use pure JXA/AppleScript, NOT Omni Automation URL scheme. The URL scheme triggers security popups for every unique script. Direct scripting runs silently.
+
+### Key JXA Patterns (for individual tasks)
+
 - `doc.inboxTasks.push(task)` - create new tasks
 - `app.add(tag, {to: task.tags})` - add existing tags (not push!)
 - `task.assignedContainer = project` - move to project
@@ -97,6 +176,173 @@ Creates a new tag, optionally under a parent.
 **Parameters:** name, parent (optional)
 
 **Use when:** Tag doesn't exist for a person or category
+
+### create_projects_in_folder.applescript
+**CRITICAL:** Creates projects INSIDE folders (not at root level).
+
+**WHY APPLESCRIPT, NOT JXA:**
+External JXA scripts (osascript -l JavaScript) **cannot reliably create projects in folders**. Projects appear created but end up at root level, not in the folder. This creates duplicate folders and organizational mess.
+
+**CORRECT PATTERN (AppleScript):**
+```applescript
+tell application "OmniFocus"
+  tell default document
+    set myFolder to make new folder with properties {name:"Folder Name"}
+    tell myFolder
+      set proj to make new project with properties {name:"Project Name", note:"Description"}
+      tell proj
+        make new task with properties {name:"Task Name"}
+      end tell
+    end tell
+  end tell
+end tell
+```
+
+**WRONG PATTERNS (DO NOT USE):**
+- ❌ JXA: `new Project(name, folderNamed('X'))` - only works in OmniJS, not external scripts
+- ❌ JXA: `project.folder = folder` - sets property but doesn't move
+- ❌ JXA: `project.parentFolder = folder` - projects still at root level
+- ❌ JXA: `folder.projects.push(project)` - fails silently
+
+**DELETION NOTES:**
+- Projects: Use AppleScript `mark dropped proj` command
+- Folders: **Cannot be deleted via script** - must delete manually in OmniFocus UI
+- Always verify folder contents before assuming success
+
+**Use when:** Creating multiple projects organized in folders (annual planning, strategic priorities, etc.)
+
+## Interface for Other Skills
+
+If another skill needs to create OmniFocus projects/tasks, use these patterns:
+
+### Creating Individual Tasks
+
+**Call directly from other skill:**
+```bash
+osascript -l JavaScript /path/to/omnifocus-manager/scripts/add_task.js '{
+  "name": "Task name",
+  "project": "Project Name",
+  "tags": ["Tag1", "Tag2"],
+  "dueDate": "2026-01-15",
+  "note": "Optional note"
+}'
+```
+
+### Creating Folder with Multiple Projects
+
+**Build AppleScript dynamically:**
+
+1. **Generate AppleScript string** with folder + projects + tasks structure
+2. **Write to temp file:** `/tmp/create_projects_TIMESTAMP.applescript`
+3. **Execute:** `osascript /tmp/create_projects_TIMESTAMP.applescript`
+4. **Verify:** Check `count of projects of folder "Folder Name"` returns expected count
+5. **Clean up:** Remove temp file
+
+**Example structure:**
+```applescript
+tell application "OmniFocus"
+  tell default document
+    set targetFolder to make new folder with properties {name:"FOLDER_NAME"}
+    tell targetFolder
+      # Repeat for each project:
+      set proj to make new project with properties {name:"PROJECT_NAME", note:"NOTE"}
+      tell proj
+        # Repeat for each task:
+        make new task with properties {name:"TASK_NAME"}
+      end tell
+    end tell
+  end tell
+end tell
+```
+
+**CRITICAL:** Always verify after creation. Don't trust return values.
+
+## Best Practices for Folder/Project Creation
+
+### Pre-Creation Checklist
+
+**BEFORE creating projects in folders:**
+
+1. **Check for existing folders:**
+   ```applescript
+   tell application "OmniFocus"
+     tell default document
+       set folderNames to name of every folder
+       return folderNames
+     end tell
+   end tell
+   ```
+
+2. **Verify folder doesn't already exist** to avoid duplicates
+
+3. **Plan the complete structure** - folder name, all project names, all tasks
+
+### During Creation
+
+**CRITICAL RULES:**
+
+1. **Use AppleScript, NOT JXA** for external scripts creating projects in folders
+2. **Create folder FIRST** using `make new folder`
+3. **Use `tell folder` block** for all project creation
+4. **Nest `tell project` blocks** for task creation
+
+### Post-Creation Verification
+
+**ALWAYS verify projects are in folder:**
+
+```applescript
+tell application "OmniFocus"
+  tell default document
+    set folderProjects to projects of folder "Folder Name"
+    return "Found " & (count of folderProjects) & " projects"
+  end tell
+end tell
+```
+
+**If count is 0:**
+- Projects created at root level (wrong!)
+- Need to delete and recreate using correct AppleScript pattern
+
+### Cleanup After Errors
+
+**If you create projects incorrectly:**
+
+1. **Drop projects:** `mark dropped proj` for each wrong project
+2. **Empty folders cannot be deleted via script** - must delete manually in OmniFocus UI
+3. **Always verify** after cleanup before recreating
+
+### Complete Example: Creating Folder with Projects
+
+```bash
+# Build AppleScript dynamically
+cat > /tmp/create_folder_projects.applescript << 'EOF'
+tell application "OmniFocus"
+  tell default document
+    set myFolder to make new folder with properties {name:"Project Folder"}
+    tell myFolder
+      set proj1 to make new project with properties {name:"Project 1", note:"Description"}
+      tell proj1
+        make new task with properties {name:"Task 1"}
+        make new task with properties {name:"Task 2"}
+      end tell
+    end tell
+  end tell
+end tell
+EOF
+
+# Execute
+osascript /tmp/create_folder_projects.applescript
+
+# Verify
+osascript << 'VERIFY'
+tell application "OmniFocus"
+  tell default document
+    set projectCount to count of projects of folder "Project Folder"
+    return "Created " & projectCount & " projects in folder"
+  end tell
+end tell
+VERIFY
+```
 
 ## Tag Hierarchy Reference
 

@@ -8,6 +8,25 @@ Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learn
 
 **Inspiration:** [Personal AI Infrastructure by Daniel Miessler](https://github.com/danielmiessler/Personal_AI_Infrastructure)
 
+## Critical Identity Documents (Always Available)
+
+**MUST READ for annual reviews, goal planning, major decisions:**
+
+1. **Identity Core (TELOS + Summary)**
+   - Path: `~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/knowledge/identity-core.json`
+   - Contains: TELOS summary (lines 10-98), constitution principles (lines 100-135), strengths integration
+   - When: Annual reviews, goal setting, decision validation
+
+2. **Personal Constitution (Full)**
+   - Path: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/Geoffrey/Identity/Personal-Constitution.md`
+   - Contains: Complete PRINCIPLES framework, values, boundaries
+   - When: Deep value alignment questions, integrity checks
+
+3. **Obsidian Vault Base**
+   - Path: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/`
+   - Structure: `Geoffrey/Identity/`, `Geoffrey/Research/`, `Reviews/`, `Work/`
+   - Access: Direct file read OR `mcp__obsidian-vault__*` tools
+
 ## Core Architectural Principles
 
 ### Three-Tier Progressive Disclosure
@@ -49,6 +68,14 @@ Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learn
 - November 2025 → 2025-2026 ski season (NOT 2024-2025)
 - Always use current year in search queries unless explicitly historical
 - When in doubt, search for "2025" or "2026" not past years
+
+### NEVER Make Up Facts
+
+**CRITICAL:** Never fabricate details about the user's organization, systems, or people.
+
+- Don't guess: department names, software systems, who works where, stakeholder roles
+- Ask or use placeholders: "Data owner (TBD)", "SIS system (specify which)"
+- Only state facts you can cite or the user told you
 
 ### Never Trust Internal Knowledge for Current Information
 

@@ -1,0 +1,220 @@
+---
+created: {date}
+year: {YEAR}
+quarter: Q{N}
+domains_reviewed: {list_of_domains}
+status: Draft
+annual_review: [[{YEAR}-Annual-Review]]
+previous_quarter: {link_to_previous_quarter_if_exists}
+next_quarter: {link_to_next_quarter_if_planned}
+---
+
+# {YEAR} Q{N} Review
+
+> **Quick Check-In:** 15-20 min progress assessment and course correction
+
+**Review Period:** {quarter_start_date} to {quarter_end_date}
+**Linked to:** [[{YEAR}-Annual-Review|{YEAR} Annual Strategic Review]]
+
+---
+
+## Summary
+
+**Overall Portfolio Health:** {on_track_at_risk_off_track_assessment}
+
+**Key Wins This Quarter:**
+- {win_1}
+- {win_2}
+- {win_3}
+
+**Key Challenges This Quarter:**
+- {challenge_1}
+- {challenge_2}
+
+**Major Adjustments Needed:**
+- {adjustment_1}
+- {adjustment_2}
+
+---
+
+## Domain: {domain_name}
+
+### Priority Goal 1: {goal_name}
+
+**Progress Status:**
+- ✅ **On track** - will hit target
+- ⚠️ **At risk** - may miss target without intervention
+- ❌ **Off track** - unlikely to hit target
+
+[Select one above based on interview]
+
+**Evidence of Progress:**
+
+| Success Indicator | Target (EOY {YEAR}) | Current State | Q{N} Milestone | Status |
+|-------------------|-------------------|---------------|----------------|--------|
+| {indicator_1} | {target} | {current} | {milestone} | {met_partial_missed} |
+| {indicator_2} | {target} | {current} | {milestone} | {met_partial_missed} |
+
+**What Happened This Quarter:**
+
+{concrete_outcomes_actions_completed_measurable_changes}
+
+**What's Working Well:**
+
+- {success_factor_1}: {why_this_is_working}
+- {success_factor_2}: {why_this_is_working}
+
+**What's Stalled:**
+
+- {blocker_1}: {root_cause_and_impact}
+- {blocker_2}: {root_cause_and_impact}
+
+**Do Success Indicators Still Make Sense?**
+
+- {yes_no}: {rationale}
+- Adjustments: {any_changes_to_targets_or_new_indicators}
+
+**Changes for Q{N+1}:**
+
+**Actions to Add:**
+- {new_action_1}: {owner_timeline}
+- {new_action_2}: {owner_timeline}
+
+**Actions to Drop/Defer:**
+- {action_to_stop}: {why}
+
+**Resources/Support Needed:**
+- {resource_1}
+- {dependency_or_help_needed}
+
+**Trade-offs with Other Domains:**
+- {if_this_domain_needs_more_focus_what_gets_less}
+
+---
+
+### Priority Goal 2: {goal_name}
+
+[Repeat structure from Goal 1]
+
+---
+
+### Priority Goal 3: {goal_name}
+
+[Repeat structure from Goal 1]
+
+---
+
+[Repeat for each domain with Priority Goals]
+
+---
+
+## Cross-Domain Portfolio Health
+
+### Energy Distribution This Quarter
+
+| Domain | Energy Invested | Results Achieved | ROI Assessment |
+|--------|----------------|------------------|----------------|
+| {domain_1} | {high_med_low} | {outcomes} | {worth_it_or_adjust} |
+| {domain_2} | {high_med_low} | {outcomes} | {worth_it_or_adjust} |
+| {domain_3} | {high_med_low} | {outcomes} | {worth_it_or_adjust} |
+| {domain_4} | {high_med_low} | {outcomes} | {worth_it_or_adjust} |
+| {domain_5} | {high_med_low} | {outcomes} | {worth_it_or_adjust} |
+
+**Over-Committed Anywhere?**
+
+{yes_no_assessment_if_yes_what_needs_to_give}
+
+**Under-Invested Anywhere?**
+
+{domains_that_got_leftover_energy_despite_being_priorities}
+
+---
+
+### Mid-Course Corrections
+
+**Strategic Adjustments:**
+
+1. **{adjustment_1}**
+   - Reason: {why_this_correction_is_needed}
+   - Impact: {what_changes_as_a_result}
+   - Timeline: {when_to_implement}
+
+2. **{adjustment_2}**
+   - Reason: {why_this_correction_is_needed}
+   - Impact: {what_changes_as_a_result}
+   - Timeline: {when_to_implement}
+
+**Alignment Check:**
+
+- Goals still aligned with annual vision? {yes_no_assessment}
+- Type 3 stress check: {are_you_pushing_harder_instead_of_pausing_to_assess}
+- PAUSE triggered? {yes_no_if_yes_what_did_you_do}
+
+---
+
+### Lessons Learned (Q{N})
+
+**What I'd Repeat:**
+
+- {pattern_or_practice_to_continue}
+
+**What I'd Change:**
+
+- {pattern_or_practice_to_stop_or_adjust}
+
+**Insight for Next Quarter:**
+
+{one_key_takeaway_to_apply_in_q_n_plus_1}
+
+---
+
+## Next Steps
+
+### Immediate Actions (Next 2 Weeks)
+
+- [ ] {action_1}
+- [ ] {action_2}
+- [ ] {action_3}
+
+### Update Annual Review
+
+- [ ] Update quarterly_reviews frontmatter in [[{YEAR}-Annual-Review]]
+- [ ] Link this Q{N} review to annual document
+
+### Update OmniFocus
+
+- [ ] Adjust milestones for goals with changed timelines
+- [ ] Add new actions identified in this review
+- [ ] Mark completed milestones as done
+
+### Prepare for Q{N+1}
+
+**Focus Areas:**
+- {domain_or_goal_needing_priority}
+- {domain_or_goal_needing_priority}
+
+**Key Milestones (End of Q{N+1}):**
+- {milestone_1}
+- {milestone_2}
+
+**Quarterly Review Date:**
+- {next_quarter_end_date} ({Mar_31_Jun_30_Sep_30_or_Dec_31})
+
+---
+
+## Quick Stats
+
+**Goals Reviewed:** {count}
+**On Track:** {count} ({percentage})
+**At Risk:** {count} ({percentage})
+**Off Track:** {count} ({percentage})
+
+**Adjustments Made:** {count}
+**New Actions Added:** {count}
+**Actions Dropped:** {count}
+
+---
+
+*Generated by Geoffrey Strategic Planning Manager v1.0.0*
+*Review completed: {date}*
+*Next review: {next_quarter_date}*
