@@ -4,20 +4,27 @@ Your intelligent assistant, built as a Claude Code plugin. Geoffrey learns your 
 
 Named after Geoffrey Hinton (godfather of AI) and Geoffrey from Fresh Prince of Bel-Air.
 
-## Current Status: Phase 1 (Foundation)
+## Current Status: Phase 2 (Core Skills)
 
-**Version:** 0.1.0
-**Status:** In Development
+**Version:** 0.2.0
+**Status:** In Active Development
 
 ### What Works Now
-- ✅ Plugin structure
+- ✅ Plugin structure with GitHub distribution
 - ✅ Knowledge management skill
+- ✅ OmniFocus manager skill with AppleScript/JXA integration
+- ✅ Strategic planning manager skill (annual reviews + quarterly check-ins)
+- ✅ Freshservice manager skill
+- ✅ Google Workspace integration
+- ✅ Browser control skill
+- ✅ Multi-model research skill
+- ✅ Image generation skill
 - ✅ /preferences command
 - ✅ iCloud knowledge storage
-- ⏳ Local installation and testing
+- ✅ Versioning and CHANGELOG tracking
 
 ### Coming Soon
-- 🔜 Travel planning skill (Phase 2)
+- 🔜 Travel planning skill (Phase 2 expansion)
 - 🔜 Team management skill (Phase 3)
 - 🔜 Automatic learning from conversations (Phase 4)
 

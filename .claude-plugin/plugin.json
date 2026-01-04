@@ -1,6 +1,6 @@
 {
   "name": "geoffrey",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Personal AI infrastructure with learning-enabled assistance for work, travel, and personal tasks",
   "author": {
     "name": "Kris Hagel",
@@ -13,7 +13,9 @@
     "preferences",
     "assistant",
     "travel",
-    "productivity"
+    "productivity",
+    "strategic-planning",
+    "omnifocus"
   ],
   "license": "MIT"
 }

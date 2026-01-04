@@ -6,15 +6,18 @@
   },
   "metadata": {
     "description": "Personal AI infrastructure - learning-enabled assistant for work, travel, and personal tasks",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "pluginRoot": "."
   },
   "plugins": [
     {
       "name": "geoffrey",
-      "source": "./",
+      "source": {
+        "source": "github",
+        "repo": "krishagel/geoffrey"
+      },
       "description": "Personal AI infrastructure with learning-enabled assistance for work, travel, and personal tasks",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "category": "productivity",
       "keywords": [
         "personal-ai",
@@ -22,7 +25,9 @@
         "preferences",
         "assistant",
         "travel",
-        "productivity"
+        "productivity",
+        "strategic-planning",
+        "omnifocus"
       ]
     }
   ]

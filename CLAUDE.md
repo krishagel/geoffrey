@@ -171,6 +171,71 @@ Claude Code supports progressive thinking levels:
 
 Use higher levels for complex architectural decisions or multi-step planning.
 
+## Versioning Guidelines
+
+**CRITICAL:** Every code change must include a version bump based on change significance.
+
+Geoffrey follows [Semantic Versioning](https://semver.org/): **MAJOR.MINOR.PATCH**
+
+### When to Bump Versions
+
+**MAJOR (X.0.0) - Breaking Changes:**
+- Breaking changes to skills, commands, or core architecture
+- Removing or renaming skills
+- Changing skill interfaces that other skills depend on
+- Incompatible changes to knowledge storage format
+- Changes that require user migration or config updates
+
+**MINOR (0.X.0) - New Features (Backward-Compatible):**
+- Adding new skills
+- Adding new commands or agents
+- Significant enhancements to existing skills
+- New scripts that add capabilities
+- New integration points (e.g., new MCP server support)
+
+**PATCH (0.0.X) - Bug Fixes & Minor Improvements:**
+- Bug fixes
+- Documentation updates (README, SKILL.md, CLAUDE.md)
+- Performance improvements
+- Refactoring without behavior changes
+- Minor script improvements
+- Fixing typos or formatting
+
+### Version Bump Process
+
+**Before committing:**
+
+1. **Determine change significance** using guidelines above
+2. **Update version in 3 places:**
+   - `.claude-plugin/plugin.json` → `"version": "X.Y.Z"`
+   - `.claude-plugin/marketplace.json` → `"version": "X.Y.Z"` (2 places: metadata + plugins array)
+   - `README.md` → Update "Current Status" section if needed
+3. **Update CHANGELOG.md:**
+   - Add new version section at top: `## [X.Y.Z] - YYYY-MM-DD`
+   - Document changes under Added/Changed/Fixed/Removed
+4. **Commit with version in message:**
+   - Format: `v0.2.0: Add strategic planning system`
+   - Include version number in first line of commit message
+
+### Skill Versioning
+
+Individual skills track their own versions in SKILL.md frontmatter:
+
+```yaml
+version: 1.0.0
+```
+
+**Skill versions are independent of plugin version.** Bump skill versions when making significant changes to that skill's capabilities.
+
+### Users Update Via GitHub
+
+Users update Geoffrey manually:
+```bash
+/plugin update geoffrey@geoffrey
+```
+
+Claude Code fetches the latest version from GitHub. No auto-updates.
+
 ## Detailed Documentation
 
 For task-specific guidance, load these on-demand:
