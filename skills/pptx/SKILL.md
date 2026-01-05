@@ -33,7 +33,7 @@ python -m markitdown path-to-file.pptx
 You need raw XML access for: comments, speaker notes, slide layouts, animations, design elements, and complex formatting. For any of these features, you'll need to unpack a presentation and read its raw XML contents.
 
 #### Unpacking a file
-`python ooxml/scripts/unpack.py <office_file> <output_dir>`
+`skills/pptx/ooxml/scripts/unpack.py <office_file> <output_dir>`
 
 **Note**: The unpack.py script is located at `skills/pptx/ooxml/scripts/unpack.py` relative to the project root. If the script doesn't exist at this path, use `find . -name "unpack.py"` to locate it.
 
@@ -183,10 +183,10 @@ When edit slides in an existing PowerPoint presentation, you need to work with t
 
 ### Workflow
 1. **MANDATORY - READ ENTIRE FILE**: Read [`ooxml.md`](ooxml.md) (~500 lines) completely from start to finish.  **NEVER set any range limits when reading this file.**  Read the full file content for detailed guidance on OOXML structure and editing workflows before any presentation editing.
-2. Unpack the presentation: `python ooxml/scripts/unpack.py <office_file> <output_dir>`
+2. Unpack the presentation: `skills/pptx/ooxml/scripts/unpack.py <office_file> <output_dir>`
 3. Edit the XML files (primarily `ppt/slides/slide{N}.xml` and related files)
-4. **CRITICAL**: Validate immediately after each edit and fix any validation errors before proceeding: `python ooxml/scripts/validate.py <dir> --original <file>`
-5. Pack the final presentation: `python ooxml/scripts/pack.py <input_directory> <office_file>`
+4. **CRITICAL**: Validate immediately after each edit and fix any validation errors before proceeding: `skills/pptx/ooxml/scripts/validate.py <dir> --original <file>`
+5. Pack the final presentation: `skills/pptx/ooxml/scripts/pack.py <input_directory> <office_file>`
 
 ## Creating a new PowerPoint presentation **using a template**
 

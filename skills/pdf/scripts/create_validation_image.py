@@ -1,3 +1,10 @@
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "Pillow>=10.0.0",
+# ]
+# ///
+
 import json
 import sys
 

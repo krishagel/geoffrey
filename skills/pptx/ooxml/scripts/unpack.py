@@ -1,4 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "defusedxml>=0.7.1",
+# ]
+# ///
 """Unpack and format XML contents of Office files (.docx, .pptx, .xlsx)"""
 
 import random
@@ -8,7 +13,7 @@ import zipfile
 from pathlib import Path
 
 # Get command line arguments
-assert len(sys.argv) == 3, "Usage: python unpack.py <office_file> <output_dir>"
+assert len(sys.argv) == 3, "Usage: skills/pptx/ooxml/scripts/unpack.py <office_file> <output_dir>"
 input_file, output_dir = sys.argv[1], sys.argv[2]
 
 # Extract and format

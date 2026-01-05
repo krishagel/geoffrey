@@ -5,6 +5,23 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.3.0] - 2026-01-04
+
+### Fixed
+- **MS Office skills (xlsx, docx, pptx, pdf) now work on fresh machines** without pre-installed Python packages
+  - All Python scripts use `uv run` with inline PEP 723 dependencies for automatic dependency management
+  - Scripts auto-install required packages (openpyxl, pandas, python-pptx, Pillow, pypdf, defusedxml, lxml, etc.) on first run
+  - Added LibreOffice installation check in xlsx recalc.py with helpful error message
+  - Zero-friction setup: skills "just work" without manual pip installs
+
+### Changed
+- **All Python scripts in MS Office skills** now use `#!/usr/bin/env -S uv run` shebang
+- **SKILL.md examples updated** to invoke scripts directly instead of via `python3`
+  - Old: `python recalc.py output.xlsx`
+  - New: `skills/xlsx/recalc.py output.xlsx`
+- **Python Runtime section added to CLAUDE.md** documenting the inline dependency pattern
+- **All Python scripts made executable** (`chmod +x`) for direct invocation
+
 ## [0.2.1] - 2026-01-04
 
 ### Added

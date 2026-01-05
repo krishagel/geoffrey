@@ -1,3 +1,8 @@
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = []
+# ///
+
 from dataclasses import dataclass
 import json
 import sys

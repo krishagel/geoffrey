@@ -1,3 +1,10 @@
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "pypdf>=3.0.0",
+# ]
+# ///
+
 import json
 import sys
 

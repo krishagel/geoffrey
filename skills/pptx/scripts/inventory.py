@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "python-pptx>=0.6.21",
+#   "Pillow>=10.0.0",
+# ]
+# ///
 """
 Extract structured text content from PowerPoint presentations.
 
@@ -19,7 +25,7 @@ Main Functions:
     save_inventory: Save extracted data to JSON
 
 Usage:
-    python inventory.py input.pptx output.json
+    skills/pptx/scripts/inventory.py input.pptx output.json
 """
 
 import argparse

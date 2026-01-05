@@ -1,4 +1,10 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "python-pptx>=0.6.21",
+#   "Pillow>=10.0.0",
+# ]
+# ///
 """
 Create thumbnail grids from PowerPoint presentation slides.
 
@@ -19,7 +25,7 @@ Grid limits by column count:
 - 6 cols: max 42 slides per grid (6×7)
 
 Usage:
-    python thumbnail.py input.pptx [output_prefix] [--cols N] [--outline-placeholders]
+    skills/pptx/scripts/thumbnail.py input.pptx [output_prefix] [--cols N] [--outline-placeholders]
 
 Examples:
     python thumbnail.py presentation.pptx

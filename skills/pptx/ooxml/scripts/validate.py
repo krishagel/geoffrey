@@ -1,9 +1,15 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "defusedxml>=0.7.1",
+#   "lxml>=4.9.0",
+# ]
+# ///
 """
 Command line tool to validate Office document XML files against XSD schemas and tracked changes.
 
 Usage:
-    python validate.py <dir> --original <original_file>
+    skills/pptx/ooxml/scripts/validate.py <dir> --original <original_file>
 """
 
 import argparse

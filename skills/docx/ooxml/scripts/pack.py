@@ -1,9 +1,14 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "defusedxml>=0.7.1",
+# ]
+# ///
 """
 Tool to pack a directory into a .docx, .pptx, or .xlsx file with XML formatting undone.
 
 Example usage:
-    python pack.py <input_directory> <office_file> [--force]
+    skills/docx/ooxml/scripts/pack.py <input_directory> <office_file> [--force]
 """
 
 import argparse

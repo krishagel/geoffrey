@@ -117,6 +117,32 @@ bun script.js
 node script.js
 ```
 
+### Python Runtime
+
+**YOU MUST ALWAYS** use `uv run` for Python scripts with inline dependencies.
+
+All Geoffrey Python scripts use PEP 723 inline dependencies:
+
+```python
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = ["package>=1.0.0"]
+# ///
+```
+
+Make scripts executable and invoke directly:
+
+```bash
+# Correct
+skills/xlsx/recalc.py output.xlsx
+
+# Also correct
+./script.py
+
+# Wrong (missing dependencies)
+python3 script.py
+```
+
 ## Founding Principles
 
 Adapted from PAI's Constitution:

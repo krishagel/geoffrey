@@ -1,3 +1,10 @@
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "pdf2image>=1.16.0",
+# ]
+# ///
+
 import os
 import sys
 

@@ -1,8 +1,14 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "python-pptx>=0.6.21",
+#   "Pillow>=10.0.0",
+# ]
+# ///
 """Apply text replacements to PowerPoint presentation.
 
 Usage:
-    python replace.py <input.pptx> <replacements.json> <output.pptx>
+    skills/pptx/scripts/replace.py <input.pptx> <replacements.json> <output.pptx>
 
 The replacements JSON should have the structure output by inventory.py.
 ALL text shapes identified by inventory.py will have their text cleared

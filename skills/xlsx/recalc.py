@@ -1,4 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run
+# /// script
+# dependencies = [
+#   "openpyxl>=3.1.0",
+# ]
+# ///
 """
 Excel Formula Recalculation Script
 Recalculates all formulas in an Excel file using LibreOffice
@@ -9,12 +14,19 @@ import sys
 import subprocess
 import os
 import platform
+import shutil
 from pathlib import Path
 from openpyxl import load_workbook
 
 
 def setup_libreoffice_macro():
     """Setup LibreOffice macro for recalculation if not already configured"""
+    # Check if LibreOffice is installed
+    libreoffice = shutil.which('soffice')
+    if not libreoffice:
+        print("ERROR: LibreOffice not installed. Install with: brew install libreoffice", file=sys.stderr)
+        sys.exit(1)
+
     if platform.system() == 'Darwin':
         macro_dir = os.path.expanduser('~/Library/Application Support/LibreOffice/4/user/basic/Standard')
     else:
