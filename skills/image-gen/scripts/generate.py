@@ -222,12 +222,11 @@ def main():
     api_key = require_secret("GEMINI_API_KEY")
     client = genai.Client(api_key=api_key)
 
-    # Configure generation
+    # Configure generation (image_size no longer supported by API)
     config = GenerateContentConfig(
         response_modalities=["TEXT", "IMAGE"],
         image_config={
-            "aspect_ratio": aspect_ratio,
-            "image_size": image_size
+            "aspect_ratio": aspect_ratio
         }
     )
 
