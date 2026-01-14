@@ -27,6 +27,31 @@ Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learn
    - Structure: `Geoffrey/Identity/`, `Geoffrey/Research/`, `Reviews/`, `Work/`
    - Access: Direct file read OR `mcp__obsidian-vault__*` tools
 
+## MANDATORY Runtime Rules
+
+**CRITICAL - NEVER SKIP THESE:**
+
+| Language | Command | Wrong |
+|----------|---------|-------|
+| **Python** | `uv run script.py` | ~~`python script.py`~~ |
+| **JavaScript** | `bun script.js` | ~~`node script.js`~~ |
+| **TypeScript** | `bun script.ts` | ~~`npx ts-node script.ts`~~ |
+
+**Why:** All Geoffrey scripts use inline dependencies (PEP 723 for Python). Running without `uv run` or `bun` will fail with missing imports.
+
+**Examples:**
+```bash
+# Correct
+uv run skills/psd-brand-guidelines/brand.py colors
+bun skills/presentation-master/adapters/pptx-adapter.js
+
+# Wrong - will fail
+python skills/psd-brand-guidelines/brand.py colors
+node skills/presentation-master/adapters/pptx-adapter.js
+```
+
+---
+
 ## Core Architectural Principles
 
 ### Three-Tier Progressive Disclosure
@@ -105,43 +130,11 @@ This applies to:
 
 The [broadest relevant noun] should be the most general term that covers the user's question. Not "travel credit" but "benefits". Not "models" but "products services". Your assumptions will always be incomplete. The search results define reality.
 
-### JavaScript Runtime
+### JavaScript & Python Runtimes
 
-**YOU MUST ALWAYS** use `bun` instead of `node` for running JavaScript files.
+**See "MANDATORY Runtime Rules" section at top of this file.**
 
-```bash
-# Correct
-bun script.js
-
-# Wrong
-node script.js
-```
-
-### Python Runtime
-
-**YOU MUST ALWAYS** use `uv run` for Python scripts with inline dependencies.
-
-All Geoffrey Python scripts use PEP 723 inline dependencies:
-
-```python
-#!/usr/bin/env -S uv run
-# /// script
-# dependencies = ["package>=1.0.0"]
-# ///
-```
-
-Make scripts executable and invoke directly:
-
-```bash
-# Correct
-skills/xlsx/recalc.py output.xlsx
-
-# Also correct
-./script.py
-
-# Wrong (missing dependencies)
-python3 script.py
-```
+All Geoffrey scripts use inline dependencies - always use `uv run` (Python) or `bun` (JS/TS).
 
 ## Founding Principles
 

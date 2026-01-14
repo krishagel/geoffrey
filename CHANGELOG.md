@@ -5,6 +5,34 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0] - 2026-01-14
+
+### Added
+- **Brand system infrastructure** for PSD brand guidelines
+  - `brand-config.json` - Machine-readable brand data (colors, fonts, logos, forbidden patterns)
+  - `brand.py` - Python utilities for logo selection (`get_logo_path`), color access (`get_colors`), and prompt validation (`validate_prompt`)
+  - `test_brand.py` - 25 unit tests for brand utilities
+- **Image generation brand validation** - `generate.py` now accepts `--brand psd` parameter
+  - Validates prompts against brand rules before generation
+  - Blocks attempts to generate logos/emblems with helpful error messages pointing to actual logo files
+- **Branded image workflow** - `image-gen/workflows/branded.md` documenting brand-aware image generation
+- **PPTX adapter brand integration** - `pptx-adapter.js` now imports colors from `brand-config.json`
+  - Added `getLogoPath()` and `addLogoElement()` functions for programmatic logo insertion
+  - Added `--add-logo` CLI flag
+- **DOCX brand integration** - Added "Brand Integration (PSD)" section to `docx-js.md`
+  - Examples for loading brand config, adding logos to headers, applying brand styles
+
+### Changed
+- **CLAUDE.md** - Made runtime rules (uv/bun) more prominent with dedicated section at top of file
+- **psd-brand-guidelines/SKILL.md** - Added enforcement rules section
+  - Explicit "NEVER Generate" rules for logos/emblems
+  - Programmatic API documentation
+  - Version bumped to 0.2.0
+
+### Fixed
+- **Hardcoded brand colors** in `pptx-adapter.js` now loaded from `brand-config.json`
+- **Logo files were orphaned** - 19 PNG logo files now accessible via `get_logo_path()` function
+
 ## [0.3.1] - 2026-01-09
 
 ### Fixed

@@ -12,15 +12,130 @@
  * Output: PPTX specification that pptx skill can execute
  */
 
-// PSD Brand Colors
-const PSD_COLORS = {
-  primary_teal: '6CA18A',
-  dark_blue: '25424C',
-  cream: 'FFFAEC',
-  warm_gray: 'EEEBE4',
-  black: '000000',
-  white: 'FFFFFF'
-};
+import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const SKILLS_DIR = join(__dirname, '..', '..');
+
+/**
+ * Load brand configuration from brand-config.json
+ */
+function loadBrandConfig(brandId) {
+  const brandPaths = {
+    'psd': join(SKILLS_DIR, 'psd-brand-guidelines', 'brand-config.json'),
+  };
+
+  const configPath = brandPaths[brandId];
+  if (!configPath || !existsSync(configPath)) {
+    return null;
+  }
+
+  return JSON.parse(readFileSync(configPath, 'utf-8'));
+}
+
+/**
+ * Get colors from brand config in PPTX format (no # prefix)
+ */
+function getBrandColors(brandId) {
+  const config = loadBrandConfig(brandId);
+  if (!config) {
+    // Fallback to defaults
+    return {
+      primary_teal: '6CA18A',
+      dark_blue: '25424C',
+      cream: 'FFFAEC',
+      warm_gray: 'EEEBE4',
+      black: '000000',
+      white: 'FFFFFF'
+    };
+  }
+
+  const colors = config.colors;
+  return {
+    primary_teal: colors.primary.seaGlass.hex.replace('#', ''),
+    dark_blue: colors.primary.pacific.hex.replace('#', ''),
+    cream: colors.supporting.skylight.hex.replace('#', ''),
+    warm_gray: colors.supporting.seaFoam.hex.replace('#', ''),
+    driftwood: colors.primary.driftwood.hex.replace('#', ''),
+    cedar: colors.supporting.cedar.hex.replace('#', ''),
+    whulge: colors.supporting.whulge.hex.replace('#', ''),
+    meadow: colors.supporting.meadow.hex.replace('#', ''),
+    ocean: colors.supporting.ocean.hex.replace('#', ''),
+    black: '000000',
+    white: 'FFFFFF'
+  };
+}
+
+/**
+ * Get logo path based on context
+ */
+function getLogoPath(brandId, options = {}) {
+  const { background = 'light', space = 'horizontal' } = options;
+
+  const config = loadBrandConfig(brandId);
+  if (!config) return null;
+
+  const logos = config.logos;
+  const basePath = join(SKILLS_DIR, 'psd-brand-guidelines', 'assets');
+
+  // Select color variant based on background
+  const colorOptions = logos.selectionRules.byBackground[background] || ['2color'];
+  const colorVariant = colorOptions[0];
+
+  // Select layout based on space
+  const layoutOptions = logos.selectionRules.bySpace[space] || ['horizontal'];
+  const availableLayouts = logos.variants[colorVariant]?.files || [];
+
+  let layout = null;
+  for (const option of layoutOptions) {
+    if (availableLayouts.includes(option)) {
+      layout = option;
+      break;
+    }
+  }
+  if (!layout && availableLayouts.length > 0) {
+    layout = availableLayouts[0];
+  }
+
+  if (!layout) return null;
+
+  return join(basePath, `psd_logo-${colorVariant}-${layout}.png`);
+}
+
+/**
+ * Add logo element to slide
+ */
+function addLogoElement(slideSpec, brandId, options = {}) {
+  const {
+    position = 'bottom-right',
+    background = 'light',
+    space = 'small'
+  } = options;
+
+  const logoPath = getLogoPath(brandId, { background, space });
+  if (!logoPath) return;
+
+  const positions = {
+    'bottom-right': { x: '85%', y: '88%', w: '12%', h: '10%' },
+    'bottom-left': { x: '3%', y: '88%', w: '12%', h: '10%' },
+    'top-right': { x: '85%', y: '2%', w: '12%', h: '10%' },
+    'top-left': { x: '3%', y: '2%', w: '12%', h: '10%' }
+  };
+
+  const pos = positions[position] || positions['bottom-right'];
+
+  slideSpec.elements.push({
+    type: 'image',
+    path: logoPath,
+    ...pos,
+    sizing: { type: 'contain', w: pos.w, h: pos.h }
+  });
+}
+
+// PSD Brand Colors - loaded from config
+let PSD_COLORS = getBrandColors('psd');
 
 /**
  * Generate PPTX specification from presentation
@@ -28,6 +143,12 @@ const PSD_COLORS = {
 function generatePptxSpec(presentation, options = {}) {
   const brand = options.brand || null;
   const outputPath = options.output_path || null;
+  const addLogo = options.addLogo ?? false;  // Whether to add logo to slides
+
+  // Refresh brand colors from config if brand specified
+  if (brand) {
+    PSD_COLORS = getBrandColors(brand);
+  }
 
   const spec = {
     title: presentation.title,
@@ -52,6 +173,18 @@ function generatePptxSpec(presentation, options = {}) {
   // Convert slides
   for (const slide of presentation.slides) {
     const slideSpec = convertSlide(slide, brand);
+
+    // Optionally add logo to slide
+    if (addLogo && brand) {
+      const bgColor = slideSpec.background || 'FFFFFF';
+      const isDark = bgColor === PSD_COLORS.dark_blue;
+      addLogoElement(slideSpec, brand, {
+        position: 'bottom-right',
+        background: isDark ? 'dark' : 'light',
+        space: 'small'
+      });
+    }
+
     spec.slides.push(slideSpec);
   }
 
@@ -356,34 +489,43 @@ function convertDefaultSlide(slide, brand) {
 // CLI Interface
 function main() {
   const args = {};
+  const boolFlags = ['add-logo'];
 
   for (let i = 2; i < process.argv.length; i++) {
     if (process.argv[i].startsWith('--')) {
       const key = process.argv[i].replace(/^--/, '');
-      const value = process.argv[i + 1];
-      args[key] = value;
-      i++;
+      if (boolFlags.includes(key)) {
+        args[key] = true;
+      } else {
+        const value = process.argv[i + 1];
+        args[key] = value;
+        i++;
+      }
     }
   }
 
   if (!args.presentation) {
-    console.error('Usage: bun pptx-adapter.js --presentation presentation.json [--brand psd] [--output pptx-spec.json]');
+    console.error('Usage: bun pptx-adapter.js --presentation presentation.json [--brand psd] [--add-logo] [--output pptx-spec.json]');
+    console.error('\nOptions:');
+    console.error('  --brand psd     Apply PSD brand colors (loaded from brand-config.json)');
+    console.error('  --add-logo      Add brand logo to slides');
+    console.error('  --output FILE   Write spec to file (default: stdout)');
     process.exit(1);
   }
 
-  const fs = require('fs');
-  const presentation = JSON.parse(fs.readFileSync(args.presentation, 'utf-8'));
+  const presentation = JSON.parse(readFileSync(args.presentation, 'utf-8'));
 
   const options = {
     brand: args.brand || null,
     output_path: args['output-path'] || null,
-    author: args.author || 'Geoffrey'
+    author: args.author || 'Geoffrey',
+    addLogo: args['add-logo'] || false
   };
 
   const pptxSpec = generatePptxSpec(presentation, options);
 
   if (args.output) {
-    fs.writeFileSync(args.output, JSON.stringify(pptxSpec, null, 2));
+    writeFileSync(args.output, JSON.stringify(pptxSpec, null, 2));
     console.log(`PPTX specification written to ${args.output}`);
   } else {
     console.log(JSON.stringify(pptxSpec, null, 2));
@@ -394,4 +536,11 @@ if (import.meta.main) {
   main();
 }
 
-export { generatePptxSpec, convertSlide };
+export {
+  generatePptxSpec,
+  convertSlide,
+  loadBrandConfig,
+  getBrandColors,
+  getLogoPath,
+  addLogoElement
+};

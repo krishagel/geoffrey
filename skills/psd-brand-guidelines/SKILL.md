@@ -10,12 +10,58 @@ triggers:
   - "brand guide"
   - "on-brand"
 allowed-tools: Read, Write, Edit, Bash
-version: 0.1.0
+version: 0.2.0
 ---
 
 # PSD Brand Guidelines Skill
 
 This skill applies Peninsula School District's official brand identity to artifacts including presentations, documents, graphics, and other materials.
+
+## CRITICAL: Enforcement Rules
+
+### NEVER Generate
+
+**NEVER** use image-gen or any AI tool to generate:
+- District logos or emblems
+- "Peninsula School District" in stylized/logo text
+- Bridge/landscape imagery meant to represent the district logo
+- Any official-looking district branding elements
+- District seals or official marks
+
+**Why?** AI-generated logos are inconsistent and may hallucinate incorrect details (wrong colors, wrong name, made-up imagery). Always use actual logo files.
+
+### ALWAYS Use Actual Files
+
+For any branded materials:
+1. Use logo files from `assets/` directory
+2. Use colors from `brand-config.json`
+3. Use `brand.py` utilities to select the right assets
+
+### Programmatic Access
+
+**Machine-readable brand data:** `brand-config.json`
+**Python utilities:** `brand.py`
+
+```bash
+# Get colors
+uv run brand.py colors
+
+# Get appropriate logo path
+uv run brand.py logo light wide
+uv run brand.py logo dark small
+
+# Validate prompt before image generation
+uv run brand.py validate "create an infographic about enrollment"
+```
+
+### Image Generation with Brand
+
+When generating images for PSD materials, always use the `--brand` flag:
+
+```bash
+# This validates the prompt and blocks logo generation attempts
+uv run generate.py "school campus scene" campus.png --brand psd
+```
 
 ## Purpose
 
@@ -169,6 +215,38 @@ For questions or special needs:
 
 ## Quick Reference
 
+### Programmatic API (Python)
+
+```python
+from brand import get_logo_path, get_colors, validate_prompt, get_color
+
+# Get all colors as hex dict
+colors = get_colors()  # {'seaGlass': '#6CA18A', 'pacific': '#25424C', ...}
+
+# Get single color with metadata
+color = get_color('pacific')  # {'hex': '#25424C', 'rgb': [37, 66, 76], 'usage': '...'}
+
+# Get logo path based on context
+logo = get_logo_path(background='dark', space='wide')   # Returns white-horizontal path
+logo = get_logo_path(background='light', space='small')  # Returns 2color-emblem path
+
+# Validate prompt before image generation
+valid, errors = validate_prompt("create a school event banner")
+if not valid:
+    print(errors)  # Lists violations and suggestions
+```
+
+### Machine-Readable Config
+
+All brand data is available in `brand-config.json`:
+- Colors with hex, RGB, and usage notes
+- Typography specifications
+- Logo paths with selection rules
+- Forbidden generation patterns
+- Application guidelines per context
+
+### Legacy Quick Reference
+
 ```javascript
 const PSD_BRAND = {
   colors: {
@@ -197,5 +275,5 @@ const PSD_BRAND = {
 
 ---
 
-*Last updated: June 14, 2024*
-*Source: PSD Branding Guide 06.14.2024.pdf*
+*Last updated: January 14, 2025*
+*Source: PSD Branding Guide 06.14.2024.pdf, brand-config.json*

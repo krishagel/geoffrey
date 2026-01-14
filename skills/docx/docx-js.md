@@ -313,6 +313,92 @@ const doc = new Document({
 });
 ```
 
+## Brand Integration (PSD)
+
+Apply Peninsula School District branding to documents using `brand-config.json`.
+
+### Load Brand Configuration
+```javascript
+const fs = require('fs');
+const path = require('path');
+
+// Load brand config
+const brandConfigPath = path.join(__dirname, '..', 'psd-brand-guidelines', 'brand-config.json');
+const brandConfig = JSON.parse(fs.readFileSync(brandConfigPath, 'utf-8'));
+
+// Extract colors (remove # prefix for docx)
+const PSD_COLORS = {
+  seaGlass: brandConfig.colors.primary.seaGlass.hex.replace('#', ''),
+  pacific: brandConfig.colors.primary.pacific.hex.replace('#', ''),
+  skylight: brandConfig.colors.supporting.skylight.hex.replace('#', ''),
+  seaFoam: brandConfig.colors.supporting.seaFoam.hex.replace('#', ''),
+};
+
+// Get logo path
+function getLogoPath(background = 'light', space = 'horizontal') {
+  const basePath = path.join(__dirname, '..', 'psd-brand-guidelines', 'assets');
+  const colorVariant = background === 'dark' ? 'white' : '2color';
+  return path.join(basePath, `psd_logo-${colorVariant}-${space}.png`);
+}
+```
+
+### Add Logo to Header
+```javascript
+const logoPath = getLogoPath('light', 'horizontal');
+
+const doc = new Document({
+  sections: [{
+    headers: {
+      default: new Header({ children: [
+        new Paragraph({
+          alignment: AlignmentType.RIGHT,
+          children: [new ImageRun({
+            type: "png",
+            data: fs.readFileSync(logoPath),
+            transformation: { width: 150, height: 50 },
+            altText: { title: "PSD Logo", description: "Peninsula School District Logo", name: "PSD-Logo" }
+          })]
+        })
+      ]})
+    },
+    children: [/* document content */]
+  }]
+});
+```
+
+### Apply Brand Styles
+```javascript
+const doc = new Document({
+  styles: {
+    default: {
+      document: {
+        run: { font: "Arial", size: 24, color: PSD_COLORS.pacific }  // Josefin Slab fallback
+      }
+    },
+    paragraphStyles: [
+      { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
+        run: { size: 32, bold: true, color: PSD_COLORS.pacific, font: "Arial" },  // Josefin Sans fallback
+        paragraph: { spacing: { before: 240, after: 240 }, outlineLevel: 0 } },
+      { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true,
+        run: { size: 28, bold: true, color: PSD_COLORS.seaGlass, font: "Arial" },
+        paragraph: { spacing: { before: 180, after: 180 }, outlineLevel: 1 } },
+    ]
+  },
+  sections: [/* ... */]
+});
+```
+
+### Logo Selection Guide
+
+| Background | Context | Logo Variant |
+|------------|---------|--------------|
+| White/Light | Letterhead, headers | `2color-horizontal` |
+| White/Light | Small space, footer | `2color-emblem` |
+| Dark/Pacific | Dark header bar | `white-horizontal` |
+| Tan/Driftwood | Subtle branding | `1color-green-horizontal` |
+
+**Important:** Never generate logos with image-gen. Always use actual logo files from `psd-brand-guidelines/assets/`.
+
 ## Tabs
 ```javascript
 new Paragraph({
