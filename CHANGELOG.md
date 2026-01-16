@@ -5,6 +5,23 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.1] - 2026-01-16
+
+### Fixed
+- **Brand validator false positives** - Validator no longer blocks "design decisions", "Peninsula School District", or other legitimate terms
+  - Patterns now only match explicit logo/emblem generation requests (e.g., "create a PSD logo")
+  - District name and design terminology are fully allowed in prompts
+
+### Added
+- **--logo flag for generate.py** - Automatically composite brand logo onto generated images
+  - Usage: `uv run generate.py "prompt" out.png --brand psd --logo bottom-right`
+  - Positions: bottom-right, bottom-left, top-right, top-left
+  - Logo scaled to 12% of image width with 3% margin
+- **New tests** for allowed prompts (district name, design decisions)
+
+### Changed
+- Validation error messages now suggest using `--logo` flag instead of manual logo file handling
+
 ## [0.4.0] - 2026-01-14
 
 ### Added

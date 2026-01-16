@@ -106,6 +106,16 @@ class TestValidatePrompt:
         assert valid is True
         assert len(errors) == 0
 
+    def test_district_name_allowed(self):
+        """Peninsula School District as text should be allowed."""
+        valid, errors = validate_prompt("infographic for Peninsula School District about enrollment")
+        assert valid is True
+
+    def test_design_decisions_allowed(self):
+        """'design decisions' should not trigger 'design.*logo' pattern."""
+        valid, errors = validate_prompt("workflow showing design decisions for the project")
+        assert valid is True
+
     def test_psd_logo_blocked(self):
         valid, errors = validate_prompt("create a PSD logo")
         assert valid is False
@@ -115,12 +125,12 @@ class TestValidatePrompt:
         valid, errors = validate_prompt("generate a district logo for my presentation")
         assert valid is False
 
-    def test_emblem_blocked(self):
-        valid, errors = validate_prompt("design a peninsula emblem")
+    def test_school_emblem_blocked(self):
+        valid, errors = validate_prompt("create a school emblem")
         assert valid is False
 
     def test_generic_logo_request_blocked(self):
-        valid, errors = validate_prompt("make a logo for PSD")
+        valid, errors = validate_prompt("make a logo for the school")
         assert valid is False
 
     def test_case_insensitive(self):
@@ -129,7 +139,7 @@ class TestValidatePrompt:
 
     def test_suggestion_included(self):
         valid, errors = validate_prompt("create a psd logo")
-        assert any('get_logo_path' in e for e in errors)
+        assert any('--logo' in e for e in errors)
 
 
 class TestGetApplicationConfig:

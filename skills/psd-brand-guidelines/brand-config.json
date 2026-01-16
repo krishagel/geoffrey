@@ -144,26 +144,19 @@
   },
 
   "forbiddenGeneration": {
+    "description": "Only blocks explicit requests to generate logos/emblems as the image output. Allows normal use of district name and design terms.",
     "patterns": [
-      "peninsula school district logo",
-      "psd logo",
-      "district logo",
-      "school district emblem",
-      "bridge logo",
-      "peninsula landscape logo",
-      "create.*logo",
-      "generate.*logo",
-      "make.*logo",
-      "design.*logo",
-      "draw.*logo",
-      "create.*emblem",
-      "generate.*emblem",
-      "district seal",
-      "psd emblem",
-      "peninsula.*emblem"
+      "generate (?:a |the )?(?:psd |district |school )?logo",
+      "create (?:a |the )?(?:psd |district |school )?logo",
+      "make (?:a |the )?(?:psd |district |school )?logo",
+      "draw (?:a |the )?(?:psd |district |school )?logo",
+      "design (?:a |the )?(?:psd |district |school )?logo",
+      "generate (?:a |the )?(?:district |school )?emblem",
+      "create (?:a |the )?(?:district |school )?emblem",
+      "(?:psd|peninsula|district) seal"
     ],
-    "message": "Cannot generate logos or emblems. Use actual logo files from assets/ instead.",
-    "suggestion": "Use get_logo_path() to get the appropriate logo file."
+    "message": "Cannot generate logos/emblems. Use --logo flag to composite actual logo files.",
+    "suggestion": "Add --logo to include the real PSD logo in your image."
   },
 
   "applications": {

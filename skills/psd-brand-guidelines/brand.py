@@ -199,8 +199,8 @@ def validate_prompt(prompt: str) -> tuple[bool, list[str]]:
     """
     Validate a prompt against brand generation rules.
 
-    Checks if the prompt attempts to generate logos, emblems, or other
-    brand elements that should use actual files instead.
+    Only blocks explicit requests to GENERATE logos/emblems as image output.
+    Allows normal use of "Peninsula School District", "design", etc.
 
     Args:
         prompt: The image generation prompt to validate.
@@ -211,15 +211,13 @@ def validate_prompt(prompt: str) -> tuple[bool, list[str]]:
         If invalid, returns (False, [list of violation messages]).
 
     Example:
-        >>> valid, errors = validate_prompt("create a coffee shop scene")
+        >>> valid, errors = validate_prompt("infographic for Peninsula School District")
         >>> valid
         True
 
         >>> valid, errors = validate_prompt("create a PSD logo")
         >>> valid
         False
-        >>> errors[0]
-        "Cannot generate 'psd logo'. Use actual logo files from assets/ instead."
     """
     config = _load_config()
     forbidden = config['forbiddenGeneration']
@@ -229,21 +227,19 @@ def validate_prompt(prompt: str) -> tuple[bool, list[str]]:
     violations = []
 
     for pattern in patterns:
-        # Check if pattern contains regex special chars
-        if any(c in pattern for c in ['.*', '+', '?', '[', ']', '(', ')']):
-            # Treat as regex
+        # All patterns are regex - match against prompt
+        try:
             if re.search(pattern, prompt_lower):
-                violations.append(f"Cannot generate '{pattern}'. {forbidden['message']}")
-        else:
-            # Treat as literal string match
-            if pattern in prompt_lower:
-                violations.append(f"Cannot generate '{pattern}'. {forbidden['message']}")
+                # Show a cleaner version of what was matched
+                match = re.search(pattern, prompt_lower)
+                matched_text = match.group(0) if match else pattern
+                violations.append(f"Blocked: '{matched_text}'. {forbidden['message']}")
+        except re.error:
+            # Invalid regex - skip
+            continue
 
     if violations:
-        # Add suggestion for how to get logos
-        suggestion = f"\nSuggestion: {forbidden['suggestion']}"
-        suggestion += f"\nExample: get_logo_path(background='light', space='wide')"
-        suggestion += f"\nAvailable logos: {get_logo_path(absolute=False)}"
+        suggestion = f"\nTip: {forbidden['suggestion']}"
         violations.append(suggestion)
 
     return (len(violations) == 0, violations)
