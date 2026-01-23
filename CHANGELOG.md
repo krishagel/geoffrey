@@ -5,6 +5,17 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0] - 2026-01-23
+
+### Added
+- **Eleven Labs TTS skill** - Generate high-quality audio from text using the Eleven Labs API
+  - `generate_audio.py` - Main TTS generation with auto-chunking for long text and MP3 concatenation
+  - `list_voices.py` - Fetch and display available voices from API
+  - 6 curated voices (Rachel, Bella, Elli, Josh, Adam, Antoni) for variety
+  - Support for multiple models (Multilingual v2, Flash v2.5, Turbo v2.5, Eleven v3)
+  - JSON output with metadata (file path, voice, model, character count, chunks)
+  - Ideal for podcast-style daily summaries and narration
+
 ## [0.4.1] - 2026-01-16
 
 ### Fixed
