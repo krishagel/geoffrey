@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["pyyaml"]
+# ///
 """
 Quick validation script for skills - minimal version
 """
@@ -38,8 +42,15 @@ def validate_skill(skill_path):
     except yaml.YAMLError as e:
         return False, f"Invalid YAML in frontmatter: {e}"
 
-    # Define allowed properties
-    ALLOWED_PROPERTIES = {'name', 'description', 'license', 'allowed-tools', 'metadata'}
+    # Define allowed properties (includes Geoffrey-specific and Claude Code native properties)
+    ALLOWED_PROPERTIES = {
+        # Required
+        'name', 'description',
+        # Geoffrey skill properties
+        'triggers', 'allowed-tools', 'version', 'license', 'metadata',
+        # Claude Code native skill properties
+        'argument-hint', 'model', 'context', 'agent', 'extended-thinking'
+    }
 
     # Check for unexpected properties (excluding nested keys under metadata)
     unexpected_keys = set(frontmatter.keys()) - ALLOWED_PROPERTIES

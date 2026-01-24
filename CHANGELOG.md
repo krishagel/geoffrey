@@ -5,6 +5,23 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-01-23
+
+### Added
+- **PAI Monitor skill** - Monitor Personal AI Infrastructure repo for updates and identify improvement opportunities for Geoffrey
+  - 4-phase workflow: Fetch PAI state → Analyze Geoffrey → Gap analysis → Generate report
+  - Focus area options: packs, hooks, skills, patterns
+  - Detailed report template with prioritized recommendations
+- **Assistant Architect skill** - Create AI Studio Assistant Architect JSON import files
+  - Screenshot input mode: Extract fields, types, and instructions from UI images
+  - Description input mode: Parse unstructured dictation for requirements
+  - Smart defaults for models and field types
+  - Quick patterns: Q&A, chained analysis, transform with options
+  - Validation checklist and complete JSON spec reference
+
+### Fixed
+- **quick_validate.py** - Added PEP 723 inline dependency for pyyaml, expanded allowed frontmatter properties to include all valid skill properties (triggers, version, model, context, agent, extended-thinking, argument-hint)
+
 ## [0.5.0] - 2026-01-23
 
 ### Added
