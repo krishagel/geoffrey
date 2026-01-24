@@ -5,6 +5,23 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2026-01-24
+
+### Added
+- **Assistant Architect field libraries** - Pre-built option sets for common dropdown fields
+  - Common Field Libraries: Grade Levels, Subjects, US States, Standards Frameworks, Writing Tone, Output Format, Length, Audience, Language
+  - K-12 District-Specific Libraries: ELA/Math/Science Standards Domains, Grade Bands, Student Population, Instructional Models, Assessment Types, Lesson Duration, Bloom's/DOK Levels, Educator Roles, School Levels, Communication Types, Grading Periods
+  - Collapsed dropdown detection and resolution workflow
+  - Decision framework for making reasonable assumptions on education assistants
+  - PSD Instructional Essentials alignment guidance for educational tools
+
+### Changed
+- **Assistant Architect SKILL.md** - Enhanced with comprehensive field libraries and workflow improvements
+  - New "Handling Collapsed Dropdowns" section with resolution order
+  - New "1.5 Resolve All Dropdown Options" workflow step (required before JSON generation)
+  - Strengthened validation checklist to ensure all select fields have proper choices
+  - Scoped K-12 libraries to educational/instructional assistants only
+
 ## [0.7.0] - 2026-01-23
 
 ### Added
