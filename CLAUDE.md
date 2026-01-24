@@ -278,6 +278,14 @@ Geoffrey follows [Semantic Versioning](https://semver.org/): **MAJOR.MINOR.PATCH
    - Format: `vX.Y.Z: Description of changes`
    - Include version number in first line of commit message
 
+5. **Create git tag:**
+   ```bash
+   git tag vX.Y.Z
+   git push origin vX.Y.Z
+   ```
+   - Tag format: `vX.Y.Z` (e.g., `v0.7.0`)
+   - Always push tag to origin for release tracking
+
 **Why 5 locations?** Claude Code checks multiple files when determining if an update is available. Missing even one location will cause update detection to fail. This pattern matches working plugins like psd-claude-coding-system.
 
 ### Skill Versioning

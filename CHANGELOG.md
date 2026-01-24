@@ -5,6 +5,19 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-01-23
+
+### Added
+- **PSD Instructional Vision skill** - Peninsula School District's instructional framework for graphics, AI assistants, and external systems
+  - 4 Instructional Essentials: Rigor & Inclusion, Data-Driven Decisions, Continuous Growth, Innovation
+  - 8 Tier 1 Practices with definitions, examples, indicators
+  - System prompt injection template for AI assistants
+  - Full playbook reference (495 lines) converted from PDF to markdown
+  - Role-based responsibilities for teachers, principals, central office
+
+### Changed
+- **CLAUDE.md** - Added git tagging step to version bump process (step 5: `git tag vX.Y.Z && git push origin vX.Y.Z`)
+
 ## [0.6.0] - 2026-01-23
 
 ### Added
