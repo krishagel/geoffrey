@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # /// script
-# dependencies = ["httpx>=0.25.0", "python-dotenv>=1.0.0"]
+# dependencies = ["httpx>=0.25.0"]
 # ///
 """
 Universal LLM Client for Multi-Model Research
@@ -9,14 +9,16 @@ Provides unified async interface to call GPT-5.1, Gemini 3.0 Pro, Perplexity Son
 with provider-specific formatting handled internally.
 """
 
-import os
+import sys
 import asyncio
 import httpx
+from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass
-from dotenv import load_dotenv
 
-load_dotenv()
+# Add scripts directory to path for secrets module import
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "scripts"))
+from secrets import get_secret
 
 
 @dataclass
@@ -35,10 +37,10 @@ class MultiModelClient:
 
     def __init__(self, timeout: int = 120):
         self.keys = {
-            "openai": os.getenv("OPENAI_API_KEY"),
-            "google": os.getenv("GEMINI_API_KEY"),
-            "perplexity": os.getenv("PERPLEXITY_API_KEY"),
-            "xai": os.getenv("XAI_API_KEY"),
+            "openai": get_secret("OPENAI_API_KEY"),
+            "google": get_secret("GEMINI_API_KEY"),
+            "perplexity": get_secret("PERPLEXITY_API_KEY"),
+            "xai": get_secret("XAI_API_KEY"),
         }
         self.timeout = timeout
 

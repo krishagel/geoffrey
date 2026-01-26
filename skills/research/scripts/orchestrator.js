@@ -17,28 +17,7 @@
  * Usage: bun orchestrator.js --query "Research topic" [--domain travel]
  */
 
-import fs from 'fs';
-import path from 'path';
-
-const SECRETS_PATH = path.join(
-  process.env.HOME,
-  'Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env'
-);
-
-// Load environment variables
-function loadEnv() {
-  if (fs.existsSync(SECRETS_PATH)) {
-    const content = fs.readFileSync(SECRETS_PATH, 'utf-8');
-    for (const line of content.split('\n')) {
-      const [key, ...valueParts] = line.split('=');
-      if (key && valueParts.length) {
-        process.env[key.trim()] = valueParts.join('=').trim();
-      }
-    }
-  }
-}
-
-loadEnv();
+// Secrets are loaded by context-loader.js which imports from centralized secrets module
 
 /**
  * Phase 1: Query Decomposition

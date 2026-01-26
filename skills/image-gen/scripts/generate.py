@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # /// script
-# dependencies = ["google-genai", "pillow", "python-dotenv"]
+# dependencies = ["google-genai", "pillow"]
 # ///
 """
 Generate images using Google's Nano Banana Pro (Gemini 3 Pro Image).
@@ -25,19 +25,16 @@ Examples:
 """
 
 import sys
-import os
 import json
 import importlib.util
 from pathlib import Path
 
-from dotenv import load_dotenv
 from google import genai
 from google.genai.types import GenerateContentConfig
 
-# Load API key from Geoffrey secrets
-SECRETS_PATH = Path.home() / "Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env"
-if SECRETS_PATH.exists():
-    load_dotenv(SECRETS_PATH)
+# Load API key from 1Password via centralized secrets module
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "scripts"))
+from secrets import require_secret
 
 # Geoffrey skills directory for brand imports
 SKILLS_DIR = Path(__file__).parent.parent.parent
@@ -217,12 +214,8 @@ def main():
         print(f"Valid options: {', '.join(valid_sizes)}")
         sys.exit(1)
 
-    # Initialize client (uses GEMINI_API_KEY env var)
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        print("Error: GEMINI_API_KEY environment variable not set")
-        sys.exit(1)
-
+    # Initialize client
+    api_key = require_secret("GEMINI_API_KEY")
     client = genai.Client(api_key=api_key)
 
     # Configure generation

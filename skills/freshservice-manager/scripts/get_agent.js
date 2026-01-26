@@ -4,37 +4,12 @@
 // Usage: bun get_agent.js [email]
 // If no email provided, returns current agent (API key owner)
 
-import { readFileSync } from 'fs';
-import { homedir } from 'os';
-import { join } from 'path';
+const { SECRETS } = require('../../../scripts/secrets.js');
 
-// Load environment from iCloud secrets
-function loadEnv() {
-  const envPath = join(homedir(), 'Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env');
-  const content = readFileSync(envPath, 'utf-8');
-  const env = {};
-  for (const line of content.split('\n')) {
-    if (line && !line.startsWith('#')) {
-      const [key, ...valueParts] = line.split('=');
-      if (key && valueParts.length) {
-        env[key.trim()] = valueParts.join('=').trim();
-      }
-    }
-  }
-  return env;
-}
-
-const env = loadEnv();
-const domain = env.FRESHSERVICE_DOMAIN;
-const apiKey = env.FRESHSERVICE_API_KEY;
-
-if (!domain || !apiKey) {
-  console.error(JSON.stringify({ error: 'Missing FRESHSERVICE_DOMAIN or FRESHSERVICE_API_KEY in .env' }));
-  process.exit(1);
-}
+const { domain, apiKey } = SECRETS.freshservice;
+const baseUrl = `https://${domain}/api/v2`;
 
 const email = process.argv[2];
-const baseUrl = `https://${domain}/api/v2`;
 
 async function getAgents(email) {
   let url = `${baseUrl}/agents`;

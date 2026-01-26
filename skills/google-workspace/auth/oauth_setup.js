@@ -24,13 +24,8 @@ const openModule = require('open');
 const open = openModule.default || openModule;
 const path = require('path');
 
-// Load environment variables from iCloud secrets
-const os = require('os');
-const ENV_PATH = path.join(
-  os.homedir(),
-  'Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env'
-);
-require('dotenv').config({ path: ENV_PATH });
+// Load secrets from 1Password via centralized secrets module
+const { SECRETS } = require('../../../scripts/secrets.js');
 
 // Configuration
 const REDIRECT_PORT = process.env.OAUTH_REDIRECT_PORT || 3000;
@@ -93,18 +88,17 @@ async function main() {
     process.exit(1);
   }
 
-  // Load client credentials from environment
-  const client_id = process.env.GOOGLE_CLIENT_ID;
-  const client_secret = process.env.GOOGLE_CLIENT_SECRET;
+  // Load client credentials from 1Password
+  const { clientId: client_id, clientSecret: client_secret } = SECRETS.google;
 
   if (!client_id || !client_secret) {
     console.error(JSON.stringify({
-      error: 'Missing credentials in .env',
+      error: 'Missing Google credentials in 1Password',
       instructions: [
         '1. Go to Google Cloud Console',
         '2. Create OAuth 2.0 Client ID (Desktop app)',
-        '3. Copy client ID and secret to skills/google-workspace/.env',
-        '4. See .env.example for format'
+        '3. Store client ID and secret in 1Password vault "Geoffrey/Google-Workspace"',
+        '4. See docs/1password-setup.md for details'
       ]
     }));
     process.exit(1);

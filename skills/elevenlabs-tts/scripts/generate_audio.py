@@ -3,7 +3,6 @@
 # requires-python = ">=3.11"
 # dependencies = [
 #     "httpx",
-#     "python-dotenv",
 #     "pydub",
 #     "audioop-lts; python_version >= '3.13'",
 # ]
@@ -21,7 +20,6 @@ Usage:
 
 import argparse
 import json
-import os
 import re
 import sys
 import tempfile
@@ -29,15 +27,13 @@ from datetime import datetime
 from pathlib import Path
 
 import httpx
-from dotenv import load_dotenv
 from pydub import AudioSegment
 
-# Load secrets
-SECRETS_PATH = Path.home() / "Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env"
-if SECRETS_PATH.exists():
-    load_dotenv(SECRETS_PATH)
+# Load API key from 1Password via centralized secrets module
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "scripts"))
+from secrets import get_secret
 
-API_KEY = os.getenv("ELEVENLABS_API_KEY")
+API_KEY = get_secret("ELEVENLABS_API_KEY")
 BASE_URL = "https://api.elevenlabs.io/v1"
 
 # Curated voices mapping (name -> ID)
@@ -171,7 +167,7 @@ def generate_audio(
     if not API_KEY:
         return {
             "success": False,
-            "error": "ELEVENLABS_API_KEY not set. Add to ~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env"
+            "error": "ELEVENLABS_API_KEY not available. Ensure 1Password CLI is configured. See docs/1password-setup.md"
         }
 
     voice_id = get_voice_id(voice)
