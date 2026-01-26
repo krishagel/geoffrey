@@ -11,6 +11,7 @@ Examples:
     init_skill.py custom-skill --path /custom/location
 """
 
+import re
 import sys
 from pathlib import Path
 
@@ -191,6 +192,82 @@ def title_case_skill_name(skill_name):
     return ' '.join(word.capitalize() for word in skill_name.split('-'))
 
 
+def register_skill_in_claude_md(skill_name, skill_dir):
+    """
+    Register the skill in CLAUDE.md's Available Skills table.
+
+    Finds the skill table and inserts the new skill in alphabetical order.
+
+    Args:
+        skill_name: Name of the skill to register
+        skill_dir: Path to the skill directory (used to find CLAUDE.md)
+
+    Returns:
+        True if successful, False otherwise
+    """
+    # Find CLAUDE.md - walk up from skill_dir until we find it
+    claude_md_path = None
+    search_dir = Path(skill_dir).resolve().parent
+
+    # Walk up to 5 levels looking for CLAUDE.md
+    for _ in range(5):
+        candidate = search_dir / 'CLAUDE.md'
+        if candidate.exists():
+            claude_md_path = candidate
+            break
+        search_dir = search_dir.parent
+
+    if not claude_md_path:
+        print("⚠️  Could not find CLAUDE.md to register skill")
+        return False
+
+    try:
+        content = claude_md_path.read_text()
+
+        # Find the skill table section
+        table_pattern = r'(\| Skill \| Path \|\n\|-------|------\|\n)((?:\| .+ \| `.+` \|\n)*)'
+        match = re.search(table_pattern, content)
+
+        if not match:
+            print("⚠️  Could not find skill table in CLAUDE.md")
+            return False
+
+        table_header = match.group(1)
+        existing_rows = match.group(2)
+
+        # Parse existing skills
+        row_pattern = r'\| (.+?) \| `(.+?)` \|'
+        skills = re.findall(row_pattern, existing_rows)
+
+        # Check if skill already exists
+        for name, _ in skills:
+            if name.strip() == skill_name:
+                print(f"ℹ️  Skill '{skill_name}' already registered in CLAUDE.md")
+                return True
+
+        # Add new skill
+        new_row = f"| {skill_name} | `skills/{skill_name}/SKILL.md` |"
+        skills.append((skill_name, f"skills/{skill_name}/SKILL.md"))
+
+        # Sort alphabetically by skill name
+        skills.sort(key=lambda x: x[0].strip().lower())
+
+        # Rebuild table rows
+        new_rows = '\n'.join(f"| {name} | `{path}` |" for name, path in skills) + '\n'
+
+        # Replace in content
+        new_table = table_header + new_rows
+        new_content = content[:match.start()] + new_table + content[match.end():]
+
+        claude_md_path.write_text(new_content)
+        print(f"✅ Registered skill in CLAUDE.md")
+        return True
+
+    except Exception as e:
+        print(f"⚠️  Error updating CLAUDE.md: {e}")
+        return False
+
+
 def init_skill(skill_name, path):
     """
     Initialize a new skill directory with template SKILL.md.
@@ -259,6 +336,9 @@ def init_skill(skill_name, path):
     except Exception as e:
         print(f"❌ Error creating resource directories: {e}")
         return None
+
+    # Register skill in CLAUDE.md
+    register_skill_in_claude_md(skill_name, skill_dir)
 
     # Print next steps
     print(f"\n✅ Skill '{skill_name}' initialized successfully at {skill_dir}")

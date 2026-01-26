@@ -322,6 +322,45 @@ For task-specific guidance, load these on-demand:
 - Architectural questions → Load `architecture-decisions.md`
 - Contributing/setup → Load `development-workflows.md`
 
+## Skill Locations
+
+**CRITICAL:** Never search filesystem for skills. Read directly using this pattern:
+
+**Pattern:** `./skills/{skill-name}/SKILL.md`
+
+When you need to use or explore a skill:
+1. Read `./skills/{skill-name}/SKILL.md` directly
+2. Never run `find`, `glob`, or filesystem searches for skills
+3. Supporting files are in the same directory: `./skills/{skill-name}/`
+
+### Available Skills
+
+| Skill | Path |
+|-------|------|
+| assistant-architect | `skills/assistant-architect/SKILL.md` |
+| browser-control | `skills/browser-control/SKILL.md` |
+| docx | `skills/docx/SKILL.md` |
+| drafts-manager | `skills/drafts-manager/SKILL.md` |
+| elevenlabs-tts | `skills/elevenlabs-tts/SKILL.md` |
+| freshservice-manager | `skills/freshservice-manager/SKILL.md` |
+| google-workspace | `skills/google-workspace/SKILL.md` |
+| image-gen | `skills/image-gen/SKILL.md` |
+| knowledge-manager | `skills/knowledge-manager/SKILL.md` |
+| multi-model-research | `skills/multi-model-research/SKILL.md` |
+| obsidian-manager | `skills/obsidian-manager/SKILL.md` |
+| omnifocus-manager | `skills/omnifocus-manager/SKILL.md` |
+| pai-monitor | `skills/pai-monitor/SKILL.md` |
+| pdf | `skills/pdf/SKILL.md` |
+| pptx | `skills/pptx/SKILL.md` |
+| presentation-master | `skills/presentation-master/SKILL.md` |
+| psd-brand-guidelines | `skills/psd-brand-guidelines/SKILL.md` |
+| psd-instructional-vision | `skills/psd-instructional-vision/SKILL.md` |
+| research | `skills/research/SKILL.md` |
+| skill-creator | `skills/skill-creator/SKILL.md` |
+| strategic-planning-manager | `skills/strategic-planning-manager/SKILL.md` |
+| writer | `skills/writer/SKILL.md` |
+| xlsx | `skills/xlsx/SKILL.md` |
+
 ---
 
 **Remember:** Context is precious. Keep it lean. Fetch on-demand.

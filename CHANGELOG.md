@@ -5,6 +5,24 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.10.0] - 2026-01-26
+
+### Added
+- **Skill locations registry in CLAUDE.md** - Explicit skill paths for direct access by subagents
+  - Pattern: `./skills/{skill-name}/SKILL.md`
+  - Complete table of 23 available skills
+  - Eliminates filesystem searches by Explore agents
+
+- **Auto-registration in init_skill.py** - New skills automatically added to CLAUDE.md's skill table
+  - Finds CLAUDE.md by walking up directory tree
+  - Inserts new skill in alphabetical order
+  - Maintains table format
+
+### Changed
+- **skill-creator SKILL.md** - Added "Register in CLAUDE.md" step after skill initialization
+  - Documents manual registration process
+  - Notes that init_skill.py handles this automatically
+
 ## [0.9.0] - 2026-01-26
 
 ### Added

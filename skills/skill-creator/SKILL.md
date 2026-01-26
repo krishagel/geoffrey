@@ -286,6 +286,19 @@ The script:
 
 After initialization, customize or remove the generated SKILL.md and example files as needed.
 
+#### Register the Skill in CLAUDE.md
+
+After creating a new skill, register it in CLAUDE.md's skill list:
+
+1. Open `CLAUDE.md`
+2. Find the "Available Skills" table in the "Skill Locations" section
+3. Add a new row: `| {skill-name} | \`skills/{skill-name}/SKILL.md\` |`
+4. Keep the table alphabetically sorted
+
+This ensures subagents can find the skill without filesystem searches.
+
+**Note:** The `init_skill.py` script automatically handles this registration.
+
 ### Step 4: Edit the Skill
 
 When editing the (newly-generated or existing) skill, remember that the skill is being created for another instance of Claude to use. Include information that would be beneficial and non-obvious to Claude. Consider what procedural knowledge, domain-specific details, or reusable assets would help another Claude instance execute these tasks more effectively.
