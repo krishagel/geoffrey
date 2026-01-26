@@ -20,15 +20,9 @@
 
 const { execSync } = require('child_process');
 const { google } = require('googleapis');
-const path = require('path');
 
-// Load environment variables from iCloud secrets
-const os = require('os');
-const ENV_PATH = path.join(
-  os.homedir(),
-  'Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env'
-);
-require('dotenv').config({ path: ENV_PATH });
+// Load secrets from 1Password via centralized secrets module
+const { SECRETS } = require('../../../scripts/secrets.js');
 
 const SERVICE_NAME = 'geoffrey-google-workspace';
 
@@ -86,12 +80,11 @@ async function refreshTokens(account) {
     throw new Error('No refresh token available');
   }
 
-  // Load credentials from environment
-  const client_id = process.env.GOOGLE_CLIENT_ID;
-  const client_secret = process.env.GOOGLE_CLIENT_SECRET;
+  // Load credentials from 1Password
+  const { clientId: client_id, clientSecret: client_secret } = SECRETS.google;
 
   if (!client_id || !client_secret) {
-    throw new Error('Missing GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET in .env');
+    throw new Error('Missing Google credentials in 1Password. See docs/1password-setup.md');
   }
 
   // Create OAuth2 client and refresh
@@ -154,11 +147,10 @@ function deleteTokens(account) {
 async function getAuthClient(account) {
   const tokens = getTokens(account);
 
-  const client_id = process.env.GOOGLE_CLIENT_ID;
-  const client_secret = process.env.GOOGLE_CLIENT_SECRET;
+  const { clientId: client_id, clientSecret: client_secret } = SECRETS.google;
 
   if (!client_id || !client_secret) {
-    throw new Error('Missing GOOGLE_CLIENT_ID or GOOGLE_CLIENT_SECRET in .env');
+    throw new Error('Missing Google credentials in 1Password. See docs/1password-setup.md');
   }
 
   const oauth2Client = new google.auth.OAuth2(client_id, client_secret);

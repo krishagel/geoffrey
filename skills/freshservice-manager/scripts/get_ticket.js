@@ -4,28 +4,9 @@
 // Usage: bun get_ticket.js <ticket_id> [include]
 // Include options: conversations, requester, problem, stats, assets, change, related_tickets
 
-import { readFileSync } from 'fs';
-import { homedir } from 'os';
-import { join } from 'path';
+const { SECRETS } = require('../../../scripts/secrets.js');
 
-function loadEnv() {
-  const envPath = join(homedir(), 'Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/secrets/.env');
-  const content = readFileSync(envPath, 'utf-8');
-  const env = {};
-  for (const line of content.split('\n')) {
-    if (line && !line.startsWith('#')) {
-      const [key, ...valueParts] = line.split('=');
-      if (key && valueParts.length) {
-        env[key.trim()] = valueParts.join('=').trim();
-      }
-    }
-  }
-  return env;
-}
-
-const env = loadEnv();
-const domain = env.FRESHSERVICE_DOMAIN;
-const apiKey = env.FRESHSERVICE_API_KEY;
+const { domain, apiKey } = SECRETS.freshservice;
 const baseUrl = `https://${domain}/api/v2`;
 
 const ticketId = process.argv[2];
