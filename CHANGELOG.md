@@ -5,6 +5,33 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.9.0] - 2026-01-26
+
+### Added
+- **1Password CLI integration** for secure secrets management
+  - Centralized secrets modules (`scripts/secrets.js`, `scripts/secrets.py`)
+  - Setup documentation at `docs/1password-setup.md`
+  - Support for 10 secrets across 6 skills
+
+### Changed
+- **All skills now load secrets from 1Password** instead of `.env` file
+  - freshservice-manager: 13 scripts updated
+  - elevenlabs-tts: 2 scripts updated
+  - image-gen: 3 scripts updated
+  - multi-model-research: 1 script updated
+  - research: 1 script updated
+  - google-workspace: 2 auth scripts + package.json updated
+
+### Removed
+- `python-dotenv` dependency from Python scripts
+- `dotenv` dependency from google-workspace package.json
+- iCloud `.env` file requirement
+
+### Security
+- Secrets no longer stored as plaintext in iCloud
+- Leverages 1Password's security and biometric authentication
+- Secrets never written to disk by scripts
+
 ## [0.8.0] - 2026-01-24
 
 ### Added

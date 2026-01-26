@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Personal AI infrastructure - learning-enabled assistant for work, travel, and personal tasks",
-    "version": "0.8.0"
+    "version": "0.9.0"
   },
   "pluginRoot": ".",
   "plugins": [
@@ -14,7 +14,7 @@
       "name": "geoffrey",
       "source": "./",
       "description": "Personal AI infrastructure with learning-enabled assistance for work, travel, and personal tasks",
-      "version": "0.8.0",
+      "version": "0.9.0",
       "category": "productivity",
       "keywords": [
         "personal-ai",

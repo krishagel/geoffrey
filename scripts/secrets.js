@@ -18,7 +18,7 @@
  *   4. See docs/1password-setup.md for detailed setup guide
  */
 
-const { execSync } = require('child_process');
+const { spawnSync } = require('child_process');
 
 // Map environment variable names to 1Password secret references
 // Format: op://vault/item/field
@@ -58,8 +58,8 @@ function is1PasswordAvailable() {
   if (_1pChecked) return _1pAvailable;
 
   try {
-    execSync('op account list', { encoding: 'utf8', stdio: 'pipe' });
-    _1pAvailable = true;
+    const result = spawnSync('op', ['account', 'list'], { encoding: 'utf8' });
+    _1pAvailable = result.status === 0;
   } catch {
     _1pAvailable = false;
   }
@@ -89,12 +89,14 @@ function ensure1Password() {
  */
 function loadFrom1Password(secretRef) {
   try {
-    const value = execSync(`op read "${secretRef}"`, {
+    const result = spawnSync('op', ['read', secretRef], {
       encoding: 'utf8',
-      stdio: ['pipe', 'pipe', 'pipe'],
       timeout: 10000,
-    }).trim();
-    return value;
+    });
+    if (result.status === 0 && result.stdout) {
+      return result.stdout.trim();
+    }
+    return null;
   } catch (error) {
     return null;
   }
