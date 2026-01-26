@@ -33,8 +33,12 @@ from google import genai
 from google.genai.types import GenerateContentConfig
 
 # Load API key from 1Password via centralized secrets module
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "scripts"))
-from secrets import require_secret
+# Use importlib to avoid conflict with Python's built-in secrets module
+secrets_path = Path(__file__).parent.parent.parent.parent / "scripts" / "secrets.py"
+spec = importlib.util.spec_from_file_location("geoffrey_secrets", secrets_path)
+geoffrey_secrets = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(geoffrey_secrets)
+require_secret = geoffrey_secrets.require_secret
 
 # Geoffrey skills directory for brand imports
 SKILLS_DIR = Path(__file__).parent.parent.parent

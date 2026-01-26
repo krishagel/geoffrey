@@ -78,6 +78,7 @@ async function listMessages(account, options = {}) {
         return header ? header.value : '';
       };
 
+      const labelIds = detail.data.labelIds || [];
       return {
         id: msg.id,
         threadId: msg.threadId,
@@ -86,8 +87,8 @@ async function listMessages(account, options = {}) {
         subject: getHeader('Subject'),
         date: getHeader('Date'),
         snippet: detail.data.snippet,
-        labels: detail.data.labelIds,
-        isUnread: detail.data.labelIds.includes('UNREAD'),
+        labels: labelIds,
+        isUnread: labelIds.includes('UNREAD'),
       };
     })
   );

@@ -72,7 +72,9 @@ Geoffrey will infer the appropriate account from context:
 | `list_messages.js` | List inbox, unread, by label | "show unread psd emails" |
 | `read_message.js` | Get full message content | "read that email" |
 | `send_message.js` | Compose and send | "send email to John about..." |
+| `send_with_attachment.js` | Send with file attachment | "email report with PDF attached" |
 | `search_messages.js` | Search with Gmail operators | "find emails from Sarah last week" |
+| `get_unread_summary.js` | Unread count + top messages | "how many unread emails?" |
 
 ### Calendar
 

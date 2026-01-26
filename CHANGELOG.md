@@ -5,6 +5,57 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.12.0] - 2026-01-26
+
+### Added
+- **Morning Briefing enhancements** - Comprehensive daily intelligence briefing
+
+  **Team Activity (Detailed)**
+  - Team EOD messages from Google Chat with FULL details extracted
+  - Each team member's location, accomplishments, notable projects, issues
+  - Last business day calculator with US federal holidays
+  - Team completed tickets summary grouped by agent
+  - Ticket trend analysis (volume, categories, patterns)
+
+  **News with Synopses (3 sections)**
+  - EdTech News: 3-5 articles with 2-3 sentence synopses
+  - AI News: 3-5 articles on latest AI developments
+  - K-12 Leadership News: 2-3 articles on policy and leadership
+
+  **Extended Podcast Format**
+  - Increased from 2-3 minutes to 10-15 minutes (~1500-2000 words)
+  - Detailed team member highlights by name
+  - Article synopses narrated
+  - Structured sections with smooth transitions
+
+  **Infographic & Email**
+  - Visual dashboard infographic (Phase 3.5)
+  - Multi-attachment email (infographic + podcast)
+  - Body from file for long content
+  - Software Development workspace tickets (workspace_id: 13)
+
+  **New Scripts**
+  - `chat/get_eod_messages.js` - Google Chat date filtering
+  - `morning-briefing/scripts/get_last_business_day.js` - Holiday-aware calculation
+  - `gmail/send_with_attachments.js` - Multiple email attachments
+  - Fixed `image-gen/scripts/generate.py` - Import conflict with Python secrets module
+
+## [0.11.0] - 2026-01-26
+
+### Added
+- **Morning Briefing skill** - Comprehensive daily briefing workflow
+  - Gathers calendar, tasks, tickets, weather, and news
+  - OmniFocus integration for due/flagged tasks via new `get_due_flagged.js` script
+  - Freshservice integration for open tickets and pending approvals
+  - Generates conversational podcast script for ElevenLabs TTS
+  - Saves full briefing to Obsidian daily note
+  - Email delivery with audio podcast attachment
+  - Podcast script template with voice guidelines
+
+- **Google Workspace Gmail scripts**
+  - `gmail/get_unread_summary.js` - Get unread count plus message previews with sender analysis
+  - `gmail/send_with_attachment.js` - Send emails with file attachments (MP3, PDF, images, etc.)
+
 ## [0.10.0] - 2026-01-26
 
 ### Added
