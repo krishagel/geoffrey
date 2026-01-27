@@ -5,6 +5,27 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.13.0] - 2026-01-26
+
+### Added
+- **Local TTS skill** - Local text-to-speech using MLX and Kokoro-82M model
+  - No API keys or recurring costs
+  - Apple Silicon optimized (~3-4x realtime on M3 Pro)
+  - Supports MP3, WAV, M4A, OGG output formats
+  - 20+ voice presets (American and British English)
+  - Auto-chunking for long text with seamless concatenation
+  - Works on Mac Mini (M1/M2 8GB+)
+
+### Changed
+- **Morning Briefing** now uses local-tts instead of ElevenLabs API
+  - Voice changed from "Rachel" to "af_heart" (warm, friendly)
+  - Eliminates API costs for daily briefings
+
+### Technical
+- Uses `uv run --with mlx-audio --with pydub` pattern (not PEP 723 inline deps)
+- Model: mlx-community/Kokoro-82M-bf16 (~200MB, cached)
+- Documented exception in CLAUDE.md runtime rules
+
 ## [0.12.0] - 2026-01-26
 
 ### Added

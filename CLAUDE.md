@@ -50,6 +50,12 @@ python skills/psd-brand-guidelines/brand.py colors
 node skills/presentation-master/adapters/pptx-adapter.js
 ```
 
+**Exception - local-tts skill:**
+```bash
+# local-tts uses --with flags (mlx-audio requires cached uv environment)
+uv run --with mlx-audio --with pydub skills/local-tts/scripts/generate_audio.py --text "Hello" --output ~/test.mp3
+```
+
 ---
 
 ## Core Architectural Principles
@@ -346,6 +352,7 @@ When you need to use or explore a skill:
 | google-workspace | `skills/google-workspace/SKILL.md` |
 | image-gen | `skills/image-gen/SKILL.md` |
 | knowledge-manager | `skills/knowledge-manager/SKILL.md` |
+| local-tts | `skills/local-tts/SKILL.md` |
 | morning-briefing | `skills/morning-briefing/SKILL.md` |
 | multi-model-research | `skills/multi-model-research/SKILL.md` |
 | obsidian-manager | `skills/obsidian-manager/SKILL.md` |

@@ -420,13 +420,14 @@ Save to `/tmp/morning_briefing_podcast.txt`
 ## Phase 3: Create Podcast
 
 ```bash
-uv run /Users/hagelk/non-ic-code/geoffrey/skills/elevenlabs-tts/scripts/generate_audio.py \
+uv run --with mlx-audio --with pydub /Users/hagelk/non-ic-code/geoffrey/skills/local-tts/scripts/generate_audio.py \
   --file /tmp/morning_briefing_podcast.txt \
-  --voice Rachel \
+  --voice af_heart \
   --output ~/Desktop/morning_briefing_[DATE].mp3
 ```
 
-**Voice Selection**: Rachel (calm, clear - good for morning briefing)
+**Voice Selection**: af_heart (warm, friendly - good for morning briefing)
+**Note**: Uses local MLX TTS (Kokoro model) - no API costs
 
 ## Phase 3.5: Generate Infographic
 
@@ -606,10 +607,10 @@ Status: Partial
 Note: Freshservice API error - ticket data unavailable
 ```
 
-### ElevenLabs Quota Exceeded
+### Local TTS Generation Failed
 ```
 Status: Partial
-Note: Audio generation skipped - API quota
+Note: Audio generation failed - check mlx-audio setup
 Briefing saved to Obsidian without podcast
 ```
 
@@ -620,7 +621,7 @@ Briefing saved to Obsidian without podcast
 | google-workspace | Calendar, email, team EOD | Skip sections |
 | omnifocus-manager | Tasks | Skip section |
 | freshservice-manager | Tickets, approvals, team stats | Skip section |
-| elevenlabs-tts | Audio podcast | Text-only briefing |
+| local-tts | Audio podcast | Text-only briefing |
 | obsidian-vault (MCP) | Save briefing | Display only |
 | WebSearch | News, weather | Skip sections |
 
@@ -632,7 +633,7 @@ Briefing saved to Obsidian without podcast
 - **Technology Workspace**: workspace_id: 2
 - **Software Dev Workspace**: workspace_id: 13
 - **Team EOD Chat Space**: spaces/AAAAxOtpv10 (Technology Staff Check-Ins & Logs)
-- **Voice**: Rachel (calm, professional)
+- **Voice**: af_heart (warm, friendly - local Kokoro TTS)
 - **Podcast Length**: 10-15 minutes (~1500-2000 words)
 
 ### Customization
