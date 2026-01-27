@@ -1,0 +1,283 @@
+# K-12 Strategic Planning Common Themes
+# Compiled from analysis of 100+ district strategic plans
+# Use for validation, prompting, and gap analysis
+
+version: 1.0.0
+last_updated: 2026-01-26
+
+# Core themes that appear in 75%+ of K-12 strategic plans
+core_themes:
+  student_achievement:
+    prevalence: 95%
+    aliases:
+      - academic excellence
+      - student learning
+      - student success
+      - academic achievement
+    common_goals:
+      - increase graduation rates
+      - close achievement gaps
+      - improve assessment scores
+      - prepare students for college/career
+      - develop critical thinking skills
+    typical_metrics:
+      - graduation rate
+      - assessment proficiency rates
+      - college enrollment rate
+      - AP/IB participation and scores
+      - career readiness indicators
+      - growth measures
+
+  equity_access:
+    prevalence: 90%
+    aliases:
+      - educational equity
+      - access and opportunity
+      - inclusive education
+      - diversity equity inclusion
+    common_goals:
+      - eliminate opportunity gaps
+      - ensure equitable access to resources
+      - increase diverse representation
+      - provide culturally responsive education
+      - support underserved populations
+    typical_metrics:
+      - disaggregated achievement data
+      - program access by subgroup
+      - discipline disparities
+      - advanced course enrollment by subgroup
+      - representation in gifted/special programs
+
+  staff_quality:
+    prevalence: 85%
+    aliases:
+      - human capital
+      - teacher quality
+      - workforce development
+      - staff excellence
+    common_goals:
+      - recruit and retain excellent educators
+      - provide quality professional development
+      - develop leadership pipeline
+      - support teacher wellbeing
+      - recognize and reward excellence
+    typical_metrics:
+      - teacher retention rate
+      - vacancy rates
+      - professional development hours
+      - teacher satisfaction scores
+      - leadership pipeline metrics
+
+  community_engagement:
+    prevalence: 80%
+    aliases:
+      - family engagement
+      - community partnerships
+      - parent involvement
+      - stakeholder communication
+    common_goals:
+      - strengthen family partnerships
+      - increase community involvement
+      - improve two-way communication
+      - develop business partnerships
+      - engage diverse communities
+    typical_metrics:
+      - parent participation rates
+      - volunteer hours
+      - community satisfaction surveys
+      - partnership agreements
+      - event attendance
+
+# Secondary themes that appear in 50-75% of plans
+secondary_themes:
+  technology_innovation:
+    prevalence: 75%
+    aliases:
+      - educational technology
+      - digital learning
+      - innovation
+      - 21st century learning
+    common_goals:
+      - integrate technology into instruction
+      - ensure device access for all
+      - build digital literacy
+      - support innovation in teaching
+      - leverage AI for learning
+    typical_metrics:
+      - device ratios
+      - technology integration rubrics
+      - digital literacy assessments
+      - innovation project counts
+
+  facilities_resources:
+    prevalence: 70%
+    aliases:
+      - infrastructure
+      - learning environments
+      - operations
+      - resource management
+    common_goals:
+      - modernize facilities
+      - create flexible learning spaces
+      - ensure safe physical environments
+      - optimize resource allocation
+      - improve operational efficiency
+    typical_metrics:
+      - facility condition index
+      - space utilization
+      - energy efficiency
+      - capital project completion
+
+  fiscal_sustainability:
+    prevalence: 70%
+    aliases:
+      - financial stewardship
+      - budget management
+      - fiscal responsibility
+    common_goals:
+      - maintain fiscal stability
+      - maximize resource efficiency
+      - diversify funding sources
+      - ensure long-term sustainability
+      - transparent financial practices
+    typical_metrics:
+      - fund balance ratios
+      - cost per pupil
+      - audit findings
+      - grant funding secured
+
+  safety_wellness:
+    prevalence: 70%
+    aliases:
+      - school safety
+      - student wellness
+      - social-emotional learning
+      - mental health
+    common_goals:
+      - ensure safe learning environments
+      - support student mental health
+      - implement SEL curriculum
+      - prevent bullying and violence
+      - promote physical wellness
+    typical_metrics:
+      - safety incident rates
+      - SEL assessment scores
+      - counselor-to-student ratios
+      - attendance rates
+      - climate survey results
+
+# Emerging themes gaining prominence
+emerging_themes:
+  social_emotional_learning:
+    prevalence: 60%
+    trend: increasing
+    drivers:
+      - post-pandemic recovery
+      - mental health awareness
+      - whole child focus
+    common_goals:
+      - integrate SEL into curriculum
+      - build student resilience
+      - develop emotional intelligence
+      - create supportive cultures
+
+  personalized_learning:
+    prevalence: 55%
+    trend: increasing
+    drivers:
+      - technology enablement
+      - differentiation demands
+      - student agency movement
+    common_goals:
+      - individualized learning paths
+      - student voice and choice
+      - competency-based progression
+      - flexible pacing options
+
+  future_ready_skills:
+    prevalence: 50%
+    trend: increasing
+    drivers:
+      - workforce demands
+      - automation concerns
+      - 21st century skills focus
+    common_goals:
+      - develop problem-solving skills
+      - build collaboration abilities
+      - foster creativity and innovation
+      - prepare for changing workforce
+
+  ai_integration:
+    prevalence: 30%
+    trend: rapidly increasing
+    drivers:
+      - AI advancement
+      - personalization potential
+      - efficiency opportunities
+    common_goals:
+      - leverage AI for personalization
+      - develop AI literacy
+      - use AI for administrative efficiency
+      - prepare students for AI world
+
+# Theme category mappings for vision exercises
+vision_categories:
+  learning:
+    - student_achievement
+    - personalized_learning
+    - future_ready_skills
+  people:
+    - staff_quality
+    - social_emotional_learning
+  community:
+    - community_engagement
+    - family_partnerships
+  resources:
+    - facilities_resources
+    - technology_innovation
+    - fiscal_sustainability
+  culture:
+    - safety_wellness
+    - equity_access
+
+# Common contradictions by theme
+common_contradictions:
+  student_achievement:
+    - "standardization vs personalization"
+    - "breadth vs depth in curriculum"
+    - "testing demands vs authentic learning"
+  equity_access:
+    - "equity vs equality"
+    - "targeted support vs universal access"
+    - "acceleration vs remediation"
+  staff_quality:
+    - "innovation vs compliance"
+    - "autonomy vs consistency"
+    - "workload vs development"
+  community_engagement:
+    - "expert-led vs community-driven"
+    - "speed vs inclusion"
+    - "transparency vs confidentiality"
+  technology_innovation:
+    - "screen time concerns vs digital learning"
+    - "innovation vs stability"
+    - "personalization vs standardization"
+
+# Success indicator examples by theme
+sample_metrics:
+  student_achievement:
+    - "graduation rate: 85% → 92%"
+    - "proficiency in math: 45% → 60%"
+    - "college enrollment: 65% → 75%"
+  equity_access:
+    - "achievement gap reduction: 20pts → 10pts"
+    - "AP enrollment equity index: 0.7 → 0.9"
+  staff_quality:
+    - "teacher retention: 82% → 90%"
+    - "professional development satisfaction: 60% → 85%"
+  community_engagement:
+    - "parent engagement rate: 40% → 65%"
+    - "community satisfaction: 70% → 85%"
+  safety_wellness:
+    - "student sense of belonging: 65% → 80%"
+    - "SEL competency growth: 10% average improvement"

@@ -1,579 +1,640 @@
 ---
 name: strategic-planning-manager
-description: Annual strategic review and goal-setting interview across life/work domains with quarterly progress check-ins
+description: Organizational strategic planning for K-12 school districts using a hybrid CoSN/research-backed 7-phase process
 triggers:
-  - "annual review"
   - "strategic planning"
-  - "set goals for"
-  - "quarterly check-in"
-  - "review my progress"
-  - "year in review"
-  - "plan for 2026"
-  - "plan for 2027"
+  - "district strategic plan"
+  - "k-12 strategic planning"
+  - "school district planning"
+  - "strategic plan"
+  - "SWOT analysis"
+  - "practical vision"
+  - "strategic directions"
+  - "strategic retreat"
+  - "organizational planning"
 allowed-tools:
   - Read
   - Write
   - Bash
+  - Edit
+  - Glob
+  - Grep
   - AskUserQuestion
+  - WebSearch
   - mcp__obsidian-vault__create_vault_file
   - mcp__obsidian-vault__get_vault_file
+  - mcp__obsidian-vault__search_vault_simple
 version: 1.0.0
 ---
 
 # Strategic Planning Manager Skill
 
-Annual strategic review and goal-setting system combining interview-driven planning with evidence-based reflection across five life/work domains.
+Organizational strategic planning system for K-12 school districts, combining the CoSN Technology of Participation (ToP) methodology with research-backed best practices from ThoughtExchange, Education Elements, Hanover Research, and AASA.
+
+> **Quick Start:** New to this skill? Read `guides/quick-start.md` first for practical entry points and common workflows.
+
+> **Note:** For personal life/work strategic planning, use the `personal-strategic-planning` skill instead.
 
 ## When to Activate
 
 This skill activates when the user requests:
 
-**Annual Review (Primary Mode):**
-- "Let's do my annual review"
-- "Help me plan for [year]"
-- "I want to do strategic planning"
-- "Set goals for next year"
+**Full Strategic Planning Process:**
+- "Help me create a strategic plan for our district"
+- "We need to do strategic planning"
+- "Let's start the district strategic planning process"
+- "Facilitate our strategic planning retreat"
 
-**Quarterly Check-In (Lighter Mode):**
-- "Quarterly check-in"
-- "Review my progress"
-- "How am I tracking against my goals?"
+**Phase-Specific Work:**
+- "Analyze our survey data for strategic planning"
+- "Help me process focus group transcripts"
+- "Generate a SWOT analysis"
+- "Create a practical vision"
+- "Identify underlying contradictions"
+- "Define strategic directions"
+- "Build our implementation timeline"
 
-**Domain Modes:**
-Each review covers 5 domains:
-1. **CIO Role** (day job - Technology, Communications, Safety/Security)
-2. **Consulting/Speaking** (reputation building, CoSN board, conferences)
-3. **Product Development** (AI products: voice app, survey tool)
-4. **Real Estate Investing** (portfolio management)
-5. **Financial Planning** (entrepreneurial income, retirement prep)
+**Plan Update Mode:**
+- "Update our existing strategic plan"
+- "It's time to refresh our strategic plan"
+- "Annual strategic plan review"
+
+## Skill Modes
+
+### Mode 1: Full Process Guide
+Walk through all 7 phases sequentially, prompting for data inputs and facilitating each step.
+- Best for: New strategic plans, comprehensive planning retreats
+
+### Mode 2: Phase-Specific Entry
+Jump directly into any specific phase with appropriate inputs.
+- Best for: Working on one component, picking up where you left off
+
+### Mode 3: Data Analysis Only
+Process surveys, transcripts, and documents without running the full planning process.
+- Best for: Pre-work, discovery phase, feeding data into existing processes
+
+### Mode 4: Plan Update
+Start from an existing plan, analyze progress, update for a new cycle.
+- Best for: Annual reviews, mid-cycle adjustments, refresh cycles
+
+---
+
+## The 7-Phase Strategic Planning Process
+
+Based on CoSN's Technology of Participation (ToP) methodology enhanced with K-12 best practices.
+
+### Phase 1: Discovery & Data Collection
+**AI Role:** Primary executor | **Human Role:** Data provider
+
+**Purpose:** Gather and synthesize all available data about the current state.
+
+**Data Sources Processed:**
+- Survey data (CSV, JSON, Excel)
+- Focus group transcripts (text files)
+- Existing strategic plan documents
+- Board meeting minutes
+- Community feedback compilations
+- Demographic and enrollment data
+
+**AI Actions:**
+1. Ingest and validate data files
+2. Extract themes using NLP analysis
+3. Identify sentiment patterns
+4. Cross-reference findings across sources
+5. Generate initial theme clusters
+6. Create Discovery Summary Report
+
+**Available Scripts:**
+```bash
+# Analyze survey data
+uv run skills/strategic-planning-manager/scripts/analyze_surveys.py \
+  --input survey_results.csv \
+  --output-dir ./discovery
+
+# Process focus group transcripts
+uv run skills/strategic-planning-manager/scripts/process_transcripts.py \
+  --input-dir ./transcripts \
+  --output ./discovery/transcript-themes.json
+
+# Generate combined discovery report
+uv run skills/strategic-planning-manager/scripts/generate_discovery.py \
+  --data-dir ./discovery \
+  --output ./outputs/discovery-report.md
+```
+
+**Outputs:**
+- Discovery Summary Report (`templates/discovery-report.md`)
+- Theme Analysis with supporting evidence
+- Stakeholder sentiment analysis
+- Initial data-driven SWOT draft
+
+**Interview Questions (for context):**
+1. "What data sources do you have available?" (surveys, transcripts, documents)
+2. "What's the timeframe for the data?" (when collected, relevance)
+3. "Who are the key stakeholder groups represented?"
+4. "What do you already know/suspect about the findings?"
+
+---
+
+### Phase 2: Environmental Analysis (SWOT)
+**AI Role:** Synthesis and preparation | **Human Role:** Validation and refinement
+
+**Purpose:** Develop comprehensive understanding of internal and external factors.
+
+**AI Actions:**
+1. Generate SWOT from discovery data
+2. Create "Where Will We Invest?" analysis (Strengths × Opportunities)
+3. Create "What's Holding Us Back?" analysis (Weaknesses focus)
+4. Prepare briefing materials for human sessions
+
+**Human Session Support:**
+- Provide facilitator guide with session agenda
+- Suggest small group discussion prompts
+- Capture and organize human additions
+
+**Outputs:**
+- SWOT Analysis Matrix (`templates/swot-template.md`)
+- Investment Priority Grid (S×O quadrant)
+- Barriers Analysis (W focus)
+- Facilitator Guide (`guides/phase2-swot-guide.md`)
+
+**CoSN Format Reference:**
+| Strengths | Weaknesses |
+|-----------|------------|
+| What we do well | What limits us |
+| What others see as strengths | Where we're vulnerable |
+
+| Opportunities | Threats |
+|---------------|---------|
+| External factors to leverage | External risks to navigate |
+| Trends we can capitalize on | Competitive/regulatory concerns |
+
+**Key Questions:**
+- "Where Will We Invest?" (top S×O opportunities)
+- "What's Holding Us Back?" (key weaknesses to address)
+
+---
+
+### Phase 3: Practical Vision Development
+**AI Role:** Facilitation support | **Human Role:** Primary creator
+
+**Purpose:** Define what success looks like 3 years from now through collaborative brainstorming.
+
+**The CoSN Approach:**
+1. **Individual brainstorming:** "What do we want to see in 3 years?"
+2. **Small group sharing:** Combine and refine ideas
+3. **Large group clustering:** Organize into 8-10 thematic columns
+4. **Naming columns:** Give each vision cluster a descriptive title
+
+**AI Support Actions:**
+1. Provide vision prompts based on discovery themes
+2. Suggest initial category groupings as ideas emerge
+3. Capture and organize inputs in real-time
+4. Ensure all voices are represented
+
+**Vision Categories (Common in K-12):**
+- Student Achievement & Learning
+- Equity & Access
+- Staff Quality & Development
+- Community Engagement
+- Technology & Innovation
+- Facilities & Resources
+- Safety & Wellness
+- Fiscal Sustainability
+
+**Outputs:**
+- Practical Vision Matrix (`templates/practical-vision.md`)
+- Vision statement narratives per category
+- Facilitator Guide (`guides/phase3-vision-guide.md`)
+
+**Matrix Format (CoSN slide 11 style):**
+| Learning | Equity | Staff | Community | Technology | Facilities | Safety | Finance |
+|----------|--------|-------|-----------|------------|------------|--------|---------|
+| Vision items... | Vision items... | ... | ... | ... | ... | ... | ... |
+
+---
+
+### Phase 4: Underlying Contradictions
+**AI Role:** Pattern identification | **Human Role:** Primary creator
+
+**Purpose:** Identify the deep tensions (not just barriers) that must be resolved for the vision to be realized.
+
+**Key Distinction:**
+- **Barriers** = obstacles to remove
+- **Contradictions** = tensions that need resolution, often involving trade-offs
+
+**Examples of Contradictions:**
+- "Need for innovation" vs "Risk aversion in district culture"
+- "Desire for personalized learning" vs "Standardized testing requirements"
+- "Staff wanting autonomy" vs "Need for consistent practices"
+
+**AI Actions:**
+1. Suggest potential contradictions based on discovery data
+2. Help frame contradictions (not just barriers)
+3. Organize and categorize as groups work
+4. Identify patterns across stakeholder groups
+
+**Human Session Support:**
+1. Small group brainstorming of contradictions
+2. Large group clustering and naming
+3. Identification of root tensions
+
+**Outputs:**
+- Underlying Contradictions Matrix (`templates/contradictions.md`)
+- Root tension analysis
+- Facilitator Guide (`guides/phase4-contradictions-guide.md`)
+
+**Matrix Format (CoSN slide 20 style):**
+| Category | Contradiction | Impact on Vision |
+|----------|---------------|------------------|
+| Culture | [Tension description] | [Which vision areas affected] |
+| Resources | [Tension description] | [Which vision areas affected] |
+
+---
+
+### Phase 5: Strategic Directions
+**AI Role:** Synthesis support | **Human Role:** Decision making
+
+**Purpose:** Define innovative actions that resolve contradictions and move toward the vision.
+
+**Key Principle:**
+Strategic directions are NOT just goals—they are the actions and approaches that will resolve the underlying contradictions while advancing the practical vision.
+
+**AI Actions:**
+1. Map contradictions to potential strategic directions
+2. Suggest evidence-based actions from K-12 research
+3. Ensure each direction addresses multiple contradictions
+4. Connect directions to vision categories
+
+**Human Session Support:**
+1. Define 4-6 major strategic directions
+2. Prioritize based on impact and feasibility
+3. Assign preliminary ownership
+4. Validate contradiction resolution
+
+**Outputs:**
+- Strategic Directions Framework (`templates/strategic-directions.md`)
+- Direction-to-Contradiction mapping
+- Direction-to-Vision alignment matrix
+- Facilitator Guide (`guides/phase5-directions-guide.md`)
+
+**Framework Format (CoSN slide 22 style):**
+| Strategic Direction | Contradictions Addressed | Vision Categories Served |
+|---------------------|--------------------------|--------------------------|
+| [Direction 1] | [C1, C2, C3] | [Learning, Equity, Staff] |
+| [Direction 2] | [C2, C4] | [Technology, Community] |
+
+---
+
+### Phase 6: Focused Implementation
+**AI Role:** Structure and tracking | **Human Role:** Validation and commitment
+
+**Purpose:** Translate strategic directions into concrete, time-bound implementation plans.
+
+**The CoSN Three-Column Approach:**
+For each strategic direction, define:
+1. **Current Reality:** Where are we now?
+2. **1-Year Accomplishments:** What will be true in 12 months?
+3. **3-Year Outcomes:** What will be true at plan completion?
+
+**AI Actions:**
+1. Generate implementation framework structure
+2. Create Current Reality → 1-Year → 3-Year tables
+3. Suggest success indicators and metrics
+4. Draft quarterly timeline for Year 1
+
+**Human Session Support:**
+1. Confirm current reality assessments
+2. Commit to 1-year accomplishments
+3. Define measurable success indicators
+4. Assign ownership and accountability
+
+**Outputs:**
+- Focused Implementation Tables (`templates/focused-implementation.md`)
+- First-Year Timeline (`templates/first-year-timeline.md`)
+- Success Indicators Matrix
+- Facilitator Guide (`guides/phase6-implementation-guide.md`)
+
+**Implementation Table Format (CoSN slides 24-26 style):**
+| Strategic Direction: [Name] |
+|----------------------------|
+| **Current Reality** | **1-Year Accomplishments** | **3-Year Outcomes** |
+| [Where we are] | [What's true in 12 months] | [What's true in 36 months] |
+
+**First-Year Timeline Format (CoSN slide 27 style):**
+| Strategic Direction | Q1 | Q2 | Q3 | Q4 |
+|---------------------|----|----|----|----|
+| [Direction 1] | [Actions] | [Actions] | [Actions] | [Actions] |
+
+---
+
+### Phase 7: Plan Document Generation
+**AI Role:** Primary executor | **Human Role:** Review and approval
+
+**Purpose:** Compile all outputs into professional, stakeholder-ready documents.
+
+**AI Actions:**
+1. Compile all phase outputs into cohesive plan document
+2. Generate executive summary for board presentation
+3. Create stakeholder-specific versions (board, staff, community)
+4. Build monitoring dashboard structure
+
+**Outputs:**
+- Full Strategic Plan Document (`templates/full-strategic-plan.md`)
+- Executive Summary (`templates/executive-summary.md`)
+- Board presentation outline
+- Staff communication version
+- Community-facing summary
+
+**Document Structure:**
+1. Executive Summary
+2. Planning Process Overview
+3. Discovery Findings
+4. Environmental Analysis (SWOT)
+5. Practical Vision
+6. Underlying Contradictions
+7. Strategic Directions
+8. Implementation Plan
+9. Year-One Timeline
+10. Success Metrics & Monitoring
+11. Appendices (data, methodology)
+
+---
 
 ## Available Scripts
 
-### `scripts/generate_annual_review.py`
-Generates formatted annual review markdown file in Obsidian.
-
-**Usage:**
+### Survey Analysis
 ```bash
-uv run scripts/generate_annual_review.py '{json_data}' --year 2026
+uv run skills/strategic-planning-manager/scripts/analyze_surveys.py \
+  --input data.csv \
+  --format csv \
+  --output-dir ./discovery
 ```
 
-**Input:** JSON with interview data (all domains, goals, indicators)
-**Output:** Markdown file at `Personal_Notes/Reviews/Annual/{YEAR}-Annual-Review.md`
+**Supported formats:** CSV, JSON, Excel (.xlsx, .xls)
 
-### `scripts/generate_quarterly_review.py`
-Generates quarterly check-in markdown file in Obsidian.
+**Analysis includes:**
+- Response distribution statistics
+- Sentiment analysis per question
+- Theme extraction from open-ended responses
+- Stakeholder group comparisons (if demographics provided)
+- Word frequency and phrase analysis
 
-**Usage:**
+### Transcript Processing
 ```bash
-uv run scripts/generate_quarterly_review.py '{json_data}' --year 2026 --quarter Q1
+uv run skills/strategic-planning-manager/scripts/process_transcripts.py \
+  --input-dir ./transcripts \
+  --output ./discovery/transcript-themes.json
 ```
 
-**Input:** JSON with progress data per domain
-**Output:** Markdown file at `Personal_Notes/Reviews/Quarterly/{YEAR}-Q{N}-Review.md`
+**Analysis includes:**
+- Theme extraction using NLP
+- Sentiment patterns
+- Speaker/stakeholder attribution (if labeled)
+- Quote extraction for evidence
+- Cross-transcript pattern identification
 
-### `scripts/sync_to_omnifocus.js`
-Creates OmniFocus projects and tasks from Priority Goals.
-
-**Usage:**
+### SWOT Generation
 ```bash
-osascript -l JavaScript scripts/sync_to_omnifocus.js '{json_data}'
+uv run skills/strategic-planning-manager/scripts/generate_swot.py \
+  --discovery-dir ./discovery \
+  --output ./outputs/swot-analysis.md
 ```
 
-**Input:** JSON with goals, indicators, actions, milestones
-**Output:** OmniFocus projects created, returns confirmation JSON
-
-## Annual Review Workflow
-
-The annual review follows a 6-phase interview pattern modeled after the `writer` skill.
-
-### Phase 1: Domain Selection & Context Loading
-
-**Objective:** Set scope and load relevant context for each domain.
-
-**Geoffrey:**
-1. Displays 5 domains with mission from `identity-core.json`:
-   - CIO Role → TELOS Technology/Communications/Safety sections
-   - Consulting/Speaking → TELOS Economics (reputation building)
-   - Product Development → Short-term goals (AI products)
-   - Real Estate → TELOS Economics (income streams)
-   - Financial → Long-term goals (retirement, entrepreneurial income)
-
-2. Asks: "Which domain(s) do you want to review?" (allow multi-select for first run)
-
-3. For first annual review: Offer "Retrospective (2025) + Prospective (2026)" or "Prospective only"
-
-**Output:** List of selected domains with loaded context
-
----
-
-### Phase 2: Year-in-Review Reflection (Per Domain)
-
-**Objective:** Ground planning in reality by examining what actually happened.
-
-**Interview Questions (one domain at a time):**
-
-**Q1:** "What were your top 3 priorities in [domain] this year?"
-
-**Q2:** "For each priority, what actually happened?"
-- **Challenge:** Require evidence/outcomes, not just activities
-- **Push for:** Specific metrics, concrete changes, measurable results
-
-**Q3:** "What worked exceptionally well in [domain]?"
-- **Challenge:** Require specifics, not generalities
-- **Push for:** Root causes of success, replicable patterns
-
-**Q4:** "What underperformed or stalled?"
-- **Challenge:** Require root causes, not just symptoms
-- **Push for:** Honest assessment, systemic barriers
-
-**Q5:** "What surprised you—positive or negative?"
-
-**After all domains reviewed:**
-
-**Q6:** "Looking across all domains, what patterns do you see?"
-
-**Q7:** "What's one lesson you'd apply everywhere next year?"
-
-**Challenge Mechanisms:**
-- **Vague answer** → "Say more? What would that look like specifically?"
-- **Activity-focused** → "That's what you did. What was the result?"
-- **No evidence** → "What metric or outcome would prove that?"
-
----
-
-### Phase 3: Strategic Direction (Per Domain)
-
-**Objective:** Define clear vision for next year aligned with core mission.
-
-**Interview Questions (one domain at a time):**
-
-**Q1:** "At the end of [next year], what does success look like in [domain]?"
-- **Must be:** Specific, measurable, stakeholder-focused
-- **Challenge:** Push beyond vague aspirations to concrete outcomes
-
-**Q2:** "Who are the primary stakeholders for [domain]?"
-- **Follow-up:** "For each stakeholder, what specifically changes for them if you succeed?"
-
-**Q3:** "How does [domain] success contribute to your core mission?"
-- **Display:** Relevant TELOS section + constitution values
-- **Challenge:** If alignment is weak, ask "Is this the right priority?"
-
-**Q4:** "What are 2-3 major initiatives or changes in [domain]?"
-- **Challenge if >3:** "Which would you protect if capacity gets constrained?"
-- **Challenge if maintenance:** "Is this strategic work or keeping lights on?"
-
-**Q5:** "What will you explicitly NOT do in [domain]?"
-- **This is the hardest question** - use scaffolding if stuck:
-  1. "What requests have you said no to—or wish you had?"
-  2. "What did you consider but decide against?"
-  3. "If someone proposed adding [new initiative], what would you tell them?"
-  4. "What are you currently doing that you should stop?"
-- **Why it matters:** "Every 'yes' is an implicit 'no' to something else. If you can't name what you're not doing, you haven't made strategic choices."
-
-**Q6:** "What's the biggest barrier to success in [domain]?"
-- **Follow-up:** "What needs to be true for you to succeed?"
-
-**Q7:** "What resources/support do you need that you don't have?"
-- **Challenge if "nothing":** "Most meaningful work requires time, development, or coordination—not just money."
-
-**Challenge Progression:**
-1. **Curious:** "Say more?" / "What would that look like?"
-2. **Gentle push:** "Help me see this concretely. If I walked into your office in December [next year], what would I notice?"
-3. **Direct challenge:** "This is staying abstract. Let's get specific—what's one concrete outcome?"
-4. **Support scaffolding:** Offer frameworks, examples, different angles
-
-**After domain completed:**
-- Summarize strategic direction back to user
-- Get confirmation before moving to next domain
-
----
-
-### Phase 4: Priority Goals with Success Indicators (Per Domain)
-
-**Objective:** Translate strategic direction into measurable progress.
-
-**Constraints:**
-- **Maximum 3 Priority Goals per domain** (hard cap)
-- Each goal requires **2-3 Success Indicators** with baselines + targets
-- Each goal requires **Key Actions** with owners, dependencies, timeline
-- Each goal requires **Quarterly Milestones**
-
-**Interview Process:**
-
-**For each domain:**
-
-1. **Establish Priority Goals:**
-   - "Based on our conversation, what are your 2-3 Priority Goals for [domain]?"
-   - **Challenge if >3:** "You've listed [N]. Research shows more than 3 priorities means none get focus. Which would you cut?"
-   - **Challenge if activity-focused:** Reframe as outcome (e.g., "implement curriculum" → "students demonstrate deeper engagement")
-
-2. **Define Success Indicators (for each goal):**
-   - "How will you know you're making progress on [goal]?"
-   - **Require:** Current state (baseline) → Target state (end of year)
-   - **Accept:** Both quantitative and qualitative
-     - Quantitative: "Student re-enrollment: 92% → 95%"
-     - Qualitative: "Faculty report feeling supported: 45% agree → 70% agree"
-   - **Challenge if no baseline:** "How will you establish one?" or "Is this a learning year?"
-   - **Challenge if vague target:** "Too easy or unrealistic?"
-   - **Challenge if activity metric:** "That measures what you did, not the result. What outcome changes?"
-
-3. **Identify Actions, Owners, Dependencies:**
-   - "What are the key actions that will drive [goal]?"
-   - For each action:
-     - **Action/Project:** What will be done
-     - **Owner:** Who is accountable (a person, not committee)
-     - **Dependencies:** Other people/teams/resources required
-     - **Timeline:** Q1/Q2/Q3/Q4 milestones
-
-4. **Map Quarterly Milestones:**
-   - "What should be true by end of Q1 (Mar 31), Q2 (Jun 30), Q3 (Sep 30), Q4 (Dec 31)?"
-
-**Challenge Mechanisms:**
-- **Activity → Outcome reframing:** "If you do X successfully, what changes? That's the priority."
-- **No baseline:** "Can you establish one now? If not, note this as 'learning year' for baseline."
-- **Vague targets:** "If you hit this target, would you be satisfied? What would failure look like?"
-
-**After all domains completed:**
-
-5. **Confirm Alignment:**
-   - "Looking at all your goals together—do they clearly ladder up to your strategic direction AND to your core mission?"
-   - **If weak alignment:** Work to adjust or note misalignment for discussion
-
----
-
-### Phase 5: Cross-Domain Integration
-
-**Objective:** Portfolio view, trade-offs, advisor review, identity alignment.
-
-**Portfolio Questions:**
-
-**Q1:** "Looking at all 5 domains—what's the overall story of [next year]?"
-
-**Q2:** "Where are you over-committed? What trade-offs do you need to make?"
-
-**Q3:** "Which domain gets your BEST energy? Which gets leftovers?"
-
-**Q4:** "If one domain had to be 'maintenance mode' in [next year], which and why?"
-
-**Personal Board of Directors (optional but recommended):**
-
-**Q5:** "Who are your 4-7 advisors across domains?"
-- For each: Name, Domain expertise, What they help with, Last consulted
-- **Roles to consider:** Connector, Accountability Partner, Futurist, Subject Matter Expert
-
-**Q6:** "Who's missing from your board?"
-- **Prompt:** "Do you have a Connector (network access), Futurist (trends), Accountability Partner?"
-
-**Alignment with Identity:**
-
-**Q7:** "Do these goals align with your Type 3w4 achievement pattern?"
-- **Context:** Meaningful, competent, expert-level impact (from identity-core.json)
-
-**Q8:** "Which goals leverage your Input/Analytical/Learner strengths?"
-- **Display:** How each goal creates opportunities for information gathering, evidence-based thinking, mastery
-
-**Q9:** "Any goals that require relationship building (your 0% Blue gap)?"
-- **Follow-up:** "How will you handle that? Who can help?"
-
-**Q10:** "Looking at your workload—where's the Type 3 stress risk?"
-- **Context:** Type 3 pattern = push harder when stressed
-- **Prompt:** "If things get overwhelming in Q2, what's your PAUSE trigger before pushing harder?"
-
----
-
-### Phase 6: Review & Finalize
-
-**Objective:** Generate output, get approval, save to systems.
-
-**Geoffrey:**
-
-1. **Display Complete Annual Review**
-   - Use `templates/annual-review-template.md` format
-   - Show full markdown output for review
-
-2. **Get User Approval**
-   - "Does this capture your strategic plan for [year]?"
-   - "What would you adjust?"
-   - Iterate until confirmed
-
-3. **Save to Obsidian**
-   - Run `scripts/generate_annual_review.py`
-   - Save to `Personal_Notes/Reviews/Annual/{YEAR}-Annual-Review.md`
-
-4. **Ask about OmniFocus**
-   - "Create OmniFocus projects from your Priority Goals now or later?"
-   - If now: Run `scripts/sync_to_omnifocus.js`
-
-5. **Review Personal User Guide for Updates**
-   - Read current User Guide: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/Geoffrey/Kris-Hagel-User-Guide.md`
-   - Compare to this year's review conversation:
-     - Role changes (meeting cadences, team structure, responsibilities)
-     - New growth areas identified
-     - Communication pattern shifts
-     - Changed priorities, frustrations, or energizers
-     - "What drains me" / "What energizes me" updates
-   - Propose specific, evidence-based updates:
-     - "In this review you mentioned X, but your User Guide says Y. Should I update?"
-     - "You identified [growth area] but it's not documented. Should we add it?"
-   - If updates approved: Edit the User Guide and confirm changes
-   - If significant changes: Suggest notifying team/peers
-
-6. **Schedule Quarterly Reviews**
-   - Confirm quarterly timing: Mar 31, Jun 30, Sep 30, Dec 31
-   - Add to OmniFocus as recurring tasks
-
-**Final Output:**
-- Annual review markdown file (Obsidian)
-- OmniFocus projects (if requested)
-- Confirmation message with file path
-
----
-
-## Quarterly Check-In Workflow
-
-The quarterly check-in is a lighter interview (15-20 min) focused on progress and adjustment.
-
-### Check-In Questions
-
-**For each domain with Priority Goals:**
-
-**Q1:** "Progress status on [Goal]?"
-- ✅ On track (will hit target)
-- ⚠️ At risk (may miss target without intervention)
-- ❌ Off track (unlikely to hit target)
-
-**Q2:** "What evidence supports your assessment?"
-- Current state vs. Q{N} milestone
-- What happened this quarter?
-
-**Q3:** "What's working? What's stalled?"
-
-**Q4:** "Do Success Indicators still make sense?"
-- Adjust targets? (yes/no + rationale)
-- Add/remove indicators?
-
-**Q5:** "What needs to change for Q{N+1}?"
-- Actions to add/drop
-- Resources needed
-- Trade-offs with other domains
-
-**After all domains:**
-
-**Q6:** "Overall portfolio health?"
-- Energy distribution across domains
-- Over-committed anywhere?
-- Mid-course corrections needed?
-
-**Q7:** "User Guide check against this quarter's insights"
-- Read current User Guide: `~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/Geoffrey/Kris-Hagel-User-Guide.md`
-- Compare to quarterly progress discussion:
-  - Any communication preferences that changed?
-  - New frustrations or energizers to document?
-  - Growth areas with visible progress?
-- Propose specific updates based on evidence from this check-in
-- If updates approved: Edit and save
-
-### Check-In Output
-
-**Geoffrey:**
-
-1. Run `scripts/generate_quarterly_review.py`
-2. Save to `Personal_Notes/Reviews/Quarterly/{YEAR}-Q{N}-Review.md`
-3. Update annual review frontmatter with link to quarterly review
-4. Confirm adjustments to OmniFocus if targets/actions changed
-
----
-
-## Output Format
-
-### Annual Review
-
-See `templates/annual-review-template.md` for complete format.
-
-**Key sections:**
-- Year-in-Review Summary (cross-domain patterns, lessons)
-- Per Domain: Review + Strategic Direction + Priority Goals
-- Cross-Domain Integration (portfolio, trade-offs, advisors, alignment)
-- Next Steps (quarterly reviews, OmniFocus sync, advisor shares)
-
-### Quarterly Review
-
-See `templates/quarterly-review-template.md` for complete format.
-
-**Key sections:**
-- Progress status per Priority Goal
-- Evidence of progress vs. milestones
-- What's working / what's stalled
-- Adjustments for next quarter
-- Portfolio health check
-
----
-
-## Integration with Existing Systems
-
-### Obsidian
-
-**Storage locations:**
+**Generates:**
+- Data-driven SWOT matrix
+- Supporting evidence citations
+- Investment priority recommendations
+- Barrier analysis
+
+### Plan Synthesis
+```bash
+uv run skills/strategic-planning-manager/scripts/synthesize_plan.py \
+  --work-dir ./planning \
+  --output ./outputs/strategic-plan.md \
+  --format full  # or 'executive', 'board', 'staff', 'community'
 ```
-Personal_Notes/
-└── Reviews/
-    ├── Annual/
-    │   └── YYYY-Annual-Review.md
-    └── Quarterly/
-        └── YYYY-QN-Review.md
+
+**Generates:**
+- Complete strategic plan document
+- Multiple stakeholder versions
+- Executive summary
+- Board presentation outline
+
+---
+
+## Facilitator Guides
+
+Detailed guides for each human session:
+
+| Guide | Purpose | Duration |
+|-------|---------|----------|
+| `phase1-discovery-guide.md` | Data collection interviews, survey design | Varies |
+| `phase2-swot-guide.md` | SWOT workshop facilitation | 2-3 hours |
+| `phase3-vision-guide.md` | Practical vision brainstorming | 3-4 hours |
+| `phase4-contradictions-guide.md` | Contradiction identification | 2-3 hours |
+| `phase5-directions-guide.md` | Strategic direction development | 3-4 hours |
+| `phase6-implementation-guide.md` | Implementation planning | 3-4 hours |
+| `retreat-agenda-2day.md` | Full 2-day retreat structure | 2 days |
+| `retreat-agenda-condensed.md` | Condensed 1-day format | 1 day |
+
+Each guide includes:
+- Detailed agenda with timing
+- Facilitator prompts and questions
+- Small group and large group activities
+- Materials needed
+- Expected outputs
+- Common challenges and solutions
+
+---
+
+## Data Storage (Obsidian)
+
+Strategic plans are stored in the Obsidian vault:
+
+```
+Personal_Notes/Geoffrey/Strategic-Plans/
+├── {District-Name}/
+│   ├── {Year}-Strategic-Plan.md
+│   ├── Discovery-Report.md
+│   ├── SWOT-Analysis.md
+│   ├── Practical-Vision.md
+│   ├── Contradictions-Analysis.md
+│   ├── Strategic-Directions.md
+│   ├── Implementation-Plan.md
+│   └── Facilitator-Guides/
+│       └── [Generated guides for this district]
 ```
 
 **Frontmatter:**
 ```yaml
 ---
+type: strategic-plan
+district: {District Name}
+year: {YYYY}
+phase: {1-7 or complete}
+status: draft | in-progress | final
 created: {date}
-year: {YEAR}
-domains: [CIO, Consulting, Product, RealEstate, Financial]
-status: Draft | Final
-quarterly_reviews:
-  - Q1: [[YYYY-Q1-Review]]
-  - Q2: null
-  - Q3: null
-  - Q4: null
+updated: {date}
 ---
 ```
 
-### OmniFocus
+---
 
-**Project structure:**
-- `[Domain] - [Goal Name]` (e.g., "CIO Role - Improve AI Adoption")
-- Tasks for each action (owner/dependencies in notes)
-- Milestones as tasks with Q1/Q2/Q3/Q4 due dates
-- Tags: domain name + "2026 Goals"
+## Common K-12 Strategic Themes
 
-### Personal User Guide
+Pre-loaded from `config/k12-themes.yaml`:
 
-**Location:**
-```
-Personal_Notes/Geoffrey/Kris-Hagel-User-Guide.md
-```
-
-**Review triggers:**
-- Annual review (Phase 6) - comprehensive review
-- Quarterly check-ins - light evidence-based updates
-
-**Update approach:**
-- Evidence-based: Compare User Guide to review conversation
-- Specific proposals: Point out discrepancies with examples
-- User approval required before editing
-
-### Identity-Core Integration
-
-**Loads from:**
-- `~/Library/Mobile Documents/com~apple~CloudDocs/Geoffrey/knowledge/identity-core.json`
-
-**References:**
-- TELOS mission per domain
-- Constitution values (equity, excellence, empathy, learning, innovation, integrity)
-- Strengths (Input, Significance, Analytical, Achiever, Learner)
-- Personality (Type 3w4, Green-Orange, 0% Blue relationship gap)
-- Decision framework, stress patterns, growth edges
-
-**Uses for:**
-- Alignment checks in Part 3 (Strategic Direction)
-- Challenge questions in Part 5 (Cross-Domain Integration)
-- Framing success in terms of Mastery + Legacy + Freedom
+| Theme | Prevalence | Key Metrics |
+|-------|------------|-------------|
+| Student Achievement | 90%+ | Test scores, graduation rates, college readiness |
+| Equity & Access | 90% | Gap reduction, program access, representation |
+| Staff Quality & Retention | 80% | Hiring, development, turnover rates |
+| Parent/Community Engagement | 80% | Participation, satisfaction, partnerships |
+| Facilities & Technology | 75% | Infrastructure, device ratios, connectivity |
+| Fiscal Sustainability | 70% | Budget balance, reserves, cost efficiency |
+| Social-Emotional Learning | Growing | SEL metrics, climate surveys, wellness |
+| Safety & Security | Variable | Incident rates, preparedness, climate |
 
 ---
 
-## Framework Integration
+## Research Foundations
 
-### James Clear Systems Focus
+This skill synthesizes best practices from:
 
-**Applied in:**
-- Success Indicators: Include leading (process) + lagging (outcome) metrics
-- During goal-setting: Ask "What system/habit supports this goal?"
-- Reframe outcome goals → process goals where appropriate
+**ThoughtExchange 3 Models:**
+- Plan on a Page
+- VMOSA (Vision → Mission → Objectives → Strategies → Action Plan)
+- Five-Step Model
 
-**Example:**
-- Outcome: "Launch AI voice app"
-- System: "Ship feature every 2 weeks" + "User feedback session biweekly"
+**Education Elements (7 Steps):**
+- Pre-Planning Assessment
+- Community Engagement Strategy
+- Strategic Planning Team Formation
+- Build Common Understanding
+- Design Solutions (prioritization matrix)
+- Communication Planning
+- Monitoring and Adaptation
 
-### Personal Board of Directors
+**Hanover Research (5 Phases):**
+- Discovery (surveys, benchmarking)
+- Analysis (SWOT synthesis)
+- Visioning (workshops)
+- Goal Setting (SMART goals)
+- Implementation Roadmap (KPIs)
 
-**Included in:** Part 5 (Cross-Domain Integration)
+**AASA 10-Step Framework:**
+- Comprehensive district leadership approach
+- Emphasis on board/superintendent buy-in
+- Quarterly monitoring, annual evaluation
 
-**Tracks:**
-- 4-7 advisors across domains
-- Roles: Connector, Accountability Partner, Futurist, Subject Matter Expert
-- Last consulted date (accountability)
+**ICA Technology of Participation (ToP):**
+- ORID Method (Objective → Reflective → Interpretive → Decisional)
+- Focused Conversation
+- Consensus Workshop
+- Strategic Planning Matrix
 
-### Life Map (Alex Lieberman)
+**CoSN Strategic Planning (Direct Experience):**
+- Discovery Findings
+- SWOT → Investment/Barriers
+- Practical Vision (3-year, categorized)
+- Underlying Contradictions
+- Strategic Directions
+- Focused Implementation (Current → 1-Year → 3-Year)
+- First-Year Timeline
 
-**Maps to 5 domains:**
-- Career → CIO Role + Consulting/Speaking
-- Finances → Real Estate + Financial Planning
-- Meaning → Product Development (AI products = legacy)
-- Relationships → Cross-domain question (0% Blue gap)
-- Health → Not covered (note for future expansion)
-- Fun → Not covered (note for future expansion)
+---
 
-### Ideal Lifestyle Costing (Tim Ferriss)
+## Example Workflow
 
-**Optional exercise in:** Financial Planning domain
+### Starting a New Strategic Plan
 
-**Question:** "What does your ideal [year] look like? Cost it out."
-**Use for:** Retirement planning milestone
+```
+User: "Help me create a strategic plan for our district"
+
+Geoffrey:
+1. Ask which mode: Full Process, Phase-Specific, or Data Analysis
+2. If Full Process:
+   - Ask about available data (surveys, transcripts, existing docs)
+   - Ask about timeline (retreat dates, board presentation date)
+   - Ask about stakeholder groups to involve
+3. Begin Phase 1: Discovery
+   - Ingest provided data files
+   - Generate Discovery Report
+4. Continue through phases with appropriate AI/human balance
+5. Generate final plan documents
+6. Save to Obsidian vault
+```
+
+### Analyzing Survey Data Only
+
+```
+User: "I have survey results I need to analyze for our strategic planning"
+
+Geoffrey:
+1. Ask for data file(s) and format
+2. Run analyze_surveys.py
+3. Present findings:
+   - Key themes
+   - Stakeholder differences
+   - Sentiment analysis
+   - Suggested SWOT inputs
+4. Ask if user wants to continue to SWOT generation
+```
+
+### Updating an Existing Plan
+
+```
+User: "We need to update our strategic plan for year 2"
+
+Geoffrey:
+1. Load existing plan from Obsidian
+2. Ask about progress on Year 1 accomplishments
+3. Collect new data/feedback
+4. Identify what's on track, at risk, off track
+5. Recommend adjustments to timeline/directions
+6. Generate updated plan document
+```
 
 ---
 
 ## Error Handling
 
-### Common Scenarios
+**1. No data provided for discovery:**
+- Offer to conduct discovery interviews directly
+- Suggest data collection templates
+- Proceed with qualitative input only
 
-**1. User can't answer "what you will NOT do" (Q5 in Strategic Direction):**
-- **Response:** Use scaffolding questions (see Phase 3)
-- **If still stuck:** "Let's flag this and come back after Priority Goals are defined."
-- **Note in output:** "Strategic exclusions to be determined"
+**2. Insufficient stakeholder representation:**
+- Flag which groups are missing
+- Recommend targeted data collection
+- Note limitation in final report
 
-**2. User has no baseline for Success Indicator:**
-- **Response:** "Can you establish a baseline now? If not, we'll note this as a 'learning year' for baseline setting."
-- **Record:** Current = "Baseline TBD" → Target = [value]
+**3. Conflicting stakeholder priorities:**
+- Surface contradictions explicitly in Phase 4
+- Use as input for strategic direction decisions
+- Document minority viewpoints
 
-**3. User proposes >3 Priority Goals:**
-- **Response:** "You've listed [N] priorities. Research shows more than 3 means none get focus. Which would you cut?"
-- **Enforce:** Hard cap at 3 per domain
+**4. Unrealistic implementation timeline:**
+- Flag capacity concerns
+- Suggest prioritization/phasing
+- Recommend reducing scope or extending timeline
 
-**4. User's goals don't align with strategic direction:**
-- **Response:** "You said your strategic direction was [X], but this goal seems focused on [Y]. Help me see the connection."
-- **If misalignment remains:** Note in "Potential Misalignments" section for discussion
-
-**5. User wants to skip domains:**
-- **Response:** Allow skipping for quarterly check-ins
-- **For annual:** Recommend covering all 5, but allow "maintenance mode" designation
-
-**6. User wants to adjust targets mid-year (quarterly check-in):**
-- **Response:** "What changed? What's the rationale for adjusting?"
-- **Record:** Original target + Revised target with date/reason
-- **Update:** OmniFocus milestones if needed
-
----
-
-## Future Enhancements
-
-- [ ] Add Health and Fun domains to Life Map coverage
-- [ ] Integrate with calendar for automatic quarterly review reminders
-- [ ] Add mid-year strategic adjustment session (July)
-- [ ] Create visualization dashboard for progress tracking
-- [ ] Add retrospective analysis comparing year-over-year patterns
-- [ ] Integration with knowledge-manager for automatic preference updates based on goals
-- [ ] Add voice AI option for conducting interview (user speaks, Geoffrey transcribes and challenges)
+**5. Plan update with no progress data:**
+- Conduct progress interview
+- Use qualitative assessment
+- Note "self-reported" vs "measured" progress
 
 ---
 
 ## Version History
 
-**v1.0.0** (2026-01-02)
+**v1.0.0** (2026-01-26)
 - Initial release
-- Annual review interview (6 phases)
-- Quarterly check-in interview
-- Obsidian integration (Reviews folder)
-- OmniFocus integration (auto-create projects)
-- Identity-core alignment checks
-- Progressive challenge mechanisms
-- 5-domain structure
+- 7-phase CoSN/ToP methodology
+- 4 skill modes (Full, Phase-Specific, Data Analysis, Update)
+- Python scripts for data analysis
+- Facilitator guides for human sessions
+- Obsidian integration for plan storage
+- K-12 themes and metrics library
+- Research-backed framework synthesis

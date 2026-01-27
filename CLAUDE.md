@@ -378,6 +378,7 @@ When you need to use or explore a skill:
 | omnifocus-manager | `skills/omnifocus-manager/SKILL.md` |
 | pai-monitor | `skills/pai-monitor/SKILL.md` |
 | pdf | `skills/pdf/SKILL.md` |
+| personal-strategic-planning | `skills/personal-strategic-planning/SKILL.md` |
 | pptx | `skills/pptx/SKILL.md` |
 | presentation-master | `skills/presentation-master/SKILL.md` |
 | psd-brand-guidelines | `skills/psd-brand-guidelines/SKILL.md` |

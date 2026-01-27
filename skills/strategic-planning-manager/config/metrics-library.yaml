@@ -1,0 +1,308 @@
+# K-12 Strategic Planning Metrics Library
+# Common success indicators with typical baselines and targets
+# Use for reference when developing success indicators
+
+version: 1.0.0
+last_updated: 2026-01-26
+
+# Student Achievement Metrics
+student_achievement:
+  graduation_rate:
+    description: "4-year adjusted cohort graduation rate"
+    typical_baseline: "80-90%"
+    typical_target: "90-95%"
+    measurement: "State reporting system"
+    frequency: "Annual"
+    notes: "Disaggregate by subgroup for equity analysis"
+
+  assessment_proficiency:
+    description: "Percentage of students meeting/exceeding standards"
+    typical_baseline: "40-60%"
+    typical_target: "60-80%"
+    measurement: "State assessments"
+    frequency: "Annual"
+    subjects: ["ELA", "Math", "Science"]
+
+  assessment_growth:
+    description: "Percentage of students showing expected growth"
+    typical_baseline: "50-60%"
+    typical_target: "70-80%"
+    measurement: "Growth models (MAP, i-Ready, etc.)"
+    frequency: "3x per year"
+
+  college_enrollment:
+    description: "Percentage of graduates enrolling in postsecondary"
+    typical_baseline: "50-70%"
+    typical_target: "70-85%"
+    measurement: "National Student Clearinghouse"
+    frequency: "Annual"
+    lag: "1 year after graduation"
+
+  college_persistence:
+    description: "Percentage still enrolled after first year"
+    typical_baseline: "60-75%"
+    typical_target: "80-90%"
+    measurement: "National Student Clearinghouse"
+    frequency: "Annual"
+
+  career_readiness:
+    description: "Percentage meeting career readiness benchmarks"
+    typical_baseline: "30-50%"
+    typical_target: "60-80%"
+    measurement: "CTE completion, industry certifications"
+    frequency: "Annual"
+
+# Equity & Access Metrics
+equity_access:
+  achievement_gap:
+    description: "Difference in proficiency between groups"
+    typical_baseline: "15-25 percentage points"
+    typical_target: "<10 percentage points"
+    measurement: "State assessment data"
+    frequency: "Annual"
+    groups: ["White/Black", "White/Hispanic", "Non-FRL/FRL"]
+
+  advanced_course_access:
+    description: "Percentage of students in AP/IB/honors by subgroup"
+    typical_baseline: "Varies significantly"
+    typical_target: "Proportional representation"
+    measurement: "Course enrollment data"
+    frequency: "Annual"
+
+  discipline_equity:
+    description: "Discipline rate ratios between groups"
+    typical_baseline: "2-4x disparity"
+    typical_target: "<1.5x disparity"
+    measurement: "Discipline records"
+    frequency: "Quarterly"
+
+  special_education_identification:
+    description: "SpEd identification rates by subgroup"
+    typical_baseline: "Varies"
+    typical_target: "Proportional to population"
+    measurement: "Special education data"
+    frequency: "Annual"
+
+  gifted_access:
+    description: "Gifted identification rates by subgroup"
+    typical_baseline: "Typically underrepresents minorities"
+    typical_target: "Proportional representation"
+    measurement: "Gifted program data"
+    frequency: "Annual"
+
+# Staff Quality Metrics
+staff_quality:
+  teacher_retention:
+    description: "Percentage of teachers returning year-over-year"
+    typical_baseline: "80-88%"
+    typical_target: "90-95%"
+    measurement: "HR records"
+    frequency: "Annual"
+
+  teacher_vacancy:
+    description: "Percentage of positions unfilled at year start"
+    typical_baseline: "3-8%"
+    typical_target: "<2%"
+    measurement: "HR records"
+    frequency: "Annual"
+
+  teacher_satisfaction:
+    description: "Overall satisfaction score"
+    typical_baseline: "65-75%"
+    typical_target: "80-90%"
+    measurement: "Climate survey"
+    frequency: "Annual"
+
+  professional_development_hours:
+    description: "Average PD hours per teacher"
+    typical_baseline: "20-40 hours"
+    typical_target: "40-60 hours"
+    measurement: "PD tracking system"
+    frequency: "Annual"
+
+  pd_effectiveness:
+    description: "Teachers rating PD as valuable"
+    typical_baseline: "50-65%"
+    typical_target: "80-90%"
+    measurement: "PD feedback surveys"
+    frequency: "Per session"
+
+  teacher_evaluation_proficiency:
+    description: "Percentage of teachers rated proficient+"
+    typical_baseline: "85-95%"
+    typical_target: "95%+"
+    measurement: "Evaluation system"
+    frequency: "Annual"
+
+# Community Engagement Metrics
+community_engagement:
+  parent_engagement_rate:
+    description: "Percentage of families engaged in some way"
+    typical_baseline: "40-60%"
+    typical_target: "70-85%"
+    measurement: "Event attendance, conference participation"
+    frequency: "Annual"
+
+  parent_satisfaction:
+    description: "Overall satisfaction score"
+    typical_baseline: "70-80%"
+    typical_target: "85-95%"
+    measurement: "Parent survey"
+    frequency: "Annual"
+
+  conference_participation:
+    description: "Percentage attending parent-teacher conferences"
+    typical_baseline: "60-80%"
+    typical_target: "85-95%"
+    measurement: "Conference records"
+    frequency: "2x per year"
+
+  volunteer_hours:
+    description: "Total volunteer hours in district"
+    typical_baseline: "Varies significantly"
+    typical_target: "20% increase"
+    measurement: "Volunteer tracking"
+    frequency: "Annual"
+
+  community_partnerships:
+    description: "Number of active community partnerships"
+    typical_baseline: "Varies"
+    typical_target: "Baseline + 25%"
+    measurement: "Partnership agreements"
+    frequency: "Annual"
+
+# Safety & Wellness Metrics
+safety_wellness:
+  student_sense_of_belonging:
+    description: "Students feeling they belong at school"
+    typical_baseline: "60-75%"
+    typical_target: "80-90%"
+    measurement: "Climate survey"
+    frequency: "Annual"
+
+  student_safety_perception:
+    description: "Students feeling safe at school"
+    typical_baseline: "70-85%"
+    typical_target: "90-95%"
+    measurement: "Climate survey"
+    frequency: "Annual"
+
+  sel_competency:
+    description: "Students demonstrating SEL competencies"
+    typical_baseline: "Varies by assessment"
+    typical_target: "10-15% growth"
+    measurement: "SEL assessment (CASEL tools)"
+    frequency: "2-3x per year"
+
+  chronic_absenteeism:
+    description: "Students missing 10%+ of school days"
+    typical_baseline: "15-25%"
+    typical_target: "<10%"
+    measurement: "Attendance records"
+    frequency: "Monthly"
+
+  discipline_incidents:
+    description: "Suspensions/expulsions per 100 students"
+    typical_baseline: "5-15 per 100"
+    typical_target: "<5 per 100"
+    measurement: "Discipline records"
+    frequency: "Monthly"
+
+  mental_health_referrals:
+    description: "Students accessing mental health support"
+    typical_baseline: "Varies"
+    typical_target: "Access meets need"
+    measurement: "Counseling records"
+    frequency: "Quarterly"
+
+# Operations & Resources Metrics
+operations:
+  fund_balance:
+    description: "General fund balance as % of expenditures"
+    typical_baseline: "5-15%"
+    typical_target: "10-15%"
+    measurement: "Financial records"
+    frequency: "Annual"
+
+  cost_per_pupil:
+    description: "Total expenditure per student"
+    typical_baseline: "Varies by state/region"
+    typical_target: "Maintain or improve efficiency"
+    measurement: "Financial records"
+    frequency: "Annual"
+
+  facility_condition:
+    description: "Facility condition index"
+    typical_baseline: "Varies"
+    typical_target: "Improve by X%"
+    measurement: "Facility assessments"
+    frequency: "Annual"
+
+  technology_device_ratio:
+    description: "Devices per student"
+    typical_baseline: "Varies (0.5-1.0)"
+    typical_target: "1:1"
+    measurement: "Inventory records"
+    frequency: "Annual"
+
+  technology_uptime:
+    description: "Percentage of time systems operational"
+    typical_baseline: "95-99%"
+    typical_target: "99%+"
+    measurement: "IT monitoring"
+    frequency: "Monthly"
+
+# Indicator design guidance
+indicator_guidelines:
+  good_indicator_criteria:
+    - "Specific and measurable"
+    - "Aligned to strategic direction"
+    - "Within district's sphere of influence"
+    - "Data can be reliably collected"
+    - "Meaningful to stakeholders"
+    - "Mix of leading and lagging"
+
+  common_mistakes:
+    - "Too many indicators (aim for 3-5 per direction)"
+    - "Activity measures instead of outcome measures"
+    - "No baseline established"
+    - "Targets too easy or impossible"
+    - "Data collection burden too high"
+    - "Indicators not disaggregated for equity"
+
+  baseline_collection:
+    - "Collect baseline in Q1 of Year 1 if not available"
+    - "Use existing data sources when possible"
+    - "Note 'Baseline TBD' if establishing measurement"
+    - "Consider proxy measures if direct measure unavailable"
+
+  target_setting:
+    - "Ambitious but achievable"
+    - "Year 1: Foundation and early progress"
+    - "Year 3: Meaningful transformation"
+    - "Consider external benchmarks"
+    - "Allow for adjustment based on learning"
+
+# Measurement frequency guide
+measurement_frequencies:
+  annual:
+    - "graduation rate"
+    - "assessment proficiency"
+    - "retention rates"
+    - "enrollment data"
+    - "budget metrics"
+
+  quarterly:
+    - "discipline data"
+    - "attendance patterns"
+    - "implementation milestones"
+    - "stakeholder feedback"
+
+  monthly:
+    - "operational metrics"
+    - "early warning indicators"
+    - "project progress"
+
+  real_time:
+    - "technology systems"
+    - "safety incidents"

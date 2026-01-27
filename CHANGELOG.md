@@ -5,6 +5,36 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.16.0] - 2026-01-26
+
+### Added
+- **Strategic Planning Manager skill (K-12/Organizational)** - Comprehensive 7-phase strategic planning framework for school districts
+  - Hybrid CoSN + research-backed methodology (ThoughtExchange, Education Elements, Hanover Research, AASA)
+  - 4 skill modes: Full Process Guide, Phase-Specific Entry, Data Analysis Only, Plan Update
+  - **4 Python scripts** for AI-assisted data analysis:
+    - `analyze_surveys.py` - Survey data analysis with TextBlob sentiment/theme extraction
+    - `process_transcripts.py` - Focus group transcript NLP processing
+    - `generate_swot.py` - SWOT synthesis from discovery data
+    - `synthesize_plan.py` - Complete plan document generation
+  - **9 templates** matching CoSN output format:
+    - Discovery report, SWOT, Practical Vision, Contradictions, Strategic Directions
+    - Focused Implementation (3-column), First-Year Timeline, Full Plan, Executive Summary
+  - **8 facilitator guides** for human sessions:
+    - Phase 1-6 guides with timings, activities, prompts, materials
+    - 2-day retreat agenda (comprehensive)
+    - 1-day condensed retreat agenda
+  - **3 config files** with K-12 domain knowledge:
+    - `k12-themes.yaml` - Common themes with prevalence, aliases, goals, metrics
+    - `facilitation-prompts.yaml` - AI-ready prompts for each phase
+    - `metrics-library.yaml` - Success indicators with baselines/targets
+  - Obsidian storage integration (Geoffrey/Strategic-Plans/{District-Name}/)
+
+### Changed
+- **Renamed personal planning skill** from `strategic-planning-manager` to `personal-strategic-planning`
+  - Updated triggers to avoid conflict with new organizational skill
+  - Added note pointing to organizational skill
+  - Version bumped to 1.1.0
+
 ## [0.15.0] - 2026-01-26
 
 ### Added

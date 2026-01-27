@@ -1,0 +1,259 @@
+# Facilitation Prompts for Strategic Planning
+# AI-ready prompts for each phase of the planning process
+# Use to support human facilitators or AI-assisted sessions
+
+version: 1.0.0
+last_updated: 2026-01-26
+
+# Phase 1: Discovery
+discovery:
+  opening_questions:
+    - "What data sources do you have available for our analysis?"
+    - "When was this data collected, and is it still relevant?"
+    - "Who are the key stakeholder groups we need to hear from?"
+    - "What do you already know or suspect about the findings?"
+    - "Are there any sensitive topics we should handle carefully?"
+
+  survey_design:
+    - "What are the most important questions you want answered?"
+    - "Which stakeholder groups will receive this survey?"
+    - "How will you ensure representative response rates?"
+    - "What languages should the survey be available in?"
+
+  focus_group_prompts:
+    opening:
+      - "What's going well in our district right now?"
+      - "What makes you proud of our schools?"
+    probing:
+      - "Can you give me a specific example?"
+      - "What made that work so well?"
+      - "Who else noticed that?"
+    concerns:
+      - "What concerns you about our district?"
+      - "What's not working as well as it should?"
+      - "What do you wish was different?"
+    vision:
+      - "Imagine it's three years from now. What do you see?"
+      - "What would make you say 'we've succeeded'?"
+
+  theme_validation:
+    - "Does this theme resonate with what you've heard?"
+    - "Is anything missing from these findings?"
+    - "What would critics say about this assessment?"
+
+# Phase 2: SWOT Analysis
+swot:
+  strengths_prompts:
+    - "What does our district do exceptionally well?"
+    - "What would community members say is our strength?"
+    - "What are we known for positively?"
+    - "What resources or capabilities give us an advantage?"
+    - "What would we never want to lose?"
+
+  weaknesses_prompts:
+    - "Where do we fall short of our aspirations?"
+    - "What do we avoid talking about?"
+    - "What would honest critics point to?"
+    - "Where do we struggle to make progress?"
+    - "What frustrates our stakeholders most?"
+
+  opportunities_prompts:
+    - "What external trends could benefit us?"
+    - "What community needs are unmet that we could address?"
+    - "What partnerships could we develop?"
+    - "What funding or policy changes could we leverage?"
+    - "What are neighboring districts doing that we could learn from?"
+
+  threats_prompts:
+    - "What external factors could harm our district?"
+    - "What demographic or economic trends concern you?"
+    - "What policy changes could create challenges?"
+    - "What competitive pressures exist?"
+    - "What risks are we not adequately preparing for?"
+
+  investment_analysis:
+    - "Which strength could we leverage to capture this opportunity?"
+    - "What would it take to turn this into an investment priority?"
+    - "Who would need to be involved to make this happen?"
+
+  barrier_analysis:
+    - "How significantly does this weakness block our progress?"
+    - "What would happen if we don't address this?"
+    - "Is this something we can change, or must we work around it?"
+
+# Phase 3: Practical Vision
+vision:
+  opening_frame:
+    - "It's [year + 3]. You walk into our district. What do you see?"
+    - "What would make you proud of what we've accomplished?"
+    - "What do students experience that's different from today?"
+
+  category_prompts:
+    learning:
+      - "What does learning look like for every student?"
+      - "How are students prepared for their futures?"
+      - "What skills do all graduates have?"
+    equity:
+      - "Who is succeeding, and what does that look like?"
+      - "What barriers have been removed?"
+      - "What opportunities are available to all?"
+    staff:
+      - "How do teachers describe their work?"
+      - "What professional growth is happening?"
+      - "How do staff feel about working here?"
+    community:
+      - "How do families engage with our schools?"
+      - "What community partnerships exist?"
+      - "What is our reputation in the community?"
+    technology:
+      - "How is technology enhancing learning?"
+      - "What digital capabilities do students have?"
+      - "How is data being used to improve outcomes?"
+    facilities:
+      - "What do our learning spaces look like?"
+      - "How are facilities supporting our mission?"
+    safety:
+      - "How do students and staff feel at school?"
+      - "What wellness supports exist?"
+      - "What is the school climate like?"
+
+  specificity_prompts:
+    - "What would that look like specifically?"
+    - "How would we know that's happening?"
+    - "What would students say about this?"
+    - "Give me an example of what you mean."
+
+  validation_prompts:
+    - "Is this achievable in 3 years?"
+    - "Would stakeholders recognize their input here?"
+    - "Does this vision inspire you?"
+    - "What's missing that should be included?"
+
+# Phase 4: Underlying Contradictions
+contradictions:
+  framing:
+    - "We want X, BUT Y..."
+    - "The tension is between..."
+    - "What pulls us in opposite directions?"
+    - "Both of these are true, and they conflict..."
+
+  discovery_prompts:
+    culture:
+      - "Where do our stated values conflict with actual behavior?"
+      - "What do we say we want but resist when it requires change?"
+    resources:
+      - "Where do we face trade-offs between competing priorities?"
+      - "What do we want but lack capacity for?"
+    structure:
+      - "Where do external requirements conflict with our beliefs?"
+      - "Where does our organization create unintended tension?"
+    stakeholders:
+      - "Where do different groups want different things?"
+      - "Where do adult needs conflict with student needs?"
+    time:
+      - "Where do short-term demands conflict with long-term goals?"
+      - "What urgent issues crowd out important work?"
+
+  deepening_prompts:
+    - "Why does this tension exist?"
+    - "What happens when we try to resolve it?"
+    - "Why hasn't this been addressed already?"
+    - "What would it take to honor both sides?"
+
+  prioritization_prompts:
+    - "Which contradictions most block our vision?"
+    - "Which contradictions are within our power to address?"
+    - "If we resolved this, what would unlock?"
+
+# Phase 5: Strategic Directions
+directions:
+  framing:
+    - "What innovative approach could resolve this tension?"
+    - "What would fundamentally change how we work?"
+    - "What would be truly different, not just more of the same?"
+
+  development_prompts:
+    - "How does this resolve the contradiction?"
+    - "Which vision categories does this advance?"
+    - "What are the key strategies within this direction?"
+    - "What makes this innovative for our context?"
+
+  quality_checks:
+    - "Is this an approach, or just a goal?"
+    - "Is this truly innovative, or business as usual?"
+    - "Is this achievable with focused effort over 3 years?"
+    - "Does this resolve a real contradiction?"
+
+  alignment_prompts:
+    - "Are all major contradictions addressed?"
+    - "Are all vision categories supported?"
+    - "Do these directions work together or conflict?"
+    - "What's missing?"
+
+# Phase 6: Implementation
+implementation:
+  current_reality:
+    - "Where are we honestly right now?"
+    - "What would a skeptic say about our current state?"
+    - "What evidence supports this assessment?"
+    - "Are we being honest or aspirational?"
+
+  three_year_outcomes:
+    - "What will be true when this direction is fully realized?"
+    - "How will we know we've succeeded?"
+    - "What will stakeholders experience differently?"
+
+  one_year_bridge:
+    - "What must be true after Year 1 to be on track?"
+    - "What foundation needs to be built this year?"
+    - "What will demonstrate real progress?"
+    - "Is this achievable in 12 months?"
+
+  success_indicators:
+    - "How will we measure progress?"
+    - "What's our baseline for this indicator?"
+    - "What's a realistic Year 1 target?"
+    - "How will we collect this data?"
+
+  timeline_prompts:
+    - "What happens first?"
+    - "What depends on what?"
+    - "When do we need budget for this?"
+    - "What's realistic given the school calendar?"
+
+  ownership_prompts:
+    - "Who is THE owner, not just involved?"
+    - "What support will they need?"
+    - "How will they be held accountable?"
+
+# Challenge prompts for any phase
+challenge_prompts:
+  vague_responses:
+    - "Say more? What would that look like specifically?"
+    - "Give me a concrete example."
+    - "If I walked in, what would I see?"
+
+  activity_focused:
+    - "That's what we'd do. What's the result?"
+    - "What outcome changes because of that?"
+    - "How would we know it worked?"
+
+  no_evidence:
+    - "What data supports that?"
+    - "How do we know that's true?"
+    - "What would prove that?"
+
+  overly_positive:
+    - "What would critics say?"
+    - "What's the risk here?"
+    - "What could go wrong?"
+
+  stuck:
+    - "What would you tell a new superintendent?"
+    - "What do high-performing districts do here?"
+    - "If resources weren't a constraint, what would you do?"
+
+  avoiding:
+    - "What are we not talking about?"
+    - "What's the elephant in the room?"
+    - "What's the hard truth here?"
