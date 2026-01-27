@@ -196,6 +196,24 @@ Claude Code supports progressive thinking levels:
 
 Use higher levels for complex architectural decisions or multi-step planning.
 
+## Effort Classification
+
+Match response depth to task complexity:
+
+| Level | Examples | Approach |
+|-------|----------|----------|
+| **TRIVIAL** | Typo fix, simple rename | Just do it, no planning |
+| **QUICK** | Add a function, small bug fix | Light planning, implement |
+| **STANDARD** | New feature, refactor | Plan mode, ISC, implement |
+| **THOROUGH** | Architecture change, complex feature | Deep think, multi-file plan, ISC |
+| **DETERMINED** | Critical system, security-sensitive | Ultrathink, council review, comprehensive ISC |
+
+**Guidelines:**
+- TRIVIAL/QUICK: Skip plan mode
+- STANDARD+: Use plan mode with ISC
+- THOROUGH+: Use extended thinking ("think hard" or higher)
+- DETERMINED: Consider multi-model-research for validation
+
 ## Versioning Guidelines
 
 **CRITICAL:** Every code change must include a version bump based on change significance.

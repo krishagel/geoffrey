@@ -5,6 +5,22 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.15.0] - 2026-01-26
+
+### Added
+- **PAI-inspired improvements** - Adopted 4 high-value patterns from Personal AI Infrastructure v2.4.0
+  - **ISC (Ideal State Criteria)** - Binary success criteria for plans (added to global CLAUDE.md)
+  - **Effort Classification** - Right-size responses to task complexity (TRIVIAL → DETERMINED scale)
+  - **Permission to Fail** - Explicit uncertainty guidance (added to global CLAUDE.md)
+  - **Stop Hook** - Automatic learning capture reminder on session end
+
+### Changed
+- **hooks/hooks.json** - Now registers Stop event hook for capture-learnings.sh
+- **CLAUDE.md** - Added Effort Classification table after Extended Thinking section
+
+### New Files
+- `hooks/Stop/capture-learnings.sh` - Lightweight session end hook suggesting /compound for substantial sessions
+
 ## [0.14.0] - 2026-01-26
 
 ### Added
