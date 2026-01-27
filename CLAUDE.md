@@ -383,6 +383,7 @@ When you need to use or explore a skill:
 | presentation-master | `skills/presentation-master/SKILL.md` |
 | psd-brand-guidelines | `skills/psd-brand-guidelines/SKILL.md` |
 | psd-instructional-vision | `skills/psd-instructional-vision/SKILL.md` |
+| redrover-manager | `skills/redrover-manager/SKILL.md` |
 | research | `skills/research/SKILL.md` |
 | skill-creator | `skills/skill-creator/SKILL.md` |
 | strategic-planning-manager | `skills/strategic-planning-manager/SKILL.md` |

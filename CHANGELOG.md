@@ -5,6 +5,21 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.17.0] - 2026-01-27
+
+### Added
+- **Red Rover Manager skill** - Staff absence management integration for PSD
+  - `get_organization.js` - Validate credentials and get org info
+  - `get_absences.js` - Raw absence/vacancy data for date ranges
+  - `get_daily_summary.js` - Daily absence summary (all staff)
+  - `get_certificated_summary.js` - Daily summary for certificated staff only (most common report)
+  - `get_weekly_summary.js` - Weekly trends and patterns
+  - Uses `/api/v1/{orgId}/Vacancy/details` endpoint for rich absence data
+  - Includes fill rate, by-school, by-reason, unfilled positions breakdowns
+
+### Changed
+- Added Red Rover credentials to secrets.js vault map
+
 ## [0.16.0] - 2026-01-26
 
 ### Added

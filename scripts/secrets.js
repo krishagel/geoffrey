@@ -42,6 +42,11 @@ const VAULT_MAP = {
 
   // Obsidian MCP
   OBSIDIAN_API_KEY: 'op://Geoffrey/Obsidian-MCP/api-key',
+
+  // Red Rover
+  REDROVER_USERNAME: 'op://Geoffrey/RedRover/username',
+  REDROVER_PASSWORD: 'op://Geoffrey/RedRover/password',
+  REDROVER_API_KEY: 'op://Geoffrey/RedRover/api-key',
 };
 
 // Cache for loaded secrets (avoid repeated CLI calls)
@@ -212,6 +217,13 @@ const SECRETS = {
   },
   get obsidian() {
     return requireSecret('OBSIDIAN_API_KEY');
+  },
+  get redrover() {
+    return {
+      username: requireSecret('REDROVER_USERNAME'),
+      password: requireSecret('REDROVER_PASSWORD'),
+      apiKey: requireSecret('REDROVER_API_KEY'),
+    };
   },
 };
 
