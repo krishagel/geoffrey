@@ -5,6 +5,16 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.14.0] - 2026-01-26
+
+### Added
+- **Clawdbot Monitor skill** - Monitor Clawdbot repo for updates and identify improvement opportunities
+  - Compares Geoffrey against Clawdbot's patterns, skills, and features
+  - 4-phase analysis workflow (fetch, analyze, gap analysis, report)
+  - Focus areas: skills, hooks, extensions, memory
+  - Generates actionable improvement recommendations
+  - Includes reference documentation for key Clawdbot areas
+
 ## [0.13.0] - 2026-01-26
 
 ### Added
