@@ -5,6 +5,18 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.19.0] - 2026-01-28
+
+### Added
+- **PDF to Markdown skill** - Convert PDF files to clean, well-structured Markdown
+  - Uses Marker library (31k+ GitHub stars, best-in-class accuracy)
+  - Tables converted to Markdown table format
+  - Images/graphics described as text using Gemini LLM (no image files output)
+  - Surya OCR support for 90+ languages
+  - Options: `--no-llm` (fast mode), `--force-ocr` (scanned PDFs), `--page-range`
+  - Default output: `~/Desktop/{filename}.md`
+  - Requires GEMINI_API_KEY from 1Password
+
 ## [0.18.8] - 2026-01-28
 
 ### Fixed
