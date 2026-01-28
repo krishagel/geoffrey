@@ -98,6 +98,39 @@ uv run --with mlx-audio --with pydub skills/local-tts/scripts/generate_audio.py 
 - For seasonal topics (ski seasons, travel, events): calculate the CURRENT or UPCOMING season
 - November 2025 → 2025-2026 ski season (NOT 2024-2025)
 - Always use current year in search queries unless explicitly historical
+
+### JavaScript Date Parsing
+
+**CRITICAL:** NEVER use `new Date("YYYY-MM-DD")` for date strings. It interprets as midnight UTC, which becomes the PREVIOUS day in Pacific time.
+
+**WRONG - causes off-by-one bugs:**
+```javascript
+const date = new Date("2026-01-27"); // Midnight UTC = Jan 26 4pm Pacific!
+const formatted = date.toISOString().split('T')[0]; // Returns UTC date!
+```
+
+**CORRECT - parse as LOCAL time:**
+```javascript
+// Parse YYYY-MM-DD as local time
+function parseLocalDate(str) {
+  const [year, month, day] = str.split('-').map(Number);
+  return new Date(year, month - 1, day); // month is 0-indexed
+}
+
+// Format as local date (not UTC)
+function formatLocalDate(date) {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+```
+
+**Rule:** When writing ANY JavaScript that parses date strings from CLI args or user input:
+1. Split the string and use `new Date(year, month-1, day)`
+2. Format output with `getFullYear()`, `getMonth()`, `getDate()` - NOT `toISOString()`
+
+**Shared utility available:** `scripts/utils/dates.js` exports `parseLocalDate`, `formatLocalDate`, `parseDateArg`
 - When in doubt, search for "2025" or "2026" not past years
 
 ### NEVER Make Up Facts

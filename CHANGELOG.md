@@ -5,6 +5,17 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.3] - 2026-01-27
+
+### Added
+- **Morning Briefing** - Legislative activity section integrated into daily briefing
+  - Phase 1.14: Gather legislative activity since last business day
+  - Template section: Bills grouped by HIGH/MEDIUM/LOW priority
+  - Podcast script section 9: ~150 word legislative update
+  - Quick stats includes legislative bills with activity count
+  - On Mondays, includes all weekend activity (Friday→Monday)
+- `get_recent_bill_activity.js` - Returns bill IDs to check with date range and WebFetch instructions
+
 ## [0.18.2] - 2026-01-27
 
 ### Changed

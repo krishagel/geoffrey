@@ -42,8 +42,27 @@ const FEDERAL_HOLIDAYS_2026 = [
 
 const ALL_HOLIDAYS = new Set([...FEDERAL_HOLIDAYS_2025, ...FEDERAL_HOLIDAYS_2026]);
 
+/**
+ * Format date as YYYY-MM-DD in LOCAL time (not UTC)
+ */
 function formatDate(date) {
-  return date.toISOString().split('T')[0];
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/**
+ * Parse date string as LOCAL time (not UTC)
+ * Accepts: "2026-01-27" or Date object
+ */
+function parseLocalDate(input) {
+  if (input instanceof Date) {
+    return input;
+  }
+  // Parse YYYY-MM-DD as local time by splitting components
+  const [year, month, day] = input.split('-').map(Number);
+  return new Date(year, month - 1, day); // month is 0-indexed
 }
 
 function isWeekend(date) {
@@ -60,7 +79,7 @@ function isBusinessDay(date) {
 }
 
 function getLastBusinessDay(referenceDate = new Date()) {
-  const ref = new Date(referenceDate);
+  const ref = referenceDate instanceof Date ? new Date(referenceDate) : parseLocalDate(referenceDate);
   ref.setHours(0, 0, 0, 0);
 
   // Start from the day before reference
@@ -91,7 +110,7 @@ function getLastBusinessDay(referenceDate = new Date()) {
 
 // CLI
 const referenceArg = process.argv[2];
-const referenceDate = referenceArg ? new Date(referenceArg) : new Date();
+const referenceDate = referenceArg ? parseLocalDate(referenceArg) : new Date();
 
 const result = getLastBusinessDay(referenceDate);
 console.log(JSON.stringify(result, null, 2));

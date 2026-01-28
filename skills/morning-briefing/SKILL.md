@@ -236,6 +236,36 @@ Returns all open (status:2) and pending (status:3) tickets in the Software Devel
 **Workspace ID**: 13 (Software Development)
 **Note**: This is the user's internal software development bug tracker for AI Studio and other PSD applications.
 
+### 1.14 Legislative Activity (Last Business Day)
+
+Get K-12 education bills with activity since the last business day:
+
+```bash
+# Get lookback info and bills to check
+bun /Users/hagelk/non-ic-code/geoffrey/skills/legislative-tracker/scripts/get_recent_bill_activity.js --last-business-day
+```
+
+This returns:
+- Date range to check (last business day → today)
+- List of ~143 confirmed education bill IDs
+- WebFetch instructions for each bill
+
+**Workflow:**
+1. Get the output from `get_recent_bill_activity.js`
+2. WebFetch each bill URL (batch 5-6 in parallel for speed)
+3. Extract latest action date from each bill page
+4. Filter to bills where latest_action_date >= lookback_start
+5. Apply priority framework (HIGH/MEDIUM/LOW based on district impact)
+6. Include summary of what each bill does
+
+**On Monday**: Lookback starts on Friday (or earlier if Friday was a holiday), so includes all weekend activity (hearings, votes, committee actions).
+
+**Example URLs to WebFetch:**
+- `https://app.leg.wa.gov/billsummary?BillNumber=1020&Year=2025`
+- `https://app.leg.wa.gov/billsummary?BillNumber=5038&Year=2025`
+
+**Note**: Only include bills that actually had activity. If no bills moved, output "No legislative activity since [date]".
+
 ## Phase 2: Generate Briefing
 
 ### 2.1 Analyze & Prioritize
@@ -348,6 +378,27 @@ Use this structure:
 ### [Article Title 2] - [Source]
 [2-3 sentence synopsis]
 
+## Legislative Activity ([Last Biz Day] - Today)
+
+[X] education bills had movement:
+
+### 🔴 HIGH Priority
+
+#### [Bill ID] - [Short Title]
+**Action**: [What happened - hearing, vote, committee action, etc.]
+**Summary**: [1-2 sentences: what the bill does, potential district impact]
+
+### 🟡 MEDIUM Priority
+
+#### [Bill ID] - [Short Title]
+**Action**: [What happened]
+**Summary**: [1-2 sentences]
+
+### 🟢 LOW Priority
+- [Bill ID]: [Action type] - [One line summary]
+
+*No legislative activity since [date]* - if no bills moved
+
 ## Quick Stats
 - Calendar events: X
 - Tasks overdue: X | Due today: X | Flagged: X
@@ -357,6 +408,7 @@ Use this structure:
 - Recent emails (24h): X
 - Team tickets closed [last biz day]: X
 - News articles: EdTech (X) | AI (X) | Leadership (X)
+- Legislative bills with activity: X
 ```
 
 ### 2.3 Generate Podcast Script (Extended Format)
@@ -405,9 +457,15 @@ Transform the briefing into a comprehensive conversational audio script:
    - 1-2 articles with synopses
    - Policy/leadership implications
 
-9. **Closing** (~100 words)
-   - Top 3 priorities for the day
-   - Sign off
+9. **Legislative Update** (~150 words)
+   - Bills that had hearings, votes, or readings since last business day
+   - Highlight any with direct district impact (fiscal, operational, staffing)
+   - Note upcoming hearing dates if relevant
+   - On Mondays, include weekend activity summary
+
+10. **Closing** (~100 words)
+    - Top 3 priorities for the day
+    - Sign off
 
 **Style Guidelines:**
 - Use team members' first names when discussing their work
