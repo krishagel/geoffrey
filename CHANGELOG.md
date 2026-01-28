@@ -5,6 +5,53 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.2] - 2026-01-27
+
+### Changed
+- **Legislative Tracker** - Complete rewrite to use committee-based discovery via SOAP API
+  - Queries education committees directly to get ALL bills (no keyword filtering that misses bills)
+  - Tier 1: House Education + Senate Early Learning & K-12 Education → `confirmed_bills`
+  - Tier 2: Appropriations, Ways & Means, etc. → `tier2_candidates` (Geoffrey WebFetches each to filter)
+  - Tier 3: WebSearch fallback if SOAP fails
+- SKILL.md updated with new 4-phase workflow documentation
+- topics.yaml simplified - removed discovery keywords, kept analysis keywords
+
+### Added
+- `get_committees.js` - Fetch active committee names via SOAP API
+- `get_committee_bills.js` - Fetch all bills in a specific committee via SOAP
+- Committee configuration in topics.yaml with validated committee names
+- XML escaping for committee names with ampersands (e.g., "Early Learning & K-12 Education")
+
+### Fixed
+- Previous keyword-based discovery missed bills with unexpected wording
+- Bills now discovered by committee membership, not keyword matching
+- Tier 2 now properly outputs candidates for WebFetch filtering (was incorrectly trying to filter without descriptions)
+
+## [0.18.1] - 2026-01-27
+
+### Fixed
+- **Legislative Tracker** - Default year changed from 2025 to 2026
+- **Legislative Tracker** - Simplified to use WebFetch as primary data source (SOAP API unreliable for current session)
+- Scripts now output WebFetch instructions instead of failing when SOAP returns empty
+
+### Changed
+- Removed SOAP dependency for bill lookups - WebFetch is more reliable for 2025-26 session
+- `get_bill_info.js` returns bill URL and prompt for WebFetch
+- `get_bills.js` returns search queries for WebSearch discovery
+
+## [0.18.0] - 2026-01-27
+
+### Added
+- **Legislative Tracker skill** - Track WA State K-12 education legislation from leg.wa.gov
+  - Topic-based keyword filtering (Finance, Operations, Staffing, Technology, Governance, Special Programs)
+  - Priority analysis framework (HIGH/MEDIUM/LOW with fiscal impact indicators)
+  - District-specific config (Peninsula SD, 26th Legislative District legislators)
+  - Two output formats: full Markdown report and briefing JSON
+  - Morning briefing integration ready
+  - Obsidian storage support (`Work/PSD/Legislative/[YYYY-MM-DD].md`)
+  - Scripts: `get_bills.js`, `get_bill_info.js`
+  - Config: `topics.yaml` with keyword categories and district settings
+
 ## [0.17.1] - 2026-01-27
 
 ### Fixed

@@ -371,6 +371,7 @@ When you need to use or explore a skill:
 | google-workspace | `skills/google-workspace/SKILL.md` |
 | image-gen | `skills/image-gen/SKILL.md` |
 | knowledge-manager | `skills/knowledge-manager/SKILL.md` |
+| legislative-tracker | `skills/legislative-tracker/SKILL.md` |
 | local-tts | `skills/local-tts/SKILL.md` |
 | morning-briefing | `skills/morning-briefing/SKILL.md` |
 | multi-model-research | `skills/multi-model-research/SKILL.md` |

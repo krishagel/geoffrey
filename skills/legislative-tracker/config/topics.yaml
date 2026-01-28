@@ -1,0 +1,201 @@
+# Legislative Tracker Configuration
+# Analysis keywords and district configuration for WA State K-12 education legislation
+#
+# NOTE: Discovery no longer uses keyword searching. Bills are discovered by querying
+# education committees directly via SOAP API. Keywords below are used for:
+# - Tier 2 filtering (finding education bills in finance committees)
+# - Bill analysis and categorization
+
+# Education relevance keywords (for Tier 2 committee filtering)
+# Used to find education-related bills in non-education committees like Appropriations
+education_keywords:
+  - school
+  - student
+  - teacher
+  - education
+  - k-12
+  - k12
+  - district
+  - ospi
+  - classroom
+  - principal
+  - paraeducator
+  - learning
+  - instruction
+  - academic
+  - curriculum
+  - diploma
+  - graduation
+  - superintendent
+  - school board
+  - esa
+  - esd
+  - levy
+  - bond
+  - capital
+  - school construction
+
+# Impact category keywords (for bill analysis)
+impact_categories:
+  fiscal:
+    name: "Fiscal Impact"
+    keywords:
+      - levy
+      - bond
+      - funding
+      - appropriation
+      - budget
+      - revenue
+      - tax
+      - capital
+      - grant
+      - allocation
+
+  operational:
+    name: "Operations"
+    keywords:
+      - procurement
+      - transportation
+      - facilities
+      - food
+      - contracts
+      - maintenance
+      - nutrition
+      - custodial
+      - energy
+      - utilities
+
+  workforce:
+    name: "Workforce"
+    keywords:
+      - staff
+      - salary
+      - certification
+      - benefits
+      - teacher
+      - paraeducator
+      - classified
+      - retirement
+      - pers
+      - trs
+      - compensation
+      - collective bargaining
+      - shortage
+      - retention
+
+  governance:
+    name: "Governance & Compliance"
+    keywords:
+      - reporting
+      - accountability
+      - board
+      - compliance
+      - audit
+      - assessment
+      - testing
+      - accreditation
+      - diploma
+      - graduation requirements
+
+# Fiscal impact indicator keywords
+fiscal_indicators:
+  cost_increase:
+    symbol: "⬆️"
+    keywords:
+      - increase
+      - additional
+      - mandate
+      - require
+      - expand
+      - new program
+      - unfunded
+
+  cost_decrease:
+    symbol: "⬇️"
+    keywords:
+      - reduce
+      - savings
+      - efficiency
+      - eliminate
+      - streamline
+      - consolidate
+
+  risk:
+    symbol: "⚠️"
+    keywords:
+      - liability
+      - penalty
+      - fine
+      - violation
+      - lawsuit
+      - exposure
+
+  neutral:
+    symbol: "➡️"
+    keywords: []
+
+# District-specific configuration
+district:
+  name: "Peninsula School District"
+  code: "401"
+  county: "Pierce"
+
+  # 26th Legislative District representatives
+  legislators:
+    - name: "Sen. Emily Randall"
+      district: 26
+      chamber: senate
+      party: D
+    - name: "Rep. Spencer Hutchins"
+      district: 26
+      chamber: house
+      position: 1
+      party: R
+    - name: "Rep. Adison Richards"
+      district: 26
+      chamber: house
+      position: 2
+      party: R
+
+  # Priority thresholds for fiscal impact (annual)
+  thresholds:
+    high_fiscal_impact: 100000  # $100K+
+    medium_fiscal_impact: 25000  # $25K-$100K
+
+# Search/session configuration
+session:
+  biennium: "2025-26"
+  year: 2025  # URL parameter year (session start year)
+
+# Committee configuration
+# These are validated committee names from the WA Legislature SOAP API
+committees:
+  tier1:
+    # Direct education committees - get ALL bills, no filtering
+    - name: "Education"
+      agency: "House"
+    - name: "Early Learning & K-12 Education"
+      agency: "Senate"
+
+  tier2:
+    # Finance/labor committees - Geoffrey WebFetches each bill to filter for education relevance
+    - name: "Appropriations"
+      agency: "House"
+    - name: "Capital Budget"
+      agency: "House"
+    - name: "Labor & Workplace Standards"
+      agency: "House"
+    - name: "Ways & Means"
+      agency: "Senate"
+    - name: "Labor & Commerce"
+      agency: "Senate"
+    - name: "State Government, Tribal Affairs & Elections"
+      agency: "Senate"
+
+# Priority scoring weights
+priority_weights:
+  district_sponsor: 2.0      # Bill sponsored by district legislator
+  fiscal_impact_high: 1.5    # High fiscal impact
+  deadline_urgent: 1.5       # Deadline within 7 days
+  mandate_new: 1.3           # Creates new mandate/requirement
+  tier1_committee: 1.2       # From education committee (likely more relevant)
