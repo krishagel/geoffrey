@@ -23,19 +23,35 @@ Options:
 import argparse
 import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 
-# Load Gemini API key from 1Password
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "scripts"))
-from secrets import require_secret
+
+def get_secret_from_1password(secret_ref: str) -> str:
+    """Load a secret directly from 1Password CLI."""
+    try:
+        result = subprocess.run(
+            ["op", "read", secret_ref],
+            capture_output=True,
+            text=True,
+            check=True,
+            timeout=10,
+        )
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        print(f"Error reading from 1Password: {e.stderr}", file=sys.stderr)
+        sys.exit(1)
+    except FileNotFoundError:
+        print("Error: 1Password CLI (op) not found. Install with: brew install --cask 1password-cli", file=sys.stderr)
+        sys.exit(1)
 
 
 def setup_api_key():
     """Load Gemini API key from 1Password and set as env var."""
     # Marker expects GOOGLE_API_KEY
     if "GOOGLE_API_KEY" not in os.environ:
-        os.environ["GOOGLE_API_KEY"] = require_secret("GEMINI_API_KEY")
+        os.environ["GOOGLE_API_KEY"] = get_secret_from_1password("op://Geoffrey/Gemini/api-key")
 
 
 def strip_image_references(markdown: str) -> str:
