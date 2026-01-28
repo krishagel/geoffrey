@@ -11,12 +11,22 @@
  *   --body         Email body text (short messages)
  *   --body-file    Path to file containing email body (for long content)
  *   --attachments  Comma-separated paths to attachment files
+ *   --inline-image Path to image to embed inline (referenced as cid:briefing_image in HTML)
  *   --cc           CC recipients (comma-separated)
  *   --bcc          BCC recipients (comma-separated)
  *   --html         Treat body as HTML (default: plain text)
  *
+ * Inline Image Usage:
+ *   Use --inline-image to embed an image that displays in the email body.
+ *   Reference it in your HTML with: <img src="cid:briefing_image">
+ *   The image will appear inline AND be downloadable.
+ *
  * Examples:
- *   bun send_with_attachments.js psd --to "john@example.com" --subject "Daily Briefing" --body-file /tmp/briefing.md --attachments ~/Desktop/podcast.mp3,~/Desktop/infographic.png
+ *   # With inline image at top of HTML email
+ *   bun send_with_attachments.js psd --to "john@example.com" --subject "Daily Briefing" \
+ *     --body-file /tmp/briefing.html --html \
+ *     --inline-image ~/Desktop/infographic.png \
+ *     --attachments ~/Desktop/podcast.mp3
  */
 
 const { google } = require('googleapis');
@@ -80,6 +90,25 @@ async function sendWithAttachments(account, options) {
     body = fs.readFileSync(bodyPath, 'utf8');
   }
 
+  // Parse inline image (embedded in email body)
+  let inlineImage = null;
+  if (options.inlineImage) {
+    const inlinePath = expandPath(options.inlineImage);
+    if (!fs.existsSync(inlinePath)) {
+      throw new Error(`Inline image not found: ${inlinePath}`);
+    }
+    const data = fs.readFileSync(inlinePath);
+    const filename = path.basename(inlinePath);
+    inlineImage = {
+      path: inlinePath,
+      filename,
+      mimeType: getMimeType(filename),
+      base64: data.toString('base64'),
+      size: data.length,
+      contentId: 'briefing_image', // Referenced as cid:briefing_image in HTML
+    };
+  }
+
   // Parse attachments
   const attachmentPaths = options.attachments
     ? options.attachments.split(',').map(p => expandPath(p.trim()))
@@ -102,8 +131,9 @@ async function sendWithAttachments(account, options) {
     });
   }
 
-  // Generate boundary for multipart message
-  const boundary = `boundary_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+  // Generate boundaries for multipart message
+  const mixedBoundary = `mixed_${Date.now()}_${Math.random().toString(36).substring(2)}`;
+  const relatedBoundary = `related_${Date.now()}_${Math.random().toString(36).substring(2)}`;
 
   // Build headers
   const headers = [
@@ -122,27 +152,55 @@ async function sendWithAttachments(account, options) {
   headers.push(
     `Subject: ${options.subject}`,
     'MIME-Version: 1.0',
-    `Content-Type: multipart/mixed; boundary="${boundary}"`
+    `Content-Type: multipart/mixed; boundary="${mixedBoundary}"`
   );
 
   // Build body content type
   const contentType = options.html ? 'text/html; charset=utf-8' : 'text/plain; charset=utf-8';
 
-  // Build multipart message parts
-  const emailParts = [
-    headers.join('\r\n'),
-    '',
-    `--${boundary}`,
-    `Content-Type: ${contentType}`,
-    '',
-    body,
-  ];
+  // Build multipart message
+  let emailParts;
+
+  if (inlineImage && options.html) {
+    // Use multipart/related for HTML with inline image
+    emailParts = [
+      headers.join('\r\n'),
+      '',
+      `--${mixedBoundary}`,
+      `Content-Type: multipart/related; boundary="${relatedBoundary}"`,
+      '',
+      `--${relatedBoundary}`,
+      `Content-Type: ${contentType}`,
+      '',
+      body,
+      '',
+      `--${relatedBoundary}`,
+      `Content-Type: ${inlineImage.mimeType}; name="${inlineImage.filename}"`,
+      'Content-Transfer-Encoding: base64',
+      `Content-ID: <${inlineImage.contentId}>`,
+      `Content-Disposition: inline; filename="${inlineImage.filename}"`,
+      '',
+      inlineImage.base64.match(/.{1,76}/g).join('\r\n'),
+      '',
+      `--${relatedBoundary}--`,
+    ];
+  } else {
+    // Standard multipart/mixed
+    emailParts = [
+      headers.join('\r\n'),
+      '',
+      `--${mixedBoundary}`,
+      `Content-Type: ${contentType}`,
+      '',
+      body,
+    ];
+  }
 
   // Add each attachment
   for (const attachment of attachments) {
     emailParts.push(
       '',
-      `--${boundary}`,
+      `--${mixedBoundary}`,
       `Content-Type: ${attachment.mimeType}; name="${attachment.filename}"`,
       'Content-Transfer-Encoding: base64',
       `Content-Disposition: attachment; filename="${attachment.filename}"`,
@@ -153,7 +211,7 @@ async function sendWithAttachments(account, options) {
   }
 
   // Close boundary
-  emailParts.push('', `--${boundary}--`);
+  emailParts.push('', `--${mixedBoundary}--`);
 
   const email = emailParts.join('\r\n');
 
@@ -179,6 +237,12 @@ async function sendWithAttachments(account, options) {
       threadId: response.data.threadId,
       to: options.to,
       subject: options.subject,
+      inlineImage: inlineImage ? {
+        filename: inlineImage.filename,
+        mimeType: inlineImage.mimeType,
+        size: inlineImage.size,
+        contentId: inlineImage.contentId,
+      } : null,
       attachments: attachments.map(a => ({
         filename: a.filename,
         mimeType: a.mimeType,
@@ -231,6 +295,9 @@ async function main() {
         break;
       case '--html':
         options.html = true;
+        break;
+      case '--inline-image':
+        options.inlineImage = args[++i];
         break;
     }
   }

@@ -5,6 +5,20 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.4] - 2026-01-27
+
+### Fixed
+- **Morning Briefing** - Email now uses HTML formatting instead of plain markdown
+  - Infographic displays INLINE at top of email (not just as attachment)
+  - Professional styling that renders nicely in Gmail
+  - HTML template at `skills/morning-briefing/templates/email.html`
+- **Morning Briefing** - Infographic generation marked as MANDATORY (was being skipped)
+
+### Added
+- `--inline-image` option for `send_with_attachments.js` - Embeds images inline in HTML emails
+  - Use `<img src="cid:briefing_image">` in HTML to reference the image
+  - Image displays in email body AND is downloadable
+
 ## [0.18.3] - 2026-01-27
 
 ### Added

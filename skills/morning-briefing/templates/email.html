@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Briefing - {{DATE}}</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #003366;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      color: #003366;
+      margin: 0 0 8px 0;
+      font-size: 24px;
+    }
+    .header .date {
+      color: #666;
+      font-size: 14px;
+    }
+    .weather {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .weather .temp {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .weather .conditions {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      color: #003366;
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat-box {
+      background: #f8f9fa;
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-box .number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #003366;
+    }
+    .stat-box .label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .highlight {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .calendar-item {
+      display: flex;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid #eee;
+    }
+    .calendar-item:last-child {
+      border-bottom: none;
+    }
+    .calendar-time {
+      background: #003366;
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-right: 12px;
+      white-space: nowrap;
+    }
+    .calendar-title {
+      flex: 1;
+    }
+    .priority-high {
+      color: #dc3545;
+      font-weight: bold;
+    }
+    .priority-medium {
+      color: #fd7e14;
+    }
+    .priority-low {
+      color: #28a745;
+    }
+    .news-item {
+      margin-bottom: 12px;
+    }
+    .news-item .source {
+      font-size: 11px;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .news-item .title {
+      font-weight: 600;
+      color: #003366;
+    }
+    .news-item .synopsis {
+      font-size: 14px;
+      color: #555;
+    }
+    .footer {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      margin-top: 20px;
+      color: #666;
+      font-size: 12px;
+    }
+    .attachments {
+      background: #e8f4f8;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .attachments h3 {
+      margin: 0 0 12px 0;
+      color: #003366;
+      font-size: 14px;
+    }
+    .attachment-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .attachment-item:last-child {
+      margin-bottom: 0;
+    }
+    .attachment-icon {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Infographic at TOP - embedded via cid:briefing_image -->
+    <img src="cid:briefing_image" alt="Daily Briefing Infographic" style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 20px; display: block;">
+
+    <div class="header">
+      <h1>Daily Briefing</h1>
+      <div class="date">{{DAY_OF_WEEK}}, {{DATE_FORMATTED}}</div>
+    </div>
+
+    <div class="weather">
+      <div class="temp">{{WEATHER_TEMP}}</div>
+      <div class="conditions">{{WEATHER_CONDITIONS}}</div>
+    </div>
+
+    <div class="section">
+      <h2>Today at a Glance</h2>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="number">{{CALENDAR_COUNT}}</div>
+          <div class="label">Meetings</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">{{TASKS_DUE}}</div>
+          <div class="label">Tasks Due</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">{{TICKETS_OPEN}}</div>
+          <div class="label">Open Tickets</div>
+        </div>
+        <div class="stat-box">
+          <div class="number">{{EMAILS_COUNT}}</div>
+          <div class="label">New Emails</div>
+        </div>
+      </div>
+    </div>
+
+    {{#IF_OVERDUE}}
+    <div class="highlight">
+      <strong>Attention:</strong> {{OVERDUE_COUNT}} overdue task(s) need attention
+    </div>
+    {{/IF_OVERDUE}}
+
+    <div class="section">
+      <h2>Today's Calendar</h2>
+      {{CALENDAR_ITEMS}}
+    </div>
+
+    {{#IF_PRIORITIES}}
+    <div class="section">
+      <h2>Priority Tasks</h2>
+      {{PRIORITY_TASKS}}
+    </div>
+    {{/IF_PRIORITIES}}
+
+    <div class="section">
+      <h2>Team Activity ({{LAST_BIZ_DAY}})</h2>
+      <p>{{TEAM_SUMMARY}}</p>
+    </div>
+
+    <div class="section">
+      <h2>News Highlights</h2>
+      {{NEWS_ITEMS}}
+    </div>
+
+    {{#IF_LEGISLATIVE}}
+    <div class="section">
+      <h2>Legislative Activity</h2>
+      {{LEGISLATIVE_SUMMARY}}
+    </div>
+    {{/IF_LEGISLATIVE}}
+
+    <div class="attachments">
+      <h3>Attachments</h3>
+      <div class="attachment-item">
+        <span class="attachment-icon">🎧</span>
+        <span>Audio Podcast (~10-15 min)</span>
+      </div>
+      <div class="attachment-item">
+        <span class="attachment-icon">📊</span>
+        <span>Infographic Summary</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Full briefing saved to Obsidian: Geoffrey/Daily Briefings/{{DATE}}.md</p>
+      <p>Generated by Geoffrey</p>
+    </div>
+  </div>
+</body>
+</html>

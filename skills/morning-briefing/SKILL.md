@@ -487,7 +487,9 @@ uv run --with mlx-audio --with pydub /Users/hagelk/non-ic-code/geoffrey/skills/l
 **Voice Selection**: af_heart (warm, friendly - good for morning briefing)
 **Note**: Uses local MLX TTS (Kokoro model) - no API costs
 
-## Phase 3.5: Generate Infographic
+## Phase 3.5: Generate Infographic (MANDATORY)
+
+**CRITICAL:** The infographic MUST be generated. Do not skip this phase.
 
 Create a visual summary infographic using the image-gen skill.
 
@@ -574,48 +576,74 @@ Use Obsidian MCP tools:
 /Users/hagelk/Library/Mobile Documents/iCloud~md~obsidian/Documents/Personal_Notes/Geoffrey/Daily Briefings/[YYYY-MM-DD].md
 ```
 
-## Phase 5: Send Email
+## Phase 5: Send Email (HTML with Inline Infographic)
 
-### 5.1 Save Email Body to File
+### 5.1 Generate HTML Email Body
 
-Save the full briefing markdown to a temp file (avoids CLI argument length issues):
+Create a professional HTML email (NOT markdown). Use the template at `skills/morning-briefing/templates/email.html` as reference.
 
-```bash
-# Write briefing to temp file
-cat > /tmp/morning_briefing_email.md << 'EOF'
-Good morning,
+**Key HTML structure:**
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 600px; margin: 0 auto; }
+    .header { text-align: center; border-bottom: 2px solid #003366; padding: 16px; }
+    .stat-box { background: #f8f9fa; padding: 12px; text-align: center; }
+    /* ... more styles from template ... */
+  </style>
+</head>
+<body>
+  <!-- Infographic at TOP - referenced via cid:briefing_image -->
+  <img src="cid:briefing_image" alt="Daily Briefing" style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 20px;">
 
-Here's your daily briefing for [DATE].
+  <div class="header">
+    <h1 style="color: #003366;">Daily Briefing</h1>
+    <p>[DAY_OF_WEEK], [DATE_FORMATTED]</p>
+  </div>
 
-[Include full briefing markdown - same content as Obsidian note]
+  <!-- Weather, Stats, Calendar, Tasks, Team, News sections -->
+  <!-- See templates/email.html for full structure -->
 
----
-📊 Infographic and 🎧 Audio podcast attached.
-Listen time: ~3 minutes.
-Full briefing also saved to Obsidian: Geoffrey/Daily Briefings/[DATE].md
-EOF
+  <div style="background: #e8f4f8; padding: 16px; border-radius: 8px; margin-top: 20px;">
+    <strong>Attachments:</strong><br>
+    🎧 Audio Podcast (~10-15 min)<br>
+    📊 Infographic (also shown above)
+  </div>
+
+  <p style="text-align: center; color: #666; font-size: 12px;">
+    Full briefing: Obsidian/Geoffrey/Daily Briefings/[DATE].md
+  </p>
+</body>
+</html>
 ```
 
-### 5.2 Send with Multiple Attachments
+**CRITICAL:** The `<img src="cid:briefing_image">` displays the infographic inline at the top of the email.
+
+Save to `/tmp/morning_briefing_email.html`
+
+### 5.2 Send with Inline Image + Attachments
 
 ```bash
 cd /Users/hagelk/non-ic-code/geoffrey/skills/google-workspace && bun gmail/send_with_attachments.js psd \
   --to "hagelk@psd401.net" \
   --subject "Daily Briefing - [DATE]" \
-  --body-file /tmp/morning_briefing_email.md \
-  --attachments "~/Desktop/morning_briefing_[DATE].png,~/Desktop/morning_briefing_[DATE].mp3"
+  --body-file /tmp/morning_briefing_email.html \
+  --html \
+  --inline-image "~/Desktop/morning_briefing_[DATE].png" \
+  --attachments "~/Desktop/morning_briefing_[DATE].mp3"
 ```
 
-**Note**: The `send_with_attachments.js` script supports:
-- Multiple attachments (comma-separated paths)
-- Body from file (`--body-file`) for long content
-- MP3, PNG, PDF, images, Office documents
-- Plain text or HTML body (use `--html` flag)
-- CC/BCC recipients
+**Options explained:**
+- `--html` - Treat body as HTML (required for formatting)
+- `--inline-image` - Embeds image at top of email (referenced as `cid:briefing_image`)
+- `--attachments` - Additional files to attach (podcast)
 
-**Attachments sent:**
-1. `morning_briefing_[DATE].png` - Visual infographic summary
-2. `morning_briefing_[DATE].mp3` - Audio podcast (~3 min)
+**Result:**
+- Infographic displays INLINE at top of email (visible without downloading)
+- Podcast attached for download
+- Email renders nicely in Gmail with professional styling
 
 ## Output
 
