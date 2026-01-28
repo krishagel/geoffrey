@@ -201,10 +201,22 @@ Get end-of-day check-in messages from the Technology Staff space:
 cd /Users/hagelk/non-ic-code/geoffrey/skills/google-workspace && bun chat/get_eod_messages.js psd spaces/AAAAxOtpv10 last-business-day
 ```
 
+**CRITICAL - NO HALLUCINATION:**
+- ONLY use names that appear in the `sender` field of the script output
+- If script returns no messages, say "No EOD messages found"
+- If script returns messages with sender IDs instead of names, display the ID (e.g., "users/12345...")
+- NEVER invent names, locations, or accomplishments
+- Copy-paste approach: treat script output as source of truth
+
+**Before extracting team data:**
+1. Examine the raw JSON output from the script
+2. List the exact `sender` values returned
+3. Use ONLY those names - no paraphrasing, no "improving"
+
 **CRITICAL**: Extract FULL details from each team member's EOD message. Look for messages that contain "Today:" prefix - these are the detailed EOD summaries.
 
 For each team member who posted an EOD summary:
-1. **Name**: Who posted
+1. **Name**: Who posted (use EXACTLY the name from `sender` field)
 2. **Location(s)**: Where they worked (WFH, DCRC, school sites)
 3. **Key accomplishments**: Specific tasks completed (not just "tickets")
 4. **Notable items**: Interesting problems solved, projects worked on
@@ -230,6 +242,20 @@ cd /Users/hagelk/non-ic-code/geoffrey/skills/google-workspace && bun chat/get_eo
 
 **Space**: PSD Safety & Security Team
 
+**CRITICAL - NO HALLUCINATION:**
+- ONLY use names that appear in the `sender` field of the script output
+- If script returns no messages, say "No EOD messages found"
+- If script returns messages with sender IDs (e.g., "users/12345...") instead of names:
+  - Display as: **Unknown (users/123456...)** - [Location from message content]
+  - Add note: "Name not in mapping - update chat_user_mapping.json"
+- NEVER invent names, locations, or accomplishments
+- Copy-paste approach: treat script output as source of truth
+
+**Before extracting team data:**
+1. Examine the raw JSON output from the script
+2. List the exact `sender` values returned
+3. Use ONLY those names - no paraphrasing, no "improving"
+
 Extract using same format as Technology Team - names, locations, accomplishments, issues.
 
 **Note**: If today is Monday, "last business day" = Friday (or Thursday if Friday was a holiday).
@@ -245,6 +271,17 @@ LAST_BIZ_DAY=$(bun /Users/hagelk/non-ic-code/geoffrey/skills/morning-briefing/sc
 # Then get daily summary for that date
 bun /Users/hagelk/non-ic-code/geoffrey/skills/freshservice-manager/scripts/get_daily_summary.js "$LAST_BIZ_DAY"
 ```
+
+**CRITICAL - NO HALLUCINATION:**
+- ONLY use agent names that appear in the `byAgent` section of script output
+- Use EXACTLY the ticket counts returned by the script
+- NEVER invent names or ticket counts
+- If an agent's name shows as ID or email, display it as-is
+
+**Before reporting ticket stats:**
+1. Examine the raw JSON output from `get_daily_summary.js`
+2. List the exact agent names from `byAgent` field
+3. Use ONLY those names and counts
 
 Returns:
 - Total tickets closed
@@ -374,14 +411,21 @@ Use this structure:
 
 ## Team Activity (Last Business Day: [DAY, DATE])
 
+**Data Source Verification (REQUIRED):**
+- Technology EOD script returned: [X] messages from [list exact sender names from JSON]
+- Safety & Security EOD script returned: [X] messages from [list exact sender names from JSON]
+- Freshservice daily summary returned: [X] tickets by [list exact agent names from JSON]
+
+*Use ONLY the names listed above. Never invent or paraphrase names.*
+
 ### Technology Team EOD Summaries
 
-**[Name 1]** - [Location(s)]
+**[Name from sender field]** - [Location(s)]
 - [Key accomplishment 1 - be specific about what they did]
 - [Key accomplishment 2]
 - [Notable: any interesting problems solved or projects]
 
-**[Name 2]** - [Location(s)]
+**[Name from sender field]** - [Location(s)]
 - [Key accomplishment 1]
 - [Key accomplishment 2]
 - [Issues: any blockers or problems mentioned]
@@ -390,17 +434,19 @@ Use this structure:
 
 ### Safety & Security Team EOD Summaries
 
-**[Name 1]** - [Location(s)]
+**[Name from sender field]** - [Location(s)]
 - [Key accomplishment 1]
 - [Key accomplishment 2]
 - [Notable: any issues or incidents handled]
+
+*If sender shows as user ID (users/12345...), display: **Unknown (users/12345...)** - [Location]*
 
 *[Continue for each team member who posted an EOD summary]*
 
 ### Tickets Completed by Team: [count]
 | Agent | Tickets | Top Categories |
 |-------|---------|----------------|
-| [Name] | X | Password Reset (Y), Chromebook (Z) |
+| [Name from byAgent field] | X | Password Reset (Y), Chromebook (Z) |
 
 ### Ticket Trends
 - Volume: [up/down/stable] vs previous days
@@ -514,6 +560,12 @@ Transform the briefing into a comprehensive conversational audio script:
    - Notable projects, interesting problems solved
    - What the Safety & Security team accomplished
    - Overall ticket closure stats
+
+   **CRITICAL - NO HALLUCINATION:**
+   - Use ONLY names from the script output `sender` fields
+   - Use ONLY ticket counts from the `get_daily_summary.js` output
+   - If script returned no messages, say "No EOD messages were posted"
+   - NEVER invent names, locations, or accomplishments
 
 6. **EdTech News** (~200 words)
    - 2-3 articles with synopses

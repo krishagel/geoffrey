@@ -5,6 +5,20 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.18.8] - 2026-01-28
+
+### Fixed
+- **Morning Briefing** - Anti-hallucination rules for team activity data
+  - SKILL.md now requires verification of script output before extracting names
+  - Explicitly prohibits inventing names, locations, or accomplishments
+  - Added "Data Source Verification" section to briefing template
+  - Updated podcast script section with anti-hallucination reminder
+
+### Added
+- **Safety & Security** - Team member name mappings
+  - Brent Campbell (ID: 110464501803865136524)
+  - Michael "Moose" Janke (ID: 112809044227081395731)
+
 ## [0.18.6] - 2026-01-27
 
 ### Changed
