@@ -7,8 +7,8 @@ triggers:
   - "start my day"
   - "what's on today"
 disable-model-invocation: true
-allowed-tools: Read, Write, Bash, WebSearch, mcp__obsidian-vault__*
-version: 1.3.0
+allowed-tools: Read, Write, Bash, WebSearch, WebFetch, mcp__obsidian-vault__*
+version: 1.4.0
 ---
 
 # Morning Briefing Workflow
@@ -108,7 +108,7 @@ Extract:
 
 Use WebSearch:
 ```
-K-12 education technology news today 2026
+K-12 education technology news past 24 hours January 2026
 ```
 
 For each article found (3-5 articles):
@@ -117,6 +117,8 @@ For each article found (3-5 articles):
    - What happened / what's new
    - Why it matters for K-12 education
    - Key takeaway or action item
+
+**Freshness check**: Verify article dates before including. Only include articles published within the last 24 hours. Skip older articles even if they appear in results.
 
 **Topics to cover:**
 - EdTech product launches and updates
@@ -128,7 +130,7 @@ For each article found (3-5 articles):
 
 Use WebSearch:
 ```
-artificial intelligence news today 2026 latest developments
+artificial intelligence news past 24 hours January 2026 latest
 ```
 
 For each article found (3-5 articles):
@@ -137,6 +139,8 @@ For each article found (3-5 articles):
    - What's the development
    - Industry impact
    - Relevance to education/work
+
+**Freshness check**: Verify article dates before including. Only include articles published within the last 24 hours. Skip older articles even if they appear in results.
 
 **Topics to cover:**
 - Major AI model releases and capabilities
@@ -148,7 +152,7 @@ For each article found (3-5 articles):
 
 Use WebSearch:
 ```
-K-12 school leadership superintendent education policy news 2026
+K-12 school leadership superintendent news past 24 hours January 2026
 ```
 
 For each article found (2-3 articles):
@@ -158,13 +162,38 @@ For each article found (2-3 articles):
    - Impact on districts/schools
    - Relevance to CIO/technology leadership
 
+**Freshness check**: Verify article dates before including. Only include articles published within the last 24 hours. Skip older articles even if they appear in results.
+
 **Topics to cover:**
 - State and federal education policy
 - Superintendent and board news
 - School funding and budgets
 - Workforce and staffing trends
 
-### 1.10 Team EOD Messages (Last Business Day) - DETAILED
+### 1.9b School Safety & Security News (with Synopses)
+
+Use WebSearch:
+```
+K-12 school safety security news past 24 hours January 2026
+```
+
+For each article found (3 articles):
+1. Use WebFetch to read the full article
+2. Extract a 2-3 sentence synopsis covering:
+   - What happened / what's new
+   - Impact on school safety practices
+   - Key takeaway for districts
+
+**Freshness check**: Verify article dates before including. Only include articles published within the last 24 hours. Skip older articles even if they appear in results.
+
+**Topics to cover:**
+- School security incidents and responses
+- Safety policy changes
+- Emergency preparedness
+- Mental health and threat assessment
+- Physical security technology
+
+### 1.10 Technology Team EOD Messages (Last Business Day) - DETAILED
 
 Get end-of-day check-in messages from the Technology Staff space:
 
@@ -188,6 +217,20 @@ Brad White:
 - Accomplished: Packaged Cinema 4D plugin for deployment, fixed OAuth blocking for Maxon App sign-in, created SwiftDialog notification for plugin installs, used Claude Code for first time to create Installomator label for Godot game engine
 - Notable: Working on Unity deployment troubleshooting, burning comp time leaving early
 ```
+
+**Note**: If today is Monday, "last business day" = Friday (or Thursday if Friday was a holiday).
+
+### 1.10b Safety & Security Team EOD Messages (Last Business Day)
+
+Get end-of-day check-in messages from the Safety & Security Staff space:
+
+```bash
+cd /Users/hagelk/non-ic-code/geoffrey/skills/google-workspace && bun chat/get_eod_messages.js psd spaces/AAAAFpQaAnA last-business-day
+```
+
+**Space**: PSD Safety & Security Team
+
+Extract using same format as Technology Team - names, locations, accomplishments, issues.
 
 **Note**: If today is Monday, "last business day" = Friday (or Thursday if Friday was a holiday).
 
@@ -331,7 +374,7 @@ Use this structure:
 
 ## Team Activity (Last Business Day: [DAY, DATE])
 
-### Team EOD Summaries
+### Technology Team EOD Summaries
 
 **[Name 1]** - [Location(s)]
 - [Key accomplishment 1 - be specific about what they did]
@@ -342,6 +385,15 @@ Use this structure:
 - [Key accomplishment 1]
 - [Key accomplishment 2]
 - [Issues: any blockers or problems mentioned]
+
+*[Continue for each team member who posted an EOD summary]*
+
+### Safety & Security Team EOD Summaries
+
+**[Name 1]** - [Location(s)]
+- [Key accomplishment 1]
+- [Key accomplishment 2]
+- [Notable: any issues or incidents handled]
 
 *[Continue for each team member who posted an EOD summary]*
 
@@ -382,6 +434,17 @@ Use this structure:
 [2-3 sentence synopsis: policy/leadership development, impact, relevance to tech leadership]
 
 ### [Article Title 2] - [Source]
+[2-3 sentence synopsis]
+
+## School Safety & Security News
+
+### [Article Title 1] - [Source]
+[2-3 sentence synopsis: what happened, impact on safety practices, takeaway for districts]
+
+### [Article Title 2] - [Source]
+[2-3 sentence synopsis]
+
+### [Article Title 3] - [Source]
 [2-3 sentence synopsis]
 
 ## Legislative Activity ([Last Biz Day] - Today)
@@ -446,9 +509,10 @@ Transform the briefing into a comprehensive conversational audio script:
    - Pending approvals
 
 5. **Team Activity - DETAILED** (~400 words)
-   - What the team accomplished on last business day
+   - What the Technology team accomplished on last business day
    - Highlight 3-5 team members by name with specifics
    - Notable projects, interesting problems solved
+   - What the Safety & Security team accomplished
    - Overall ticket closure stats
 
 6. **EdTech News** (~200 words)
@@ -462,6 +526,10 @@ Transform the briefing into a comprehensive conversational audio script:
 8. **K-12 Leadership News** (~150 words)
    - 1-2 articles with synopses
    - Policy/leadership implications
+
+8b. **School Safety & Security News** (~150 words)
+   - 2-3 articles with synopses
+   - Safety practices and district implications
 
 9. **Legislative Update** (~150 words)
    - Bills that had hearings, votes, or readings since last business day
@@ -724,7 +792,8 @@ Briefing saved to Obsidian without podcast
 - **Work Email**: psd account
 - **Technology Workspace**: workspace_id: 2
 - **Software Dev Workspace**: workspace_id: 13
-- **Team EOD Chat Space**: spaces/AAAAxOtpv10 (Technology Staff Check-Ins & Logs)
+- **Technology Chat Space**: spaces/AAAAxOtpv10 (Technology Staff Check-Ins & Logs)
+- **Safety & Security Chat Space**: spaces/AAAAFpQaAnA (PSD Safety & Security Team)
 - **Voice**: af_heart (warm, friendly - local Kokoro TTS)
 - **Podcast Length**: 10-15 minutes (~1500-2000 words)
 
