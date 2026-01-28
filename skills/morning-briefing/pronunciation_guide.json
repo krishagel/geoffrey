@@ -1,0 +1,13 @@
+{
+  "description": "Name pronunciations for TTS. Keys are the original spelling, values are phonetic spellings.",
+  "names": {
+    "Jaden": "Jayden",
+    "Hans": "Hahns",
+    "Loesch": "Lowsh",
+    "Bahr": "Bar",
+    "Winget": "Wingit"
+  },
+  "pending": {
+    "_comment": "Names that need pronunciation confirmation"
+  }
+}
