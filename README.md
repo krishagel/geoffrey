@@ -1,6 +1,6 @@
 # Geoffrey - Personal AI Infrastructure
 
-[![Version](https://img.shields.io/badge/version-0.18.5-blue.svg)](https://github.com/krishagel/geoffrey/releases)
+[![Version](https://img.shields.io/badge/version-0.18.6-blue.svg)](https://github.com/krishagel/geoffrey/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-plugin-purple.svg)](https://claude.com/code)
 
@@ -20,7 +20,7 @@ claude plugin install geoffrey@geoffrey
 
 ## Current Status: Phase 2 (Core Skills)
 
-**Version:** 0.18.5
+**Version:** 0.18.6
 **Status:** In Active Development
 
 ### What Works Now
@@ -396,5 +396,5 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 **Built with ❤️ using Claude Code**
 
-*Version: 0.18.5 | Phase 2 (Core Skills)*
+*Version: 0.18.6 | Phase 2 (Core Skills)*
 *Last updated: January 24, 2026*

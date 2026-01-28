@@ -57,13 +57,19 @@ Returns tasks that are:
 ```bash
 # Get yesterday's date in Gmail query format
 YESTERDAY=$(date -v-1d +%Y/%m/%d)
-cd /Users/hagelk/non-ic-code/geoffrey/skills/google-workspace && bun gmail/list_messages.js psd --query "after:$YESTERDAY" --max 15
+cd /Users/hagelk/non-ic-code/geoffrey/skills/google-workspace && bun gmail/list_messages.js psd --query "in:inbox after:$YESTERDAY" --max 15
 ```
 
 Returns recent inbox messages with:
 - From, subject, date, snippet
 - Whether read or unread
 - Thread ID for context
+- Labels array
+
+**Filtering**: Only show emails still in inbox (not already labeled/processed).
+- Emails with custom labels (Label_XXXXX) have been sorted and should be excluded
+- Exception: Include emails with SaneCC or SaneLater labels (worth knowing about)
+- System labels (UNREAD, INBOX, CATEGORY_*, IMPORTANT) don't count as "processed"
 
 **Philosophy**: Any email still in inbox from last 24 hours needs attention, read or not.
 
