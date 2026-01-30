@@ -420,6 +420,7 @@ When you need to use or explore a skill:
 | psd-instructional-vision | `skills/psd-instructional-vision/SKILL.md` |
 | redrover-manager | `skills/redrover-manager/SKILL.md` |
 | research | `skills/research/SKILL.md` |
+| seven-advisors | `skills/seven-advisors/SKILL.md` |
 | skill-creator | `skills/skill-creator/SKILL.md` |
 | strategic-planning-manager | `skills/strategic-planning-manager/SKILL.md` |
 | writer | `skills/writer/SKILL.md` |

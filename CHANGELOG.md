@@ -5,6 +5,17 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.20.0] - 2026-01-30
+
+### Added
+- **Seven Advisors skill** - Structured multi-perspective deliberation framework for important decisions
+  - Adapted from de Bono's Six Thinking Hats + 7th Stakeholder perspective
+  - 7 advisors: Facilitator (Blue), Analyst (White), Intuitive (Red), Innovator (Green), Advocate (Yellow), Critic (Black), Stakeholder (Orange)
+  - Full Council mode: 8-step sequential deliberation with facilitator synthesis
+  - Individual Advisor mode: consult a single perspective on demand
+  - Advisor profiles with role descriptions, core questions, tone guidance, and caution notes
+  - AI Studio assistant JSON export (`~/Downloads/seven-advisors-council.json`) with 8 sequential prompts
+
 ## [0.19.1] - 2026-01-28
 
 ### Fixed
