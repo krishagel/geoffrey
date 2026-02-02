@@ -3,13 +3,14 @@ type: discovery-report
 district: {DISTRICT_NAME}
 created: {DATE}
 status: draft
+stage: 1
 data_sources:
   - surveys: {count}
   - focus_groups: {count}
   - documents_reviewed: {count}
 ---
 
-# Discovery Phase Report
+# Discovery Report
 
 > Summary of data collection and initial findings for {DISTRICT_NAME} strategic planning.
 

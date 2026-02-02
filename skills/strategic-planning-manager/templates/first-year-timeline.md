@@ -3,6 +3,7 @@ type: first-year-timeline
 district: {DISTRICT_NAME}
 created: {DATE}
 status: draft
+stage: 3
 fiscal_year: {YEAR}-{YEAR + 1}
 ---
 

@@ -3,6 +3,7 @@ type: practical-vision
 district: {DISTRICT_NAME}
 created: {DATE}
 status: draft
+stage: 2
 vision_horizon: {YEAR + 3}
 ---
 

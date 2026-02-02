@@ -1,11 +1,13 @@
-# Phase 6: Focused Implementation
+# Stage 3: Build the Plan & Align Resources
 ## Facilitator Guide
 
 ---
 
 ## Overview
 
-**Purpose:** Translate strategic directions into concrete, time-bound implementation plans with clear accountability.
+**Key Question:** How will we get there?
+
+**Purpose:** Translate strategic directions into concrete, measurable goals with clear ownership, resource alignment, and a Year 1 implementation timeline.
 
 **Duration:** 3-4 hours for workshop session
 
@@ -16,7 +18,7 @@
 
 ## Key Concept: The Three-Column Approach
 
-For each strategic direction, we map:
+For each strategic direction, map progress across three horizons:
 
 | Current Reality | 1-Year Accomplishments | 3-Year Outcomes |
 |-----------------|------------------------|-----------------|
@@ -37,6 +39,7 @@ For each strategic direction, we map:
 ### Materials Needed
 
 - [ ] Strategic Directions summary (displayed)
+- [ ] Priority areas and outcome goals (displayed)
 - [ ] Large format three-column templates (1 per direction)
 - [ ] Markers (multiple colors)
 - [ ] Success indicator templates
@@ -46,7 +49,7 @@ For each strategic direction, we map:
 
 ### Room Setup
 
-- Tables for direction-specific groups
+- Tables assigned to specific directions
 - Each table has their direction displayed
 - Wall space for posting completed templates
 - Central timeline display
@@ -54,7 +57,7 @@ For each strategic direction, we map:
 ### Pre-Work
 
 Send 2-3 days before:
-- Strategic Directions summary
+- Strategic Directions summary with priority alignment
 - Prompt: "For your assigned direction, come prepared to honestly assess current state and propose Year 1 milestones"
 - Assign participants to directions based on expertise
 
@@ -69,8 +72,8 @@ Send 2-3 days before:
 | 0:45 | 3-Year Outcomes Definition | 25 min | |
 | 1:10 | Break | 10 min | |
 | 1:20 | 1-Year Accomplishments | 35 min | |
-| 1:55 | Success Indicators | 25 min | |
-| 2:20 | Year 1 Timeline (Quarterly) | 30 min | |
+| 1:55 | Success Indicators & Metrics | 25 min | |
+| 2:20 | Year 1 Quarterly Timeline | 30 min | |
 | 2:50 | Cross-Direction Integration | 20 min | |
 | 3:10 | Commitment & Close | 15 min | |
 | 3:25 | End | | |
@@ -97,15 +100,15 @@ Why this order? We start with honesty about now, define the destination, then id
 STRATEGIC DIRECTION: Culture of Continuous Improvement
 
 CURRENT REALITY           | 1-YEAR ACCOMPLISHMENTS      | 3-YEAR OUTCOMES
---------------------------|-----------------------------|-----------------
+--------------------------|-----------------------------|------------------
 Teachers hesitant to      | 50% of teams running        | Innovation is
 try new approaches        | improvement cycles          | embedded in culture
 
-No safe-to-fail          | 3 school pilots of          | All schools have
-experimentation          | innovation zones            | innovation structures
+No safe-to-fail           | 3 school pilots of          | All schools have
+experimentation           | innovation zones            | innovation structures
 
-Mistakes are hidden      | Monthly "learning from      | Failures shared as
-                        | failure" sessions           | learning opportunities
+Mistakes are hidden       | Monthly "learning from      | Failures shared as
+                          | failure" sessions           | learning opportunities
 ```
 
 ### Current Reality Assessment (30 min)
@@ -135,7 +138,7 @@ Write 5-8 current reality statements for your direction."
 "Now define the 3-year outcomes. By the end of Year 3, what will be true?
 
 These should:
-- Connect directly to the vision
+- Connect directly to our priority areas and vision
 - Be observable and measurable
 - Represent meaningful transformation
 - Be ambitious but achievable
@@ -143,7 +146,7 @@ These should:
 Write 5-8 outcome statements that match your current reality statements."
 
 **Facilitate:**
-- "How does this connect to our practical vision?"
+- "How does this connect to our vision?"
 - "Is this achievable in 3 years with focused effort?"
 - "How would we know this outcome was achieved?"
 
@@ -168,7 +171,7 @@ Year 1 accomplishments should be a credible bridge from current reality to 3-yea
 - "Is this ambitious enough to show real progress?"
 - "Will this set us up for Years 2-3?"
 
-### Success Indicators (25 min)
+### Success Indicators & Metrics (25 min)
 
 **Say:**
 "For each direction, we need 3-5 success indicators—measurable ways to track progress.
@@ -182,8 +185,8 @@ For each indicator, define:
 
 **Template:**
 
-| Indicator | Baseline | Y1 Target | Y3 Target | Measurement |
-|-----------|----------|-----------|-----------|-------------|
+| Indicator | Baseline | Y1 Target | Y3 Target | Measurement Method |
+|-----------|----------|-----------|-----------|-------------------|
 | | | | | |
 
 **Facilitate:**
@@ -197,16 +200,10 @@ For each indicator, define:
 - Some qualitative (surveys, perceptions)
 - Mix of leading (activity) and lagging (outcome)
 
-### Year 1 Timeline (30 min)
+### Year 1 Quarterly Timeline (30 min)
 
 **Say:**
-"Now let's break Year 1 into quarters. What happens when?
-
-For each quarter, identify:
-- Key actions
-- Milestones
-- Dependencies
-- Owner"
+"Let's break Year 1 into quarters. What happens when?"
 
 **Template:**
 
@@ -232,15 +229,12 @@ For each quarter, identify:
 - Potential conflicts in timing?
 - Opportunities for synergy?"
 
-**Create master view:**
 Post all direction timelines on the wall. Look for:
 - Resource conflicts (same people needed in multiple places)
 - Logical dependencies (Direction A must happen before B)
 - Integration opportunities (combine related work)
 
-**Adjust as needed:**
-"Where do we need to sequence differently?"
-"Where can we combine efforts?"
+Adjust as needed.
 
 ### Commitment & Close (15 min)
 
@@ -252,50 +246,22 @@ For each direction:
 - Who are the key leads?
 - When is the first milestone due?"
 
-**Go around the room:**
+Go around the room:
 "For [Direction], [Name] is committing to deliver [milestone] by [date]."
 
 **Close:**
-"We now have implementation plans for all strategic directions. These will guide our work for the next three years.
+"We now have implementation plans for all strategic directions.
 
-Final steps:
-1. I'll compile these into the Implementation Plan document
+Next steps:
+1. I'll compile these into the Strategic Plan document
 2. You'll review and finalize
 3. We'll develop detailed Year 1 action plans
-4. Board presentation for approval
-5. Launch!"
+4. Board presentation for adoption
+5. Stage 4: monitoring, reporting, and continuous improvement"
 
 ---
 
-## Quality Checks
-
-For each implementation plan, verify:
-
-- [ ] Current reality is honest and evidence-based
-- [ ] 3-year outcomes align with vision
-- [ ] Year 1 accomplishments are achievable and meaningful
-- [ ] Success indicators are measurable
-- [ ] Quarterly timeline is realistic
-- [ ] Owner is identified and committed
-- [ ] Resources are estimated
-- [ ] Dependencies are noted
-
----
-
-## Common Challenges
-
-| Challenge | Response |
-|-----------|----------|
-| Current reality too optimistic | "Would a skeptic agree? What would critics say?" |
-| 3-year outcomes too vague | "How would we know this happened? What would we observe?" |
-| Year 1 too ambitious | "Is this actually achievable in 12 months? What if we hit 70%?" |
-| Year 1 too modest | "Will this create enough momentum? Will stakeholders see progress?" |
-| No baseline data | "Can we collect baseline in Q1? What's our estimate now?" |
-| Overlapping ownership | "Who is THE owner? Others can support, but one person is accountable." |
-
----
-
-## Resource Estimation Guide
+## Resource Alignment Guide
 
 For each direction, estimate:
 
@@ -316,26 +282,55 @@ For each direction, estimate:
 
 ---
 
-## Output Checklist
+## Quality Checks
 
-By end of session:
-- [ ] Three-column template for each direction
-- [ ] 3-5 success indicators per direction with baselines
+For each implementation plan, verify:
+
+- [ ] Current reality is honest and evidence-based
+- [ ] 3-year outcomes align with vision and priority areas
+- [ ] Year 1 accomplishments are achievable and meaningful
+- [ ] Success indicators are measurable with baselines
+- [ ] Quarterly timeline is realistic given school calendar
+- [ ] Owner is identified and committed
+- [ ] Resources are estimated
+- [ ] Dependencies noted and resolved
+
+---
+
+## Common Challenges
+
+| Challenge | Response |
+|-----------|----------|
+| Current reality too optimistic | "Would a skeptic agree? What would critics say?" |
+| 3-year outcomes too vague | "How would we know this happened? What would we observe?" |
+| Year 1 too ambitious | "Is this actually achievable in 12 months? What if we hit 70%?" |
+| Year 1 too modest | "Will this create enough momentum? Will stakeholders see progress?" |
+| No baseline data | "Can we collect baseline in Q1? What's our estimate now?" |
+| Overlapping ownership | "Who is THE owner? Others support, but one person is accountable." |
+
+---
+
+## Outputs
+
+By end of Stage 3:
+- [ ] Three-column template for each direction (Current → Y1 → Y3)
+- [ ] 3-5 success indicators per direction with baselines and targets
 - [ ] Quarterly Year 1 timeline per direction
-- [ ] Cross-direction integration noted
+- [ ] Cross-direction integration plan
 - [ ] Owners identified and committed
-- [ ] Resource estimates drafted
+- [ ] Resource alignment estimates
 
 ---
 
-## Post-Session Actions
+## Handoff to Stage 4
 
-1. Compile Implementation Plan document
-2. Create First-Year Timeline summary
-3. Develop detailed Q1 action plans
-4. Prepare board presentation materials
-5. Create communication materials for launch
+Before moving to Implement & Improve:
+- [ ] Strategic plan document compiled
+- [ ] Board presentation prepared
+- [ ] Communication plan for launch
+- [ ] Monitoring framework defined
+- [ ] Annual action plan for Year 1 drafted
 
 ---
 
-*Phase 6 Guide - Geoffrey Strategic Planning Manager*
+*Stage 3 Guide - Strategic Planning Manager v2.0.0*

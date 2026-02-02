@@ -3,6 +3,7 @@ type: swot-analysis
 district: {DISTRICT_NAME}
 created: {DATE}
 status: draft
+stage: 1
 ---
 
 # SWOT Analysis

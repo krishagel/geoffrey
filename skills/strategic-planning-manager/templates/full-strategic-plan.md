@@ -3,6 +3,7 @@ type: strategic-plan
 district: {DISTRICT_NAME}
 created: {DATE}
 status: draft
+stage: complete
 plan_horizon: {YEAR} - {YEAR + 3}
 version: 1.0
 ---
@@ -18,16 +19,12 @@ version: 1.0
 2. [Executive Summary](#executive-summary)
 3. [About Our District](#about-our-district)
 4. [Planning Process](#planning-process)
-5. [Discovery Findings](#discovery-findings)
-6. [Environmental Analysis](#environmental-analysis)
-7. [Our Vision for {YEAR + 3}](#our-vision)
-8. [Underlying Contradictions](#underlying-contradictions)
-9. [Strategic Directions](#strategic-directions)
-10. [Implementation Plan](#implementation-plan)
-11. [Year One Focus](#year-one-focus)
-12. [Monitoring & Accountability](#monitoring-and-accountability)
-13. [Acknowledgments](#acknowledgments)
-14. [Appendices](#appendices)
+5. [Where We Are Now](#where-we-are-now)
+6. [Where We Want to Go](#where-we-want-to-go)
+7. [How We Will Get There](#how-we-will-get-there)
+8. [How We Will Know We're Succeeding](#how-we-will-know)
+9. [Acknowledgments](#acknowledgments)
+10. [Appendices](#appendices)
 
 ---
 
@@ -48,10 +45,10 @@ Dear {DISTRICT_NAME} Community,
 
 {2-3 sentence vision statement for the district in {YEAR + 3}}
 
-## Strategic Priorities
+## Strategic Directions
 
-| Priority | Focus |
-|----------|-------|
+| Direction | Focus |
+|-----------|-------|
 | **{Strategic Direction 1}** | {Brief description} |
 | **{Strategic Direction 2}** | {Brief description} |
 | **{Strategic Direction 3}** | {Brief description} |
@@ -104,39 +101,31 @@ Dear {DISTRICT_NAME} Community,
 
 # Planning Process
 
-## Methodology
+## Our Approach
 
-This strategic plan was developed using the Technology of Participation (ToP) methodology, a collaborative approach that ensures diverse stakeholder voices shape our direction.
+This strategic plan was developed through a collaborative 4-stage process that ensures diverse stakeholder voices shape our direction.
 
-### Planning Phases
+### Planning Stages
 
-1. **Discovery & Data Collection**
-   - Surveys, focus groups, document analysis
+1. **Engage & Assess** — Where are we now?
+   - Surveys, focus groups, interviews, document analysis
+   - SWOT analysis and prioritization
    - {Number} stakeholders engaged
 
-2. **Environmental Analysis**
-   - SWOT synthesis and prioritization
-   - Investment and barrier identification
+2. **Set Direction** — Where do we want to go?
+   - Mission, vision, and values review
+   - Priority area identification
+   - Strategic direction development
 
-3. **Practical Vision Development**
-   - Collaborative visioning sessions
-   - 8-10 vision categories identified
-
-4. **Underlying Contradictions**
-   - Tension identification and clustering
-   - Root cause analysis
-
-5. **Strategic Directions**
-   - Action definition and prioritization
-   - Resource planning
-
-6. **Implementation Planning**
+3. **Build the Plan & Align Resources** — How will we get there?
    - Three-year roadmap development
-   - Accountability structures
+   - Goal setting with measurable indicators
+   - Resource alignment and ownership
 
-7. **Plan Synthesis**
-   - Document development
-   - Stakeholder approval
+4. **Implement, Monitor & Improve** — Are we making progress?
+   - Annual action plans
+   - Progress monitoring and board reporting
+   - Continuous improvement cycles
 
 ## Stakeholder Engagement
 
@@ -156,7 +145,7 @@ This strategic plan was developed using the Technology of Participation (ToP) me
 
 ---
 
-# Discovery Findings
+# Where We Are Now
 
 ## What We Learned
 
@@ -182,11 +171,9 @@ This strategic plan was developed using the Technology of Participation (ToP) me
 > "{Representative quote}"
 > — {Stakeholder group}
 
----
+## Environmental Analysis
 
-# Environmental Analysis
-
-## SWOT Summary
+### SWOT Summary
 
 | Strengths | Weaknesses |
 |-----------|------------|
@@ -200,67 +187,45 @@ This strategic plan was developed using the Technology of Participation (ToP) me
 | {O2} | {T2} |
 | {O3} | {T3} |
 
-## Where We Will Invest
+### Where We Will Invest
 
 {Description of key investment priorities based on S×O analysis}
 
-## Barriers to Address
+### Barriers to Address
 
 {Description of key barriers that must be overcome}
 
 ---
 
-# Our Vision for {YEAR + 3}
+# Where We Want to Go
 
-## Vision Statement
+## Our Vision for {YEAR + 3}
 
 By {YEAR + 3}, {DISTRICT_NAME} will be a district where...
 
 {Narrative vision statement}
 
-## Vision by Category
+## Priority Areas
 
-### {Category 1}: {Theme}
+### {Priority 1}: {Theme}
 
-{Vision description and key outcomes}
+**Long-Term Outcome:** {What success looks like in 3 years}
 
-### {Category 2}: {Theme}
+### {Priority 2}: {Theme}
 
-{Vision description and key outcomes}
+**Long-Term Outcome:** {What success looks like in 3 years}
 
-### {Category 3}: {Theme}
+### {Priority 3}: {Theme}
 
-{Vision description and key outcomes}
+**Long-Term Outcome:** {What success looks like in 3 years}
 
-[Continue for all vision categories]
-
----
-
-# Underlying Contradictions
-
-## Understanding Our Challenges
-
-Strategic planning revealed tensions that must be resolved—not just obstacles to overcome, but competing priorities that require thoughtful resolution.
-
-### Contradiction 1: {Title}
-
-**The Tension:** {Description}
-
-**Impact:** {How this affects our vision}
-
-### Contradiction 2: {Title}
-
-**The Tension:** {Description}
-
-**Impact:** {How this affects our vision}
-
-[Continue for key contradictions]
+[Continue for all priority areas]
 
 ---
 
-# Strategic Directions
+# How We Will Get There
 
-## Our Five Priorities
+## Strategic Directions
 
 ### Strategic Direction 1: {Title}
 
@@ -268,7 +233,7 @@ Strategic planning revealed tensions that must be resolved—not just obstacles 
 {Description of the strategic direction}
 
 **Why It Matters:**
-{Connection to vision and contradictions resolved}
+{Connection to vision and priority areas served}
 
 **Key Strategies:**
 1. {Strategy}
@@ -276,9 +241,9 @@ Strategic planning revealed tensions that must be resolved—not just obstacles 
 3. {Strategy}
 
 **Success Indicators:**
-| Indicator | Baseline | Year 3 Target |
-|-----------|----------|---------------|
-| {Indicator} | {Value} | {Target} |
+| Indicator | Baseline | Year 1 Target | Year 3 Target |
+|-----------|----------|---------------|---------------|
+| {Indicator} | {Value} | {Target} | {Target} |
 
 ---
 
@@ -305,8 +270,6 @@ Strategic planning revealed tensions that must be resolved—not just obstacles 
 [Repeat structure]
 
 ---
-
-# Implementation Plan
 
 ## Three-Year Roadmap
 
@@ -356,11 +319,7 @@ Strategic planning revealed tensions that must be resolved—not just obstacles 
 | Facilities | ${} | ${} | ${} | ${} |
 | **Total** | **${}** | **${}** | **${}** | **${}** |
 
----
-
-# Year One Focus
-
-## Quarterly Priorities
+## Year One Quarterly Priorities
 
 | Quarter | Focus |
 |---------|-------|
@@ -369,24 +328,18 @@ Strategic planning revealed tensions that must be resolved—not just obstacles 
 | **Q3** (Jan-Mar) | {Focus} |
 | **Q4** (Apr-Jun) | {Focus} |
 
-## Key Year 1 Milestones
-
-- [ ] {Milestone} - {Target Date}
-- [ ] {Milestone} - {Target Date}
-- [ ] {Milestone} - {Target Date}
-- [ ] {Milestone} - {Target Date}
-
 ---
 
-# Monitoring & Accountability
+# How We Will Know We're Succeeding
 
-## Governance Structure
+## Monitoring & Accountability
 
-| Level | Frequency | Purpose |
-|-------|-----------|---------|
-| Cabinet | Monthly | Progress monitoring |
-| Board | Quarterly | Strategic oversight |
-| Community | Semi-annual | Transparency reporting |
+| Review Type | Frequency | Participants | Purpose |
+|-------------|-----------|-------------|---------|
+| Operational Check | Monthly | Direction owners | Action step progress |
+| Cabinet Review | Quarterly | Full cabinet | Cross-direction progress |
+| Board Report | Semester | Board of Education | Strategic oversight |
+| Community Update | Annually | All stakeholders | Transparency reporting |
 
 ## Success Indicators Dashboard
 
@@ -402,9 +355,14 @@ Strategic planning revealed tensions that must be resolved—not just obstacles 
 
 Each year, the district will:
 1. Assess progress against success indicators
-2. Gather stakeholder feedback
+2. Gather stakeholder feedback on plan implementation
 3. Adjust tactics while maintaining strategic focus
 4. Report progress to the board and community
+5. Develop the next year's detailed action plan
+
+## Mid-Plan Refresh
+
+At the midpoint (Year 2), the district will conduct a comprehensive review including environmental scan update, progress assessment, stakeholder input, and revised Year 3 priorities.
 
 ---
 

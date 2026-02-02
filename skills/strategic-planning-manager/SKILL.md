@@ -1,6 +1,6 @@
 ---
 name: strategic-planning-manager
-description: Organizational strategic planning for K-12 school districts using a hybrid CoSN/research-backed 7-phase process
+description: Organizational strategic planning for K-12 school districts using a research-backed 4-stage process
 triggers:
   - "strategic planning"
   - "district strategic plan"
@@ -8,7 +8,6 @@ triggers:
   - "school district planning"
   - "strategic plan"
   - "SWOT analysis"
-  - "practical vision"
   - "strategic directions"
   - "strategic retreat"
   - "organizational planning"
@@ -24,14 +23,14 @@ allowed-tools:
   - mcp__obsidian-vault__create_vault_file
   - mcp__obsidian-vault__get_vault_file
   - mcp__obsidian-vault__search_vault_simple
-version: 1.0.0
+version: 2.0.0
 ---
 
 # Strategic Planning Manager Skill
 
-Organizational strategic planning system for K-12 school districts, combining the CoSN Technology of Participation (ToP) methodology with research-backed best practices from ThoughtExchange, Education Elements, Hanover Research, and AASA.
+Organizational strategic planning system for K-12 school districts using a research-backed 4-stage process. Synthesizes best practices from Education Elements, Hanover Research, AASA, ThoughtExchange, and facilitation methodology.
 
-> **Quick Start:** New to this skill? Read `guides/quick-start.md` first for practical entry points and common workflows.
+> **Start Here:** New to this skill? Read `guides/leader-overview.md` for a full introduction to the 4-stage process, superintendent roles, team formation, and readiness assessment.
 
 > **Note:** For personal life/work strategic planning, use the `personal-strategic-planning` skill instead.
 
@@ -45,14 +44,13 @@ This skill activates when the user requests:
 - "Let's start the district strategic planning process"
 - "Facilitate our strategic planning retreat"
 
-**Phase-Specific Work:**
+**Stage-Specific Work:**
 - "Analyze our survey data for strategic planning"
 - "Help me process focus group transcripts"
 - "Generate a SWOT analysis"
-- "Create a practical vision"
-- "Identify underlying contradictions"
-- "Define strategic directions"
+- "Help define our strategic directions"
 - "Build our implementation timeline"
+- "Set up progress monitoring"
 
 **Plan Update Mode:**
 - "Update our existing strategic plan"
@@ -62,16 +60,16 @@ This skill activates when the user requests:
 ## Skill Modes
 
 ### Mode 1: Full Process Guide
-Walk through all 7 phases sequentially, prompting for data inputs and facilitating each step.
+Walk through all 4 stages sequentially, prompting for data inputs and facilitating each step.
 - Best for: New strategic plans, comprehensive planning retreats
 
-### Mode 2: Phase-Specific Entry
-Jump directly into any specific phase with appropriate inputs.
+### Mode 2: Stage-Specific Entry
+Jump directly into any specific stage with appropriate inputs.
 - Best for: Working on one component, picking up where you left off
 
 ### Mode 3: Data Analysis Only
 Process surveys, transcripts, and documents without running the full planning process.
-- Best for: Pre-work, discovery phase, feeding data into existing processes
+- Best for: Pre-work, discovery, feeding data into existing processes
 
 ### Mode 4: Plan Update
 Start from an existing plan, analyze progress, update for a new cycle.
@@ -79,30 +77,18 @@ Start from an existing plan, analyze progress, update for a new cycle.
 
 ---
 
-## The 7-Phase Strategic Planning Process
+## The 4-Stage Strategic Planning Process
 
-Based on CoSN's Technology of Participation (ToP) methodology enhanced with K-12 best practices.
+### Stage 1: Engage & Assess
+**Key Question:** Where are we now?
+**AI Role:** Data analysis, synthesis, draft preparation
+**Human Role:** Data collection, stakeholder engagement, validation
 
-### Phase 1: Discovery & Data Collection
-**AI Role:** Primary executor | **Human Role:** Data provider
-
-**Purpose:** Gather and synthesize all available data about the current state.
-
-**Data Sources Processed:**
-- Survey data (CSV, JSON, Excel)
-- Focus group transcripts (text files)
-- Existing strategic plan documents
-- Board meeting minutes
-- Community feedback compilations
-- Demographic and enrollment data
-
-**AI Actions:**
-1. Ingest and validate data files
-2. Extract themes using NLP analysis
-3. Identify sentiment patterns
-4. Cross-reference findings across sources
-5. Generate initial theme clusters
-6. Create Discovery Summary Report
+**What Happens:**
+- Gather and analyze data (surveys, focus groups, document review)
+- Engage stakeholders across the community
+- Conduct SWOT analysis with prioritization
+- Identify investment opportunities and critical barriers
 
 **Available Scripts:**
 ```bash
@@ -116,248 +102,101 @@ uv run skills/strategic-planning-manager/scripts/process_transcripts.py \
   --input-dir ./transcripts \
   --output ./discovery/transcript-themes.json
 
-# Generate combined discovery report
-uv run skills/strategic-planning-manager/scripts/generate_discovery.py \
-  --data-dir ./discovery \
-  --output ./outputs/discovery-report.md
+# Generate SWOT from discovery data
+uv run skills/strategic-planning-manager/scripts/generate_swot.py \
+  --discovery-dir ./discovery \
+  --output ./outputs/swot-analysis.md
 ```
 
 **Outputs:**
-- Discovery Summary Report (`templates/discovery-report.md`)
-- Theme Analysis with supporting evidence
-- Stakeholder sentiment analysis
-- Initial data-driven SWOT draft
+- Discovery Report (`templates/discovery-report.md`)
+- SWOT Analysis (`templates/swot-template.md`)
+- Stakeholder input summary
+- Key findings synthesis
 
-**Interview Questions (for context):**
-1. "What data sources do you have available?" (surveys, transcripts, documents)
-2. "What's the timeframe for the data?" (when collected, relevance)
-3. "Who are the key stakeholder groups represented?"
-4. "What do you already know/suspect about the findings?"
+**Guide:** `guides/stage1-engage-assess-guide.md`
 
 ---
 
-### Phase 2: Environmental Analysis (SWOT)
-**AI Role:** Synthesis and preparation | **Human Role:** Validation and refinement
+### Stage 2: Set Direction
+**Key Question:** Where do we want to go?
+**AI Role:** Provide prompts, capture input, map alignment
+**Human Role:** Visioning, decision-making, prioritization
 
-**Purpose:** Develop comprehensive understanding of internal and external factors.
+**What Happens:**
+- Define or reaffirm Mission, Vision, and Values
+- Identify 3-6 district priority areas
+- Define long-term outcome goals
+- Develop 4-6 strategic directions
 
-**AI Actions:**
-1. Generate SWOT from discovery data
-2. Create "Where Will We Invest?" analysis (Strengths × Opportunities)
-3. Create "What's Holding Us Back?" analysis (Weaknesses focus)
-4. Prepare briefing materials for human sessions
-
-**Human Session Support:**
-- Provide facilitator guide with session agenda
-- Suggest small group discussion prompts
-- Capture and organize human additions
-
-**Outputs:**
-- SWOT Analysis Matrix (`templates/swot-template.md`)
-- Investment Priority Grid (S×O quadrant)
-- Barriers Analysis (W focus)
-- Facilitator Guide (`guides/phase2-swot-guide.md`)
-
-**CoSN Format Reference:**
-| Strengths | Weaknesses |
-|-----------|------------|
-| What we do well | What limits us |
-| What others see as strengths | Where we're vulnerable |
-
-| Opportunities | Threats |
-|---------------|---------|
-| External factors to leverage | External risks to navigate |
-| Trends we can capitalize on | Competitive/regulatory concerns |
-
-**Key Questions:**
-- "Where Will We Invest?" (top S×O opportunities)
-- "What's Holding Us Back?" (key weaknesses to address)
-
----
-
-### Phase 3: Practical Vision Development
-**AI Role:** Facilitation support | **Human Role:** Primary creator
-
-**Purpose:** Define what success looks like 3 years from now through collaborative brainstorming.
-
-**The CoSN Approach:**
-1. **Individual brainstorming:** "What do we want to see in 3 years?"
-2. **Small group sharing:** Combine and refine ideas
-3. **Large group clustering:** Organize into 8-10 thematic columns
-4. **Naming columns:** Give each vision cluster a descriptive title
-
-**AI Support Actions:**
-1. Provide vision prompts based on discovery themes
-2. Suggest initial category groupings as ideas emerge
-3. Capture and organize inputs in real-time
-4. Ensure all voices are represented
-
-**Vision Categories (Common in K-12):**
-- Student Achievement & Learning
-- Equity & Access
-- Staff Quality & Development
-- Community Engagement
-- Technology & Innovation
-- Facilities & Resources
-- Safety & Wellness
-- Fiscal Sustainability
+**Optional Deeper Work:**
+- Deep participatory visioning exercise → `guides/appendix-a-vision-development.md`
+- Organizational tension analysis → `guides/appendix-b-tension-analysis.md`
+- Developing a Profile of a Graduate → `guides/appendix-c-graduate-profile.md`
 
 **Outputs:**
-- Practical Vision Matrix (`templates/practical-vision.md`)
-- Vision statement narratives per category
-- Facilitator Guide (`guides/phase3-vision-guide.md`)
-
-**Matrix Format (CoSN slide 11 style):**
-| Learning | Equity | Staff | Community | Technology | Facilities | Safety | Finance |
-|----------|--------|-------|-----------|------------|------------|--------|---------|
-| Vision items... | Vision items... | ... | ... | ... | ... | ... | ... |
-
----
-
-### Phase 4: Underlying Contradictions
-**AI Role:** Pattern identification | **Human Role:** Primary creator
-
-**Purpose:** Identify the deep tensions (not just barriers) that must be resolved for the vision to be realized.
-
-**Key Distinction:**
-- **Barriers** = obstacles to remove
-- **Contradictions** = tensions that need resolution, often involving trade-offs
-
-**Examples of Contradictions:**
-- "Need for innovation" vs "Risk aversion in district culture"
-- "Desire for personalized learning" vs "Standardized testing requirements"
-- "Staff wanting autonomy" vs "Need for consistent practices"
-
-**AI Actions:**
-1. Suggest potential contradictions based on discovery data
-2. Help frame contradictions (not just barriers)
-3. Organize and categorize as groups work
-4. Identify patterns across stakeholder groups
-
-**Human Session Support:**
-1. Small group brainstorming of contradictions
-2. Large group clustering and naming
-3. Identification of root tensions
-
-**Outputs:**
-- Underlying Contradictions Matrix (`templates/contradictions.md`)
-- Root tension analysis
-- Facilitator Guide (`guides/phase4-contradictions-guide.md`)
-
-**Matrix Format (CoSN slide 20 style):**
-| Category | Contradiction | Impact on Vision |
-|----------|---------------|------------------|
-| Culture | [Tension description] | [Which vision areas affected] |
-| Resources | [Tension description] | [Which vision areas affected] |
-
----
-
-### Phase 5: Strategic Directions
-**AI Role:** Synthesis support | **Human Role:** Decision making
-
-**Purpose:** Define innovative actions that resolve contradictions and move toward the vision.
-
-**Key Principle:**
-Strategic directions are NOT just goals—they are the actions and approaches that will resolve the underlying contradictions while advancing the practical vision.
-
-**AI Actions:**
-1. Map contradictions to potential strategic directions
-2. Suggest evidence-based actions from K-12 research
-3. Ensure each direction addresses multiple contradictions
-4. Connect directions to vision categories
-
-**Human Session Support:**
-1. Define 4-6 major strategic directions
-2. Prioritize based on impact and feasibility
-3. Assign preliminary ownership
-4. Validate contradiction resolution
-
-**Outputs:**
+- Mission/Vision/Values statements
+- Priority areas with outcome goals
 - Strategic Directions Framework (`templates/strategic-directions.md`)
-- Direction-to-Contradiction mapping
-- Direction-to-Vision alignment matrix
-- Facilitator Guide (`guides/phase5-directions-guide.md`)
+- Direction-to-priority alignment matrix
 
-**Framework Format (CoSN slide 22 style):**
-| Strategic Direction | Contradictions Addressed | Vision Categories Served |
-|---------------------|--------------------------|--------------------------|
-| [Direction 1] | [C1, C2, C3] | [Learning, Equity, Staff] |
-| [Direction 2] | [C2, C4] | [Technology, Community] |
+**Guide:** `guides/stage2-set-direction-guide.md`
 
 ---
 
-### Phase 6: Focused Implementation
-**AI Role:** Structure and tracking | **Human Role:** Validation and commitment
+### Stage 3: Build the Plan & Align Resources
+**Key Question:** How will we get there?
+**AI Role:** Structure creation, timeline drafting, metric suggestions
+**Human Role:** Reality testing, commitment making, ownership assignment
 
-**Purpose:** Translate strategic directions into concrete, time-bound implementation plans.
-
-**The CoSN Three-Column Approach:**
-For each strategic direction, define:
-1. **Current Reality:** Where are we now?
-2. **1-Year Accomplishments:** What will be true in 12 months?
-3. **3-Year Outcomes:** What will be true at plan completion?
-
-**AI Actions:**
-1. Generate implementation framework structure
-2. Create Current Reality → 1-Year → 3-Year tables
-3. Suggest success indicators and metrics
-4. Draft quarterly timeline for Year 1
-
-**Human Session Support:**
-1. Confirm current reality assessments
-2. Commit to 1-year accomplishments
-3. Define measurable success indicators
-4. Assign ownership and accountability
+**What Happens:**
+- Develop three-column plans (Current Reality → 1-Year → 3-Year)
+- Define measurable goals and success indicators
+- Choose strategies/initiatives per direction
+- Assign ownership and align resources
+- Build Year 1 quarterly timeline
+- Cross-direction integration check
 
 **Outputs:**
-- Focused Implementation Tables (`templates/focused-implementation.md`)
+- Implementation Tables (`templates/focused-implementation.md`)
+- Success indicator matrix
 - First-Year Timeline (`templates/first-year-timeline.md`)
-- Success Indicators Matrix
-- Facilitator Guide (`guides/phase6-implementation-guide.md`)
+- Resource alignment plan
+- Ownership chart
 
-**Implementation Table Format (CoSN slides 24-26 style):**
-| Strategic Direction: [Name] |
-|----------------------------|
-| **Current Reality** | **1-Year Accomplishments** | **3-Year Outcomes** |
-| [Where we are] | [What's true in 12 months] | [What's true in 36 months] |
-
-**First-Year Timeline Format (CoSN slide 27 style):**
-| Strategic Direction | Q1 | Q2 | Q3 | Q4 |
-|---------------------|----|----|----|----|
-| [Direction 1] | [Actions] | [Actions] | [Actions] | [Actions] |
+**Guide:** `guides/stage3-build-plan-guide.md`
 
 ---
 
-### Phase 7: Plan Document Generation
-**AI Role:** Primary executor | **Human Role:** Review and approval
+### Stage 4: Implement, Monitor & Improve
+**Key Question:** Are we making progress?
+**AI Role:** Dashboard creation, report drafting, data analysis
+**Human Role:** Implementation leadership, decision-making, accountability
 
-**Purpose:** Compile all outputs into professional, stakeholder-ready documents.
+**What Happens:**
+- Develop annual action plans
+- Track leading and lagging indicators
+- Report to board and community on regular cadence
+- Make mid-course adjustments when data warrants
+- Conduct annual reviews and mid-plan refreshes
 
-**AI Actions:**
-1. Compile all phase outputs into cohesive plan document
-2. Generate executive summary for board presentation
-3. Create stakeholder-specific versions (board, staff, community)
-4. Build monitoring dashboard structure
+**Available Scripts:**
+```bash
+# Generate strategic plan document from all stage outputs
+uv run skills/strategic-planning-manager/scripts/synthesize_plan.py \
+  --work-dir ./planning \
+  --output ./outputs/strategic-plan.md \
+  --format full  # or 'executive', 'board', 'staff', 'community'
+```
 
 **Outputs:**
 - Full Strategic Plan Document (`templates/full-strategic-plan.md`)
 - Executive Summary (`templates/executive-summary.md`)
-- Board presentation outline
-- Staff communication version
-- Community-facing summary
+- Annual action plans
+- Progress dashboards
+- Board reports
 
-**Document Structure:**
-1. Executive Summary
-2. Planning Process Overview
-3. Discovery Findings
-4. Environmental Analysis (SWOT)
-5. Practical Vision
-6. Underlying Contradictions
-7. Strategic Directions
-8. Implementation Plan
-9. Year-One Timeline
-10. Success Metrics & Monitoring
-11. Appendices (data, methodology)
+**Guide:** `guides/stage4-implement-improve-guide.md`
 
 ---
 
@@ -425,18 +264,19 @@ uv run skills/strategic-planning-manager/scripts/synthesize_plan.py \
 
 ## Facilitator Guides
 
-Detailed guides for each human session:
-
 | Guide | Purpose | Duration |
 |-------|---------|----------|
-| `phase1-discovery-guide.md` | Data collection interviews, survey design | Varies |
-| `phase2-swot-guide.md` | SWOT workshop facilitation | 2-3 hours |
-| `phase3-vision-guide.md` | Practical vision brainstorming | 3-4 hours |
-| `phase4-contradictions-guide.md` | Contradiction identification | 2-3 hours |
-| `phase5-directions-guide.md` | Strategic direction development | 3-4 hours |
-| `phase6-implementation-guide.md` | Implementation planning | 3-4 hours |
-| `retreat-agenda-2day.md` | Full 2-day retreat structure | 2 days |
-| `retreat-agenda-condensed.md` | Condensed 1-day format | 1 day |
+| `leader-overview.md` | Full process overview for superintendents | Reference |
+| `stage1-engage-assess-guide.md` | Data collection + SWOT workshop | 2-6 weeks + 2.5 hrs |
+| `stage2-set-direction-guide.md` | Vision, priorities, strategic directions | 3-4 hours |
+| `stage3-build-plan-guide.md` | Implementation planning workshop | 3-4 hours |
+| `stage4-implement-improve-guide.md` | Monitoring and continuous improvement | Ongoing |
+| `appendix-a-vision-development.md` | Deep participatory visioning exercise | 3-4 hours |
+| `appendix-b-tension-analysis.md` | Organizational tension analysis | 2-3 hours |
+| `appendix-c-graduate-profile.md` | Profile of a Graduate development process | Multi-session |
+| `six-month-timeline.md` | Month-by-month planning timeline | Reference |
+| `retreat-agenda-2day.md` | Full 2-day retreat (all 4 stages) | 2 days |
+| `retreat-agenda-condensed.md` | Condensed 1-day (Stages 1-3) | 1 day |
 
 Each guide includes:
 - Detailed agenda with timing
@@ -458,10 +298,10 @@ Personal_Notes/Geoffrey/Strategic-Plans/
 │   ├── {Year}-Strategic-Plan.md
 │   ├── Discovery-Report.md
 │   ├── SWOT-Analysis.md
-│   ├── Practical-Vision.md
-│   ├── Contradictions-Analysis.md
 │   ├── Strategic-Directions.md
 │   ├── Implementation-Plan.md
+│   ├── Progress-Reports/
+│   │   └── [Quarterly/annual reports]
 │   └── Facilitator-Guides/
 │       └── [Generated guides for this district]
 ```
@@ -472,7 +312,7 @@ Personal_Notes/Geoffrey/Strategic-Plans/
 type: strategic-plan
 district: {District Name}
 year: {YYYY}
-phase: {1-7 or complete}
+stage: {1-4 or complete}
 status: draft | in-progress | final
 created: {date}
 updated: {date}
@@ -528,20 +368,11 @@ This skill synthesizes best practices from:
 - Emphasis on board/superintendent buy-in
 - Quarterly monitoring, annual evaluation
 
-**ICA Technology of Participation (ToP):**
+**Facilitation Methodology:**
 - ORID Method (Objective → Reflective → Interpretive → Decisional)
 - Focused Conversation
 - Consensus Workshop
 - Strategic Planning Matrix
-
-**CoSN Strategic Planning (Direct Experience):**
-- Discovery Findings
-- SWOT → Investment/Barriers
-- Practical Vision (3-year, categorized)
-- Underlying Contradictions
-- Strategic Directions
-- Focused Implementation (Current → 1-Year → 3-Year)
-- First-Year Timeline
 
 ---
 
@@ -553,15 +384,15 @@ This skill synthesizes best practices from:
 User: "Help me create a strategic plan for our district"
 
 Geoffrey:
-1. Ask which mode: Full Process, Phase-Specific, or Data Analysis
+1. Ask which mode: Full Process, Stage-Specific, or Data Analysis
 2. If Full Process:
    - Ask about available data (surveys, transcripts, existing docs)
    - Ask about timeline (retreat dates, board presentation date)
    - Ask about stakeholder groups to involve
-3. Begin Phase 1: Discovery
+3. Begin Stage 1: Engage & Assess
    - Ingest provided data files
-   - Generate Discovery Report
-4. Continue through phases with appropriate AI/human balance
+   - Generate Discovery Report and SWOT
+4. Continue through stages with appropriate AI/human balance
 5. Generate final plan documents
 6. Save to Obsidian vault
 ```
@@ -569,7 +400,7 @@ Geoffrey:
 ### Analyzing Survey Data Only
 
 ```
-User: "I have survey results I need to analyze for our strategic planning"
+User: "I have survey results I need to analyze for strategic planning"
 
 Geoffrey:
 1. Ask for data file(s) and format
@@ -611,7 +442,7 @@ Geoffrey:
 - Note limitation in final report
 
 **3. Conflicting stakeholder priorities:**
-- Surface contradictions explicitly in Phase 4
+- Surface tensions explicitly
 - Use as input for strategic direction decisions
 - Document minority viewpoints
 
@@ -629,9 +460,28 @@ Geoffrey:
 
 ## Version History
 
+**v2.0.1** (2026-02-02)
+- Added Appendix C: Developing a Profile of a Graduate
+- Community workshop and student voice facilitation scripts
+- Common competency categories reference table
+- Guidance on connecting profile to strategic plan
+- Updated facilitation prompts with graduate_profile section
+
+**v2.0.0** (2026-02-02)
+- Restructured from 7-phase to 4-stage process
+- 4 stages: Engage & Assess → Set Direction → Plan & Align → Implement & Improve
+- New leader overview with readiness self-assessment
+- New Stage 4 guide (monitoring, board reporting, review cycles)
+- New 6-month planning timeline
+- New fillable strategic planning template
+- Deep visioning moved to Appendix A
+- Tension analysis moved to Appendix B (rebranded from "contradictions")
+- Retreat agendas restructured around 4 stages
+- Removed methodology-specific branding throughout
+
 **v1.0.0** (2026-01-26)
 - Initial release
-- 7-phase CoSN/ToP methodology
+- 7-phase methodology
 - 4 skill modes (Full, Phase-Specific, Data Analysis, Update)
 - Python scripts for data analysis
 - Facilitator guides for human sessions

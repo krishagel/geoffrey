@@ -3,6 +3,7 @@ type: strategic-directions
 district: {DISTRICT_NAME}
 created: {DATE}
 status: draft
+stage: 2
 direction_count: {N}
 ---
 

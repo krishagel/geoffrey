@@ -5,6 +5,38 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.21.1] - 2026-02-02
+
+### Added
+- **Strategic Planning Manager** - Appendix C: Developing a Profile of a Graduate
+  - Full multi-session process guide (3-6 months) for defining graduate competencies
+  - Community workshop facilitation script (3 hours) with equity pause
+  - Student voice session facilitation script (1.5 hours)
+  - Common K-12 competency categories reference table
+  - Guidance on connecting profile to curriculum, instruction, and assessment
+  - Common challenges table with responses
+  - Added graduate_profile section to facilitation-prompts.yaml
+  - Updated leader overview, Stage 2 guide, SKILL.md, and retreat agendas with Appendix C references
+
+## [0.21.0] - 2026-02-02
+
+### Changed
+- **Strategic Planning Manager** - Complete restructure from 7-phase to 4-stage process (skill version 2.0.0)
+  - 4 stages: Engage & Assess → Set Direction → Plan & Align → Implement & Improve
+  - New leader overview with readiness self-assessment checklist and superintendent role guidance
+  - New Stage 4 guide covering monitoring, board reporting, review cycles, and mid-plan refresh
+  - New 6-month planning timeline (month-by-month from launch to adoption)
+  - New fillable strategic planning template with 5 sections
+  - Deep visioning exercise moved to Appendix A: Deep Vision Development
+  - Contradiction analysis rebranded to Appendix B: Organizational Tension Analysis
+  - Retreat agendas (2-day and condensed) restructured around 4 stages
+  - All templates updated with stage-based frontmatter
+  - Facilitation prompts config updated for stage-based structure
+  - Removed methodology-specific branding throughout all materials
+  - Renamed `contradictions.md` template to `tension-analysis.md`
+  - Deleted 7 old phase-specific guides and quick-start guide
+  - Updated full strategic plan template with 4-stage process structure
+
 ## [0.20.0] - 2026-01-30
 
 ### Added

@@ -3,6 +3,7 @@ type: executive-summary
 district: {DISTRICT_NAME}
 created: {DATE}
 status: draft
+stage: 4
 plan_horizon: {YEAR} - {YEAR + 3}
 ---
 
@@ -25,7 +26,7 @@ This executive summary presents the key elements of {DISTRICT_NAME}'s three-year
 | **Strategic Directions** | {N} major focus areas |
 | **Stakeholders Engaged** | {Number} participants |
 | **Total Investment** | ${Amount} over 3 years |
-| **Planning Method** | Technology of Participation (ToP) |
+| **Planning Method** | 4-Stage Collaborative Process |
 
 ---
 
@@ -208,4 +209,4 @@ The administration recommends that the Board of Education:
 - {Number} community forum attendees
 
 **Methodology:**
-Technology of Participation (ToP) strategic planning, incorporating best practices from K-12 education research.
+4-stage collaborative strategic planning process, incorporating best practices from K-12 education research.

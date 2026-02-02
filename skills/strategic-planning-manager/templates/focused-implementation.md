@@ -3,6 +3,7 @@ type: focused-implementation
 district: {DISTRICT_NAME}
 created: {DATE}
 status: draft
+stage: 3
 plan_start: {YEAR}
 plan_end: {YEAR + 3}
 ---

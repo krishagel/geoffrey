@@ -4,9 +4,9 @@
 # ///
 
 """
-Synthesize strategic plan document from all planning phases.
+Synthesize strategic plan document from all planning stages.
 
-Compiles outputs from all 7 phases into cohesive plan documents:
+Compiles outputs from all 4 stages into cohesive plan documents:
 - Full strategic plan (comprehensive)
 - Executive summary (board-ready)
 - Staff communication version
@@ -92,7 +92,7 @@ plan_horizon: {year} - {year + 3}
 
 # {district} Strategic Plan {year}-{year + 3}
 
-> A three-year strategic plan developed through collaborative community engagement using the Technology of Participation (ToP) methodology.
+> A three-year strategic plan developed through collaborative community engagement using a 4-stage research-backed planning process.
 
 ---
 
@@ -134,7 +134,7 @@ This strategic plan represents the collective vision of {district}'s stakeholder
 
 ### Methodology
 
-This plan was developed using the Technology of Participation (ToP) strategic planning methodology, enhanced with research-backed practices from education planning literature.
+This plan was developed using a 4-stage collaborative strategic planning process, informed by research-backed practices from education planning literature.
 
 **Planning Phases:**
 
@@ -308,7 +308,7 @@ created: {date}
 
 ### Purpose
 
-This executive summary presents the key elements of {district}'s three-year strategic plan, developed through extensive community engagement using the Technology of Participation methodology.
+This executive summary presents the key elements of {district}'s three-year strategic plan, developed through extensive community engagement using a collaborative 4-stage planning process.
 
 ---
 
@@ -318,7 +318,7 @@ This executive summary presents the key elements of {district}'s three-year stra
 |---------|---------|
 | **Plan Horizon** | {year} - {year + 3} |
 | **Strategic Directions** | 4-6 major focus areas |
-| **Planning Method** | Technology of Participation (ToP) |
+| **Planning Method** | 4-Stage Collaborative Process |
 | **Stakeholders Engaged** | [Number] participants |
 
 ---

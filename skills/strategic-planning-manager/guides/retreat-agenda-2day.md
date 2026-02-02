@@ -5,18 +5,18 @@
 
 ## Overview
 
-**Purpose:** Complete strategic planning Phases 2-6 in an intensive retreat format.
+**Purpose:** Complete all 4 stages of strategic planning in an intensive retreat format.
 
-**Pre-Requisite:** Phase 1 Discovery complete and shared with participants.
+**Pre-Requisite:** Stage 1 Discovery data collection complete and shared with participants.
 
 **Participants:** 20-40 planning team members representing all stakeholder groups.
 
 **Outcomes by End of Day 2:**
-- Validated SWOT analysis
-- Complete Practical Vision
-- Prioritized Underlying Contradictions
-- Defined Strategic Directions
-- Initial Implementation Framework
+- Validated SWOT analysis (Stage 1 completion)
+- Mission/Vision/Values and priority areas defined (Stage 2)
+- Strategic directions developed and prioritized (Stage 2)
+- Initial implementation framework with timelines (Stage 3)
+- Monitoring approach and commitments established (Stage 4 introduction)
 
 ---
 
@@ -41,7 +41,7 @@
 ### Day Before
 
 - [ ] Set up room with materials at each table
-- [ ] Post vision categories on walls
+- [ ] Post reference materials on walls
 - [ ] Prepare flip charts
 - [ ] Confirm catering
 - [ ] Run through facilitation plan
@@ -75,13 +75,13 @@
 
 ## Day 1 Agenda
 
-### Morning Session: Foundation & SWOT
+### Morning Session: Stage 1 Completion (SWOT) + Stage 2 Start
 
 | Time | Activity | Duration | Lead |
 |------|----------|----------|------|
 | 8:00 | Registration & Breakfast | 30 min | |
 | 8:30 | Welcome & Context Setting | 20 min | Superintendent |
-| 8:50 | Planning Process Overview | 15 min | Facilitator |
+| 8:50 | Planning Process Overview (4-Stage Framework) | 15 min | Facilitator |
 | 9:05 | Team Building Activity | 15 min | Facilitator |
 | 9:20 | Discovery Findings Presentation | 25 min | Facilitator |
 | 9:45 | Table Discussion: Discovery Reactions | 15 min | Tables |
@@ -92,23 +92,21 @@
 | 11:35 | Investment & Barriers Analysis | 25 min | Facilitator |
 | 12:00 | **LUNCH** | 60 min | |
 
-### Afternoon Session: Practical Vision
+### Afternoon Session: Stage 2 — Set Direction
 
 | Time | Activity | Duration | Lead |
 |------|----------|----------|------|
 | 1:00 | Energizer | 10 min | Facilitator |
-| 1:10 | Practical Vision Introduction | 15 min | Facilitator |
-| 1:25 | Individual Brainstorm | 15 min | Individual |
-| 1:40 | Pair Share | 10 min | Pairs |
-| 1:50 | Table Consolidation | 20 min | Tables |
-| 2:10 | Wall Posting | 10 min | All |
+| 1:10 | Review/Reaffirm Mission, Vision, Values | 30 min | Facilitator |
+| 1:40 | Identify Priority Areas | 25 min | All |
+| 2:05 | Define Long-Term Outcome Goals | 15 min | Tables |
 | 2:20 | **BREAK** | 15 min | |
-| 2:35 | Silent Clustering | 15 min | All |
-| 2:50 | Discussion Clustering | 20 min | All |
-| 3:10 | Naming Categories | 25 min | All |
-| 3:35 | Vision Narrative Development | 20 min | Tables |
-| 3:55 | Vision Validation | 20 min | All |
-| 4:15 | Day 1 Synthesis & Preview | 15 min | Facilitator |
+| 2:35 | Strategic Directions Introduction | 15 min | Facilitator |
+| 2:50 | Direction Brainstorm | 20 min | Tables |
+| 3:10 | Direction Development (Small Groups) | 35 min | Tables |
+| 3:45 | Gallery Walk & Feedback | 20 min | All |
+| 4:05 | Direction Refinement | 15 min | Tables |
+| 4:20 | Day 1 Synthesis & Preview | 10 min | Facilitator |
 | 4:30 | End Day 1 | | |
 
 ### Evening (Optional)
@@ -118,53 +116,52 @@
 | 6:00 | Group Dinner |
 | 7:30 | Informal Discussion: Reactions to Day 1 |
 
+> **Optional deeper work:** If the organization wants to conduct a deep visioning exercise (Appendix A), organizational tension analysis (Appendix B), or develop a Profile of a Graduate (Appendix C), these can replace or extend the afternoon sessions. Add 2-3 hours to the agenda or split across both days. Note: Appendix C (Profile of a Graduate) is typically a multi-session process and is better suited as pre-retreat or parallel work rather than a retreat add-on.
+
 ---
 
 ## Day 2 Agenda
 
-### Morning Session: Contradictions & Directions
+### Morning Session: Stage 2 Completion + Stage 3
 
 | Time | Activity | Duration | Lead |
 |------|----------|----------|------|
 | 8:00 | Breakfast | 30 min | |
 | 8:30 | Day 1 Recap & Day 2 Preview | 15 min | Facilitator |
-| 8:45 | Contradictions Framework Introduction | 15 min | Facilitator |
-| 9:00 | Individual Contradiction Brainstorm | 15 min | Individual |
-| 9:15 | Table Sharing & Consolidation | 20 min | Tables |
-| 9:35 | Wall Posting & Clustering | 20 min | All |
-| 9:55 | **BREAK** | 15 min | |
-| 10:10 | Naming Contradictions | 20 min | All |
-| 10:30 | Prioritization (Dot Voting) | 15 min | All |
-| 10:45 | Contradiction-Vision Mapping | 15 min | All |
-| 11:00 | Strategic Directions Introduction | 15 min | Facilitator |
-| 11:15 | Direction Brainstorm | 20 min | Tables |
-| 11:35 | Direction Development (Assigned) | 25 min | Tables |
+| 8:45 | Direction Prioritization & Alignment Check | 25 min | All |
+| 9:10 | Assign Direction Ownership | 10 min | All |
+| 9:20 | Three-Column Framework Introduction | 15 min | Facilitator |
+| 9:35 | Current Reality Assessment (Per Direction) | 30 min | Tables |
+| 10:05 | **BREAK** | 15 min | |
+| 10:20 | 3-Year Outcomes Definition | 25 min | Tables |
+| 10:45 | 1-Year Accomplishments | 30 min | Tables |
+| 11:15 | Success Indicators Development | 25 min | Tables |
+| 11:40 | Year 1 Quarterly Timeline | 20 min | Tables |
 | 12:00 | **LUNCH** | 60 min | |
 
-### Afternoon Session: Directions & Implementation
+### Afternoon Session: Stage 3 Completion + Stage 4 Introduction
 
 | Time | Activity | Duration | Lead |
 |------|----------|----------|------|
 | 1:00 | Energizer | 10 min | Facilitator |
-| 1:10 | Direction Development (Continued) | 30 min | Tables |
-| 1:40 | Gallery Walk & Feedback | 25 min | All |
-| 2:05 | Direction Refinement | 20 min | Tables |
-| 2:25 | **BREAK** | 15 min | |
-| 2:40 | Direction Prioritization & Alignment | 20 min | All |
-| 3:00 | Implementation Framework Introduction | 15 min | Facilitator |
-| 3:15 | Three-Column Development (Per Direction) | 35 min | Tables |
-| 3:50 | Success Indicators | 20 min | Tables |
-| 4:10 | Cross-Direction Integration | 15 min | All |
-| 4:25 | Ownership Commitments | 15 min | All |
-| 4:40 | Retreat Synthesis & Next Steps | 20 min | Superintendent/Facilitator |
-| 5:00 | Closing & Thanks | 10 min | Superintendent |
-| 5:10 | End | | |
+| 1:10 | Cross-Direction Integration Review | 20 min | All |
+| 1:30 | Resource Alignment Discussion | 20 min | All |
+| 1:50 | Implementation Plan Gallery Walk | 20 min | All |
+| 2:10 | **BREAK** | 15 min | |
+| 2:25 | Stage 4 Introduction: Monitor & Improve | 15 min | Facilitator |
+| 2:40 | Monitoring Framework & Board Reporting | 15 min | Facilitator |
+| 2:55 | Review Cadence & Communication Planning | 15 min | All |
+| 3:10 | Ownership Commitments | 15 min | All |
+| 3:25 | Plan Compilation & Next Steps | 15 min | Facilitator |
+| 3:40 | Retreat Synthesis | 15 min | Superintendent/Facilitator |
+| 3:55 | Closing & Thanks | 15 min | Superintendent |
+| 4:10 | End | | |
 
 ---
 
 ## Detailed Session Notes
 
-### Day 1 Morning: Discovery & SWOT
+### Day 1 Morning: Stage 1 Completion
 
 **8:30 - Welcome (Superintendent)**
 - Thank participants for commitment
@@ -173,8 +170,8 @@
 - Commit to honoring the work
 
 **8:50 - Process Overview (Facilitator)**
-- Show 7-phase framework
-- Explain we're doing Phases 2-6 in retreat
+- Show 4-stage framework
+- Explain retreat covers Stages 1-4
 - Preview Day 1 and Day 2 outcomes
 - Establish ground rules
 
@@ -189,11 +186,7 @@
 - Representative stakeholder quotes
 - Set up SWOT by previewing initial inputs
 
-**9:45 - Table Discussion**
-Prompt: "What resonates? What surprises? What's missing?"
-Report out 1-2 key points per table.
-
-**10:25 - SWOT Validation (See Phase 2 Guide)**
+**10:25 - SWOT Validation** (See Stage 1 Guide, Part B)
 - 10 min per quadrant at tables
 - Add, flag, star priorities
 
@@ -204,78 +197,50 @@ Report out 1-2 key points per table.
 
 **11:35 - Investment & Barriers**
 - Small groups identify S×O investments
-- Identify critical W barriers
+- Identify critical barriers
 - Report to full group
 
-### Day 1 Afternoon: Practical Vision
+### Day 1 Afternoon: Stage 2
 
-**1:10 - Vision Introduction**
-- Explain practical vs. aspirational vision
-- Give examples of observable outcomes
-- "In 3 years, what do you see?"
+**1:10 - Mission/Vision/Values** (See Stage 2 Guide, Part A)
+- Review existing or create new
+- Table work → large group synthesis
 
-**1:25-2:10 - Brainstorm through Posting (See Phase 3 Guide)**
-- Individual → Pairs → Tables → Wall
+**1:40 - Priority Areas**
+- Individual brainstorm → table consolidation → large group
+- Identify 3-6 priority areas
 
-**2:35-3:35 - Clustering through Naming (See Phase 3 Guide)**
-- Silent cluster → Discussion → Names
+**2:35 - Strategic Directions** (See Stage 2 Guide, Part B)
+- Framework introduction
+- Brainstorm → develop at tables → gallery walk
 
-**3:35 - Vision Narratives**
-- Tables take 2-3 categories each
-- Write 2-3 sentence narrative
-- Share with full group
+### Day 2 Morning: Stages 2-3
 
-### Day 2 Morning: Contradictions & Directions
+**8:45 - Direction Prioritization**
+- Alignment matrix check (directions ↔ priorities)
+- Dot vote on final 4-6 directions
+- Assign ownership
 
-**8:45 - Contradictions Introduction**
-- Critical distinction: Barriers vs. Contradictions
-- Examples of K-12 contradictions
-- "We want X, BUT Y"
+**9:20 - Three-Column Framework** (See Stage 3 Guide)
+- Current Reality → Y1 → Y3 per direction
+- Tables work on assigned directions
 
-**9:00-10:10 - Contradiction Development (See Phase 4 Guide)**
-- Individual → Table → Wall → Cluster
+**11:15 - Success Indicators**
+- 3-5 measurable indicators per direction
+- Baselines and targets
 
-**10:10-10:45 - Naming & Prioritization**
-- Name each contradiction cluster
-- Dot vote on priority
-- Map impact on vision
+### Day 2 Afternoon: Stages 3-4
 
-**11:00 - Strategic Directions Introduction**
-- Explain what makes a direction (not goal, not tactic)
-- Show connection to contradictions and vision
-- Examples
+**1:10 - Cross-Direction Integration**
+- Resource conflicts, dependencies, synergies
+- Adjust timelines as needed
 
-**11:15-11:35 - Direction Brainstorm & Development**
-- Brainstorm potential directions
-- Assign 1-2 contradictions per table
-- Begin developing directions using template
+**2:25 - Stage 4 Introduction** (See Stage 4 Guide)
+- Monitoring framework overview
+- Board reporting cadence
+- Review schedule (monthly/quarterly/annual)
 
-### Day 2 Afternoon: Directions & Implementation
-
-**1:10-2:05 - Direction Development & Gallery (See Phase 5 Guide)**
-- Complete direction templates
-- Gallery walk with feedback
-- Refine based on input
-
-**2:40 - Prioritization & Alignment**
-- Check coverage (all contradictions, all vision)
-- Dot vote on priorities
-- Establish 4-6 final directions
-
-**3:00-3:50 - Implementation Framework (See Phase 6 Guide)**
-- Three-column templates per direction
-- Current Reality → Year 1 → Year 3
-
-**3:50 - Success Indicators**
-- 3-5 indicators per direction
-- Baseline, Year 1, Year 3 targets
-
-**4:10 - Cross-Direction Integration**
-- Look for dependencies
-- Identify shared resources
-- Note sequencing needs
-
-**4:25 - Ownership Commitments**
+**3:10 - Ownership Commitments**
 - Cabinet owner per direction
 - Key leads identified
 - First milestone committed
@@ -304,13 +269,6 @@ Report out 1-2 key points per table.
 - Call on different voices
 - Use think-pair-share before full group
 
-### Managing Time
-
-- Keep strict time; use visible timer
-- Have "parking lot" for off-topic issues
-- Know what to cut if running behind
-- Build in buffer before major transitions
-
 ---
 
 ## Materials Checklist
@@ -320,7 +278,7 @@ Report out 1-2 key points per table.
 - 12 markers (thick)
 - 30 small sticky notes
 - 1 roll masking tape
-- 6 direction template packets
+- 6 template packets
 - 6 name tents
 - 6 agendas
 
@@ -328,7 +286,6 @@ Report out 1-2 key points per table.
 - 30 sheets chart paper
 - 200+ dot stickers (4 colors)
 - 10 category header cards (blank)
-- Vision category labels
 - Masking tape (3 rolls)
 - Projector & screen
 - Flip chart stand
@@ -337,10 +294,9 @@ Report out 1-2 key points per table.
 ### Handouts
 - Discovery summary (all)
 - SWOT draft (all)
-- Vision template (all)
-- Contradiction template (all)
 - Direction template (all)
-- Implementation template (all)
+- Three-column template (all)
+- Success indicator template (all)
 
 ---
 
@@ -353,17 +309,16 @@ Report out 1-2 key points per table.
 - [ ] Debrief with co-facilitators
 
 ### Within 1 Week
-- [ ] Compile all outputs into draft documents
+- [ ] Compile all outputs into draft strategic plan
 - [ ] Send draft to participants for review
-- [ ] Schedule follow-up for Implementation details
-- [ ] Begin Year 1 timeline development
+- [ ] Begin Year 1 action plan development
 
 ### Within 2 Weeks
-- [ ] Finalize plan documents
+- [ ] Incorporate feedback and finalize plan
 - [ ] Prepare board presentation
-- [ ] Develop communication materials
-- [ ] Schedule board approval meeting
+- [ ] Develop stakeholder communication materials
+- [ ] Schedule board adoption meeting
 
 ---
 
-*2-Day Retreat Agenda - Geoffrey Strategic Planning Manager*
+*2-Day Retreat Agenda - Strategic Planning Manager v2.0.0*

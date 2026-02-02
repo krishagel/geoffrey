@@ -1,5 +1,18 @@
-# Phase 3: Practical Vision Development
-## Facilitator Guide
+# Appendix A: Deep Vision Development
+## Participatory Visioning Exercise
+
+---
+
+## When to Use This
+
+Use this appendix when your organization wants **broad participatory engagement** in setting direction. This is a full visioning exercise (3-4 hours) that engages stakeholders in building a concrete picture of what success looks like.
+
+This exercise is referenced from the Stage 2 guide. It can be:
+- Run as a standalone session before developing strategic directions
+- Incorporated into a 2-day retreat
+- Used when a district is developing a vision from scratch (not reaffirming an existing one)
+
+**Skip this if:** The district has a recent, well-supported vision that just needs reaffirmation. In that case, the simplified process in the Stage 2 guide is sufficient.
 
 ---
 
@@ -69,12 +82,12 @@ Send 2-3 days before:
 | 0:35 | Table Consolidation | 20 min | |
 | 0:55 | Wall Posting | 10 min | |
 | 1:05 | Break | 10 min | |
-| 1:15 | Clustering Round 1 | 25 min | |
-| 1:40 | Clustering Round 2 | 20 min | |
-| 2:00 | Naming Categories | 25 min | |
-| 2:25 | Vision Narrative | 20 min | |
-| 2:45 | Validation & Close | 15 min | |
-| 3:00 | End | | |
+| 1:15 | Clustering Round 1 (Silent) | 15 min | |
+| 1:30 | Clustering Round 2 (Discussion) | 20 min | |
+| 1:50 | Naming Categories | 25 min | |
+| 2:15 | Vision Narrative Development | 20 min | |
+| 2:35 | Validation & Close | 15 min | |
+| 2:50 | End | | |
 
 ---
 
@@ -132,32 +145,25 @@ Write clearly—these will be read from a distance. One idea per note."
 **Say:**
 "Take a break. When you come back, walk the wall. Read what other tables wrote. Notice patterns."
 
-### Clustering Round 1 (25 min)
+### Clustering Round 1 — Silent (15 min)
 
 **Say:**
 "Now we cluster. Without talking, move notes that seem related closer together. If you see two ideas that belong together, put them near each other.
 
-Don't create formal categories yet—just cluster by similarity. Work silently for 10 minutes."
+Don't create formal categories yet—just cluster by similarity. Work silently for 15 minutes."
 
-After silent clustering:
+### Clustering Round 2 — Discussion (20 min)
 
 **Say:**
 "Now you can talk. Discuss the clusters you see forming. Continue to refine groupings. What themes are emerging?"
 
-### Clustering Round 2 (20 min)
-
-**Say:**
-"Let's formalize the clusters. We're aiming for 8-10 distinct categories.
-
-Work as a group to:
-1. Define clear cluster boundaries
-2. Move any outliers to where they fit best
-3. Identify any gaps—is something missing?"
+**Aim for 8-10 distinct categories.**
 
 **Facilitate:**
 - "Is this one cluster or two?"
 - "Where does this note belong?"
 - "What's the common thread in this cluster?"
+- "Are there any gaps—something nobody mentioned?"
 
 ### Naming Categories (25 min)
 
@@ -169,13 +175,12 @@ Not just 'Staff' but 'Supported, Growing Professionals'
 
 Work in pairs or small groups—each pair takes 2-3 columns. Write a name on the header card."
 
-After naming:
 **Large group review each name:**
 - "Does this name capture what's here?"
 - "Is it aspirational enough?"
 - "Is it too vague?"
 
-### Vision Narrative (20 min)
+### Vision Narrative Development (20 min)
 
 **Say:**
 "For each category, let's create a 2-3 sentence narrative. What's the story of this vision area?
@@ -199,55 +204,40 @@ Questions:
 - Does this align with our SWOT—leveraging strengths, addressing weaknesses, capturing opportunities?"
 
 **Close:**
-"This is excellent work. I'll compile this into our Practical Vision document. You'll receive it for review.
+"This is strong work. I'll compile this into our Practical Vision document. You'll receive it for review.
 
-Next session: Underlying Contradictions—what tensions must we resolve to make this vision real?"
+This vision will guide Stage 2's strategic directions and the entire plan."
 
 ---
 
-## Vision Prompt Ideas
+## Vision Categories Common in K-12
 
-If groups need prompts, offer these by category:
+Use as prompts if groups need direction:
 
-**Learning & Achievement:**
-- What does student learning look like?
-- How are students prepared for their futures?
-- What assessment practices exist?
+| Category | Prompt Questions |
+|----------|-----------------|
+| **Learning & Achievement** | What does student learning look like? How are students prepared? |
+| **Equity & Access** | Who is succeeding? What barriers are removed? |
+| **Staff & Culture** | How do staff describe their work? What growth exists? |
+| **Community & Families** | How do families engage? What partnerships exist? |
+| **Technology & Innovation** | How is technology used? What innovations are happening? |
+| **Facilities & Resources** | What do learning spaces look like? How are resources allocated? |
+| **Safety & Wellness** | How do students/staff feel? What supports exist? |
+| **Fiscal & Operations** | How are resources used efficiently? What fiscal health exists? |
 
-**Equity & Access:**
-- Who is succeeding? (Everyone!)
-- What barriers have been removed?
-- What opportunities are available to all?
+---
 
-**Staff & Culture:**
-- How do staff feel about working here?
-- What professional growth exists?
-- How do people collaborate?
+## Vision Matrix Format
 
-**Community & Families:**
-- How do families engage with schools?
-- What partnerships exist?
-- How is the district perceived?
+The final output should look like:
 
-**Technology & Innovation:**
-- How is technology used for learning?
-- What innovations are happening?
-- How is data used?
+| Category 1 | Category 2 | Category 3 | Category 4 | ... |
+|------------|------------|------------|------------|-----|
+| Vision item | Vision item | Vision item | Vision item | ... |
+| Vision item | Vision item | Vision item | Vision item | ... |
+| Vision item | Vision item | Vision item | Vision item | ... |
 
-**Facilities & Resources:**
-- What do learning spaces look like?
-- How are resources allocated?
-- What infrastructure exists?
-
-**Safety & Wellness:**
-- How do students/staff feel at school?
-- What supports exist for wellness?
-- How is climate measured?
-
-**Fiscal & Operations:**
-- How are resources used efficiently?
-- What fiscal health exists?
-- How are operations supporting learning?
+With a narrative paragraph for each category.
 
 ---
 
@@ -257,7 +247,7 @@ If groups need prompts, offer these by category:
 |-----------|----------|
 | Ideas too vague | "Make it observable. What would I see?" |
 | Ideas too small | "Think bigger. What's the vision, not the task?" |
-| Getting stuck | Offer prompts by category |
+| Getting stuck | Offer prompts by category (see table above) |
 | Too many clusters | "Can any of these combine? What's the broader theme?" |
 | Disagreement on categories | "Both can be true. Let's capture the nuance." |
 | Dominant contributors | "Let's hear from someone who hasn't spoken." |
@@ -280,9 +270,9 @@ By end of session:
 1. Compile Practical Vision document
 2. Send to participants for review (48-hour window)
 3. Cross-reference with SWOT for alignment
-4. Prepare materials for Phase 4 (Contradictions)
+4. Use as input for strategic direction development (Stage 2 Part B)
 5. Create visual summary for broader sharing
 
 ---
 
-*Phase 3 Guide - Geoffrey Strategic Planning Manager*
+*Appendix A - Strategic Planning Manager v2.0.0*

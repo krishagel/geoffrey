@@ -1,11 +1,11 @@
 # Facilitation Prompts for Strategic Planning
-# AI-ready prompts for each phase of the planning process
+# AI-ready prompts for each stage of the planning process
 # Use to support human facilitators or AI-assisted sessions
 
-version: 1.0.0
-last_updated: 2026-01-26
+version: 2.0.0
+last_updated: 2026-02-02
 
-# Phase 1: Discovery
+# Stage 1: Engage & Assess - Discovery
 discovery:
   opening_questions:
     - "What data sources do you have available for our analysis?"
@@ -41,7 +41,7 @@ discovery:
     - "Is anything missing from these findings?"
     - "What would critics say about this assessment?"
 
-# Phase 2: SWOT Analysis
+# Stage 1: Engage & Assess - SWOT Analysis
 swot:
   strengths_prompts:
     - "What does our district do exceptionally well?"
@@ -81,7 +81,7 @@ swot:
     - "What would happen if we don't address this?"
     - "Is this something we can change, or must we work around it?"
 
-# Phase 3: Practical Vision
+# Stage 2: Set Direction - Vision & Mission
 vision:
   opening_frame:
     - "It's [year + 3]. You walk into our district. What do you see?"
@@ -129,8 +129,8 @@ vision:
     - "Does this vision inspire you?"
     - "What's missing that should be included?"
 
-# Phase 4: Underlying Contradictions
-contradictions:
+# Stage 2: Set Direction - Tension Analysis (Appendix B)
+tensions:
   framing:
     - "We want X, BUT Y..."
     - "The tension is between..."
@@ -161,11 +161,53 @@ contradictions:
     - "What would it take to honor both sides?"
 
   prioritization_prompts:
-    - "Which contradictions most block our vision?"
-    - "Which contradictions are within our power to address?"
+    - "Which tensions most block our vision?"
+    - "Which tensions are within our power to address?"
     - "If we resolved this, what would unlock?"
 
-# Phase 5: Strategic Directions
+# Stage 2: Set Direction - Profile of a Graduate (Appendix C)
+graduate_profile:
+  opening_frame:
+    - "What should every graduate of our district be able to do?"
+    - "What qualities, skills, and knowledge define a successful graduate?"
+    - "Think beyond academics—what does a complete graduate look like?"
+
+  competency_prompts:
+    thinking:
+      - "What critical thinking skills should every graduate have?"
+      - "How should graduates approach complex problems?"
+    communication:
+      - "How should graduates communicate effectively?"
+      - "What does strong communication look like in today's world?"
+    collaboration:
+      - "How should graduates work with others?"
+      - "What does productive collaboration look like?"
+    character:
+      - "What character qualities should graduates demonstrate?"
+      - "How should graduates contribute to their communities?"
+    creativity:
+      - "How should graduates approach innovation and creativity?"
+      - "What does creative problem-solving look like?"
+
+  student_voice_prompts:
+    - "What skills do you actually use outside of school?"
+    - "What do you wish school prepared you for?"
+    - "What does a successful person look like to you?"
+    - "What would you want to be able to do when you graduate?"
+
+  equity_pause_prompts:
+    - "Whose voice is missing from this conversation?"
+    - "Who benefits from this profile? Who might be left out?"
+    - "Does this reflect our full community or just part of it?"
+    - "Are these competencies accessible to every student?"
+
+  validation_prompts:
+    - "Would our community recognize their values here?"
+    - "Is this aspirational but achievable?"
+    - "Can we actually assess and develop these competencies?"
+    - "Does this distinguish our graduates or could it be any district?"
+
+# Stage 2: Set Direction - Strategic Directions
 directions:
   framing:
     - "What innovative approach could resolve this tension?"
@@ -173,8 +215,7 @@ directions:
     - "What would be truly different, not just more of the same?"
 
   development_prompts:
-    - "How does this resolve the contradiction?"
-    - "Which vision categories does this advance?"
+    - "How does this advance our priority areas?"
     - "What are the key strategies within this direction?"
     - "What makes this innovative for our context?"
 
@@ -182,15 +223,14 @@ directions:
     - "Is this an approach, or just a goal?"
     - "Is this truly innovative, or business as usual?"
     - "Is this achievable with focused effort over 3 years?"
-    - "Does this resolve a real contradiction?"
+    - "Does this address a real barrier or tension?"
 
   alignment_prompts:
-    - "Are all major contradictions addressed?"
-    - "Are all vision categories supported?"
+    - "Are all priority areas addressed by at least one direction?"
     - "Do these directions work together or conflict?"
     - "What's missing?"
 
-# Phase 6: Implementation
+# Stage 3: Build the Plan & Align Resources
 implementation:
   current_reality:
     - "Where are we honestly right now?"
@@ -226,7 +266,32 @@ implementation:
     - "What support will they need?"
     - "How will they be held accountable?"
 
-# Challenge prompts for any phase
+# Stage 4: Implement, Monitor & Improve
+monitoring:
+  progress_review:
+    - "What did we accomplish this quarter?"
+    - "What fell short and why?"
+    - "What barriers are blocking progress?"
+    - "What support is needed?"
+
+  mid_course_adjustment:
+    - "Is this direction still the right approach?"
+    - "What's changed since we wrote the plan?"
+    - "Should we adjust tactics or adjust targets?"
+    - "What would we do differently?"
+
+  annual_review:
+    - "What's our biggest accomplishment this year?"
+    - "What's our biggest lesson learned?"
+    - "Are our success indicators still the right ones?"
+    - "What shifts are needed for next year?"
+
+  board_reporting:
+    - "What outcomes can we point to?"
+    - "What challenges should the board know about?"
+    - "What decisions need board input?"
+
+# Challenge prompts for any stage
 challenge_prompts:
   vague_responses:
     - "Say more? What would that look like specifically?"
