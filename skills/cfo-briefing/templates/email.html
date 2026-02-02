@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFO Daily Briefing - {{DATE}}</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .header {
+      text-align: center;
+      border-bottom: 3px solid #003366;
+      padding-bottom: 16px;
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      color: #003366;
+      margin: 0 0 4px 0;
+      font-size: 24px;
+    }
+    .header .subtitle {
+      color: #666;
+      font-size: 13px;
+      margin: 0 0 8px 0;
+    }
+    .header .date {
+      color: #666;
+      font-size: 14px;
+    }
+    .weather {
+      background: linear-gradient(135deg, #003366 0%, #004d99 100%);
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .weather .temp {
+      font-size: 32px;
+      font-weight: bold;
+    }
+    .weather .conditions {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .section {
+      margin-bottom: 20px;
+    }
+    .section h2 {
+      color: #003366;
+      font-size: 16px;
+      margin: 0 0 12px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat-box {
+      background: #f8f9fa;
+      border-radius: 6px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-box .number {
+      font-size: 24px;
+      font-weight: bold;
+      color: #003366;
+    }
+    .stat-box .label {
+      font-size: 12px;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .stat-box.green .number { color: #28a745; }
+    .stat-box.red .number { color: #dc3545; }
+    .stat-box.gold .number { color: #b8860b; }
+    .warning-box {
+      background: #fff3cd;
+      border-left: 4px solid #dc3545;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .warning-box strong {
+      color: #dc3545;
+    }
+    .highlight {
+      background: #fff3cd;
+      border-left: 4px solid #FFD700;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 0 6px 6px 0;
+    }
+    .dept-section {
+      background: #f8f9fa;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+    }
+    .dept-section h3 {
+      color: #003366;
+      font-size: 14px;
+      margin: 0 0 8px 0;
+    }
+    .dept-count {
+      display: inline-block;
+      background: #003366;
+      color: white;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+    .ticket-item {
+      padding: 4px 0;
+      font-size: 14px;
+      border-bottom: 1px solid #eee;
+    }
+    .ticket-item:last-child {
+      border-bottom: none;
+    }
+    .priority-high {
+      color: #dc3545;
+      font-weight: bold;
+    }
+    .priority-medium {
+      color: #fd7e14;
+    }
+    .priority-low {
+      color: #28a745;
+    }
+    .legislative-item {
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      background: #f8f9fa;
+      border-radius: 6px;
+      border-left: 3px solid #FFD700;
+    }
+    .legislative-item .bill-id {
+      font-weight: bold;
+      color: #003366;
+    }
+    .legislative-item .impact {
+      display: inline-block;
+      background: #FFD700;
+      color: #003366;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .news-item {
+      margin-bottom: 12px;
+    }
+    .news-item .source {
+      font-size: 11px;
+      color: #666;
+      text-transform: uppercase;
+    }
+    .news-item .title {
+      font-weight: 600;
+      color: #003366;
+    }
+    .news-item .synopsis {
+      font-size: 14px;
+      color: #555;
+    }
+    .absence-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+    }
+    .absence-table th {
+      background: #003366;
+      color: white;
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 13px;
+    }
+    .absence-table td {
+      padding: 6px 12px;
+      border-bottom: 1px solid #eee;
+      font-size: 14px;
+    }
+    .absence-table tr:nth-child(even) {
+      background: #f8f9fa;
+    }
+    .attachments {
+      background: #e8f4f8;
+      padding: 16px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .attachments h3 {
+      margin: 0 0 12px 0;
+      color: #003366;
+      font-size: 14px;
+    }
+    .attachment-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .attachment-item:last-child {
+      margin-bottom: 0;
+    }
+    .attachment-icon {
+      margin-right: 8px;
+      font-size: 16px;
+    }
+    .footer {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      margin-top: 20px;
+      color: #666;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Absence Infographic at TOP - embedded via cid:briefing_image -->
+    <img src="cid:briefing_image" alt="Staff Absences Infographic" style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 20px; display: block;">
+
+    <div class="header">
+      <h1>CFO Daily Briefing</h1>
+      <p class="subtitle">Prepared for Ashley Murphy</p>
+      <div class="date">{{DAY_OF_WEEK}}, {{DATE_FORMATTED}}</div>
+    </div>
+
+    <div class="weather">
+      <div class="temp">{{WEATHER_TEMP}}</div>
+      <div class="conditions">{{WEATHER_CONDITIONS}}</div>
+    </div>
+
+    <div class="section">
+      <h2>At a Glance</h2>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="number">{{TOTAL_ABSENCES}}</div>
+          <div class="label">Total Absences</div>
+        </div>
+        <div class="stat-box {{FILL_RATE_CLASS}}">
+          <div class="number">{{FILL_RATE}}%</div>
+          <div class="label">Fill Rate</div>
+        </div>
+        <div class="stat-box red">
+          <div class="number">{{UNFILLED_COUNT}}</div>
+          <div class="label">Unfilled</div>
+        </div>
+        <div class="stat-box gold">
+          <div class="number">{{DEPT_TICKETS}}</div>
+          <div class="label">Dept Tickets</div>
+        </div>
+      </div>
+    </div>
+
+    {{#IF_ABSENCE_WARNING}}
+    <div class="warning-box">
+      <strong>Attention:</strong> {{ABSENCE_WARNING_TEXT}}
+    </div>
+    {{/IF_ABSENCE_WARNING}}
+
+    {{#IF_CALENDAR}}
+    <div class="section">
+      <h2>Today's Calendar</h2>
+      {{CALENDAR_ITEMS}}
+    </div>
+    {{/IF_CALENDAR}}
+
+    <div class="section">
+      <h2>Staff Absences Dashboard</h2>
+      <table class="absence-table">
+        <tr>
+          <th>Metric</th>
+          <th>All Staff</th>
+          <th>Certificated</th>
+          <th>Classified</th>
+        </tr>
+        <tr>
+          <td>Total Absences</td>
+          <td>{{ALL_ABSENCES}}</td>
+          <td>{{CERT_ABSENCES}}</td>
+          <td>{{CLASS_ABSENCES}}</td>
+        </tr>
+        <tr>
+          <td>Filled</td>
+          <td>{{ALL_FILLED}}</td>
+          <td>{{CERT_FILLED}}</td>
+          <td>{{CLASS_FILLED}}</td>
+        </tr>
+        <tr>
+          <td>Unfilled</td>
+          <td>{{ALL_UNFILLED}}</td>
+          <td>{{CERT_UNFILLED}}</td>
+          <td>{{CLASS_UNFILLED}}</td>
+        </tr>
+        <tr>
+          <td>Fill Rate</td>
+          <td>{{ALL_FILL_RATE}}%</td>
+          <td>{{CERT_FILL_RATE}}%</td>
+          <td>{{CLASS_FILL_RATE}}%</td>
+        </tr>
+      </table>
+    </div>
+
+    {{#IF_WEEKLY_TRENDS}}
+    <div class="section">
+      <h2>Weekly Absence Trends</h2>
+      {{WEEKLY_TRENDS_CONTENT}}
+    </div>
+    {{/IF_WEEKLY_TRENDS}}
+
+    {{#IF_UNFILLED_ALERT}}
+    <div class="highlight">
+      <strong>Unfilled Positions Requiring Attention:</strong>
+      {{UNFILLED_POSITIONS_LIST}}
+    </div>
+    {{/IF_UNFILLED_ALERT}}
+
+    <div class="section">
+      <h2>Department Tickets</h2>
+
+      <div class="dept-section">
+        <h3>Transportation <span class="dept-count">{{TRANSPORT_COUNT}}</span></h3>
+        {{TRANSPORT_TICKETS}}
+      </div>
+
+      <div class="dept-section">
+        <h3>Maintenance <span class="dept-count">{{MAINT_COUNT}}</span></h3>
+        {{MAINT_TICKETS}}
+      </div>
+
+      <div class="dept-section">
+        <h3>Employee Support Services <span class="dept-count">{{ESS_COUNT}}</span></h3>
+        {{ESS_TICKETS}}
+      </div>
+    </div>
+
+    {{#IF_LEGISLATIVE}}
+    <div class="section">
+      <h2>Legislative Fiscal Update</h2>
+      {{LEGISLATIVE_ITEMS}}
+    </div>
+    {{/IF_LEGISLATIVE}}
+
+    {{#IF_FINANCE_NEWS}}
+    <div class="section">
+      <h2>K-12 Finance & WASBO/OSPI News</h2>
+      {{FINANCE_NEWS_ITEMS}}
+    </div>
+    {{/IF_FINANCE_NEWS}}
+
+    <div class="attachments">
+      <h3>Attachments</h3>
+      <div class="attachment-item">
+        <span class="attachment-icon">🎧</span>
+        <span>Audio Podcast (~9 min)</span>
+      </div>
+      <div class="attachment-item">
+        <span class="attachment-icon">📊</span>
+        <span>Absence Infographic (also shown above)</span>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p>Generated by Geoffrey</p>
+    </div>
+  </div>
+</body>
+</html>

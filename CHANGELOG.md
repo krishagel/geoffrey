@@ -5,6 +5,21 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.22.0] - 2026-02-02
+
+### Added
+- **CFO Daily Briefing** - New skill for CFO Ashley Murphy's daily briefing
+  - Staff absence dashboard with certificated vs classified breakdown
+  - Department tickets from Transportation (WS 9), Maintenance (WS 6), Employee Support Services (WS 3)
+  - Legislative fiscal update prioritizing FISCAL impact bills
+  - K-12 finance and WASBO/OSPI news with synopses
+  - Weekly absence trend context via Red Rover weekly summary
+  - Absence infographic generation (PSD brand, 16:9, cert/classified split)
+  - Audio podcast (~9 min, af_heart voice)
+  - HTML email delivery with inline infographic + podcast attachment
+  - CFO-specific pronunciation guide for TTS
+  - No Obsidian vault writing (email-only delivery)
+
 ## [0.21.1] - 2026-02-02
 
 ### Added

@@ -396,6 +396,7 @@ When you need to use or explore a skill:
 |-------|------|
 | assistant-architect | `skills/assistant-architect/SKILL.md` |
 | browser-control | `skills/browser-control/SKILL.md` |
+| cfo-briefing | `skills/cfo-briefing/SKILL.md` |
 | clawdbot-monitor | `skills/clawdbot-monitor/SKILL.md` |
 | docx | `skills/docx/SKILL.md` |
 | drafts-manager | `skills/drafts-manager/SKILL.md` |

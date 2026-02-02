@@ -1,0 +1,21 @@
+{
+  "description": "Name pronunciations for CFO briefing TTS. Keys are the original spelling, values are phonetic spellings.",
+  "names": {
+    "Jaden": "Jayden",
+    "Hans": "Hahns",
+    "Loesch": "Lowsh",
+    "Bahr": "Bar",
+    "Winget": "Wingit",
+    "Artondale": "Art-on-dale",
+    "Kopachuck": "Koh-pah-chuck",
+    "Voyager": "Voy-ah-jer",
+    "Purdy": "Per-dee",
+    "WASBO": "Waz-bo",
+    "OSPI": "Oh-Spy",
+    "ESA": "E.S.A.",
+    "CTE": "C.T.E."
+  },
+  "pending": {
+    "_comment": "Names that need pronunciation confirmation"
+  }
+}
