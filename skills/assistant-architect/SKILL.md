@@ -12,7 +12,7 @@ triggers:
   - "make this into an assistant"
   - "turn this into an assistant"
 allowed-tools: Read, Write, AskUserQuestion
-version: 1.2.0
+version: 1.3.1
 ---
 
 # Assistant Architect
@@ -150,7 +150,7 @@ Based on requirements, determine:
 
 | Decision | Options |
 |----------|---------|
-| Execution pattern | Sequential (default) / Parallel / Chained |
+| Execution pattern | Sequential (default) / Parallel / Multi-level |
 | Model selection | `gpt-4o` (complex) / `gpt-4o-mini` (simple) / `claude-3-5-sonnet` |
 | Input fields | `short_text`, `long_text`, `select`, `multi_select`, `file_upload` |
 | Timeouts | Default null, max 900 seconds |
@@ -167,7 +167,6 @@ Build the JSON structure:
   "assistants": [{
     "name": "[Assistant Name]",
     "description": "[Purpose]",
-    "is_parallel": false,
     "prompts": [...],
     "input_fields": [...]
   }]
@@ -193,7 +192,7 @@ Save to user's preferred location (default: `~/Downloads/[assistant-name].json`)
     "description": "Answers questions clearly",
     "prompts": [{
       "name": "answer",
-      "content": "Answer this question:\n\n{{question}}",
+      "content": "Answer this question:\n\n${question}",
       "system_context": "You are a helpful expert.",
       "model_name": "gpt-4o-mini",
       "position": 0
@@ -209,26 +208,51 @@ Save to user's preferred location (default: `~/Downloads/[assistant-name].json`)
 }
 ```
 
-### Document Analyzer (Chained)
+### Multi-Level Parallel (Solo → Parallel → Synthesis)
+
+Prompts at the same `position` with different `parallel_group` values run simultaneously. Parallel prompts can only reference outputs from **earlier** positions, never from other prompts at the same position.
 
 ```json
 {
   "prompts": [
     {
-      "name": "extract",
-      "content": "Extract key points from:\n\n{{document}}",
+      "name": "framing",
+      "content": "Frame the key issues in this document:\n\n${document}",
       "model_name": "gpt-4o",
-      "position": 0
+      "position": 0,
+      "parallel_group": null
     },
     {
-      "name": "analyze",
-      "content": "Analyze these points:\n\n{{prompt_0_output}}",
+      "name": "strengths",
+      "content": "Based on this framing:\n\n${prompt_0_output}\n\nIdentify strengths and opportunities.",
       "model_name": "gpt-4o",
-      "position": 1
+      "position": 1,
+      "parallel_group": 1000
+    },
+    {
+      "name": "risks",
+      "content": "Based on this framing:\n\n${prompt_0_output}\n\nIdentify risks and weaknesses.",
+      "model_name": "gpt-4o",
+      "position": 1,
+      "parallel_group": 1001
+    },
+    {
+      "name": "synthesis",
+      "content": "Synthesize these perspectives:\n\nStrengths: ${prompt_1_output}\n\nRisks: ${prompt_2_output}",
+      "model_name": "gpt-4o",
+      "position": 2,
+      "parallel_group": null
     }
   ]
 }
 ```
+
+**Key rules:**
+- `parallel_group` = `null` → solo prompt (runs alone at its position)
+- `parallel_group` = unique number → runs in parallel with other prompts at same position
+- Parallel prompts reference `${prompt_N_output}` from earlier positions ONLY
+- The synthesis prompt (position 2) can reference all earlier prompt outputs
+- **Alternative syntax:** Instead of `${prompt_N_output}`, you can use `${slugified-prompt-name}` (e.g., `${framing}` for a prompt named "framing"). Both `${...}` and `{{...}}` delimiters work.
 
 ### Transform with Options
 
@@ -236,7 +260,7 @@ Save to user's preferred location (default: `~/Downloads/[assistant-name].json`)
 {
   "prompts": [{
     "name": "transform",
-    "content": "Rewrite in {{style}} style:\n\n{{content}}",
+    "content": "Rewrite in ${style} style:\n\n${content}",
     "model_name": "gpt-4o",
     "position": 0
   }],
@@ -276,7 +300,7 @@ Before writing the file, verify:
 - [ ] Each prompt has `name`, `content`, `model_name`, `position`
 - [ ] Each input field has `name`, `label`, `field_type`, `position`
 - [ ] `position` values are sequential starting from 0
-- [ ] All `{{variables}}` match input field names or `prompt_N_output`
+- [ ] All `${variables}` match input field names, `prompt_N_output`, or slugified prompt names
 - [ ] **CRITICAL: Every `select` and `multi_select` field has `options.choices` array with at least 2 items**
 - [ ] No dropdown was left with placeholder options like "Option 1", "Option 2"
 - [ ] Domain-specific dropdowns (departments, buildings, programs) have real values from user

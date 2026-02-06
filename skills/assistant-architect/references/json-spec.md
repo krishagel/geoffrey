@@ -41,7 +41,7 @@
 | `description` | string | No | `""` | Purpose/description |
 | `status` | string | No | - | **Ignored on import** (always `pending_approval`) |
 | `image_path` | string | No | `null` | Path to assistant icon |
-| `is_parallel` | boolean | No | `false` | Enable parallel prompt execution |
+| `is_parallel` | boolean | No | `false` | **Deprecated** - use `parallel_group` on prompts instead |
 | `timeout_seconds` | number | No | `null` | Max: 900 (15 minutes) |
 | `prompts` | array | **Yes** | - | 1-20 prompts required |
 | `input_fields` | array | **Yes** | - | Can be empty array `[]` |
@@ -51,7 +51,7 @@
 ```json
 {
   "name": "analyze",
-  "content": "Analyze the following document:\n\n{{document_content}}",
+  "content": "Analyze the following document:\n\n${document_content}",
   "system_context": "You are an expert document analyst.",
   "model_name": "gpt-4o",
   "position": 0,
@@ -64,7 +64,7 @@
 | Field | Type | Required | Default | Constraints |
 |-------|------|----------|---------|-------------|
 | `name` | string | **Yes** | - | Internal identifier |
-| `content` | string | **Yes** | - | Supports `{{variables}}` |
+| `content` | string | **Yes** | - | Supports `${variables}` |
 | `system_context` | string | No | `null` | System prompt prepended |
 | `model_name` | string | **Yes** | - | See Model Mapping below |
 | `position` | number | **Yes** | - | 0-based execution order |
@@ -189,17 +189,43 @@
 
 ## Variable Substitution
 
-### Input Field Variables
-Reference user input: `{{field_name}}`
+Both `${var}` and `{{var}}` delimiters work interchangeably for all variable types below.
 
-### Prompt Output Variables
-Reference previous prompt output: `{{prompt_N_output}}` (0-based)
+### Variable Types
+
+| Syntax | Description | Example |
+|--------|-------------|---------|
+| `${field_name}` | Reference user input field by name | `${document_content}` |
+| `${prompt_N_output}` | Reference prompt output by array index (0-based) | `${prompt_0_output}` |
+| `${slugified-prompt-name}` | Reference prompt output by slugified name | `${framing}`, `${facilitator-opening}` |
+
+### Slugified Prompt Name Syntax
+
+Prompt names are slugified for use as variable references:
+- Lowercase the name
+- Replace non-alphanumeric characters with hyphens
+- Trim leading/trailing hyphens
+
+| Prompt Name | Variable |
+|-------------|----------|
+| `framing` | `${framing}` |
+| `Facilitator Opening` | `${facilitator-opening}` |
+| `Risk Analysis` | `${risk-analysis}` |
+
+### Variable Resolution Priority
+
+When a variable is resolved, the system checks sources in this order:
+
+1. **inputMapping** — explicit mappings defined on the prompt
+2. **Input fields** — user-provided input field values
+3. **Slugified prompt names** — output from a prompt matched by slugified name
+4. **`prompt_N_output`** — output from a prompt matched by array index
 
 ### Input Mapping
 ```json
 {
   "input_mapping": {
-    "analysis": "{{prompt_0_output}}"
+    "analysis": "${prompt_0_output}"
   }
 }
 ```
@@ -207,13 +233,28 @@ Reference previous prompt output: `{{prompt_N_output}}` (0-based)
 ## Execution Patterns
 
 ### Sequential (default)
-Prompts execute in order by `position`.
+Prompts execute in order by `position`. Each prompt runs alone at its position with `parallel_group: null`.
 
 ### Parallel
-Set `is_parallel: true` and same `parallel_group` for concurrent prompts.
+Prompts at the **same `position`** with different `parallel_group` values run simultaneously. Each parallel prompt gets a unique `parallel_group` ID (e.g., 1000, 1001, 1002).
 
-### Chained
-Each prompt uses `{{prompt_N_output}}` from previous.
+**Rules:**
+- Parallel prompts can ONLY reference `${prompt_N_output}` from **earlier** positions
+- Parallel prompts CANNOT reference outputs from other prompts at the same position (they run simultaneously, so those outputs don't exist yet)
+- `parallel_group: null` = solo prompt (runs alone at its position)
+
+### Multi-Level (Solo → Parallel → Solo)
+Combine sequential and parallel execution across positions:
+
+| Position | Prompts | parallel_group | Pattern |
+|----------|---------|----------------|---------|
+| 0 | 1 prompt | `null` | Solo — setup/framing |
+| 1 | N prompts | 1000, 1001, ... | Parallel — concurrent analysis |
+| 2 | 1 prompt | `null` | Solo — synthesis of all outputs |
+
+The position 2 synthesis prompt references all earlier outputs: `${prompt_0_output}`, `${prompt_1_output}`, `${prompt_2_output}`, etc.
+
+**Output reference mapping:** `${prompt_N_output}` references the prompt at **array index N** in the `prompts` array (0-based), regardless of position.
 
 ## Validation Checklist
 
@@ -227,7 +268,7 @@ Each prompt uses `{{prompt_N_output}}` from previous.
 ### Prompts
 - Each has `name`, `content`, `model_name`, `position`
 - `position` values sequential from 0
-- Variables reference valid fields or `prompt_N_output`
+- Variables reference valid fields, `prompt_N_output`, or slugified prompt names
 
 ### Input Fields
 - Each has `name`, `label`, `field_type`, `position`
