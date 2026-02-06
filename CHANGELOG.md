@@ -5,6 +5,25 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.23.1] - 2026-02-06
+
+### Added
+- **Runtime Validator Hook** - PreToolUse hook that blocks wrong runtimes before execution
+  - Blocks `node` → suggests `bun`, `npm` → suggests `bun`, `npx` → suggests `bunx`
+  - Blocks `python`/`python3` with .py files → suggests `uv run`
+  - Blocks `python -m` → suggests `uv run -m`
+  - Splits compound commands (&&, ||, ;) and checks each segment independently
+  - Strips quoted strings to avoid false positives
+  - Exceptions for version checks (`node -v`, `python3 --version`) and inline exec (`python3 -c "..."`)
+  - Data-driven rules config (`hooks/pre-tool-use/runtime-rules.json`)
+  - 68 unit tests covering blocks, allows, compound commands, and edge cases
+  - Fails open on errors (exit 0) — same pattern as security-validator
+
+### Changed
+- **Runtime rules in global CLAUDE.md** - Added mandatory runtime rules to `~/.claude/CLAUDE.md` for enforcement across all projects
+- **Runtime rules in Obsidian vault CLAUDE.md** - Added mandatory runtime rules section for vault sessions
+- **Vault hook registration** - Registered runtime-validator hook in vault's `.claude/settings.local.json` using absolute path
+
 ## [0.23.0] - 2026-02-05
 
 ### Changed

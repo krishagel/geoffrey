@@ -1,0 +1,45 @@
+{
+  "version": "1.0.0",
+  "description": "Runtime enforcement rules - blocks wrong runtimes and suggests correct alternatives",
+  "rules": [
+    {
+      "id": "node-to-bun",
+      "pattern": "\\bnode\\s+\\S+\\.(js|ts|mjs|mts)\\b",
+      "replacement": "bun",
+      "message": "Use `bun` instead of `node` for JavaScript/TypeScript files. All scripts use inline dependencies that require bun.",
+      "exceptions": ["-v", "--version"]
+    },
+    {
+      "id": "npm-to-bun",
+      "pattern": "\\bnpm\\s+(install|i|ci|run|exec|test|start|build|init|create|publish|pack|link|unlink|update|outdated|ls|list|prune|dedupe|audit|fund|cache|config|set|get)\\b",
+      "replacement": "bun",
+      "message": "Use `bun` instead of `npm` for package management."
+    },
+    {
+      "id": "npx-to-bunx",
+      "pattern": "\\bnpx\\s+",
+      "replacement": "bunx",
+      "message": "Use `bunx` instead of `npx` for package execution."
+    },
+    {
+      "id": "python-to-uv",
+      "pattern": "\\bpython\\s+\\S+\\.py\\b",
+      "replacement": "uv run",
+      "message": "Use `uv run` instead of `python` for Python scripts. All scripts use inline dependencies (PEP 723) that require uv.",
+      "exceptions": ["-c", "-V", "--version"]
+    },
+    {
+      "id": "python3-to-uv",
+      "pattern": "\\bpython3\\s+\\S+\\.py\\b",
+      "replacement": "uv run",
+      "message": "Use `uv run` instead of `python3` for Python scripts. All scripts use inline dependencies (PEP 723) that require uv.",
+      "exceptions": ["-c", "-V", "--version"]
+    },
+    {
+      "id": "python-m-to-uv",
+      "pattern": "\\bpython3?\\s+-m\\s+",
+      "replacement": "uv run -m",
+      "message": "Use `uv run -m` instead of `python -m` for module execution."
+    }
+  ]
+}
