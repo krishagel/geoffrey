@@ -5,6 +5,23 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.23.0] - 2026-02-05
+
+### Changed
+- **Seven Advisors** - Deeply enriched all advisor prompts and synthesis for serious deliberation (skill version 1.1.0)
+  - Facilitator opening: Added Options Inventory, Stakes Assessment sections for richer framing
+  - Analyst: Added Evidence Quality Assessment (HIGH/MEDIUM/LOW confidence ratings), Assumptions Audit, Data Needed to Decide
+  - Intuitive: Added Emotional Forecast (6-month projection), Best Friend Test, permission to be contradictory
+  - Innovator: Added Constraint Inversion exercise, Admired Exemplar question, Do Nothing baseline, minimum 5 alternatives required
+  - Advocate: Must address each option from facilitator framing, added Compounding Benefits and Hidden Alignment sections
+  - Critic: Added explicit Pre-Mortem framing, Mitigation Path for each risk, Reversibility Assessment (fully/partially/irreversible)
+  - Stakeholder: Added Power/Interest Map, explicit Equity Audit section, Communication Needs
+  - Facilitator Synthesis: Expanded from 7 to 11 sections including Advisor Highlights (cite specific insights), Decision Matrix table, Strongest Counter-Argument, What We Still Don't Know; now 800-1200 words
+  - All advisor prompts now 400-600 words with caution/anti-pattern notes from advisor profiles
+  - SKILL.md updated to describe parallel execution model (advisors run simultaneously, not sequentially)
+  - Added AI Studio JSON export reference in SKILL.md
+- AI Studio JSON export (`~/Downloads/seven-advisors-council.json`) updated with all enriched prompts
+
 ## [0.22.0] - 2026-02-02
 
 ### Added

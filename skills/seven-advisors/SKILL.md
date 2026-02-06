@@ -10,7 +10,7 @@ triggers:
   - "think through this decision"
   - "multiple perspectives"
 allowed-tools: Read
-version: 1.0.0
+version: 1.1.0
 ---
 
 # Seven Advisors Decision Council
@@ -33,7 +33,7 @@ Structured multi-perspective deliberation framework adapted from de Bono's Six T
 
 ### Full Council (Default)
 
-All 7 advisors deliberate in sequence, followed by facilitator synthesis. Use this for important decisions where thoroughness matters.
+All 7 advisors deliberate, followed by facilitator synthesis. Use this for important decisions where thoroughness matters.
 
 ### Individual Advisor
 
@@ -43,16 +43,25 @@ Consult a single advisor when you need one specific perspective. User specifies 
 
 ## Deliberation Sequence
 
-The sequence is intentional - each advisor builds on what came before:
+The Facilitator opens by framing the decision. Then all six advisors analyze **simultaneously** — each works only from the Facilitator's framing, not from each other's output. This parallel structure is intentional: it prevents groupthink and anchoring bias. Each advisor delivers an independent perspective uncontaminated by the others.
 
-1. **Facilitator (Blue)** - Frames the decision, clarifies scope, identifies key tensions
-2. **Analyst (White)** - Establishes facts, data, knowns and unknowns
-3. **Intuitive (Red)** - Surfaces emotions, gut reactions, unspoken concerns
-4. **Innovator (Green)** - Expands the option space, proposes alternatives
-5. **Advocate (Yellow)** - Builds the positive case for each option
-6. **Critic (Black)** - Stress-tests every option, finds failure modes
-7. **Stakeholder (Orange)** - Maps who is affected, surfaces equity concerns
-8. **Facilitator (Blue)** - Synthesizes all perspectives into recommendation
+Finally, the Facilitator returns to synthesize all six perspectives into a single recommendation with cross-references, a decision matrix, and concrete next steps.
+
+**Execution flow:**
+
+1. **Facilitator (Blue)** — Frames the decision, lists options, defines success criteria, assesses stakes
+2. **Six Advisors in parallel:**
+   - **Analyst (White)** — Facts, evidence quality, assumptions audit, data gaps
+   - **Intuitive (Red)** — Emotions, gut reactions, unspoken concerns, emotional forecast
+   - **Innovator (Green)** — Alternatives, constraint inversion, hybrid approaches, wild cards
+   - **Advocate (Yellow)** — Best cases, hidden strengths, compounding benefits, values alignment
+   - **Critic (Black)** — Pre-mortem, failure modes, mitigation paths, reversibility assessment
+   - **Stakeholder (Orange)** — Power/interest map, equity audit, missing voices, communication needs
+3. **Facilitator Synthesis (Blue)** — Cross-references all six, builds decision matrix, delivers recommendation
+
+**Why parallel?** Sequential deliberation causes anchoring — the Analyst's facts shape the Intuitive's feelings, the Critic's fears constrain the Innovator's ideas. Parallel execution means each advisor gives their honest, independent read.
+
+**AI Studio:** A JSON export is available for running this council in PSD AI Studio, where the parallel execution is handled natively. See `~/Downloads/seven-advisors-council.json`.
 
 ## Workflow
 
@@ -74,7 +83,7 @@ Read `skills/seven-advisors/references/advisor-profiles.md` for detailed advisor
 
 ### Step 4: Execute Deliberation
 
-**Full Council:** Run through all 8 steps (7 advisors + synthesis). Each advisor speaks in their distinct voice.
+**Full Council:** Run through all 8 steps (facilitator open → 6 advisors → facilitator synthesis). Each advisor speaks in their distinct voice and provides structured analysis (400-600 words per advisor, 800-1200 words for synthesis).
 
 **Individual Advisor:** Only the requested advisor speaks.
 
@@ -90,15 +99,18 @@ After the council delivers its recommendation, invite the user to:
 
 ### Each Advisor's Entry
 
+Each advisor provides structured sections specific to their lens (not just prose + bullets). See advisor profiles for section details. General format:
+
 ```
 ### [Emoji] [Advisor Name] ([Color]) — [Core Question]
 
-[2-3 paragraphs of analysis in the advisor's voice and tone]
+**1. [Section Name]**
+[Structured analysis]
 
-**Key Points:**
-- [Bullet 1]
-- [Bullet 2]
-- [Bullet 3]
+**2. [Section Name]**
+[Structured analysis]
+
+... (5-7 sections per advisor, 400-600 words total)
 ```
 
 **Advisor Emojis:**
@@ -112,25 +124,46 @@ After the council delivers its recommendation, invite the user to:
 
 ### Facilitator Synthesis (Final Step)
 
+The synthesis is the crown jewel — the longest and most detailed output (800-1200 words). It cross-references advisor arguments by name and builds a decision matrix.
+
 ```
 ---
 
 ## 🔵 Facilitator Synthesis
 
+### Advisor Highlights
+[Single most critical insight from each advisor, cited by name]
+
 ### Consensus
-[Where the advisors agree]
+[Points of convergence across 3+ advisors]
 
 ### Key Tensions
-[Where the advisors disagree and why]
+[Where advisors disagree, naming specific advisors and their arguments]
+
+### Decision Matrix
+| Option | Feasibility | Risk Level | Stakeholder Impact | Upside Potential | Values Alignment |
+|--------|------------|------------|-------------------|-----------------|-----------------|
 
 ### Recommendation
-[The facilitator's recommended path forward]
+[Decisive recommended path — WHAT, WHY (citing advisors), WHEN]
+
+### The Strongest Counter-Argument
+[Best argument AGAINST the recommendation, citing which advisor made it, and why this path is still recommended despite it]
 
 ### Conditions for Success
-- [What must be true for the recommendation to work]
+[Critical assumptions and prerequisites]
+
+### Risk Mitigation Plan
+[Critic's top 3 concerns with specific mitigation actions]
+
+### Stakeholder Safeguards
+[Stakeholder's equity concerns with protective actions]
+
+### What We Still Don't Know
+[Analyst's unresolved unknowns that could change the recommendation]
 
 ### Next Steps
-1. [Concrete action 1]
-2. [Concrete action 2]
-3. [Concrete action 3]
+1. [Concrete, specific, time-bound action]
+2. [Concrete, specific, time-bound action]
+3. [Concrete, specific, time-bound action]
 ```
