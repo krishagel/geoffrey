@@ -5,6 +5,23 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.24.0] - 2026-02-18
+
+### Added
+- **Hook Infrastructure Expansion** - Registered all existing hooks and added new session lifecycle hooks
+  - Registered 2 PreToolUse hooks: `security-validator.ts` (Write|Edit|Bash|NotebookEdit), `runtime-validator.ts` (Bash)
+  - Registered 4 SessionEnd hooks: `extract-learnings.ts`, `route-to-obsidian.ts`, `capture-history.ts`, `create-daily-log.ts`
+  - Total hooks: 1 SessionStart + 2 PreToolUse + 1 Stop + 5 SessionEnd = 9 registered hooks (up from 1)
+- **SessionStart Hook** - `hooks/session-start/load-context.ts` loads working memory state at session start
+  - Reads `~/.geoffrey/state/current-work.json` for cross-session continuity
+  - Displays active task, last skill used, pending actions if state is fresh (<24h)
+  - Skips silently if no state or stale state
+- **Working Memory System** - 2-tier memory architecture (hot state + cold Obsidian)
+  - `~/.geoffrey/state/current-work.json` for ephemeral session-to-session context
+  - `hooks/session-end/save-state.ts` extracts task context, files modified, skills used, pending actions
+  - 24h staleness window prevents outdated context from misleading new sessions
+- **Memory Architecture Documentation** - `docs/memory-architecture.md` documents the 2-tier approach, data flow, and design decisions
+
 ## [0.23.1] - 2026-02-06
 
 ### Added
