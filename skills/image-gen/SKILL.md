@@ -1,6 +1,6 @@
 ---
 name: image-gen
-description: Generate images using Google's Nano Banana Pro (Gemini 3 Pro Image) with workflow-based prompting
+description: Generate images using Google's Nano Banana 2 (Gemini 3.1 Flash Image) with workflow-based prompting
 triggers:
   - "create image"
   - "generate image"
@@ -16,13 +16,14 @@ version: 0.1.0
 
 # Image Generation Skill
 
-Generate professional images, infographics, and diagrams using Google's Nano Banana Pro model (gemini-3-pro-image-preview).
+Generate professional images, infographics, and diagrams using Google's Nano Banana 2 model (gemini-3.1-flash-image-preview).
 
 ## Model Capabilities
 
-**Nano Banana Pro** (released November 20, 2025):
+**Nano Banana 2** (released February 26, 2026):
 - **Text rendering** - Accurate, legible text in images
 - **Google Search grounding** - Real-time data (weather, stocks, etc.)
+- **Subject consistency** - Up to 5 characters maintained across generations
 - **Multi-turn conversation** - Iterative refinement
 - **Up to 14 reference images** - For composition and style transfer
 - **Resolutions**: 1K, 2K, 4K
@@ -157,7 +158,7 @@ Workflow:
 - No photorealistic humans (safety filter)
 - No copyrighted characters
 - Maximum 14 reference images for composition
-- 4K only available with Nano Banana Pro
+- 4K only available with Nano Banana 2 and Nano Banana Pro
 
 ## Pricing
 

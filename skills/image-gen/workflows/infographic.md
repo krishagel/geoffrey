@@ -92,7 +92,7 @@ uv run scripts/generate.py "[prompt]" output.png 16:9 2K
 **Settings for infographics:**
 - Aspect ratio: **16:9** (landscape) - best for infographics
 - Size: **2K minimum** - ensures text readability
-- Model: gemini-3-pro-image-preview (Nano Banana Pro)
+- Model: gemini-3.1-flash-image-preview (Nano Banana 2)
 
 ### Step 6: Validate
 

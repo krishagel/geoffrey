@@ -3,7 +3,7 @@
 # dependencies = ["google-genai", "pillow"]
 # ///
 """
-Generate images using Google's Nano Banana Pro (Gemini 3 Pro Image).
+Generate images using Google's Nano Banana 2 (Gemini 3.1 Flash Image).
 
 Usage:
     uv run generate.py "prompt" output.png [aspect_ratio] [size] [--brand ID] [--logo POSITION]
@@ -237,7 +237,7 @@ def main():
 
     try:
         response = client.models.generate_content(
-            model="gemini-3-pro-image-preview",
+            model="gemini-3.1-flash-image-preview",
             contents=[prompt],
             config=config
         )

@@ -105,7 +105,7 @@ uv run scripts/generate.py "[prompt]" output.png [aspect_ratio] 2K
 
 **Settings:**
 - Size: **2K minimum** for label clarity
-- Model: gemini-3-pro-image-preview
+- Model: gemini-3.1-flash-image-preview (Nano Banana 2)
 
 ### Step 6: Validate
 

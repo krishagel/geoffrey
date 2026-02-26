@@ -3,7 +3,7 @@
 # dependencies = ["google-genai", "pillow"]
 # ///
 """
-Edit existing images using Google's Nano Banana Pro.
+Edit existing images using Google's Nano Banana 2.
 
 Usage:
     uv run edit.py input.png "edit instructions" output.png
@@ -64,7 +64,7 @@ def main():
     try:
         # Create content with image and instructions
         response = client.models.generate_content(
-            model="gemini-3-pro-image-preview",
+            model="gemini-3.1-flash-image-preview",
             contents=[
                 Part.from_image(input_image),
                 f"Edit this image: {instructions}"
