@@ -423,6 +423,7 @@ When you need to use or explore a skill:
 | research | `skills/research/SKILL.md` |
 | seven-advisors | `skills/seven-advisors/SKILL.md` |
 | skill-creator | `skills/skill-creator/SKILL.md` |
+| sop-creator | `skills/sop-creator/SKILL.md` |
 | strategic-planning-manager | `skills/strategic-planning-manager/SKILL.md` |
 | writer | `skills/writer/SKILL.md` |
 | xlsx | `skills/xlsx/SKILL.md` |

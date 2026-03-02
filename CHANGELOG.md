@@ -5,6 +5,18 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.25.0] - 2026-03-02
+
+### Added
+- **SOP Creator Skill** (`/sop-creator`) — Interview-driven generator for Peninsula School District Standard Operating Procedures
+  - Conducts structured 4-round interview to gather procedure details, compliance requirements, and complexity assessment
+  - Generates SOPs matching the official PSD template format (Title, Scope, Procedure, Safety Considerations, Quality Control, References, Revision History)
+  - Supports 3 complexity levels: Simple (numbered steps), Moderate (multi-phase with classification tables), Complex (Roman numeral sections with definitions, flowcharts, glossary)
+  - Distilled conventions from ~30 existing SOPs across all PSD departments (Safety & Security, ESS, Teaching & Learning, Technology, Finance, Athletics)
+  - Reference guide includes all PSD role titles, system names, board policy numbers, RCW/WAC references, and escalation path patterns
+  - Saves completed SOPs to the Drafts folder in the SOP shared drive for review before department placement
+  - Companion AI Studio assistant architect JSON (`sop-creator.json`) for form-based SOP generation in PSD AI Studio
+
 ## [0.24.1] - 2026-02-26
 
 ### Changed
