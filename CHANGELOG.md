@@ -5,6 +5,20 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.25.1] - 2026-03-02
+
+### Added
+- **PSD Athletics Skill** (`/psd-athletics`) — Retrieve athletics schedules for both PSD high schools (GHHS Tides and PHS Seahawks)
+  - Fetches schedule data from MaxPreps JSON-LD structured data (official PlayOn sites are JS-rendered and unreadable by LLMs)
+  - Covers all sports across all three seasons (Fall, Winter, Spring) — 27 sport/gender URLs per school
+  - Supports flexible queries: today, this week, this month, specific date ranges, filtered by school or sport
+  - Auto-determines active season based on current date to minimize unnecessary page fetches
+  - Reference file with complete MaxPreps schedule URL catalog for both schools
+  - Documents data pipeline: ArbiterSports → PlayOn Sites → MaxPreps
+
+### Fixed
+- **Plugin version mismatch** — Updated `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json` from 0.24.1 to 0.25.0 (missed in v0.25.0 bump)
+
 ## [0.25.0] - 2026-03-02
 
 ### Added

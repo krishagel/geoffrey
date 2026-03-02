@@ -33,6 +33,7 @@ Geoffrey is a personal AI infrastructure built as a Claude Code plugin. It learn
 
 | Language | Command | Wrong |
 |----------|---------|-------|
+| psd-athletics | `skills/psd-athletics/SKILL.md` |
 | **Python** | `uv run script.py` | ~~`python script.py`~~ |
 | **JavaScript** | `bun script.js` | ~~`node script.js`~~ |
 | **TypeScript** | `bun script.ts` | ~~`npx ts-node script.ts`~~ |
