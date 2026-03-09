@@ -71,11 +71,11 @@ Present the draft SOP and ask:
 
 End every SOP with `LH_swoop` footer element.
 
-Always save to the **Drafts folder** (`1PLeCQ6DaxWehEbzjzbXU2wLsaLTgv6Ku`) in the SOP shared drive. SOPs go through a review process before being moved to their department folder.
+**CRITICAL: SOPs are ONLY created as Google Docs in the shared drive. NEVER write SOPs to the Obsidian vault, local filesystem, or any other location — not even as an intermediate draft.** Draft directly in memory during the interview/iteration phases, then create the Google Doc as the single output.
 
-Output options:
-- Create as Google Doc in the Drafts folder (default)
-- Create as .docx using `/docx` skill
+Save to the **Drafts folder** (`1PLeCQ6DaxWehEbzjzbXU2wLsaLTgv6Ku`) in the SOP shared drive using the Google Workspace skill's `drive/create_file.js` with `--folder 1PLeCQ6DaxWehEbzjzbXU2wLsaLTgv6Ku`. The shared drive requires `supportsAllDrives: true` in API calls. SOPs go through a review process before being moved to their department folder.
+
+Alternative output: Create as .docx using `/docx` skill and upload to the Drafts folder.
 
 ## Department Subfolder IDs
 

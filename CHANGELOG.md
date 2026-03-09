@@ -5,6 +5,24 @@ All notable changes to Geoffrey will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.26.0] - 2026-03-09
+
+### Changed
+- **Skill Creator** — Major rewrite adopting Anthropic's official eval framework while preserving Geoffrey-specific features
+  - Added full eval/testing framework: spawn parallel with-skill vs baseline runs, grade with assertions, aggregate benchmarks, browser-based eval viewer
+  - Added description optimization loop: generate trigger eval queries, train/test split (60/40), automated `run_loop.py` using `claude -p` with extended thinking
+  - Added blind A/B comparison system with independent comparator and post-hoc analyzer agents
+  - Added 3 subagent instruction files: `agents/grader.md`, `agents/comparator.md`, `agents/analyzer.md`
+  - Added eval viewer: `eval-viewer/generate_review.py` + `viewer.html` for browser-based output review with feedback collection
+  - Added HTML template for eval set review (`assets/eval_review.html`)
+  - Added 6 new scripts: `aggregate_benchmark.py`, `generate_report.py`, `improve_description.py`, `run_eval.py`, `run_loop.py`, `utils.py`
+  - Added `references/schemas.md` with JSON schemas for all data formats (evals, grading, benchmark, comparison, analysis)
+  - Updated `package_skill.py` with improved exclusion patterns (evals dir, __pycache__, .DS_Store)
+  - Updated `quick_validate.py` to support `compatibility` frontmatter property
+  - Merged writing philosophy: "explain the why" over heavy MUSTs, "pushy" descriptions to combat undertriggering, audience-aware communication
+  - Preserved Geoffrey-specific features: `init_skill.py` scaffolding, CLAUDE.md registration, progressive disclosure patterns, "what not to include" guidance, `references/workflows.md`, `references/output-patterns.md`
+  - SKILL.md rewritten at 398 lines (under 500 line target)
+
 ## [0.25.1] - 2026-03-02
 
 ### Added

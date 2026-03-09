@@ -47,6 +47,7 @@ async function createFile(account, options) {
 
   const response = await drive.files.create({
     requestBody: fileMetadata,
+    supportsAllDrives: true,
     fields: 'id, name, mimeType, webViewLink',
   });
 
