@@ -65,7 +65,6 @@ mkdir -p ~/.claude/plugins
 ln -s $(pwd) ~/.claude/plugins/geoffrey
 
 # Install skill dependencies
-cd skills/browser-control && bun install && cd ../..
 cd skills/google-workspace && bun install && cd ../..
 cd skills/pptx && bun install && cd ../..
 cd skills/presentation-master && bun install && cd ../..

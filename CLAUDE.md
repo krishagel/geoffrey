@@ -75,11 +75,6 @@ uv run --with mlx-audio --with pydub skills/local-tts/scripts/generate_audio.py 
 
 **CRITICAL:** Different rules for different image types.
 
-**Screenshots (browser-control skill):**
-- Automatically resized to <8000px per dimension
-- Safe to Read for research analysis
-- Used by Geoffrey to analyze web content
-
 **Generated images (image-gen skill):**
 - **YOU MUST NEVER** use Read tool on these
 - High-quality 4K outputs for user consumption
@@ -396,7 +391,6 @@ When you need to use or explore a skill:
 | Skill | Path |
 |-------|------|
 | assistant-architect | `skills/assistant-architect/SKILL.md` |
-| browser-control | `skills/browser-control/SKILL.md` |
 | cfo-briefing | `skills/cfo-briefing/SKILL.md` |
 | clawdbot-monitor | `skills/clawdbot-monitor/SKILL.md` |
 | docx | `skills/docx/SKILL.md` |
